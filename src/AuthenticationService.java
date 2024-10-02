@@ -6,9 +6,6 @@ public class AuthenticationService {
 
         if ("resident".equals(username) && "password".equals(password)) {
             return true;
-        } else if ("intervenant".equals(username) && "password".equals(password)) {
-            return true;
-        }
-        return false;
+        } else return "intervenant".equals(username) && "password".equals(password);
     }
 }

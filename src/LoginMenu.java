@@ -4,7 +4,7 @@ public class LoginMenu {
     private AuthenticationService authService = new AuthenticationService();
     private boolean firstTimeLoggingIn = false;
     public void start() {
-        if (firstTimeLoggingIn == false) {
+        if (!firstTimeLoggingIn) {
             System.out.println("Bienvenue dans votre application MaVille!");
             firstTimeLoggingIn = true;
         };
