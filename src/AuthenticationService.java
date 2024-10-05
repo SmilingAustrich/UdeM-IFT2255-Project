@@ -1,7 +1,6 @@
 public class AuthenticationService {
-    private boolean resident;
 
-    public boolean login(String username, String password) {
+    public static boolean login(String username, String password) {
 
 
         if ("resident".equals(username) && "password".equals(password)) {
