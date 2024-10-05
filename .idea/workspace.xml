@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Premier prototype.">
-      <change afterPath="$PROJECT_DIR$/src/Menus.java" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.">
+      <change afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppSimulation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LoginMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -39,6 +43,9 @@
     &quot;accountId&quot;: &quot;c9139fb8-f7ab-4549-afe5-c259e1893526&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -61,6 +68,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -81,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727906087244</updated>
       <workItem from="1727906089024" duration="2506000" />
-      <workItem from="1728160870896" duration="4614000" />
+      <workItem from="1728160870896" duration="14388000" />
     </task>
     <task id="LOCAL-00001" summary="base code.">
       <option name="closed" value="true" />
@@ -91,7 +99,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727906512305</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Deuxieme version du prototype.">
+      <option name="closed" value="true" />
+      <created>1728166289395</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728166289395</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.">
+      <option name="closed" value="true" />
+      <created>1728168768527</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728168768529</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +134,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="base code." />
-    <option name="LAST_COMMIT_MESSAGE" value="base code." />
+    <MESSAGE value="Premier prototype." />
+    <MESSAGE value="Deuxieme version du prototype." />
+    <MESSAGE value="Ajout de l'interface &quot;user&quot;.&#10;implémentation des différents menus." />
+    <MESSAGE value="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;." />
   </component>
 </project>

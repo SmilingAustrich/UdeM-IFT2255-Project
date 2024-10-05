@@ -14,4 +14,12 @@ public class AppSimulation {
         System.out.println(); // Aller à la ligne après le chargement
     }
 
+    public static void simulateWaitTime(){
+
+        try {
+            Thread.sleep(1500); // Pause de 500 ms entre chaque point
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
