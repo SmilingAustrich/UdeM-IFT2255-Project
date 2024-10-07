@@ -13,6 +13,7 @@ Les résidents ont accès aux fonctionnalités suivantes :
 - **Soumettre des requêtes de travaux** en fonction de leurs besoins.
 - **Suivre l'état de leurs requêtes** et **recevoir des notifications personnalisées**.
 - **Donner un avis** sur les travaux une fois terminés.
+- **Participer à la planification des travaux**
 - **Signaler un problème** à la ville.
 
 ### Intervenants 🛠️
@@ -20,6 +21,7 @@ Les intervenants peuvent :
 - **S'inscrire** et **se connecter**.
 - **Consulter les requêtes de travaux** soumises par les résidents.
 - **Soumettre leur candidature** pour participer à des travaux.
+- **Soumettre un nouveau projet** de travaux
 - **Mettre à jour les informations d'un chantier** en cours (statut, avancement, etc.).
 
 ## 📂 Organisation du Répertoire
@@ -43,7 +45,7 @@ Ce projet a été réalisé par :
 
 - **Tarik Hireche**  
   * _Développement du service d'authentification, de l'interface utilisateur ainsi que de ses implémentations_
-  * _Création du diagramme de cas d'utilisations et scénarios_
+  * _Création du diagramme de cas d'utilisations, scénarios et du README_
   
 - **Karim Ndoye**  
   * _Développement des fonctionnalités résidents et intervenant._
