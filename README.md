@@ -1,39 +1,57 @@
-# Projet "Ma Ville" - Application de Gestion des Travaux
+# 🌆 Projet "Ma Ville" - Application de Gestion des Travaux
 
-## Brève Description du Projet
+## 📄 Brève Description du Projet
 
-**Ma Ville** est une application Java destinée à faciliter la gestion des travaux publics et privés dans la ville de Montréal. Cette application permet aux résidents et aux intervenants de se connecter, consulter, soumettre des requêtes de travaux, et recevoir des notifications concernant les projets dans leur quartier. Le projet a été développé dans le cadre d'un devoir universitaire.
+**Ma Ville** est une application développée en **Java** visant à simplifier la gestion des travaux publics et privés à Montréal. Elle permet aux **résidents** et aux **intervenants** de se connecter, consulter, soumettre des requêtes de travaux, et recevoir des notifications personnalisées liées aux projets dans leurs quartiers. Ce projet a été réalisé dans le cadre d'un **devoir universitaire**.
 
-### Fonctionnalités principales :
-- **Résidents** peuvent :
-  - S'inscrire et se connecter.
-  - Consulter les travaux en cours ou à venir.
-  - Soumettre des requêtes de travaux.
-  - Suivre l'état de leurs requêtes et recevoir des notifications personnalisées.
-  - Donner un avis sur les travaux terminés.
-  - Signaler un problème à la ville.
+## 🚀 Fonctionnalités Principales
 
-- **Intervenants** peuvent :
-  - S'inscrire et se connecter.
-  - Consulter les requêtes de travaux soumises par les résidents.
-  - Soumettre des candidatures pour des travaux.
-  - Mettre à jour les informations d'un chantier (statut, avancement).
+### Résidents 🏡
+Les résidents ont accès aux fonctionnalités suivantes :
+- **S'inscrire** et **se connecter**.
+- **Consulter les travaux en cours ou à venir** dans leur quartier.
+- **Soumettre des requêtes de travaux** en fonction de leurs besoins.
+- **Suivre l'état de leurs requêtes** et **recevoir des notifications personnalisées**.
+- **Donner un avis** sur les travaux une fois terminés.
+- **Signaler un problème** à la ville.
 
-### Organisation du Répertoire
+### Intervenants 🛠️
+Les intervenants peuvent :
+- **S'inscrire** et **se connecter**.
+- **Consulter les requêtes de travaux** soumises par les résidents.
+- **Soumettre leur candidature** pour participer à des travaux.
+- **Mettre à jour les informations d'un chantier** en cours (statut, avancement, etc.).
 
-Le répertoire `src` contient les différentes classes Java qui composent le projet :
+## 📂 Organisation du Répertoire
+
+Le répertoire `src` contient les classes Java principales du projet, organisées de la manière suivante :
 
 ```plaintext
 src
-├── AppSimulation.java        # Classe pour simuler des chargements et délais
-├── AuthenticationService.java # Service d'authentification pour résidents et intervenants
-├── Intervenant.java           # Classe représentant les intervenants
-├── Main.java                  # Classe principale pour démarrer l'application
-├── Menu.java                  # Classe pour gérer l'interface de menu (connexion, inscription, etc.)
-├── Resident.java              # Classe représentant les résidents
-└── User.java                  # Interface utilisateur commune aux résidents et intervenants
+├── AppSimulation.java        # Gère la simulation des chargements et des délais.
+├── AuthenticationService.java # Service pour gérer l'authentification des résidents et intervenants.
+├── Intervenant.java           # Classe représentant un intervenant (entreprise ou particulier).
+├── Main.java                  # Classe principale pour démarrer l'application.
+├── Menu.java                  # Gère l'interface en ligne de commande pour la navigation.
+├── Resident.java              # Classe représentant un résident de Montréal.
+└── User.java                  # Interface commune pour les utilisateurs résidents et intervenants.
 ```
-- Les **auteurs** :
-  - Tarik Hireche
-  - Ilyesse Bouzammita
-  - Karim Ndoye
+
+## 👥 Auteurs
+
+Ce projet a été réalisé par :
+
+- **Tarik Hireche**  
+  * _Développement du service d'authentification, de l'interface utilisateur ainsi que de ses implémentations_
+  * _Création du diagrammes de cas d'utilisations et scénarios_
+  
+- **Karim Ndoye**  
+  * _Développement des fonctionnalités résidents et intervenant._
+  * _Création du glossaire, analyse_
+  
+
+- **Ilyesse Bouzammita**  
+  * _Développement du menu principal des intervenants et des résidents._
+  * _création du diagrammes d'activités_
+
+
