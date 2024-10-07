@@ -43,7 +43,7 @@ Ce projet a été réalisé par :
 
 - **Tarik Hireche**  
   * _Développement du service d'authentification, de l'interface utilisateur ainsi que de ses implémentations_
-  * _Création du diagrammes de cas d'utilisations et scénarios_
+  * _Création du diagramme de cas d'utilisations et scénarios_
   
 - **Karim Ndoye**  
   * _Développement des fonctionnalités résidents et intervenant._
@@ -52,6 +52,6 @@ Ce projet a été réalisé par :
 
 - **Ilyesse Bouzammita**  
   * _Développement du menu principal des intervenants et des résidents._
-  * _création du diagrammes d'activités_
+  * _Création du diagramme d'activités_
 
 
