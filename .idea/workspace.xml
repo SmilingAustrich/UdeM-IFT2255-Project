@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.">
-      <change afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppSimulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menus.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,23 +48,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.Menus.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -89,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727906087244</updated>
       <workItem from="1727906089024" duration="2506000" />
-      <workItem from="1728160870896" duration="14388000" />
+      <workItem from="1728160870896" duration="14820000" />
     </task>
     <task id="LOCAL-00001" summary="base code.">
       <option name="closed" value="true" />
@@ -115,7 +108,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728168768529</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.">
+      <option name="closed" value="true" />
+      <created>1728326352560</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1728326352560</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
+      <option name="closed" value="true" />
+      <created>1728326564314</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1728326564314</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,6 +147,8 @@
     <MESSAGE value="Deuxieme version du prototype." />
     <MESSAGE value="Ajout de l'interface &quot;user&quot;.&#10;implémentation des différents menus." />
     <MESSAGE value="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;." />
+    <MESSAGE value="Ajout de l'interface &quot;User&quot;.&#10;Mise à jour des classes intervenant et resident&#10;Mise à jour de la classe AuthenticationService" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
   </component>
 </project>
