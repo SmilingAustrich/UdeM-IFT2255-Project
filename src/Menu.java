@@ -27,11 +27,11 @@ public class Menu {
                 break;
 
             case 3:
-                inscriptionResidentMenu();
+                residentInscriptionMenu();
                 break;
 
             case 4:
-                inscriptionIntervenantMenu();
+                intervenantInscriptionMenu();
                 break;
 
             default:
@@ -75,16 +75,18 @@ public class Menu {
                 System.out.print("Vous ne semblez pas être inscrits en tant que résident, redirection vers " +
                         "la page d'inscription. ");
                 AppSimulation.simulateLoading();
-                inscriptionResidentMenu();
+                residentInscriptionMenu();
                 break;
             }
 
         }
 
         if (loggedInResident) {
-            System.out.println("Connexion réussie ! Bienvenue, résident.\n");
+            System.out.print("\nConnexion réussie ! Bienvenue.\nChargement de la page ");
+            AppSimulation.simulateLoading();
+            AppSimulation.simulateWaitTime();
             // Redirige vers le menu des résidents
-            // residentMainMenu();
+            residentMainMenu();
         }
     }
 
@@ -122,7 +124,7 @@ public class Menu {
                 AppSimulation.simulateLoading();
                 AppSimulation.simulateWaitTime();
 
-                inscriptionIntervenantMenu();
+                intervenantInscriptionMenu();
                 break;
             }
         }
@@ -130,16 +132,16 @@ public class Menu {
         if (loggedInIntervenant) {
             System.out.println("Connexion réussie ! Bienvenue, intervenant.");
             // Redirige vers le menu des intervenants
-            // intervenantMainMenu();
+            intervenantMainMenu();
         }
     }
 
-    public void inscriptionResidentMenu() {
+    public void residentInscriptionMenu() {
 
         System.out.print("--------------------------\n" +
                 "Chargement du portail d'inscription des résidents. ");
         AppSimulation.simulateLoading();
-        System.out.println("--------------------------\n");
+        System.out.println("--------------------------");
 
         Scanner in = new Scanner(System.in);
 
@@ -157,7 +159,7 @@ public class Menu {
         System.out.print("Mot de passe >: ");
         String passwordResident = in.nextLine();
 
-        System.out.print("Numéro de téléphone >: ");
+        System.out.print("Numéro de téléphone (optionnel) >: ");
         String phoneResident = in.nextLine();
 
         System.out.print("Adresse >: ");
@@ -179,7 +181,7 @@ public class Menu {
 
     }
 
-    public void inscriptionIntervenantMenu(){
+    public void intervenantInscriptionMenu(){
 
         System.out.print("--------------------------\n" +
                 "Chargement du portail d'inscription des intervenants. ");
@@ -225,7 +227,7 @@ public class Menu {
         intervenantLogInMenu();
     }
 
-    public void intervenantMainMenu(User user) {
+    public void intervenantMainMenu() {
         Scanner in = new Scanner(System.in);
         System.out.print("\n*******************************\n" +
                 "Vous êtes actuellement sur le menu des intervenants de l'application Ma Ville.\n" +
@@ -256,7 +258,7 @@ public class Menu {
         }
     }
 
-    public void residentMainMenu(User user){
+    public void residentMainMenu(){
         Scanner in = new Scanner(System.in);
         System.out.print("\n*******************************\n" +
                 "Vous êtes actuellement sur le menu des résidents de l'application Ma Ville.\n" +
@@ -267,7 +269,7 @@ public class Menu {
                 "\t 4. Permettre une planification participative. \n" +
                 "\t 5. Soumettre une requête de travail. \n" +
                 "\t 6. Signaler un problème à la ville. \n" +
-                " Insérer la lettre qui correspond à votre choix : ");
+                "\nInsérer le numéro qui correspond à votre choix :> ");
         int choice = in.nextInt();
         in.nextLine();
         System.out.println("*******************************");

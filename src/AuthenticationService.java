@@ -13,7 +13,7 @@ public class AuthenticationService {
             System.out.println("Un résident avec cet email existe déjà.");
         } else {
             residentMap.put(resident.getEmail(), resident); // Ajouter le résident à la map
-            System.out.println("Inscription réussie pour le résident : " + resident.getFirstName());
+            System.out.println("\nInscription réussie pour le résident : " + resident.getFirstName());
         }
     }
 
@@ -23,7 +23,7 @@ public class AuthenticationService {
             System.out.println("Un intervenant avec cet email existe déjà.");
         } else {
             intervenantMap.put(intervenant.getEmail(), intervenant); // Ajouter l'intervenant à la map
-            System.out.println("Inscription réussie pour l'intervenant : " + intervenant.getFirstName());
+            System.out.println("\nInscription réussie pour l'intervenant : " + intervenant.getFirstName());
         }
     }
 
