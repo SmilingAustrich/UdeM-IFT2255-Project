@@ -158,9 +158,10 @@ public class Intervenant implements User {
     public void soumettreCandidatureTravail() {
         Scanner in = new Scanner(System.in);
         System.out.println("Soumettre une candidature pour un travail.");
-        System.out.print("Nom du travail >: ");
-        String jobTitle = in.nextLine();
+        System.out.println("Fournissez les spécifications (titre du travail à réaliser, description détaillée, " +
+                        "date de début espérée...) pour la requête de travail :");
+        String description = in.nextLine();
         
-        System.out.println("Candidature soumise avec succès pour le travail : " + jobTitle);
+        System.out.println("Candidature soumise avec succès pour le travail suivant : " + description);
     }
 }

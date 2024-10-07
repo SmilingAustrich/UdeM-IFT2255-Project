@@ -261,6 +261,8 @@ public class Menu {
                         "\t 1. Consulter la liste des requêtes de travail.\n" +
                         "\t 2. Soumettre un nouveau projet de travaux.\n" +
                         "\t 3. Mettre à jour les informations d'un chantier.\n" +
+                        "\t 4. Proposer une plage horaire pour les travaux.\n" +
+                        "\t 5. Soumettre une candidature pour un travail.\n" +
                         "\nInsérer le numéro qui correspond à votre choix : "
         );
         int choice = in.nextInt();
@@ -279,6 +281,12 @@ public class Menu {
                 System.out.println("Que voulez-vous mettre à jour ? La description du projet, la date de fin prévue" +
                         " ou voulez-vous changer le statut du projet ? :");
                 break;
+            case 4:
+                intervenant.proposerPlageHoraire();
+            break;
+            case 5:
+                intervenant.soumettreCandidatureTravail();
+            break;
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
         }
@@ -321,8 +329,7 @@ public class Menu {
                 System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");
                 break;
             case 5:
-                System.out.println("Fournissez les spécifications (titre du travail à réaliser, description détaillée, " +
-                        "date de début espérée...) pour la requête de travail :");
+                resident.soumettreRequeteTravail();
                 break;
             case 6:
                 resident.signalerProbleme();
