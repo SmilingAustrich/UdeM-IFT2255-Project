@@ -32,7 +32,7 @@ src
 ├── Menu.java                  # Classe pour gérer l'interface de menu (connexion, inscription, etc.)
 ├── Resident.java              # Classe représentant les résidents
 └── User.java                  # Interface utilisateur commune aux résidents et intervenants
-
+```
 - Les **auteurs** :
   - Tarik Hireche
   - Ilyesse Bouzammita
