@@ -97,6 +97,8 @@ public class Intervenant implements User {
      *
      * @param requetes La liste des requêtes de travaux disponibles
      */
+
+
     public void consulterListeRequetesTravaux(List<String> requetes) {
         Scanner in = new Scanner(System.in);
         System.out.println("Voulez-vous filtrer les requêtes par : ");
@@ -132,5 +134,33 @@ public class Intervenant implements User {
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
         }
+    }
+
+    /**
+     * Permet à l'intervenant de proposer une plage horaire pour les travaux.
+     */
+    public void proposerPlageHoraire() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Veuillez proposer une plage horaire pour les travaux.");
+        System.out.print("Date (format JJ/MM/AAAA) >: ");
+        String date = in.nextLine();
+        System.out.print("Heure de début (format HH:MM) >: ");
+        String heureDebut = in.nextLine();
+        System.out.print("Heure de fin (format HH:MM) >: ");
+        String heureFin = in.nextLine();
+        System.out.println("Plage horaire proposée : " + date + " de " + heureDebut + " à " + heureFin);
+        
+    }
+
+    /**
+     * Permet à l'intervenant de soumettre une candidature pour un travail.
+     */
+    public void soumettreCandidatureTravail() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Soumettre une candidature pour un travail.");
+        System.out.print("Nom du travail >: ");
+        String jobTitle = in.nextLine();
+        
+        System.out.println("Candidature soumise avec succès pour le travail : " + jobTitle);
     }
 }

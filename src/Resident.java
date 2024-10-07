@@ -192,4 +192,17 @@ public class Resident implements User {
             System.out.println("Aucune autre zone n'a été ajoutée. Vous continuerez à recevoir des notifications pour votre quartier.");
         }
     }
+
+    /**
+     * Permet au résident de soumettre une requête de travail.
+     */
+    public void soumettreRequeteTravail() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Soumettre une requête de travail.");
+        System.out.print("Description des travaux >: ");
+        String description = in.nextLine();
+        
+        System.out.println("Requête soumise avec succès : " + description);
+    }
+
 }
