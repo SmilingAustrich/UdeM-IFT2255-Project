@@ -61,13 +61,13 @@
         .right { float: right; }
 
         .clear-fix { clear: both; display: block; }
-            .clear-fix:after {
-                content: ".";
-                clear: both;
-                display: block;
-                height: 0;
-                visibility: hidden;
-            }
+        .clear-fix:after {
+            content: ".";
+            clear: both;
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
 
         .row { display: table-row; }
 
@@ -82,7 +82,7 @@
         .bare-table { border: none; table-layout: fixed; }
 
         .bare-table td,
-        .bare-table th { 
+        .bare-table th {
             border: none;
         }
 
@@ -137,14 +137,14 @@
             position: relative;
         }
 
-            .has-helper:hover > .helper {
-                opacity: 1;   
-                transform: scale(1) translateY(2px);
-            }
-            .ico-helper:focus + .helper {
-                opacity: 1;   
-                transform: scale(1) translateY(2px);
-            }
+        .has-helper:hover > .helper {
+            opacity: 1;
+            transform: scale(1) translateY(2px);
+        }
+        .ico-helper:focus + .helper {
+            opacity: 1;
+            transform: scale(1) translateY(2px);
+        }
 
         .has-def {
             position: relative;
@@ -160,17 +160,17 @@
             cursor: default;
             font-style: normal; font-weight: 500;
         }
-            .def-term:after {
-                content: "?";
-                text-align: center;
-                font-weight: bold;
-                margin-left: 3px;
-                height: 18px; width: 18px;
-                font-size: 1.2rem; 
-                border-radius: 50%;
-                background-color: #6667AB;
-                color: #fff;
-            }
+        .def-term:after {
+            content: "?";
+            text-align: center;
+            font-weight: bold;
+            margin-left: 3px;
+            height: 18px; width: 18px;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            background-color: #6667AB;
+            color: #fff;
+        }
 
 
         .def {
@@ -184,15 +184,15 @@
             background-color: #232425;
             box-shadow: 0 1px 2px -1px #999;
             opacity: 0;
-            transform: scale(0); 
+            transform: scale(0);
             transition: .2s; transition-property: opacity, transform;
             z-index: 20;
         }
 
-            .has-def:hover > .def {
-                opacity: 1;   
-                transform: scale(1) translateY(2px);
-            }
+        .has-def:hover > .def {
+            opacity: 1;
+            transform: scale(1) translateY(2px);
+        }
 
         .report-header {
             padding-top: 24px; padding-bottom: 24px;
@@ -215,27 +215,27 @@
             font-size: 1.4em;
             color: #555;
         }
-        
+
         .report-resources {
             display: flex;
             justify-content: flex-end;
         }
 
-            .report-resource {
-                margin-left: 12px;
-            }
+        .report-resource {
+            margin-left: 12px;
+        }
 
-            .report-resource-link {
-                padding: 8px 12px;
-                font-weight: bold;
-                color: #fff;
-                border-radius: 2px;
-                text-decoration: none;
-                background-color: #232425;
-            }
-                .report-resource-link:hover {
-                    background-color: #1b1f23;
-                }
+        .report-resource-link {
+            padding: 8px 12px;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 2px;
+            text-decoration: none;
+            background-color: #232425;
+        }
+        .report-resource-link:hover {
+            background-color: #1b1f23;
+        }
 
         .section-title {
             margin-bottom: 6px;
@@ -254,34 +254,34 @@
             padding-right: 5vw;
         }
 
-            .team-title {
-                font-weight: 500;
-                margin-bottom: 12px;
-                color: #1C3A94;
-            }
+        .team-title {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #1C3A94;
+        }
 
-            .members {
-                display: flex; flex-direction: row;
-            }
+        .members {
+            display: flex; flex-direction: row;
+        }
 
-            .member {
-                display: flex; flex-direction: column;
-            }
-                .member:not(:last-child) {
-                    margin-right: 12px;
-                }
+        .member {
+            display: flex; flex-direction: column;
+        }
+        .member:not(:last-child) {
+            margin-right: 12px;
+        }
 
-                .member-pic {
-                    display: block;
-                    width: 120px;
-                    height: 120px;
-                    border-radius: 50%;
-                }
+        .member-pic {
+            display: block;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
 
-                .member-role {
-                    font-size: 0.9em; font-weight: 500;
-                    color: #555;
-                }
+        .member-role {
+            font-size: 0.9em; font-weight: 500;
+            color: #555;
+        }
 
         .report-body {
             display: flex;
@@ -292,9 +292,9 @@
             min-width: 300px;
             background-color: #6667AB;
         }
-            .report-aside .section-title {
-                color: #fff;
-            }
+        .report-aside .section-title {
+            color: #fff;
+        }
 
         .report-main {
             padding-top: 24px; padding-left: 2%; padding-right: 5vw;
@@ -308,24 +308,24 @@
             color: #E87429;
         }
 
-            .nav-item-title {
-                font-size: 1.1em;
-                margin: 0;
-            }
+        .nav-item-title {
+            font-size: 1.1em;
+            margin: 0;
+        }
 
-            .nav-item-title__link {
-                display: block;
-                color: #fff;
-                font-weight: 500;
-                padding: 6px;
-                text-decoration: none;
-            }
+        .nav-item-title__link {
+            display: block;
+            color: #fff;
+            font-weight: 500;
+            padding: 6px;
+            text-decoration: none;
+        }
 
-            .nav-item-details {
-                color: #f5f5f5;
-                padding-left: 6px;
-                line-height: 1.5;
-            }
+        .nav-item-details {
+            color: #f5f5f5;
+            padding-left: 6px;
+            line-height: 1.5;
+        }
 
         .glossary-term {
             font-weight: bold;
@@ -347,80 +347,80 @@
             display: flex;
         }
 
-            .persona {
-                position: relative;
-                display: flex; flex-direction: column;
-                margin-right: 12px;
-                max-width: 360px;
-                padding: 6px 12px;
-                border-radius: 2px;
-                box-shadow: 0 1px 2px -1px #999;
-                background-color: #fff;
-                z-index: 2;
-            }
+        .persona {
+            position: relative;
+            display: flex; flex-direction: column;
+            margin-right: 12px;
+            max-width: 360px;
+            padding: 6px 12px;
+            border-radius: 2px;
+            box-shadow: 0 1px 2px -1px #999;
+            background-color: #fff;
+            z-index: 2;
+        }
 
-            .persona-stat {
-                display: flex;
-                justify-content: flex-end;
-            }
+        .persona-stat {
+            display: flex;
+            justify-content: flex-end;
+        }
 
-            .persona-type {
-                display: flex; align-items: center; justify-content: center;
-                height: 40px; width: 40px; 
-                font-size: 1.3rem; font-weight: bold; 
-                border-radius: 50%;
-            }
+        .persona-type {
+            display: flex; align-items: center; justify-content: center;
+            height: 40px; width: 40px;
+            font-size: 1.3rem; font-weight: bold;
+            border-radius: 50%;
+        }
 
-            .persona-type--pp {
-                background-color: #FF6F61;
-            }
+        .persona-type--pp {
+            background-color: #FF6F61;
+        }
 
-            .persona-type--eco {
-                background-color: #88B04B;
-            }
+        .persona-type--eco {
+            background-color: #88B04B;
+        }
 
-            .persona-market {
-                display: flex; align-items: center; justify-content: center;
-                margin-left: 6px;
-                height: 40px; width: 40px; 
-                color: #444;
-                font-size: 1.3rem; font-weight: bold; 
-                border-radius: 50%;
-                background-color: #d5d5d5;
-            }
+        .persona-market {
+            display: flex; align-items: center; justify-content: center;
+            margin-left: 6px;
+            height: 40px; width: 40px;
+            color: #444;
+            font-size: 1.3rem; font-weight: bold;
+            border-radius: 50%;
+            background-color: #d5d5d5;
+        }
 
-            .persona-color {
-                display: flex; align-items: center; justify-content: center;
-                background-color: #FF6F61;
-                height: 42px; width: 42px; font-weight: bold;
-                justify-self: center; align-self: center;
-                font-size: 1.3rem;
-                border-radius: 50%;
-            }
+        .persona-color {
+            display: flex; align-items: center; justify-content: center;
+            background-color: #FF6F61;
+            height: 42px; width: 42px; font-weight: bold;
+            justify-self: center; align-self: center;
+            font-size: 1.3rem;
+            border-radius: 50%;
+        }
 
-            .persona-identity {
-                display: flex; 
-            }
-            
-            .persona-name {
-                font-size: 1.2em; font-weight: 300;
-                flex-grow: 2;
-            }
+        .persona-identity {
+            display: flex;
+        }
 
-            .persona-demography-line {
-                display: flex;
-            }
+        .persona-name {
+            font-size: 1.2em; font-weight: 300;
+            flex-grow: 2;
+        }
 
-            .persona-background {
-                padding: 6px;
-                color: #555;
-            }
+        .persona-demography-line {
+            display: flex;
+        }
 
-            .persona-title {
-                margin-top: 6px; margin-bottom: 3px;
-                color: #222;
-                font-size: 1.1em; font-weight: 500;
-            }
+        .persona-background {
+            padding: 6px;
+            color: #555;
+        }
+
+        .persona-title {
+            margin-top: 6px; margin-bottom: 3px;
+            color: #222;
+            font-size: 1.1em; font-weight: 500;
+        }
 
         .use-case {
             display: flex; flex-wrap: wrap;
@@ -469,7 +469,7 @@
             margin: 0;
             color: #FF6F61;
         }
-        
+
         .cu-actors {
             display: flex;
         }
@@ -512,7 +512,7 @@
         }
 
         .scenario-main-steps {
-            margin: 0; padding-left: 16px;        
+            margin: 0; padding-left: 16px;
         }
 
         .scenario-alt {
@@ -522,12 +522,12 @@
         .scenario-alt p { margin: 0; }
 
         .scenario-alt-steps { counter-reset: topLevel; }
-            .scenario-alt-steps:not(:last-child) { margin-bottom: 6px; }
-            .scenario-alt-step { counter-increment: topLevel; font-weight: 500; }
-            .scenario-alt-step:before { content: attr(value) counter(topLevel, lower-alpha) '. '; }
-            .scenario-alt-steps ol { font-weight: 400; counter-reset: secondLevel; }
-                .scenario-alt-steps ol li { counter-increment: secondLevel; margin-left: 12px; }
-                    .scenario-alt-steps ol li:before { content: attr(value) counter(topLevel, lower-alpha) '.' counter(secondLevel, decimal) '. '}
+        .scenario-alt-steps:not(:last-child) { margin-bottom: 6px; }
+        .scenario-alt-step { counter-increment: topLevel; font-weight: 500; }
+        .scenario-alt-step:before { content: attr(value) counter(topLevel, lower-alpha) '. '; }
+        .scenario-alt-steps ol { font-weight: 400; counter-reset: secondLevel; }
+        .scenario-alt-steps ol li { counter-increment: secondLevel; margin-left: 12px; }
+        .scenario-alt-steps ol li:before { content: attr(value) counter(topLevel, lower-alpha) '.' counter(secondLevel, decimal) '. '}
 
         .glossary {
             font-size: 1.4em;
@@ -545,9 +545,9 @@
             background-color: #292723;
         }
 
-            .report-footer p {
-                margin: 0; margin-bottom: 6px;
-            }
+        .report-footer p {
+            margin: 0; margin-bottom: 6px;
+        }
 
         .activity-diagram {
             display: block;
@@ -558,430 +558,607 @@
             background-color: #d5d5d5;
         }
 
-        .dash:before { 
-            content: '-'; 
+        .dash:before {
+            content: '-';
             margin-left: 4px;
-            margin-right: 8px; 
+            margin-right: 8px;
             font-weight: bold;
             color: currentColor;
-        } 
+        }
 
         .check:before {
             margin-left: 2px;
-            margin-right: 4px; 
+            margin-right: 4px;
             font-weight: bold;
-            content: '🗸'; 
+            content: '🗸';
             color: currentColor;
         }
     </style>
 </head>
 
 <body>
-    <header class="report-header">
-        <div class="title-section">
-            <div>
-                <h1 class="report-title">Rapport du livrable X</h1>
-                <p class="report-summary">
-                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur... 
-                    lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia distinctio tempora quam nulla quod enim. 
-                    Odit eius dolores repellendus incidunt doloribus delectus at ex sunt error, iste dicta, maiores blanditiis.
+<header class="report-header">
+    <div class="title-section">
+        <div>
+            <h1 class="report-title">Rapport pour l'application Ma ville</h1>
+            <p class="report-summary">
+                <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur l'analyse
+                et le développement d'une application dédiée à la gestion et à l'amélioration des
+                services urbains dans notre ville. À travers ce projet, nous avons identifié les
+                besoins des citoyens, évalué les infrastructures existantes et proposé des solutions
+                innovantes. L'objectif est de favoriser l'interaction entre les habitants et les services
+                municipaux, tout en optimisant la gestion des ressources. Ce rapport présente
+                les étapes de notre démarche, les outils utilisés, ainsi que les résultats obtenus
+                et les perspectives d'évolution pour notre application.
+            </p>
+        </div>
+
+        <ul class="bare-list report-resources">
+            <li class="report-resource">
+                <a class="report-resource-link" href="#" target="_blank">
+                    Répertoire GitHub
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="team-section">
+        <h2 class="team-title">Équipe #01</h2>
+        <ul class="bare-list members">
+            <li class="member">
+                <img class="member-pic" src="" alt="" >
+                <div class="member-identification">
+                    <span class="member-name">Tarik Hireche</span>
+                    <span class="member-id">202 301 89</span>
+                </div>
+                <span>Discord: @soymyo</span>
+                <a href="mailto:prenom.nom@umontreal.ca">tarik.hireche@umontreal.ca</a>
+                <span class="member-role">Chargé de faire:
+                        <ul>
+                            <li>Le développement du service d'authentification</li>
+                            <li>L'interface utilisateur ainsi que ses implémentations</li>
+                            <li>La création du diagramme de cas d'utilisations</li>
+                            <li>Le scénarios</li>
+                            <li>README</li>
+                        </ul>
+                    </span>
+            </li>
+            <li class="member">
+                <img class="member-pic" src="" alt="" >
+                <div class="member-identification">
+                    <span class="member-name">Karim Ndoye</span>
+                    <span class="member-id">202 898 24</span>
+                </div>
+                <span>Discord: @lolie</span>
+                <a href="mailto:prenom.nom@umontreal.ca">karim.ndoye@umontreal.ca</a>
+                <span class="member-role">Chargé de...</span>
+            </li>
+            <li class="member">
+                <img class="member-pic" src="" alt="" >
+                <div class="member-identification">
+                    <span class="member-name">Ilyesse Bouzommita</span>
+                    <span class="member-id">202 761 43</span>
+                </div>
+                <span>Discord: @ilyaoooo</span>
+                <a href="mailto:prenom.nom@umontreal.ca">ilyesse.bouzommita@umontreal.ca</a>
+                <span class="member-role">Chargé de...</span>
+            </li>
+        </ul>
+    </div>
+</header>
+<main class="report-body">
+    <aside class="report-aside">
+        <nav>
+            <h2 class="section-title">Contenu</h2>
+            <ul class="bare-list nav">
+                <li class="nav-item">
+                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#plan">Cadre du projet</a></h3>
+                    <ul class="bare-list nav-item-details">
+                        <li class="dash">Introduction</li>
+                        <li class="dash">Échéancier</li>
+                        <li class="dash">Hypothèses</li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#requirements">Exigences</a></h3>
+                    <ul class="bare-list nav-item-details">
+                        <li class="dash">Glossaire</li>
+                        <li class="dash">Persona</li>
+                        <li class="dash">Cas d'utilisation</li>
+                        <li class="dash">Diagramme d'activités</li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#analysis">Analyse</a></h3>
+                    <ul class="bare-list nav-item-details">
+                        <li class="dash">Risques</li>
+                        <li class="dash">Besoins non fonctionnels</li>
+                        <li class="dash">Besoins matériels</li>
+                        <li class="dash">Stockage</li>
+                        <li class="dash">Intégration</li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Prototype</a> </h3>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="report-main">
+        <section class="main-section">
+            <h2 id="plan" class="section-title">Cadre du projet</h2>
+            <h3 class="subsection-title">Introduction</h3>
+            <p>
+                <em>
+                    Le projet "Ma Ville", élaboré par Tarek, Ilyesse et Karim dans le cadre du cours IFT2255 (Génie Logiciel),
+                    vise à résoudre les problèmes de communication liés aux travaux publics et privés à Montréal.
+                    Actuellement, les résidents se heurtent à des informations fragmentées sur les entraves à la circulation,
+                    ce qui engendre frustration et imprévisibilité.  Nous proposons donc de développer une application mobile, "Ma Ville",
+                    qui centralisera toutes les informations relatives aux chantiers, y compris les dates, emplacements, et impacts sur la circulation.
+                    L'application permettra également aux utilisateurs de signaler des problèmes, d'accéder à un calendrier des travaux, et de recevoir des notifications en temps réel.
+                    En favorisant une meilleure collaboration entre la ville, les entreprises et les citoyens, "Ma Ville" a pour objectif d'améliorer la coordination des travaux et de minimiser les désagréments pour les résidents.
+                </em>
+            </p>
+            <h3 class="subsection-title">Échéancier</h3>
+            <p>
+                <em>Présentation de l'échéancier et la distribution des taches (au moins pour le devoir 1)</em>
+                <img src="images/echeancier.jpg" alt="echeancier" class="preview-img">
+            </p>
+
+            <h3 class="subsection-title">Hypothèses (optionnel)</h3>
+            <p>
+                <em>Présentation des hypothèses faites dans l'élaboration des exigences et l'analyse</em>
+            </p>
+        </section>
+
+        <section class="main-section">
+            <h2 id="requirements" class="section-title">Exigences</h2>
+            <p>
+                Après de nombreuses rencontres avec le client et une familiarisation avec les activités de recyclage et compostage,
+                nous avons préparé un glossaire rassemblant les termes et expressions clés caractérisant l'environnement.
+            </p>
+
+            <h3 class="subsection-title">Glossaire</h3>
+            <dl class="glossary">
+                <dt class="glossary-term">Travaux publics</dt>
+                <dd class="glossary-def">Projets de construction, de maintenance ou d'amélioration entrepris par les autorités municipales ou gouvernementales pour le bénéfice public, tels que la réfection de routes, l'installation de conduites d'eau ou l'entretien des infrastructures publiques.</dd>
+
+                <dt class="glossary-term">Travaux privés</dt>
+                <dd class="glossary-def">Projets de construction ou de développement réalisés par des entreprises privées, des promoteurs immobiliers ou des particuliers, souvent dans le cadre de projets commerciaux ou résidentiels.</dd>
+
+                <dt class="glossary-term">Entraves à la circulation</dt>
+                <dd class="glossary-def">Obstacles ou limitations imposées à la circulation des véhicules ou des piétons en raison des travaux en cours, tels que la fermeture de routes, les détours ou les restrictions de stationnement.</dd>
+
+                <dt class="glossary-term">Info entraves et travaux</dt>
+                <dd class="glossary-def">Service en ligne de la ville permettant aux résidents de s'informer sur les travaux et les perturbations liés aux infrastructures routières.</dd>
+
+                <dt class="glossary-term">Planification participative</dt>
+                <dd class="glossary-def">Processus permettant aux citoyens de contribuer à la prise de décision concernant la planification et l'organisation des travaux dans leur quartier, en fournissant des retours ou en soumettant des demandes.</dd>
+
+                <dt class="glossary-term">Notification personnalisée</dt>
+                <dd class="glossary-def">Système de messagerie permettant aux utilisateurs de recevoir des mises à jour spécifiques sur les travaux ou les entraves qui affectent leur secteur géographique ou leurs trajets quotidiens.</dd>
+
+                <dt class="glossary-term">Intervenant</dt>
+                <dd class="glossary-def">Entité ou individu, qu’il soit public ou privé, impliqué dans la réalisation, la planification ou la gestion des travaux, incluant les entrepreneurs, les promoteurs immobiliers, et les autorités locales.</dd>
+
+                <dt class="glossary-term">Chantier</dt>
+                <dd class="glossary-def">Site où des travaux de construction ou d'amélioration sont en cours. Il peut être temporaire et causer des interruptions dans les services locaux.</dd>
+
+                <dt class="glossary-term">Mobilité urbaine</dt>
+                <dd class="glossary-def">Ensemble des modes de déplacement utilisés par les résidents dans une ville, incluant la marche, les vélos, les voitures, les transports en commun, et leur accessibilité.</dd>
+
+                <dt class="glossary-term">Système d’authentification</dt>
+                <dd class="glossary-def">Mécanisme permettant de vérifier l'identité des utilisateurs qui souhaitent accéder à des fonctionnalités spécifiques de l'application, que ce soit en tant que résident ou intervenant.</dd>
+
+                <dt class="glossary-term">Menu principal</dt>
+                <dd class="glossary-def">Interface initiale de l'application offrant les différentes options d'actions possibles pour l'utilisateur connecté, avec une structure hiérarchique claire et des niveaux d’imbrication limités.</dd>
+
+                <dt class="glossary-term">Application MaVille</dt>
+                <dd class="glossary-def">Application proposée dans le cadre du projet visant à centraliser et améliorer la communication entre les résidents et les intervenants au sujet des travaux publics et privés.</dd>
+
+                <dt class="glossary-term">Flux d’activités</dt>
+                <dd class="glossary-def">Séquence d’actions ou d'étapes que suit un utilisateur pour accomplir une tâche dans l'application, souvent représentée par un diagramme d’activités.</dd>
+
+                <dt class="glossary-term">Diagramme de cas d’utilisation (CU)</dt>
+                <dd class="glossary-def">Représentation graphique décrivant les interactions entre les utilisateurs (résidents, intervenants) et les fonctionnalités de l’application dans différents scénarios.</dd>
+
+                <dt class="glossary-term">Risques</dt>
+                <dd class="glossary-def">Problèmes potentiels susceptibles de survenir au cours de la réalisation du projet ou de l'utilisation de l'application, et pouvant affecter son bon fonctionnement ou son adoption par les utilisateurs.</dd>
+
+                <dt class="glossary-term">Solution de stockage</dt>
+                <dd class="glossary-def">Méthode ou technologie utilisée pour conserver et gérer les données recueillies ou générées par l'application, comme les informations sur les travaux, les utilisateurs, ou les notifications.</dd>
+
+                <dt class="glossary-term">Solution d’intégration</dt>
+                <dd class="glossary-def">Ensemble des outils ou processus permettant de connecter et de synchroniser l'application avec d'autres systèmes ou services externes, comme les bases de données municipales.</dd>
+
+                <dt class="glossary-term">Requête de travail</dt>
+                <dd class="glossary-def">Demande soumise par un résident ou un intervenant pour la réalisation ou la modification d'un projet de travaux dans leur quartier ou zone d'intérêt.</dd>
+
+                <dt class="glossary-term">Signalement</dt>
+                <dd class="glossary-def">Fonctionnalité permettant à un utilisateur de rapporter un problème spécifique, comme un chantier non sécurisé ou une entrave non annoncée, directement à la ville ou à l'entreprise responsable.</dd>
+
+                <dt class="glossary-term">Échéancier</dt>
+                <dd class="glossary-def">Plan de déroulement des différentes étapes du projet, indiquant les délais et les responsabilités de chaque membre de l’équipe.</dd>
+
+                <dt class="glossary-term">Adresse résidentielle</dt>
+                <dd class="glossary-def">Localisation physique d’un résident utilisée pour l’associer à un quartier de Montréal et personnaliser les notifications.</dd>
+
+                <dt class="glossary-term">Authentification</dt>
+                <dd class="glossary-def">Processus de vérification des informations d'identification (courriel et mot de passe) pour accéder à l'application en tant que résident ou intervenant.</dd>
+
+                <dt class="glossary-term">Candidature</dt>
+                <dd class="glossary-def">Proposition soumise par un intervenant pour réaliser un projet de travaux, en réponse à une requête d’un résident.</dd>
+
+                <dt class="glossary-term">Changement de statut</dt>
+                <dd class="glossary-def">Action effectuée par un intervenant pour mettre à jour le statut d’un chantier, comme "Prévu", "En cours", "Suspendu" ou "Terminé".</dd>
+
+                <dt class="glossary-term">Coordination des travaux</dt>
+                <dd class="glossary-def">Processus visant à organiser et planifier les projets de travaux afin de minimiser les perturbations pour les citoyens.</dd>
+
+                <dt class="glossary-term">Description du projet</dt>
+                <dd class="glossary-def">Information détaillée soumise par un intervenant lors de la création d'un nouveau projet de travaux, incluant son type, ses dates, et les zones affectées.</dd>
+
+                <dt class="glossary-term">Filtre</dt>
+                <dd class="glossary-def">Fonctionnalité permettant aux utilisateurs de trier les travaux selon des critères spécifiques, tels que le type, le quartier ou la date.</dd>
+
+                <dt class="glossary-term">Identifiant de la ville</dt>
+                <dd class="glossary-def">Code unique à 8 chiffres attribué aux intervenants par la ville pour valider leur inscription à l’application.</dd>
+
+                <dt class="glossary-term">Plages horaires</dt>
+                <dd class="glossary-def">Périodes pendant lesquelles les résidents préfèrent que des travaux soient effectués dans leur quartier.</dd>
+
+                <dt class="glossary-term">Quartier</dt>
+                <dd class="glossary-def">Secteur géographique de Montréal utilisé pour filtrer ou associer des projets de travaux aux résidents et intervenants.</dd>
+
+                <dt class="glossary-term">GitHub</dt>
+                <dd class="glossary-def">Plateforme de gestion de versions utilisée pour héberger et collaborer sur le code source du projet. Les équipes y soumettent leurs modifications (commits) et effectuent des releases à la fin du projet.</dd>
+
+                <dt class="glossary-term">Commit</dt>
+                <dd class="glossary-def">Action d’enregistrer des modifications apportées au code source dans un dépôt Git. Chaque membre de l’équipe doit avoir au moins un commit pour démontrer sa participation active au projet.</dd>
+
+                <dt class="glossary-term">Release</dt>
+                <dd class="glossary-def">Version stable du projet ou prototype, soumise à la fin du développement. Une "release" officielle doit être faite lors de la remise du projet.</dd>
+
+                <dt class="glossary-term">Prototype</dt>
+                <dd class="glossary-def">Première version fonctionnelle de l'application, réalisée dans un cadre limité. Pour ce projet, le prototype se limite à une interaction en ligne de commande, permettant de simuler certaines fonctionnalités de base de l'application.</dd>
+
+                <dt class="glossary-term">README</dt>
+                <dd class="glossary-def">Fichier texte situé dans le répertoire du projet GitHub, décrivant brièvement le projet, son organisation, et les étapes pour l'exécuter ou le tester.</dd>
+
+                <dt class="glossary-term">Système de stockage</dt>
+                <dd class="glossary-def">Solution technique utilisée pour conserver les données relatives aux utilisateurs, aux travaux et aux notifications dans l'application.</dd>
+
+                <dt class="glossary-term">Interface utilisateur</dt>
+                <dd class="glossary-def">Ensemble des menus et options affichés aux utilisateurs pour interagir avec l’application. Dans ce projet, elle est limitée à une interface en ligne de commande.</dd>
+
+                <dt class="glossary-term">Cas d'utilisation (CU)</dt>
+                <dd class="glossary-def">Scénarios ou situations spécifiques dans lesquelles un utilisateur interagit avec l’application. Chaque CU décrit une fonctionnalité particulière, comme la recherche de travaux ou la soumission d’une requête.</dd>
+
+                <dt class="glossary-term">Diagramme d’activités</dt>
+                <dd class="glossary-def">Représentation visuelle des flux de travail dans l’application, montrant les étapes que suit un utilisateur pour accomplir une tâche donnée.</dd>
+
+                <dt class="glossary-term">Besoins fonctionnels</dt>
+                <dd class="glossary-def">Exigences décrivant les actions spécifiques que l'application doit permettre, comme la consultation des travaux en cours ou la soumission de projets par les intervenants.</dd>
+
+                <dt class="glossary-term">Besoins non fonctionnels</dt>
+                <dd class="glossary-def">Exigences portant sur la qualité de l’application, telles que sa rapidité, sa sécurité, ou sa capacité à gérer un grand nombre d'utilisateurs simultanés.</dd>
+
+                <dt class="glossary-term">Risques</dt>
+                <dd class="glossary-def">Problèmes potentiels liés à la mise en œuvre ou à l’utilisation de l’application, pouvant inclure des défaillances de sécurité, des bugs, ou une mauvaise adoption par les utilisateurs.</dd>
+            </dl>
+
+
+            <h3 class="subsection-title">Persona (optionnel)</h3>
+
+            <ul class="bare-list personas">
+
+                <li class="persona">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <span class="persona-name">Maxime &ndash; <em>Résident de Montréal</em></span>
+                        <div class="persona-stat">
+                            <span class="persona-type persona-type--fam" title="Famille">FAM</span>
+                            <span class="persona-market">35%</span>
+                        </div>
+                    </div>
+                    <span class="persona-info">Homme marié de 40 ans vivant avec sa famille à Montréal</span>
+                    <div class="persona-goal">
+                        <h4 class="persona-title">Buts</h4>
+                        <ul class="bare-list">
+                            <li class="check">Recevoir des notifications sur les travaux dans son quartier</li>
+                            <li class="check">Planifier ses trajets quotidiens sans perturbations</li>
+                            <li class="check">S'assurer que les projets de travaux ne perturbent pas la sécurité et la mobilité de sa famille</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="persona">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <span class="persona-name">Sophie &ndash; <em>Intervenante en construction</em></span>
+                        <div class="persona-stat">
+                            <span class="persona-type persona-type--prof" title="Professionnelle">PROF</span>
+                            <span class="persona-market">25%</span>
+                        </div>
+                    </div>
+                    <span class="persona-info">Femme de 30 ans, travaillant dans le domaine de la construction à Montréal</span>
+                    <div class="persona-goal">
+                        <h4 class="persona-title">Buts</h4>
+                        <ul class="bare-list">
+                            <li class="check">Soumettre des candidatures pour les projets de travaux</li>
+                            <li class="check">Mettre à jour les informations sur l'avancement des chantiers</li>
+                            <li class="check">Planifier et coordonner les travaux en fonction des préférences des résidents</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="persona">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <span class="persona-name">Julien &ndash; <em>Responsable de la ville</em></span>
+                        <div class="persona-stat">
+                            <span class="persona-type persona-type--gov" title="Gouvernement">GOV</span>
+                            <span class="persona-market">15%</span>
+                        </div>
+                    </div>
+                    <span class="persona-info">Homme de 50 ans travaillant pour la ville de Montréal</span>
+                    <div class="persona-goal">
+                        <h4 class="persona-title">Buts</h4>
+                        <ul class="bare-list">
+                            <li class="check">Valider les inscriptions des intervenants</li>
+                            <li class="check">Coordonner les travaux publics</li>
+                            <li class="check">Gérer les signalements de problèmes soumis par les résidents</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+            <h3 class="subsection-title">Cas d'utilisation</h3>
+            <div class="use-case">
+                <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="preview-img">
+                <p class="use-case-notes">
+
+                <h4>1. Choix des acteurs</h4>
+                <ul>
+                    <li><strong>Résident :</strong>
+                        <p>Il s'agit d'un acteur principal car il représente les utilisateurs finaux qui interagissent avec l'application pour gérer les travaux dans leur quartier. Le résident est impliqué dans des actions comme la soumission de requêtes de travaux, la consultation des travaux en cours ou à venir, et la réception de notifications. Il participe également à la planification participative en proposant des plages horaires pour les travaux.</p>
+                    </li>
+                    <li><strong>Intervenant :</strong>
+                        <p>L’intervenant est un acteur clé dans l'exécution des travaux. C'est un utilisateur qui consulte les requêtes de travaux, soumet des candidatures pour les réaliser, et met à jour l’état des projets de travaux. L’intervenant peut être un entrepreneur privé, une entreprise publique ou un particulier.</p>
+                    </li>
+                    <li><strong>Ville de Montréal :</strong>
+                        <p>La ville de Montréal est un acteur secondaire qui joue un rôle de validation et de gestion. Elle valide les inscriptions des intervenants et traite les signalements de problèmes soumis par les résidents. La ville n’interagit pas directement avec tous les cas d'utilisation mais a un rôle de supervision et de gestion.</p>
+                    </li>
+                </ul>
+
+                <h4>2. Choix des relations</h4>
+                <ul>
+                    <li><strong>Include (« Inclure ») :</strong>
+                        <p>Cette relation est utilisée lorsque le cas d’utilisation nécessite l’invocation d'un autre cas pour être complété. Par exemple, dans le cas d’utilisation <em>"Se connecter comme résident"</em>, il inclut <em>"S'inscrire comme résident"</em> si l'utilisateur n'a pas encore de compte. Cela garantit que l’utilisateur soit correctement inscrit avant de se connecter.</p>
+                        <p>D’autres cas comme <em>"Signaler un problème à la ville"</em> incluent des sous-cas comme <em>"Traiter les problèmes signalés par les résidents"</em> pour indiquer que la ville doit nécessairement intervenir après le signalement.</p>
+                    </li>
+                    <li><strong>Extend (« Étendre ») :</strong>
+                        <p>La relation d'extension est utilisée lorsque le cas de base peut être enrichi par des fonctionnalités optionnelles. Par exemple, <em>"Consulter les travaux en cours ou à venir"</em> est un cas d’utilisation central, mais il peut être étendu par <em>"Recevoir des notifications personnalisées"</em> qui est une option supplémentaire que le résident peut activer ou non.</p>
+                        <p>De même, <em>"Consulter la liste des requêtes de travaux"</em> pour l’intervenant peut être étendu par <em>"Déposer sa candidature"</em> lorsque l’intervenant choisit de participer à un projet de travaux.</p>
+                    </li>
+                    <li><strong>Généralisation (« Héritage ») :</strong>
+                        <p>Dans ce diagramme, la généralisation n’est pas explicitement utilisée, mais aurait pu être utilisée pour illustrer des comportements communs entre certains acteurs ou cas d'utilisation. Par exemple, <em>"S'inscrire"</em> et <em>"Se connecter"</em> pour les résidents et les intervenants sont des cas similaires qui pourraient hériter d'une structure commune.</p>
+                    </li>
+                </ul>
+
+                <p>Ces choix de relations permettent de modéliser l’interaction de manière claire et modulaire, avec des cas d'utilisation centrés sur les tâches principales et leurs extensions pour les fonctionnalités optionnelles.</p>
+                S
                 </p>
             </div>
 
-            <ul class="bare-list report-resources">
-                <li class="report-resource">
-                    <a class="report-resource-link" href="#" target="_blank">
-                        Répertoire GitHub
-                    </a>
-                </li>
-            </ul>
-        </div>
+            <h3 class="subsection-title">Scénarios</h3>
 
-        <div class="team-section">
-            <h2 class="team-title">Équipe #XX</h2>
-            <ul class="bare-list members">
-                <li class="member">
-                    <img class="member-pic" src="" alt="" >
-                    <div class="member-identification">
-                        <span class="member-name">Francois LABONTE</span>
-                        <span class="member-id">2014069</span>
-                    </div> 
-                    <span>Discord: @franck</span>
-                    <a href="mailto:prenom.nom@umontreal.ca">prenom.nom@umontreal.ca</a>
-                    <span class="member-role">Chargé de...</span>
-                </li>
-                <li class="member">
-                    <img class="member-pic" src="" alt="" >
-                    <div class="member-identification">
-                        <span class="member-name">Lola MONTENEGRO</span>
-                        <span class="member-id">1034870</span>
-                    </div> 
-                    <span>Discord: @lolie</span>
-                    <a href="mailto:prenom.nom@umontreal.ca">prenom.nom@umontreal.ca</a>
-                    <span class="member-role">Chargé de...</span>
-                </li>
-                <li class="member">
-                    <img class="member-pic" src="" alt="" >
-                    <div class="member-identification">
-                        <span class="member-name">Tien NGUYEN</span>
-                        <span class="member-id">2046973</span>
-                    </div> 
-                    <span>Discord: @tien</span>
-                    <a href="mailto:prenom.nom@umontreal.ca">prenom.nom@umontreal.ca</a>
-                    <span class="member-role">Chargé de...</span>
-                </li>
-                <li class="member">
-                    <img class="member-pic" src="" alt="" >
-                    <div class="member-identification">
-                        <span class="member-name">Alassane N'DIAYE</span>
-                        <span class="member-id">2145872</span>
-                    </div> 
-                    <span>Discord: @alassane</span>
-                    <a href="mailto:prenom.nom@umontreal.ca">prenom.nom@umontreal.ca</a>
-                    <span class="member-role">Chargé de...</span>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <main class="report-body">
-        <aside class="report-aside">
-            <nav>
-                <h2 class="section-title">Contenu</h2>
-                <ul class="bare-list nav">
-                    <li class="nav-item">
-                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#plan">Cadre du projet</a></h3>
-                        <ul class="bare-list nav-item-details">
-                            <li class="dash">Introduction</li>
-                            <li class="dash">Échéancier</li>
-                            <li class="dash">Hypothèses</li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#requirements">Exigences</a></h3>
-                        <ul class="bare-list nav-item-details">
-                            <li class="dash">Glossaire</li>
-                            <li class="dash">Persona</li>
-                            <li class="dash">Cas d'utilisation</li>
-                            <li class="dash">Diagramme d'activités</li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#analysis">Analyse</a></h3>
-                        <ul class="bare-list nav-item-details">
-                            <li class="dash">Risques</li>
-                            <li class="dash">Besoins non fonctionnels</li>
-                            <li class="dash">Besoins matériels</li>
-                            <li class="dash">Stockage</li>
-                            <li class="dash">Intégration</li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Prototype</a> </h3>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-        <div class="report-main">
-            <section class="main-section">
-                <h2 id="plan" class="section-title">Cadre du projet</h2>
-                <h3 class="subsection-title">Introduction</h3>
-                <p>
-                    <em>
-                        Description brève du projet.
-                    </em>
-                </p>
-                <h3 class="subsection-title">Échéancier</h3>
-                <p>
-                    <em>Présentation de l'échéancier et la distribution des taches (au moins pour le devoir 1)</em>
-                </p>
-
-                <h3 class="subsection-title">Hypothèses (optionnel)</h3>
-                <p>
-                    <em>Présentation des hypothèses faites dans l'élaboration des exigences et l'analyse</em>
-                </p>
-            </section>
-
-            <section class="main-section">
-                <h2 id="requirements" class="section-title">Exigences</h2>
-                <p>
-                    Après de nombreuses rencontres avec le client et une familiarisation avec les activités de recyclage et compostage, 
-                    nous avons préparé un glossaire rassemblant les termes et expressions clés caractérisant l'environnement.
-                </p>
-
-                <h3 class="subsection-title">Glossaire</h3>
-                <dl class="glossary">
-                    <dt class="glossary-term">Terme 1</dt>
-                    <dd class="glossary-def">Definition Debitis vel incidunt quaerat vitae iure, amet voluptatem commodi neque perferendis, asperiores facilis fugit! Dicta possimus aperiam officiis recusandae ipsum magni dignissimos?</dd>
-                    <dt class="glossary-term">Terme 2</dt>
-                    <dd class="glossary-def">Definition Culpa assumenda pariatur doloremque accusamus obcaecati reiciendis saepe sapiente, nihil adipisci quo architecto amet veniam vero delectus ullam dolorem unde quidem? Debitis.</dd>
-                    <dt class="glossary-term">Terme 3</dt>
-                    <dd class="glossary-def">Definition Alias sequi officia tempore maiores placeat omnis eum quo totam quia fuga? Officia repellendus odio ducimus dolores error dolorem hic a beatae.</dd>
-                </dl>
-
-                <h3 class="subsection-title">Persona (optionnel)</h3>
-
-                <ul class="bare-list personas">
-                    <li class="persona">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span class="persona-name">Bob &ndash; <em>Comptable</em></span>
-                            <div class="persona-stat">
-                                <span class="persona-type persona-type--pp" title="Pratico-pratique">PP</span>
-                                <span class="persona-market">40%</span>
-                            </div>
-                        </div>
-                        <span class="persona-info">Homme célibataire de 42 ans vivant au Canada</span>
-                        <div class="persona-goal">
-                            <h4 class="persona-title">Buts</h4>
-                            <ul class="bare-list">
-                                <li class="check">But principal</li>
-                                <li class="check">But secondaire</li>
-                                <li class="check">Avantages</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="persona">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                            <span class="persona-name">Eva &ndash; <em>Pharmacienne</em></span>
-                            <div class="persona-stat">
-                                <span class="persona-type persona-type--eco" title="Ecolo">ECO</span>
-                                <span class="persona-market">20%</span>
-                            </div>
-                        </div>
-                        <span class="persona-info">Femme mariée de 34 ans vivant au Canada</span>
-                        <div class="persona-goal">
-                            <h4 class="persona-title">Buts</h4>
-                            <ul class="bare-list">
-                                <li class="check">But principal</li>
-                                <li class="check">But secondaire</li>
-                                <li class="check">Avantages</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-             
-                <h3 class="subsection-title">Cas d'utilisation</h3>
-                <div class="use-case">
-                    <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation">
-                    <p class="use-case-notes">
-                        <em>
-                            Notes à propos du diagramme <br>
-                            - choix des acteurs <br>
-                            - choix des relations
-                        </em>
+            <div class="scenario" id="cu-1">
+                <div class="scenario-meta">
+                    <h4 class="cu-name">
+                        <strong>CU:</strong> Créer une séance
+                    </h4>
+                    <p class="cu-goal">
+                        <strong>Objectif:</strong> Un professionnel souhaite donner une séance d'un service au GYM
                     </p>
-                </div>
 
-                <h3 class="subsection-title">Scénarios</h3>
+                    <hr>
 
-                <div class="scenario" id="cu-1">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU:</strong> Créer une séance
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif:</strong> Un professionnel souhaite donner une séance d'un service au GYM
-                        </p>
-                        
-                        <hr>
-
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Professionnel (Principal)</li>
-                                <li class="cu-actor">Agent (Secondaire)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le professionnel a un compte et est présent au GYM.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
+                    <div class="cu-part">
+                        <h5 class="cu-part-title">Acteurs</h5>
+                        <ul class="bare-list cu-actors">
+                            <li class="cu-actor">Professionnel (Principal)</li>
+                            <li class="cu-actor">Agent (Secondaire)</li>
+                        </ul>
                     </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">Le professionnel se présente à l’accueil et donne son numéro.</li>
-                            <li class="scenario-main-step">L’agent entre le numéro dans le système.</li>
-                            <li class="scenario-main-step">Le système valide le numéro du membre.</li>
-                            <li class="scenario-main-step">Le professionnel indique à l’agent le service qu’il souhaite fournir.</li>
-                            <li class="scenario-main-step">L’agent <a href="#cu-2">consulte le Répertoire des services</a> pour trouver le code de service.</li>
-                            <li class="scenario-main-step">L’agent demande au professionnel le reste des informations requises.</li>
-                            <li class="scenario-main-step">L’agent entre les données dans le système.</li>
-                            <li class="scenario-main-step">Le système affiche les détails de la séance nouvellement créée.</li>
-                        </ol>
 
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="4">
-                                    Le compte est suspendu.
-                                    <ol class="bare-list">
-                                        <li value="4">Le système affiche Compte suspendu à l'écran</li>
-                                        <li value="4">Le scénario se termine</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="6">
-                                    Le service souhaité n'est pas offert chez GYM.
-                                    <ol class="bare-list">
-                                        <li value="6">L'agent ne trouve pas le code pour le service demandé.</li>
-                                        <li value="6">L'agent informe le professionnel de la non-disponibilité du service.</li>
-                                        <li value="6">Le scénario se termine.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
+                    <div class="cu-part">
+                        <h5 class="cu-part-title">Préconditions</h5>
+                        <ul class="bare-list cu-conditions">
+                            <li class="dash">Le professionnel a un compte et est présent au GYM.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cu-part">
+                        <h5 class="cu-part-title">Postconditions</h5>
+                        <ul class="bare-list cu-conditions">
+                            <li class="dash">Aucun</li>
+                        </ul>
+                    </div>
+
+                    <div class="cu-part cu-part--notes">
+                        <h5 class="cu-part-title">Notes</h5>
+                        <p class="cu-notes">Notes additionnelles et hypothèses</p>
                     </div>
                 </div>
-
-                <div class="scenario" id="cu-2">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU:</strong> Consulter le répertoire des services
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif:</strong> Obtenir la liste des services et séances offerts et disponibles
-                        </p>
-                        
-                        <hr>
-
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Agent (Principal)</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Aucun</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L’agent ouvre le Répertoire des services.</li>
-                            <li class="scenario-main-step">Le système affiche la liste des services offerts par GYM ainsi que toutes les séances disponibles durant la journée.</li>
-                        </ol>
-
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <p>Aucun</p>
-                        </div>
-                    </div>
-                </div>
-
-                  
-                <h3 class="subsection-title">Diagramme d'activités</h3>
-                <div class="activity">
-                    <h4>Titre du diagramme 1</h4>
-                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
-                </div>
-                <div class="activity">
-                    <h4>Titre du diagramme 2</h4>
-                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
-                </div>
-            </section>
-
-            <section class="main-section">
-                <h2 id="analysis" class="section-title">Analyse</h2>
-
-                <div>
-                    <h3 class="subsection-title">Risques</h3>
-                    <ol class="risks">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                <div class="scenario-main">
+                    <h5 class="scenario-main-title">Scénario principal</h5>
+                    <ol class="scenario-main-steps">
+                        <li class="scenario-main-step">Le professionnel se présente à l’accueil et donne son numéro.</li>
+                        <li class="scenario-main-step">L’agent entre le numéro dans le système.</li>
+                        <li class="scenario-main-step">Le système valide le numéro du membre.</li>
+                        <li class="scenario-main-step">Le professionnel indique à l’agent le service qu’il souhaite fournir.</li>
+                        <li class="scenario-main-step">L’agent <a href="#cu-2">consulte le Répertoire des services</a> pour trouver le code de service.</li>
+                        <li class="scenario-main-step">L’agent demande au professionnel le reste des informations requises.</li>
+                        <li class="scenario-main-step">L’agent entre les données dans le système.</li>
+                        <li class="scenario-main-step">Le système affiche les détails de la séance nouvellement créée.</li>
                     </ol>
-                </div>
 
-                <div>
-                    <h3 class="subsection-title">Besoins non-fonctionnelles</h3>
-                    <ol class="nf-requirements">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                    <div class="scenario-alt">
+                        <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+                        <ol class="bare-list scenario-alt-steps">
+                            <li class="scenario-alt-step" value="4">
+                                Le compte est suspendu.
+                                <ol class="bare-list">
+                                    <li value="4">Le système affiche Compte suspendu à l'écran</li>
+                                    <li value="4">Le scénario se termine</li>
+                                </ol>
+                            </li>
+                        </ol>
+                        <ol class="bare-list scenario-alt-steps">
+                            <li class="scenario-alt-step" value="6">
+                                Le service souhaité n'est pas offert chez GYM.
+                                <ol class="bare-list">
+                                    <li value="6">L'agent ne trouve pas le code pour le service demandé.</li>
+                                    <li value="6">L'agent informe le professionnel de la non-disponibilité du service.</li>
+                                    <li value="6">Le scénario se termine.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario" id="cu-2">
+                <div class="scenario-meta">
+                    <h4 class="cu-name">
+                        <strong>CU:</strong> Consulter le répertoire des services
+                    </h4>
+                    <p class="cu-goal">
+                        <strong>Objectif:</strong> Obtenir la liste des services et séances offerts et disponibles
+                    </p>
+
+                    <hr>
+
+                    <div class="cu-part">
+                        <h5 class="cu-part-title">Acteurs</h5>
+                        <ul class="bare-list cu-actors">
+                            <li class="cu-actor">Agent (Principal)</li>
+                        </ul>
+                    </div>
+
+                    <div class="cu-part">
+                        <h5 class="cu-part-title">Préconditions</h5>
+                        <ul class="bare-list cu-conditions">
+                            <li class="dash">Aucun.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cu-part">
+                        <h5 class="cu-part-title">Postconditions</h5>
+                        <ul class="bare-list cu-conditions">
+                            <li class="dash">Aucun</li>
+                        </ul>
+                    </div>
+
+                    <div class="cu-part cu-part--notes">
+                        <h5 class="cu-part-title">Notes</h5>
+                        <p class="cu-notes">Notes additionnelles et hypothèses</p>
+                    </div>
+                </div>
+                <div class="scenario-main">
+                    <h5 class="scenario-main-title">Scénario principal</h5>
+                    <ol class="scenario-main-steps">
+                        <li class="scenario-main-step">L’agent ouvre le Répertoire des services.</li>
+                        <li class="scenario-main-step">Le système affiche la liste des services offerts par GYM ainsi que toutes les séances disponibles durant la journée.</li>
                     </ol>
-                </div>
-                
-                <div>
-                    <h3 class="subsection-title">Besoins matériels</h3>
-                    <p>
-                        <em>Description et justification des ressourcs nécessaires pour le projet...</em>
-                    </p>
-                </div>
 
-                <div>
-                    <h3 class="subsection-title">Solution de stockage</h3>
-                    <p>
-                        <em>Description de votre solution de stockage...</em>
-                    </p>
+                    <div class="scenario-alt">
+                        <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
+                        <p>Aucun</p>
+                    </div>
                 </div>
+            </div>
 
-                <div>
-                    <h3 class="subsection-title">Solution d'intégration</h3>
 
-                    <p>
-                        <em>Description de votre solution d'intégration...</em>
-                    </p>
-                </div>
-            </section>
+            <h3 class="subsection-title">Diagramme d'activités</h3>
+            <div class="activity">
+                <h4>Titre du diagramme 1</h4>
+                <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+            </div>
+            <div class="activity">
+                <h4>Titre du diagramme 2</h4>
+                <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+            </div>
+        </section>
 
-            <section class="main-section">
-                <h2 id="prototype" class="section-title">Prototype</h2>
+        <section class="main-section">
+            <h2 id="analysis" class="section-title">Analyse</h2>
+
+            <div>
+                <h3 class="subsection-title">Risques</h3>
+                <ol class="risks">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </div>
+
+            <div>
+                <h3 class="subsection-title">Besoins non-fonctionnelles</h3>
+                <ol class="nf-requirements">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ol>
+            </div>
+
+            <div>
+                <h3 class="subsection-title">Besoins matériels</h3>
+                <p>
+                    <em>Description et justification des ressourcs nécessaires pour le projet...</em>
+                </p>
+            </div>
+
+            <div>
+                <h3 class="subsection-title">Solution de stockage</h3>
+                <p>
+                    <em>Description de votre solution de stockage...</em>
+                </p>
+            </div>
+
+            <div>
+                <h3 class="subsection-title">Solution d'intégration</h3>
 
                 <p>
-                    <em>
-                        Indiquez ici les informations nécessaires (commande d'exécution, comptes préconfigurées) pour exécuter et tester le prototype</em>.
+                    <em>Description de votre solution d'intégration...</em>
                 </p>
-            </section>
-        </div>
-    </main>
-    <footer class="report-footer">
-        <p>
-            Devoir 1 &ndash; Analyse des exigences<br>
-            IFT2255 (Génie logiciel) <br>
-            Automne 2024
-        </p>
-        <p>
-            <em>
-                Ajoutez tous les liens additionnels nécessaires à la compréhension du rapport ici
-            </em>
-        </p>
-    </footer>
+            </div>
+        </section>
+
+        <section class="main-section">
+            <h2 id="prototype" class="section-title">Prototype</h2>
+
+            <p>
+                <em>
+                    Indiquez ici les informations nécessaires (commande d'exécution, comptes préconfigurées) pour exécuter et tester le prototype</em>.
+            </p>
+        </section>
+    </div>
+</main>
+<footer class="report-footer">
+    <p>
+        Devoir 1 &ndash; Analyse des exigences<br>
+        IFT2255 (Génie logiciel) <br>
+        Automne 2024
+    </p>
+    <p>
+        <em>
+            Ajoutez tous les liens additionnels nécessaires à la compréhension du rapport ici
+        </em>
+    </p>
+</footer>
 </body>
 
 </html>
