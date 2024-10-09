@@ -251,7 +251,7 @@ public class Menu {
      * Affiche le menu principal pour les intervenants une fois connectés.
      * @param intervenant L'intervenant connecté
      */
-    public void intervenantMainMenu(Intervenant intervenant) {
+    public static void intervenantMainMenu(Intervenant intervenant) {
         Scanner in = new Scanner(System.in);
         System.out.print(
                 "\n--------------------------\n" +
@@ -271,21 +271,34 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                System.out.println("Voulez-vous consulter la liste des requêtes de travaux et soumettre votre candidature ?");
+                intervenant.consulterListeRequetesTravaux(intervenant);
                 break;
             case 2:
                 System.out.println("Fournissez les informations suivantes (titre du projet, description du projet," +
                         "types de travaux, quartiers affectés, rues affectées, date de début, date de fin, horaire des travaux) pour soumettre un projet :");
+                System.out.println("Tapez '0' pour retourner au menu principal.");
+                choice = in.nextInt();
+                in.nextLine();
+                if(choice==0){
+                    intervenantMainMenu(intervenant);
+                }
+
+
                 break;
             case 3:
                 System.out.println("Que voulez-vous mettre à jour ? La description du projet, la date de fin prévue" +
                         " ou voulez-vous changer le statut du projet ? :");
+                System.out.println("Tapez '0' pour retourner au menu principal.");
+                choice = in.nextInt();
+                in.nextLine();
+                if(choice==0){
+                    intervenantMainMenu(intervenant);}
                 break;
             case 4:
-                intervenant.proposerPlageHoraire();
+                intervenant.proposerPlageHoraire(intervenant);
             break;
             case 5:
-                intervenant.soumettreCandidatureTravail();
+                intervenant.soumettreCandidatureTravail(intervenant);
             break;
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
@@ -296,10 +309,10 @@ public class Menu {
      * Affiche le menu principal pour les résidents une fois connectés.
      * @param resident Le résident connecté
      */
-    public void residentMainMenu(Resident resident) {
+    public static void residentMainMenu(Resident resident) {
         Scanner in = new Scanner(System.in);
         System.out.print(
-                "\n*******************************\n" +
+                "\n----------------------------\n" +
                         "Bienvenue " + resident.getFirstName() +
                         "! Vous êtes actuellement sur le menu des résidents de l'application Ma Ville.\n" +
                         "\nVeuillez choisir une option dans la liste de souhait suivante : \n" +
@@ -313,26 +326,35 @@ public class Menu {
         );
         int choice = in.nextInt();
         in.nextLine();
-        System.out.println("*******************************");
+        System.out.println("----------------------------");
 
         switch (choice) {
             case 1:
-                resident.consulterTravaux();
+                resident.consulterTravaux(resident);
                 break;
             case 2:
                 System.out.println("Entrer les critères de recherche (par titre, types de travaux ou quartier) :");
+                System.out.println("Tapez '0' pour retourner au menu principal.");
+                choice = in.nextInt();
+                in.nextLine();
+                if(choice==0){
+                    residentMainMenu(resident);}
                 break;
             case 3:
-                resident.receivePersonalizedNotifications();
+                resident.recevoirNotificationsPersonalisees(resident);
                 break;
             case 4:
-                System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");
+                System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");        System.out.println("Tapez '0' pour retourner au menu principal.");
+                choice = in.nextInt();
+                in.nextLine();
+                if(choice==0){
+                    residentMainMenu(resident);}
                 break;
             case 5:
-                resident.soumettreRequeteTravail();
+                resident.soumettreRequeteTravail(resident);
                 break;
             case 6:
-                resident.signalerProbleme();
+                resident.signalerProbleme(resident);
                 break;
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
