@@ -801,6 +801,19 @@
                         <li class="dash">Introduction</li>
                         <li class="dash">Échéancier</li>
                         <li class="dash">Hypothèses</li>
+                        <div>
+                            <h3 class="subsection-title">Hypothèses (optionnel)</h3>
+                            <p>Cette section présente les hypothèses formulées lors de l'élaboration des exigences et de l'analyse pour le projet d'application **Ma Ville**. Ces hypothèses guideront le développement et l'évaluation du projet :</p>
+                            <ol>
+                                <li><strong>Adoption par les utilisateurs :</strong> Nous supposons que les résidents et les intervenants utiliseront régulièrement l'application pour signaler des travaux et consulter des informations.</li>
+                                <li><strong>Disponibilité des données :</strong> Nous partons du principe que les données sur les travaux publics de la ville de Montréal seront accessibles en temps réel.</li>
+                                <li><strong>Utilisation d'Internet :</strong> Nous supposons que tous les utilisateurs cibles auront un accès Internet fiable, leur permettant d'utiliser l'application de manière efficace.</li>
+                                <li><strong>Interactivité et fonctionnalité :</strong> Nous croyons que les utilisateurs trouveront les fonctionnalités de l'application, comme la soumission de requêtes et la consultation des travaux, intuitives et faciles à utiliser.</li>
+                                <li><strong>Satisfaction des utilisateurs :</strong> Nous pensons que les utilisateurs de l'application seront satisfaits des fonctionnalités et des services fournis, ce qui se traduira par une réduction des demandes d'assistance.</li>
+                                <li><strong>Collaboration entre intervenants :</strong> Nous croyons que les intervenants publics et privés utiliseront activement l'application pour coordonner les travaux et accéder aux informations pertinentes.</li>
+                                <li><strong>Mises à jour fréquentes :</strong> Nous supposons que les données et les informations relatives aux travaux seront régulièrement mises à jour pour garantir leur exactitude.</li>
+                            </ol>
+                        </div>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -1242,36 +1255,75 @@
             <div>
                 <h3 class="subsection-title">Risques</h3>
                 <ol class="risks">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li>
+                        <strong>Mauvaise adoption par les utilisateurs</strong><br>
+                        <strong>Justification :</strong> Si les résidents et les intervenants trouvent l'application compliquée à utiliser ou qu'elle ne répond pas à leurs attentes, il est probable qu'ils ne l'adoptent pas. Cela pourrait nuire à l'efficacité du projet.<br>
+                        <strong>Solution :</strong> Il est essentiel de concevoir une interface simple et intuitive, accompagnée d'un tutoriel clair. Prévoir également une assistance et un support technique lors du lancement pour faciliter une adoption rapide et positive.
+                    </li>
+                    <li>
+                        <strong>Données inexactes ou non mises à jour</strong><br>
+                        <strong>Justification :</strong> Si les informations ne sont pas actualisées en temps réel, les utilisateurs risquent de consulter des données erronées, ce qui pourrait entraîner des frustrations.<br>
+                        <strong>Solution :</strong> Mettre en place un système de mise à jour automatique des données et envoyer des notifications en temps réel pour informer les utilisateurs de toute modification concernant les projets en cours.
+                    </li>
+                    <li>
+                        <strong>Problèmes de sécurité des données</strong><br>
+                        <strong>Justification :</strong> L'application manipule des données personnelles, telles que des noms, des adresses et des courriels. Une faille de sécurité pourrait causer des fuites de données sensibles.<br>
+                        <strong>Solution :</strong> Utiliser un système de cryptage pour protéger toutes les informations personnelles et effectuer des audits de sécurité réguliers afin d’identifier et de corriger les vulnérabilités.
+                    </li>
+                    <li>
+                        <strong>Manque de coordination entre les intervenants</strong><br>
+                        <strong>Justification :</strong> Une mauvaise coordination entre les intervenants publics et privés peut conduire à des chevauchements de projets, ce qui augmente les perturbations pour les résidents.<br>
+                        <strong>Solution :</strong> Mettre en place un système de validation des calendriers lors de la soumission des projets pour éviter les conflits. De plus, rendre les préférences des résidents accessibles à tous les intervenants peut favoriser la collaboration.
+                    </li>
+                    <li>
+                        <strong>Complexité technique du déploiement de l’application</strong><br>
+                        <strong>Justification :</strong> Le développement et la gestion d'une telle application nécessitent une infrastructure robuste, ce qui peut faire augmenter les coûts et compliquer le déploiement.<br>
+                        <strong>Solution :</strong> Adopter une approche agile pour le développement et réaliser des tests en plusieurs phases pour identifier et résoudre les problèmes avant un déploiement à grande échelle.
+                    </li>
                 </ol>
             </div>
+            
 
-            <div>
-                <h3 class="subsection-title">Besoins non-fonctionnelles</h3>
-                <ol class="nf-requirements">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ol>
-            </div>
+<div>
+    <h3 class="subsection-title">Besoins non-fonctionnels</h3>
+    <ol class="nf-requirements">
+        <li>
+            <strong>Sécurité des données</strong><br>
+            L'application devra traiter des informations sensibles et personnelles. Il est donc crucial d'assurer la confidentialité des utilisateurs.
+        </li>
+        <li>
+            <strong>Performance</strong><br>
+            L’application doit être capable de répondre rapidement aux demandes, surtout lorsque les utilisateurs consultent des projets ou des travaux. Des temps de réponse lents pourraient décourager l'utilisation.
+        </li>
+        <li>
+            <strong>Accessibilité</strong><br>
+            L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
+        </li>
+        <li>
+            <strong>Pouvoir tenir une augmentation du nombre d'utilisateurs</strong><br>
+            L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
+        </li>
+        <li>
+            <strong>Facilité de maintenance</strong><br>
+            L’application devra être régulièrement mise à jour pour corriger des bugs, ajouter des fonctionnalités ou s’adapter à l’évolution technologique.
+        </li>
+    </ol>
+</div>
 
             <div>
                 <h3 class="subsection-title">Besoins matériels</h3>
                 <p>
-                    <em>Description et justification des ressourcs nécessaires pour le projet...</em>
+                    L’application aura besoin d’une infrastructure serveur capable de supporter plusieurs centaines de connexions simultanées. 
+                    Un hébergement cloud, comme Google Cloud, est recommandé pour sa scalabilité et ses options de sauvegarde automatique.
                 </p>
             </div>
 
             <div>
                 <h3 class="subsection-title">Solution de stockage</h3>
                 <p>
-                    <em>Description de votre solution de stockage...</em>
+                    Pour gérer les informations des utilisateurs et des projets, nous opterons pour une base de données relationnelle, comme MySQL. 
+                    Afin d'assurer une gestion efficace, nous organiserons les données relatives aux travaux et aux requêtes dans des tables distinctes. 
+                    De plus, le stockage dans le cloud sera privilégié pour garantir la résilience et la disponibilité des données.
                 </p>
             </div>
 
@@ -1279,7 +1331,9 @@
                 <h3 class="subsection-title">Solution d'intégration</h3>
 
                 <p>
-                    <em>Description de votre solution d'intégration...</em>
+                    Pour assurer une communication fluide, notre application devra s'intégrer aux systèmes d'information de la ville de Montréal. 
+                    Cela nous permettra d'accéder aux données en temps réel concernant les travaux publics. 
+                    Pour les intervenants privés, nous souhaitons également mettre en place un portail dédié qui leur permettra de soumettre directement leurs projets via l'application.
                 </p>
             </div>
         </section>
