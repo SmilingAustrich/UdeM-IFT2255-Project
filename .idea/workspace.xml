@@ -10,8 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Ajout de l'option retour au menu principal">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/MaVillePrototype_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/MaVillePrototypeV0_1_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/releases/MaVillePrototype V0.1.0.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +79,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Trk\IdeaProjects\UdeM-IFT2255-Groupe01\releases" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Trk\IdeaProjects\UdeM-IFT2255-Groupe01\releases" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="template.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UdeM-IFT2255-Groupe01/devoir1/template.html" useBuiltInWebServerPort="true">
@@ -112,7 +113,7 @@
       <workItem from="1728160870896" duration="19007000" />
       <workItem from="1728493709724" duration="10900000" />
       <workItem from="1728510690273" duration="3171000" />
-      <workItem from="1728514028140" duration="68000" />
+      <workItem from="1728514028140" duration="436000" />
     </task>
     <task id="LOCAL-00001" summary="base code.">
       <option name="closed" value="true" />
@@ -210,7 +211,23 @@
       <option name="project" value="LOCAL" />
       <updated>1728513870570</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Ajout de l'option retour au menu principal">
+      <option name="closed" value="true" />
+      <created>1728514147252</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1728514147252</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Ajout de l'option retour au menu principal">
+      <option name="closed" value="true" />
+      <created>1728514347440</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1728514347440</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +255,7 @@
     <MESSAGE value="Changes in template.html" />
     <MESSAGE value="Changes in template.html &amp;&#10;comments" />
     <MESSAGE value="release" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
     <MESSAGE value="Ajout de l'option retour au menu principal" />
     <option name="LAST_COMMIT_MESSAGE" value="Ajout de l'option retour au menu principal" />
   </component>
