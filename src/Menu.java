@@ -254,10 +254,10 @@ public class Menu {
     public void intervenantMainMenu(Intervenant intervenant) {
         Scanner in = new Scanner(System.in);
         System.out.print(
-                "\n*******************************\n" +
+                "\n--------------------------\n" +
                         "Bienvenue " + intervenant.getFirstName() +
                         "! Vous êtes actuellement sur le menu des intervenants de l'application Ma Ville.\n" +
-                        "\nVeuillez choisir une option dans la liste de souhait suivante \n" +
+                        "\nVeuillez choisir une option dans la liste suivante \n" +
                         "\t 1. Consulter la liste des requêtes de travail.\n" +
                         "\t 2. Soumettre un nouveau projet de travaux.\n" +
                         "\t 3. Mettre à jour les informations d'un chantier.\n" +
@@ -267,7 +267,7 @@ public class Menu {
         );
         int choice = in.nextInt();
         in.nextLine();
-        System.out.println("*******************************");
+        System.out.println("--------------------------");
 
         switch (choice) {
             case 1:

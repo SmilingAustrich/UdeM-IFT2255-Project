@@ -122,8 +122,10 @@ public class Resident implements User {
         String descriptionProbleme = in.nextLine();
 
         // Simulation de l'envoi des données
+        System.out.print("Envoie des données ");
+        AppSimulation.simulateLoading();
         System.out.println("\n------------------------------");
-        System.out.println("Problème signalé à la ville :");
+        System.out.println("Problème signalé à la ville :\n");
         System.out.println("Nom du résident : " + this.getFirstName() + " " + this.getLastName());
         System.out.println("Adresse courriel : " + this.getEmail());
         System.out.println("Adresse de résidence : " + this.getAddress());

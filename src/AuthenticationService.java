@@ -8,8 +8,8 @@ import java.util.Map;
 public class AuthenticationService {
 
     // Stockage des résidents et des intervenants dans des maps, avec l'email comme clé.
-    private static Map<String, Resident> residentMap = new HashMap<>(); // Clé = email
-    private static Map<String, Intervenant> intervenantMap = new HashMap<>(); // Clé = email
+    private static Map<String, Resident> residentMap = new HashMap<>(); // On map pour chaque résident, un String (son email)
+    private static Map<String, Intervenant> intervenantMap = new HashMap<>(); // On map pour chaque intervenant, un String (son email)
 
     /**
      * Bloc statique pour initialiser des utilisateurs de test dans l'application.
@@ -17,11 +17,11 @@ public class AuthenticationService {
      */
     static {
         // Création d'un résident de test avec un mot de passe
-        Resident testResident = new Resident("John", "Smiths", "john.smiths@example.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", "01/01/1980");
+        Resident testResident = new Resident("John", "Smiths", "resident@example.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", "01/01/1980");
         residentMap.put(testResident.getEmail(), testResident);
 
         // Création d'un intervenant de test avec un mot de passe
-        Intervenant testIntervenant = new Intervenant("Jane", "Doe", "jane.doe@intervenant.com", "password123", "12345678", 1);
+        Intervenant testIntervenant = new Intervenant("Jane", "Doe", "intervenant@example.com", "password456", "12345678", 1);
         intervenantMap.put(testIntervenant.getEmail(), testIntervenant);
     }
 
