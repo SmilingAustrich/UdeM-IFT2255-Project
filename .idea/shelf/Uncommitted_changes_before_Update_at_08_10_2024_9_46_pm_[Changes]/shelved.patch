@@ -1,0 +1,257 @@
+Index: src/Resident.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\r\n\r\n/**\r\n * La classe {@code Resident} représente un utilisateur résident dans l'application Ma Ville.\r\n * Un résident peut consulter les travaux, signaler des problèmes, et recevoir des notifications personnalisées.\r\n */\r\npublic class Resident implements User {\r\n\r\n    private String firstName;\r\n    private String lastName;\r\n    private String email;\r\n    private String password;\r\n    private String phone;\r\n    private String address;\r\n    private String dob;\r\n\r\n    /**\r\n     * Constructeur de la classe {@code Resident}.\r\n     *\r\n     * @param firstName Le prénom du résident\r\n     * @param lastName  Le nom de famille du résident\r\n     * @param email     L'adresse email du résident\r\n     * @param password  Le mot de passe du résident\r\n     * @param phone     Le numéro de téléphone du résident (optionnel)\r\n     * @param address   L'adresse résidentielle\r\n     * @param dob       La date de naissance du résident (format dd/mm/yy)\r\n     */\r\n    public Resident(String firstName, String lastName, String email, String password, String phone, String address, String dob) {\r\n        this.firstName = firstName;\r\n        this.lastName = lastName;\r\n        this.email = email;\r\n        this.password = password;\r\n        this.phone = phone;\r\n        this.address = address;\r\n        this.dob = dob;\r\n    }\r\n\r\n    /**\r\n     * Retourne le prénom du résident.\r\n     *\r\n     * @return le prénom du résident\r\n     */\r\n    @Override\r\n    public String getFirstName() {\r\n        return firstName;\r\n    }\r\n\r\n    /**\r\n     * Retourne le nom de famille du résident.\r\n     *\r\n     * @return le nom de famille du résident\r\n     */\r\n    @Override\r\n    public String getLastName() {\r\n        return lastName;\r\n    }\r\n\r\n    /**\r\n     * Retourne l'adresse email du résident.\r\n     *\r\n     * @return l'adresse email du résident\r\n     */\r\n    @Override\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    /**\r\n     * Retourne le mot de passe du résident.\r\n     *\r\n     * @return le mot de passe du résident\r\n     */\r\n    @Override\r\n    public String getPassword() {\r\n        return password;\r\n    }\r\n\r\n    /**\r\n     * Retourne le numéro de téléphone du résident.\r\n     *\r\n     * @return le numéro de téléphone du résident\r\n     */\r\n    public String getPhone() {\r\n        return phone;\r\n    }\r\n\r\n    /**\r\n     * Retourne l'adresse de résidence du résident.\r\n     *\r\n     * @return l'adresse de résidence du résident\r\n     */\r\n    public String getAddress() {\r\n        return address;\r\n    }\r\n\r\n    /**\r\n     * Retourne la date de naissance du résident.\r\n     *\r\n     * @return la date de naissance du résident (format dd/mm/yy)\r\n     */\r\n    public String getDob() {\r\n        return dob;\r\n    }\r\n\r\n    /**\r\n     * Simule le signalement d'un problème à la ville par le résident.\r\n     * Le résident doit fournir le type et la description du problème.\r\n     */\r\n    public void signalerProbleme() {\r\n        Scanner in = new Scanner(System.in);\r\n\r\n        // Affichage des informations du résident\r\n        System.out.println(\"Signalement de problème pour le résident: \" + this.getFirstName() + \" \" + this.getLastName());\r\n        System.out.println(\"Adresse courriel: \" + this.getEmail());\r\n        System.out.println(\"Adresse de résidence: \" + this.getAddress());\r\n\r\n        // Demande des informations relatives au problème\r\n        System.out.print(\"Veuillez indiquer le type de problème: \");\r\n        String typeProbleme = in.nextLine();\r\n\r\n        System.out.print(\"Veuillez entrer une description détaillée du problème: \");\r\n        String descriptionProbleme = in.nextLine();\r\n\r\n        // Simulation de l'envoi des données\r\n        System.out.println(\"\\n------------------------------\");\r\n        System.out.println(\"Problème signalé à la ville :\");\r\n        System.out.println(\"Nom du résident : \" + this.getFirstName() + \" \" + this.getLastName());\r\n        System.out.println(\"Adresse courriel : \" + this.getEmail());\r\n        System.out.println(\"Adresse de résidence : \" + this.getAddress());\r\n        System.out.println(\"Type de problème : \" + typeProbleme);\r\n        System.out.println(\"Description du problème : \" + descriptionProbleme);\r\n        System.out.println(\"------------------------------\");\r\n        System.out.println(\"Votre problème a été signalé à la Ville de Montréal.\");\r\n    }\r\n\r\n    /**\r\n     * Permet au résident de consulter les travaux en cours ou à venir.\r\n     * Le résident peut filtrer les travaux par quartier, type de travaux, ou rue.\r\n     */\r\n    public void consulterTravaux() {\r\n        Scanner in = new Scanner(System.in);\r\n        System.out.println(\"Voulez-vous filtrer les travaux par : \");\r\n        System.out.println(\"1. Quartier\");\r\n        System.out.println(\"2. Type de travaux\");\r\n        System.out.println(\"3. Rue\");\r\n        System.out.print(\"Veuillez entrer votre choix (1-3) : \");\r\n        int choix = in.nextInt();\r\n        in.nextLine();\r\n\r\n        switch (choix) {\r\n            case 1:\r\n                System.out.print(\"Entrez le quartier : \");\r\n                String quartier = in.nextLine();\r\n                System.out.println(\"Voici les travaux pour le quartier \" + quartier + \" :\");\r\n                // Afficher les travaux pour le quartier donné\r\n                break;\r\n\r\n            case 2:\r\n                System.out.print(\"Entrez le type de travaux (routiers, électricité, etc.) : \");\r\n                String typeTravaux = in.nextLine();\r\n                System.out.println(\"Voici les travaux du type \" + typeTravaux + \" :\");\r\n                // Afficher les travaux par type\r\n                break;\r\n\r\n            case 3:\r\n                System.out.print(\"Entrez le nom de la rue : \");\r\n                String rue = in.nextLine();\r\n                System.out.println(\"Voici les travaux pour la rue \" + rue + \" :\");\r\n                // Afficher les travaux pour la rue donnée\r\n                break;\r\n\r\n            default:\r\n                System.out.println(\"Choix invalide. Veuillez réessayer.\");\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Permet au résident de recevoir des notifications personnalisées pour des projets dans son quartier\r\n     * ou dans d'autres zones de son choix.\r\n     */\r\n    public void receivePersonalizedNotifications() {\r\n        Scanner in = new Scanner(System.in);\r\n        System.out.println(\"Vous êtes automatiquement abonné aux notifications pour des projets dans votre quartier: Montréal\");\r\n        System.out.print(\"Voulez-vous également recevoir des notifications pour un autre quartier ou une rue spécifique ? (oui/non) : \");\r\n        String choix = in.nextLine();\r\n\r\n        if (choix.equalsIgnoreCase(\"Oui\")) {\r\n            System.out.print(\"Entrez le quartier ou la rue spécifique pour laquelle vous souhaitez recevoir des notifications : \");\r\n            String zoneSupplementaire = in.nextLine();\r\n            System.out.println(\"Vous recevrez maintenant des notifications pour des projets dans la zone : \" + zoneSupplementaire);\r\n        } else {\r\n            System.out.println(\"Aucune autre zone n'a été ajoutée. Vous continuerez à recevoir des notifications pour votre quartier.\");\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Permet au résident de soumettre une requête de travail.\r\n     */\r\n    public void soumettreRequeteTravail() {\r\n        Scanner in = new Scanner(System.in);\r\n        System.out.println(\"Soumettre une requête de travail.\");\r\n        System.out.print(\"Description des travaux >: \");\r\n        String description = in.nextLine();\r\n        \r\n        System.out.println(\"Requête soumise avec succès : \" + description);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Resident.java b/src/Resident.java
+--- a/src/Resident.java	(revision 31352cf278e8a1805ae2c88ff8a1838a1bfcab6a)
++++ b/src/Resident.java	(date 1728347928979)
+@@ -201,8 +201,8 @@
+         System.out.println("Soumettre une requête de travail.");
+         System.out.print("Description des travaux >: ");
+         String description = in.nextLine();
+-        
++
+         System.out.println("Requête soumise avec succès : " + description);
+     }
+ 
+-}
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1f8e66a6-5a75-4593-a864-44e5f7c8a60f\" name=\"Changes\" comment=\"Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/AppSimulation.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/AppSimulation.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/AuthenticationService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/AuthenticationService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Intervenant.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Intervenant.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Menu.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Menu.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Resident.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Resident.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/User.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n        <option value=\"Interface\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;SmilingAustrich&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01&quot;,\r\n    &quot;accountId&quot;: &quot;c9139fb8-f7ab-4549-afe5-c259e1893526&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2mtqBOTnAWmn5peqSUEiieiMzaL\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1f8e66a6-5a75-4593-a864-44e5f7c8a60f\" name=\"Changes\" comment=\"\" />\r\n      <created>1727906087244</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1727906087244</updated>\r\n      <workItem from=\"1727906089024\" duration=\"2506000\" />\r\n      <workItem from=\"1728160870896\" duration=\"19007000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"base code.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1727906512305</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1727906512305</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Deuxieme version du prototype.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1728166289395</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1728166289395</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1728168768527</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1728168768529</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1728326352560</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1728326352560</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1728326564314</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1728326564314</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1728326770997</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1728326770997</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1728327457574</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1728327457574</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"base code.\" />\r\n    <MESSAGE value=\"Premier prototype.\" />\r\n    <MESSAGE value=\"Deuxieme version du prototype.\" />\r\n    <MESSAGE value=\"Ajout de l'interface &quot;user&quot;.&#10;implémentation des différents menus.\" />\r\n    <MESSAGE value=\"Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.\" />\r\n    <MESSAGE value=\"Ajout de l'interface &quot;User&quot;.&#10;Mise à jour des classes intervenant et resident&#10;Mise à jour de la classe AuthenticationService\" />\r\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 31352cf278e8a1805ae2c88ff8a1838a1bfcab6a)
++++ b/.idea/workspace.xml	(date 1728356024827)
+@@ -1,18 +1,20 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="ArtifactsWorkspaceSettings">
++    <artifacts-to-build>
++      <artifact name="devoir1:jar2" />
++    </artifacts-to-build>
++  </component>
+   <component name="AutoImportSettings">
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
++    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Deuxieme version du prototype.">
++      <change afterPath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar2.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/AppSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppSimulation.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthenticationService.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -23,12 +25,12 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="Class" />
+-        <option value="Interface" />
+       </list>
+     </option>
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="GitHubPullRequestSearchHistory">{
+   &quot;lastFilter&quot;: {
+@@ -42,9 +44,6 @@
+     &quot;accountId&quot;: &quot;c9139fb8-f7ab-4549-afe5-c259e1893526&quot;
+   }
+ }</component>
+-  <component name="ProblemsViewState">
+-    <option name="selectedTabId" value="CurrentFile" />
+-  </component>
+   <component name="ProjectColorInfo">{
+   &quot;associatedIndex&quot;: 4
+ }</component>
+@@ -54,23 +53,28 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+-    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.Main.executor": "Run",
++    "Application.Menus.executor": "Run",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "main",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "C:/Users/Trk/Desktop",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
++    "project.structure.last.edited": "Artifacts",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "configurable.group.appearance",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+@@ -88,7 +92,7 @@
+       <option name="presentableId" value="Default" />
+       <updated>1727906087244</updated>
+       <workItem from="1727906089024" duration="2506000" />
+-      <workItem from="1728160870896" duration="19007000" />
++      <workItem from="1728160870896" duration="6162000" />
+     </task>
+     <task id="LOCAL-00001" summary="base code.">
+       <option name="closed" value="true" />
+@@ -106,47 +110,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1728166289395</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.">
+-      <option name="closed" value="true" />
+-      <created>1728168768527</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1728168768529</updated>
+-    </task>
+-    <task id="LOCAL-00004" summary="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;.">
+-      <option name="closed" value="true" />
+-      <created>1728326352560</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1728326352560</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
+-      <option name="closed" value="true" />
+-      <created>1728326564314</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1728326564314</updated>
+-    </task>
+-    <task id="LOCAL-00006" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
+-      <option name="closed" value="true" />
+-      <created>1728326770997</created>
+-      <option name="number" value="00006" />
+-      <option name="presentableId" value="LOCAL-00006" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1728326770997</updated>
+-    </task>
+-    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
+-      <option name="closed" value="true" />
+-      <created>1728327457574</created>
+-      <option name="number" value="00007" />
+-      <option name="presentableId" value="LOCAL-00007" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1728327457574</updated>
+-    </task>
+-    <option name="localTasksCounter" value="8" />
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -167,10 +131,6 @@
+     <MESSAGE value="base code." />
+     <MESSAGE value="Premier prototype." />
+     <MESSAGE value="Deuxieme version du prototype." />
+-    <MESSAGE value="Ajout de l'interface &quot;user&quot;.&#10;implémentation des différents menus." />
+-    <MESSAGE value="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;." />
+-    <MESSAGE value="Ajout de l'interface &quot;User&quot;.&#10;Mise à jour des classes intervenant et resident&#10;Mise à jour de la classe AuthenticationService" />
+-    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
++    <option name="LAST_COMMIT_MESSAGE" value="Deuxieme version du prototype." />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_22\" default=\"true\" project-jdk-name=\"openjdk-22\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 31352cf278e8a1805ae2c88ff8a1838a1bfcab6a)
++++ b/.idea/misc.xml	(date 1728347742338)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/artifacts/devoir1_jar2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/artifacts/devoir1_jar2.xml b/.idea/artifacts/devoir1_jar2.xml
+new file mode 100644
+--- /dev/null	(date 1728348402979)
++++ b/.idea/artifacts/devoir1_jar2.xml	(date 1728348402979)
+@@ -0,0 +1,8 @@
++<component name="ArtifactManager">
++  <artifact type="jar" name="devoir1:jar2">
++    <output-path>$USER_HOME$/Desktop</output-path>
++    <root id="archive" name="devoir1.jar">
++      <element id="module-output" name="devoir1" />
++    </root>
++  </artifact>
++</component>
+\ No newline at end of file
+Index: .idea/artifacts/devoir1_jar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/artifacts/devoir1_jar.xml b/.idea/artifacts/devoir1_jar.xml
+new file mode 100644
+--- /dev/null	(date 1728348112545)
++++ b/.idea/artifacts/devoir1_jar.xml	(date 1728348112545)
+@@ -0,0 +1,8 @@
++<component name="ArtifactManager">
++  <artifact type="jar" name="devoir1:jar">
++    <output-path>$PROJECT_DIR$/out/artifacts/devoir1_jar</output-path>
++    <root id="archive" name="devoir1.jar">
++      <element id="module-output" name="devoir1" />
++    </root>
++  </artifact>
++</component>
+\ No newline at end of file

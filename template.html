@@ -290,17 +290,19 @@
 
         .report-body {
             display: flex;
-            margin-left: 300px; /* Adjust this to the width of the aside */
+            min-height: calc(100vh - 96px);
+            margin-left: 300px;
         }
 
         .report-aside {
             position: fixed;
             top: 0;
             left: 0;
-            width: 300px; /* Define the width of the aside */
-            height: 100vh; /* Full viewport height */
+            width: 300px;
             background-color: #6667AB;
             padding: 24px 12px;
+            height: 100vh;
+            overflow-y: auto;
         }
 
         .report-aside .section-title {
@@ -559,9 +561,12 @@
         }
 
         .report-footer {
+            clear: both;
+            position: relative;
             padding: 24px 5vw 24px;
             color: #fff;
             background-color: #292723;
+            text-align: center;
         }
 
         .report-footer p {
@@ -592,6 +597,18 @@
             content: '🗸';
             color: currentColor;
         }
+
+        @media (max-width: 800px) {
+            .report-body {
+                flex-direction: column;
+                margin-left: 0;
+            }
+
+            .report-aside {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }}
     </style>
 </head>
 
@@ -623,9 +640,11 @@
 
     <div class="team-section">
         <h2 class="team-title">Équipe #01</h2>
+        <br>
         <ul class="bare-list members">
             <li class="member">
-                <img class="member-pic" src="" alt="" >
+                <img class="member-pic" src="images/avatar.png" alt="" >
+                <br>
                 <div class="member-identification">
                     <span class="member-name">Tarik Hireche</span>
                     <span class="member-id">202 301 89</span>
@@ -645,12 +664,13 @@
                     </span>
             </li>
             <li class="member">
-                <img class="member-pic" src="" alt="" >
+                <img class="member-pic" src="images/avatar.png" alt="" >
+                <br>
                 <div class="member-identification">
                     <span class="member-name">Karim Ndoye</span>
                     <span class="member-id">202 898 24</span>
                 </div>
-                <span>Discord: @lolie</span>
+                <span>Discord: @karimndoye</span>
                 <a href="mailto:karim.ndoye@umontreal.ca">karim.ndoye@umontreal.ca</a>
                 <span class="member-role">
                     <br>
@@ -663,7 +683,8 @@
                         </ul> </span>
             </li>
             <li class="member">
-                <img class="member-pic" src="" alt="" >
+                <img class="member-pic" src="images/avatar.png" alt="" >
+                <br>
                 <div class="member-identification">
                     <span class="member-name">Ilyesse Bouzommita</span>
                     <span class="member-id">202 761 43</span>
