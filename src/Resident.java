@@ -201,7 +201,7 @@ public class Resident implements User {
         System.out.println("Soumettre une requête de travail.");
         System.out.print("Description des travaux >: ");
         String description = in.nextLine();
-        
+
         System.out.println("Requête soumise avec succès : " + description);
     }
 

@@ -9,14 +9,14 @@
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <style>
-        html,
-        body {
+        html, body {
             position: relative;
             height: 100%;
+            margin: 0;
+            padding: 0;
             font: normal 10px 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, Helvetica, sans-serif;
             scroll-behavior: smooth;
             background: #f5f5f5;
-            overflow-x: hidden;
         }
 
         h1, h2 { margin: 0; }
@@ -75,7 +75,7 @@
 
         /* Reset */
 
-        .bare-list { margin: 0; padding: 0; list-style: none; }
+        .bare-list { margin: 0; padding: 0; list-style: none; align-items: center}
 
         .bare-link { text-decoration: none; color: inherit; }
 
@@ -195,8 +195,10 @@
         }
 
         .report-header {
-            padding-top: 24px; padding-bottom: 24px;
+            padding-top: 24px;
+            padding-bottom: 24px;
             background-color: #fff;
+            margin-left: 300px;
         }
 
         .title-section {
@@ -250,8 +252,11 @@
         }
 
         .team-section {
-            padding-left: 5vw;
-            padding-right: 5vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 24px;
         }
 
         .team-title {
@@ -285,21 +290,29 @@
 
         .report-body {
             display: flex;
+            margin-left: 300px; /* Adjust this to the width of the aside */
         }
 
         .report-aside {
-            padding-top: 24px; padding-right: 12px; padding-left: 5vw;
-            min-width: 300px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px; /* Define the width of the aside */
+            height: 100vh; /* Full viewport height */
             background-color: #6667AB;
+            padding: 24px 12px;
         }
+
         .report-aside .section-title {
             color: #fff;
         }
 
         .report-main {
-            padding-top: 24px; padding-left: 2%; padding-right: 5vw;
+            padding-top: 24px;
+            padding-left: 2%;
+            padding-right: 5vw;
+            flex-grow: 1;
         }
-
         .main-section {
             margin-bottom: 24px;
         }
@@ -423,21 +436,27 @@
         }
 
         .use-case {
-            display: flex; flex-wrap: wrap;
+            display: block;
+            margin-bottom: 24px;
         }
 
-        .use-case-diagram {
-            display: block;
-            height: 100%;
-            width: auto;
-            min-height: 800px;
-            min-width: 600px;
-            border-radius: 4px;
-            background-color: #d5d5d5;
+
+        .use-case-notes {
+            margin-top: 16px;
         }
+
+
+        .use-case-diagram {
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            margin-bottom: 16px;
+        }
+
 
         .use-case-notes {
             margin-left: 12px;
+            margin-top: 16px;
         }
 
         .scenario {
@@ -595,7 +614,7 @@
 
         <ul class="bare-list report-resources">
             <li class="report-resource">
-                <a class="report-resource-link" href="#" target="_blank">
+                <a class="report-resource-link" href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01" target="_blank">
                     Répertoire GitHub
                 </a>
             </li>
@@ -612,11 +631,13 @@
                     <span class="member-id">202 301 89</span>
                 </div>
                 <span>Discord: @soymyo</span>
-                <a href="mailto:prenom.nom@umontreal.ca">tarik.hireche@umontreal.ca</a>
-                <span class="member-role">Chargé de faire:
+                <a href="mailto:tarik.hireche@umontreal.ca">tarik.hireche@umontreal.ca</a>
+                <span class="member-role">
+                    <br>
+                    <strong>Chargé de faire</strong>:
                         <ul>
-                            <li>Le développement du service d'authentification</li>
-                            <li>L'interface utilisateur ainsi que ses implémentations</li>
+                            <li>Service d'authentification</li>
+                            <li>L'interface utilisateur & ses implémentations</li>
                             <li>La création du diagramme de cas d'utilisations</li>
                             <li>Le scénarios</li>
                             <li>README</li>
@@ -630,8 +651,16 @@
                     <span class="member-id">202 898 24</span>
                 </div>
                 <span>Discord: @lolie</span>
-                <a href="mailto:prenom.nom@umontreal.ca">karim.ndoye@umontreal.ca</a>
-                <span class="member-role">Chargé de...</span>
+                <a href="mailto:karim.ndoye@umontreal.ca">karim.ndoye@umontreal.ca</a>
+                <span class="member-role">
+                    <br>
+                    <strong>Chargé de faire</strong>:
+                        <ul>
+                            <li>Proposer des plages horaires pour les travaux</li>
+                            <li>Soumettre une requete de travail</li>
+                            <li>Rechercher des travaux</li>
+                            <li>Soumettre une candidature pour un travail.</li>
+                        </ul> </span>
             </li>
             <li class="member">
                 <img class="member-pic" src="" alt="" >
@@ -640,8 +669,16 @@
                     <span class="member-id">202 761 43</span>
                 </div>
                 <span>Discord: @ilyaoooo</span>
-                <a href="mailto:prenom.nom@umontreal.ca">ilyesse.bouzommita@umontreal.ca</a>
-                <span class="member-role">Chargé de...</span>
+                <a href="mailto:ilyesse.bouzommita@umontreal.ca">ilyesse.bouzommita@umontreal.ca</a>
+            <span class="member-role">
+                <br>
+                <strong>Chargé de faire</strong>:
+                        <ul>
+                            <li>Menu principal du résident</li>
+                            <li>Menu principal de l'intervenant</li>
+                            <li>Rechercher des travaux</li>
+                            <li>Soumettre une candidature pour un travail.</li>
+                        </ul> </span>
             </li>
         </ul>
     </div>
@@ -693,7 +730,7 @@
                     Le projet "Ma Ville", élaboré par Tarek, Ilyesse et Karim dans le cadre du cours IFT2255 (Génie Logiciel),
                     vise à résoudre les problèmes de communication liés aux travaux publics et privés à Montréal.
                     Actuellement, les résidents se heurtent à des informations fragmentées sur les entraves à la circulation,
-                    ce qui engendre frustration et imprévisibilité.  Nous proposons donc de développer une application mobile, "Ma Ville",
+                    ce qui engendre frustration et imprévisibilité.  Nous proposons donc de développer une application mobile, intitul"Ma Ville",
                     qui centralisera toutes les informations relatives aux chantiers, y compris les dates, emplacements, et impacts sur la circulation.
                     L'application permettra également aux utilisateurs de signaler des problèmes, d'accéder à un calendrier des travaux, et de recevoir des notifications en temps réel.
                     En favorisant une meilleure collaboration entre la ville, les entreprises et les citoyens, "Ma Ville" a pour objectif d'améliorer la coordination des travaux et de minimiser les désagréments pour les résidents.
@@ -913,15 +950,18 @@
             <h3 class="subsection-title">Cas d'utilisation</h3>
             <div class="use-case">
                 <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="preview-img">
+
                 <p class="use-case-notes">
 
+
                 <h4>1. Choix des acteurs</h4>
+
                 <ul>
                     <li><strong>Résident :</strong>
                         <p>Il s'agit d'un acteur principal car il représente les utilisateurs finaux qui interagissent avec l'application pour gérer les travaux dans leur quartier. Le résident est impliqué dans des actions comme la soumission de requêtes de travaux, la consultation des travaux en cours ou à venir, et la réception de notifications. Il participe également à la planification participative en proposant des plages horaires pour les travaux.</p>
                     </li>
                     <li><strong>Intervenant :</strong>
-                        <p>L’intervenant est un acteur clé dans l'exécution des travaux. C'est un utilisateur qui consulte les requêtes de travaux, soumet des candidatures pour les réaliser, et met à jour l’état des projets de travaux. L’intervenant peut être un entrepreneur privé, une entreprise publique ou un particulier.</p>
+                        <p>Il s'agit aussi d'un acteur principal. L’intervenant est un acteur clé dans l'exécution des travaux. C'est un utilisateur qui consulte les requêtes de travaux, soumet des candidatures pour les réaliser, et met à jour l’état des projets de travaux. L’intervenant peut être un entrepreneur privé, une entreprise publique ou un particulier.</p>
                     </li>
                     <li><strong>Ville de Montréal :</strong>
                         <p>La ville de Montréal est un acteur secondaire qui joue un rôle de validation et de gestion. Elle valide les inscriptions des intervenants et traite les signalements de problèmes soumis par les résidents. La ville n’interagit pas directement avec tous les cas d'utilisation mais a un rôle de supervision et de gestion.</p>
@@ -931,8 +971,8 @@
                 <h4>2. Choix des relations</h4>
                 <ul>
                     <li><strong>Include (« Inclure ») :</strong>
-                        <p>Cette relation est utilisée lorsque le cas d’utilisation nécessite l’invocation d'un autre cas pour être complété. Par exemple, dans le cas d’utilisation <em>"Se connecter comme résident"</em>, il inclut <em>"S'inscrire comme résident"</em> si l'utilisateur n'a pas encore de compte. Cela garantit que l’utilisateur soit correctement inscrit avant de se connecter.</p>
-                        <p>D’autres cas comme <em>"Signaler un problème à la ville"</em> incluent des sous-cas comme <em>"Traiter les problèmes signalés par les résidents"</em> pour indiquer que la ville doit nécessairement intervenir après le signalement.</p>
+                        <p>Cette relation est utilisée lorsque le cas d’utilisation nécessite l’invocation d'un autre cas pour être complété. Par exemple, dans le cas d’utilisation <em>"Se connecter comme résident/intervenant"</em>, il inclut <em>"S'inscrire comme résident/intervenant"</em> si l'utilisateur n'a pas encore de compte. Cela garantit que l’utilisateur soit correctement inscrit avant de se connecter.</p>
+                        <p>D’autres cas comme <em>"Signaler un problème à la ville"</em> incluent des sous-cas comme <em>"Traiter les problèmes signalés par les résidents"</em> pour indiquer que la ville doit nécessairement intervenir après le signalement. Finalement, nous avons le cas <em>"Suivre une requête de travaux"</em> qui inclut l'action <em>"Accepter/Refuser la candidature d'un intervenant"</em>.</p>
                     </li>
                     <li><strong>Extend (« Étendre ») :</strong>
                         <p>La relation d'extension est utilisée lorsque le cas de base peut être enrichi par des fonctionnalités optionnelles. Par exemple, <em>"Consulter les travaux en cours ou à venir"</em> est un cas d’utilisation central, mais il peut être étendu par <em>"Recevoir des notifications personnalisées"</em> qui est une option supplémentaire que le résident peut activer ou non.</p>
