@@ -315,7 +315,7 @@ public class Menu {
                 "\n----------------------------\n" +
                         "Bienvenue " + resident.getFirstName() +
                         "! Vous êtes actuellement sur le menu des résidents de l'application Ma Ville.\n" +
-                        "\nVeuillez choisir une option dans la liste de souhait suivante : \n" +
+                        "\nVeuillez choisir une option dans la liste suivante: \n" +
                         "\t 1. Consulter les travaux en cours ou à venir.\n" +
                         "\t 2. Rechercher des travaux\n" +
                         "\t 3. Recevoir des notifications personnalisées.\n" +
@@ -334,17 +334,64 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("Entrer les critères de recherche (par titre, types de travaux ou quartier) :");
-                System.out.println("Tapez '0' pour retourner au menu principal.");
+                System.out.println("1. Par titre\n" + "2. Par types de travaux\n" + "3. Par Quartier" +
+                        "4. Tapez '0' pour retourner au menu principal.");
                 choice = in.nextInt();
                 in.nextLine();
-                if(choice==0){
-                    residentMainMenu(resident);}
+                switch(choice){
+                    case 1:
+                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 2:
+                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 3:
+                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 0:
+                        residentMainMenu(resident);
+                        break;
+                }
                 break;
             case 3:
                 resident.recevoirNotificationsPersonalisees(resident);
                 break;
             case 4:
-                System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");        System.out.println("Tapez '0' pour retourner au menu principal.");
+                System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");
+                System.out.println(
+                        "1. Fournir mes préférences\n" + "2. Fournir celles des autres\n" +
+                                "3. Tapez '0' pour retourner au menu principal.");
+                switch(choice){
+                    case 1:
+                        System.out.print("Voici les dernières préférences que vous avez mises et celles des autres:");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucune préférences disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 2:
+                        System.out.print("Voici les dernières préférences que vous avez mises et celles des autres:");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucune préférences disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 0:
+                        residentMainMenu(resident);
+                        break;
+                }
                 choice = in.nextInt();
                 in.nextLine();
                 if(choice==0){
