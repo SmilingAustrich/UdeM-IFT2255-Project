@@ -578,6 +578,10 @@
             height: auto;
         }
 
+        #github{
+            color: white;
+        }
+
         .report-footer {
             clear: both;
             position: relative;
@@ -748,6 +752,10 @@
             transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
             transform: scale(1.01);
         }
+        a:link, a:visited {
+            color: inherit; /* This keeps the link's color the same as the surrounding text */
+            text-decoration: none; /* If you don't want underlines on the links */
+        }
 
 
     </style>
@@ -772,7 +780,7 @@
 
         <ul class="bare-list report-resources">
             <li class="report-resource">
-                <a class="report-resource-link" href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01" target="_blank">
+                <a  id="github" class="report-resource-link" href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01" target="_blank">
                     Répertoire GitHub
                 </a>
             </li>
@@ -797,10 +805,12 @@
                     <strong>Chargé de faire</strong>:
                         <ul>
                             <li>Service d'authentification</li>
+                            <li>implémentations de certains CUs</li>
+                            <li>la classe résidents et intervenant</li>
                             <li>L'interface utilisateur & ses implémentations</li>
-                            <li>La création du diagramme de cas d'utilisations</li>
-                            <li>Le scénarios</li>
+                            <li>Le diagramme de cas d'utilisations</li>
                             <li>README</li>
+                            <li>Design/Structure du rapport & CSS</li>
                         </ul>
                     </span>
             </li>
@@ -821,6 +831,8 @@
                             <li>Soumettre une requete de travail</li>
                             <li>Rechercher des travaux</li>
                             <li>Soumettre une candidature pour un travail.</li>
+                            <li>Analyse (risques, besoins, stockage et intégration)</li>
+                            <li>Hypothèses</li>
                         </ul> </span>
             </li>
             <li class="member">
@@ -836,8 +848,11 @@
                 <br>
                 <strong>Chargé de faire</strong>:
                         <ul>
-                            <li>Menu principal du résident</li>
-                            <li>Menu principal de l'intervenant</li>
+                            <li>Le menu principal du résident</li>
+                            <li>Le menu principal de l'intervenant</li>
+                            <li>L'intégration des scénarios principaux dans le rapport</li>
+                            <li>L'intégration des scénarios alternatifs dans le rapport</li>
+                            <li>Diagramme d'activités</li>
                         </ul> </span>
             </li>
         </ul>
@@ -851,33 +866,33 @@
                 <li class="nav-item">
                     <h3 class="nav-item-title"><a class="nav-item-title__link" href="#plan">Cadre du projet</a></h3>
                     <ul class="bare-list nav-item-details">
-                        <li class="dash">Introduction</li>
-                        <li class="dash">Échéancier</li>
-                        <li class="dash">Hypothèses</li>
+                        <a href="#introduction"><li class="dash">Introduction</li></a>
+                        <a href="#echeancier"><li class="dash">Échéancier</li></a>
+                        <a href="#hypotheses"><li class="dash">Hypothèses</li></a>
                         
                     </ul>
                 </li>
                 <li class="nav-item">
                     <h3 class="nav-item-title"><a class="nav-item-title__link" href="#requirements">Exigences</a></h3>
                     <ul class="bare-list nav-item-details">
-                        <li class="dash">Glossaire</li>
-                        <li class="dash">Persona</li>
-                        <li class="dash">Cas d'utilisation</li>
-                        <li class="dash">Diagramme d'activités</li>
+                        <a href="#glossaire"><li class="dash">Glossaire</li></a>
+                        <a href="#persona"><li class="dash">Persona</li></a>
+                        <a href="#use-case"><li class="dash">Cas d'utilisation</li></a>
+                        <a href="#activitydiag"><li class="dash">Diagramme d'activités</li></a>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <h3 class="nav-item-title"><a class="nav-item-title__link" href="#analysis">Analyse</a></h3>
                     <ul class="bare-list nav-item-details">
-                        <li class="dash">Risques</li>
-                        <li class="dash">Besoins non fonctionnels</li>
-                        <li class="dash">Besoins matériels</li>
-                        <li class="dash">Stockage</li>
-                        <li class="dash">Intégration</li>
+                        <a href="#risques"><li class="dash">Risques</li></a>
+                        <a href="#besoinsnf"><li class="dash">Besoins non fonctionnels</li></a>
+                        <a href="#besoinsmt"><li class="dash">Besoins matériels</li></a>
+                        <a href="#stockage"><li class="dash">Stockage</li></a>
+                        <a href="#integration"><li class="dash">Intégration</li></a>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Prototype</a> </h3>
+                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Guide pour le prototype</a> </h3>
                 </li>
             </ul>
         </nav>
@@ -885,7 +900,7 @@
     <div class="report-main">
         <section class="main-section">
             <h2 id="plan" class="section-title">Cadre du projet</h2>
-            <h3 class="subsection-title">Introduction</h3>
+            <h3 class="subsection-title" id="introduction">Introduction</h3>
             <p>
                 <em>
                     Le projet "Ma Ville", élaboré par Tarek, Ilyesse et Karim dans le cadre du cours IFT2255 (Génie Logiciel),
@@ -897,13 +912,13 @@
                     En favorisant une meilleure collaboration entre la ville, les entreprises et les citoyens, "Ma Ville" a pour objectif d'améliorer la coordination des travaux et de minimiser les désagréments pour les résidents.
                 </em>
             </p>
-            <h3 class="subsection-title">Échéancier</h3>
+            <h3 class="subsection-title" id="echeancier">Échéancier</h3>
             <div>
                 <em>Présentation de l'échéancier et la distribution des taches (au moins pour le devoir 1)</em>
                 <img src="images/echeancier.jpg" alt="echeancier" class="preview-img">
             </div>
 
-            <h3 class="subsection-title">Hypothèses </h3>
+            <h3 class="subsection-title" id="hypotheses">Hypothèses</h3>
             <p>
                 Cette section présente les hypothèses formulées lors de l'élaboration des exigences et de l'analyse pour le projet **Ma Ville**. Ces hypothèses guideront le développement et l'évolution de l'application :
             </p>
@@ -919,13 +934,13 @@
         </section>
 
         <section class="main-section">
-            <h2 id="requirements" class="section-title">Exigences</h2>
+            <h2 id="requirements" class="section-title" id="exigences">Exigences</h2>
             <p>
                 Après de nombreuses rencontres avec le client et une familiarisation avec les activités de recyclage et compostage,
                 nous avons préparé un glossaire rassemblant les termes et expressions clés caractérisant l'environnement.
             </p>
 
-            <h3 class="subsection-title">Glossaire</h3>
+            <h3 class="subsection-title" id="glossaire">Glossaire</h3>
             <dl class="glossary">
                 <dt class="glossary-term">Travaux publics</dt>
                 <dd class="glossary-def">Projets de construction, de maintenance ou d'amélioration entrepris par les autorités municipales ou gouvernementales pour le bénéfice public, tels que la réfection de routes, l'installation de conduites d'eau ou l'entretien des infrastructures publiques.</dd>
@@ -1055,7 +1070,7 @@
             </dl>
 
 
-            <h3 class="subsection-title">Persona (optionnel)</h3>
+            <h3 class="subsection-title" id="persona">Personas</h3>
 
             <ul class="bare-list personas">
 
@@ -1117,7 +1132,7 @@
                 </li>
             </ul>
 
-            <h3 class="subsection-title">Cas d'utilisation</h3>
+            <h3 class="subsection-title" id="use-case">Cas d'utilisation</h3>
             <div class="use-case">
                 <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="preview-img">
 
@@ -1158,7 +1173,7 @@
                 </p>
             </div>
 
-            <h3 class="subsection-title">Scénarios</h3>
+            <h3 class="subsection-title" id="scenarios">Scénarios</h3>
 
             <div class="scenario" id="cu-1">
                 <div class="scenario-meta">
@@ -1288,7 +1303,7 @@
             </div>
 
 
-            <h3 class="subsection-title">Diagramme d'activités</h3>
+            <h3 class="subsection-title" id="activitydiag">Diagramme d'activités</h3>
             <div class="activity">
                 <h4>Diagramme d'activité pour les résidents.</h4>
                 <img class="activity-diagram" src="images/activity_diagram_resident.svg" alt="Diagramme d'activités">
@@ -1299,7 +1314,7 @@
             <h2 id="analysis" class="section-title">Analyse</h2>
 
             <div>
-                <h3 class="subsection-title">Risques</h3>
+                <h3 id="risques" class="subsection-title">Risques</h3>
                 <ol class="risks">
                     <li>
                         <strong>Mauvaise adoption par les utilisateurs</strong><br>
@@ -1331,7 +1346,7 @@
             
 
 <div>
-    <h3 class="subsection-title">Besoins non-fonctionnels</h3>
+    <h3 class="subsection-title" id="besoinsnf">Besoins non-fonctionnels</h3>
     <ol class="nf-requirements">
         <li>
             <strong>Sécurité des données</strong><br>
@@ -1357,7 +1372,7 @@
 </div>
 
             <div>
-                <h3 class="subsection-title">Besoins matériels</h3>
+                <h3 class="subsection-title" id="besoinsmt">Besoins matériels</h3>
                 <p>
                     L’application aura besoin d’une infrastructure serveur capable de supporter plusieurs centaines de connexions simultanées. 
                     Un hébergement cloud, comme Google Cloud, est recommandé pour sa scalabilité et ses options de sauvegarde automatique.
@@ -1365,7 +1380,7 @@
             </div>
 
             <div>
-                <h3 class="subsection-title">Solution de stockage</h3>
+                <h3 class="subsection-title" id="stockage">Solution de stockage</h3>
                 <p>
                     Pour gérer les informations des utilisateurs et des projets, nous opterons pour une base de données relationnelle, comme MySQL. 
                     Afin d'assurer une gestion efficace, nous organiserons les données relatives aux travaux et aux requêtes dans des tables distinctes. 
@@ -1374,7 +1389,7 @@
             </div>
 
             <div>
-                <h3 class="subsection-title">Solution d'intégration</h3>
+                <h3 class="subsection-title" id="integration">Solution d'intégration</h3>
 
                 <p>
                     Pour assurer une communication fluide, notre application devra s'intégrer aux systèmes d'information de la ville de Montréal. 
