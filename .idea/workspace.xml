@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="changes in the side bar">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Changes to Menus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +64,8 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "configurable.group.appearance",
     "vue.rearranger.settings.migration": "true"
@@ -106,7 +105,7 @@
       <workItem from="1727906089024" duration="2506000" />
       <workItem from="1728160870896" duration="19007000" />
       <workItem from="1728430031229" duration="330000" />
-      <workItem from="1728587575333" duration="1434000" />
+      <workItem from="1728587575333" duration="1783000" />
     </task>
     <task id="LOCAL-00001" summary="base code.">
       <option name="closed" value="true" />
@@ -188,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728587229752</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Changes to Menus">
+      <option name="closed" value="true" />
+      <created>1728589163760</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1728589163760</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +222,7 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
     <MESSAGE value="diagramme d'activités." />
     <MESSAGE value="changes in the side bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in the side bar" />
+    <MESSAGE value="Changes to Menus" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to Menus" />
   </component>
 </project>
