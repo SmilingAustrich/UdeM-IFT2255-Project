@@ -106,6 +106,14 @@
         * {
             box-sizing: border-box;
         }
+        .dash {
+            background-color: #4169E1;
+            transition: background-color 0.3s ease;
+        }
+
+        .dash:hover {
+            background-color: rgba(56, 162, 223, 0.6);
+        }
 
         .helper {
             position: absolute;
@@ -334,6 +342,11 @@
             font-weight: 500;
             padding: 6px;
             text-decoration: none;
+            background-color: #4169E1; /* Bleu royal */
+            transition: background-color 0.3s ease;
+        }
+        .nav-item-title__link:hover{
+            background-color: rgba(56, 95, 223, 0.6);
         }
 
         .nav-item-details {
@@ -349,6 +362,11 @@
             display: inline-block;
             border-radius: 2px;
             color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .glossary-term:hover{
+            background-color: rgb(29, 97, 220);
         }
 
         .glossary-def {
@@ -695,6 +713,43 @@
         .report-link:hover {
             background-color: #1c2b80;
         }
+
+        .member-name{
+            font-weight: bold;
+        }
+
+        p:hover, h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover, li:hover, a:hover {
+            transform: scale(1.008) rotate(0.1deg);
+            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+            cursor: pointer;
+            text-shadow: 0 0 8px rgba(65, 105, 225, 0.4), 0 0 12px rgba(25, 0, 255, 0.8);
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .glossary-term:hover, .glossary-def:hover {
+            transform: scale(1.01) rotate(-0.1deg);
+            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+            cursor: pointer;
+            text-shadow: 0 0 8px RoyalBlue, 0 0 12px #0040ff;
+            color: #000000;
+        }
+
+        .section-title:hover {
+            transform: scale(1.01) rotate(0.1deg);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+            cursor: pointer;
+            text-shadow: 0 0 8px RoyalBlue, 0 0 12px #003fff;
+            color: #000000;
+        }
+
+        .nav-item-title__link:hover, .checklist li:hover {
+            text-shadow: 0 0 8px RoyalBlue, 0 0 12px #003efd;
+            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
+            transform: scale(1.01);
+        }
+
+
     </style>
 </head>
 
@@ -843,10 +898,10 @@
                 </em>
             </p>
             <h3 class="subsection-title">Échéancier</h3>
-            <p>
+            <div>
                 <em>Présentation de l'échéancier et la distribution des taches (au moins pour le devoir 1)</em>
                 <img src="images/echeancier.jpg" alt="echeancier" class="preview-img">
-            </p>
+            </div>
 
             <h3 class="subsection-title">Hypothèses </h3>
             <p>
