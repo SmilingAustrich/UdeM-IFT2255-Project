@@ -174,22 +174,16 @@ public class Menu {
         System.out.println("--------------------------");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Bienvenue sur le portail d'inscription des résident!");
+        System.out.println("Bienvenue sur le portail d'inscription des résidents!");
 
-        System.out.print("Veuillez entrer votre prénom >: ");
-        String firstNameResident = in.nextLine();
-        System.out.print("Veuillez entrer votre nom de famille >: ");
-        String lastNameResident = in.nextLine();
-        System.out.print("Adresse courriel >: ");
-        String emailResident = in.nextLine();
-        System.out.print("Mot de passe >: ");
-        String passwordResident = in.nextLine();
-        System.out.print("Numéro de téléphone (optionnel) >: ");
-        String phoneResident = in.nextLine();
-        System.out.print("Adresse >: ");
-        String addressResident = in.nextLine();
-        System.out.print("Date de naissance (format dd/mm/yy) >: ");
-        String dobResident = in.nextLine();
+        // Function to ensure non-empty input
+        String firstNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre prénom >: ");
+        String lastNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre nom de famille >: ");
+        String emailResident = promptForNonEmptyInput(in, "Adresse courriel >: ");
+        String passwordResident = promptForNonEmptyInput(in, "Mot de passe >: ");
+        String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel) >: "); // Optional field
+        String addressResident = promptForNonEmptyInput(in, "Adresse >: ");
+        String dobResident = promptForNonEmptyInput(in, "Date de naissance (format dd/mm/yy) >: ");
 
         Resident resident = new Resident(
                 firstNameResident, lastNameResident, emailResident, passwordResident,
@@ -201,6 +195,20 @@ public class Menu {
         System.out.println("Bienvenue " + resident.getFirstName() + "! Vous pouvez maintenant vous connecter.");
         residentLogInMenu();
     }
+
+    // Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie
+    private String promptForNonEmptyInput(Scanner in, String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = in.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ce champ est obligatoire. Veuillez entrer une valeur.");
+            }
+        } while (input.isEmpty());
+        return input;
+    }
+
 
     /**
      * Affiche le menu d'inscription pour les intervenants et enregistre un nouvel intervenant.
