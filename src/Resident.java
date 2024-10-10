@@ -139,6 +139,10 @@ public class Resident implements User {
         System.out.println("Description du problème : " + descriptionProbleme);
         System.out.println("------------------------------");
         System.out.println("Votre problème a été signalé à la Ville de Montréal.");
+        AppSimulation.simulateLoading();
+        AppSimulation.simulateWaitTime();
+        System.out.println("Retour au menu principal.");
+        Menu.residentMainMenu(resident);
     }
 
 
@@ -170,6 +174,10 @@ public class Resident implements User {
                 }
                 System.out.println("Voici les travaux pour le quartier " + quartier + " :");
                 // Afficher les travaux pour le quartier donné
+                AppSimulation.simulateLoading();
+                AppSimulation.simulateWaitTime();
+                System.out.println("Retour au menu principal.");
+                Menu.residentMainMenu(resident);
                 break;
 
             case 2:
@@ -179,6 +187,10 @@ public class Resident implements User {
                     Menu.residentMainMenu(resident);; // Retourne au menu principal
                 }
                 System.out.println("Voici les travaux du type " + typeTravaux + " :");
+                AppSimulation.simulateLoading();
+                AppSimulation.simulateWaitTime();
+                System.out.println("Retour au menu principal.");
+                Menu.residentMainMenu(resident);
                 // Afficher les travaux par type
                 break;
 
@@ -189,6 +201,10 @@ public class Resident implements User {
                     Menu.residentMainMenu(resident);; // Retourne au menu principal
                 }
                 System.out.println("Voici les travaux pour la rue " + rue + " :");
+                AppSimulation.simulateLoading();
+                AppSimulation.simulateWaitTime();
+                System.out.println("Retour au menu principal.");
+                Menu.residentMainMenu(resident);
                 // Afficher les travaux pour la rue donnée
                 break;
 
@@ -217,8 +233,16 @@ public class Resident implements User {
                 Menu.residentMainMenu(resident); // Retourne au menu principal
             }
             System.out.println("Vous recevrez maintenant des notifications pour des projets dans la zone : " + zoneSupplementaire);
+            AppSimulation.simulateLoading();
+            AppSimulation.simulateWaitTime();
+            System.out.println("Retour au menu principal.");
+            Menu.residentMainMenu(resident);
         } else {
             System.out.println("Aucune autre zone n'a été ajoutée. Vous continuerez à recevoir des notifications pour votre quartier.");
+            AppSimulation.simulateLoading();
+            AppSimulation.simulateWaitTime();
+            System.out.println("Retour au menu principal.");
+            Menu.residentMainMenu(resident);
         }
     }
 
@@ -235,5 +259,9 @@ public class Resident implements User {
         }
 
         System.out.println("Requête soumise avec succès : " + description);
+        AppSimulation.simulateLoading();
+        AppSimulation.simulateWaitTime();
+        System.out.println("Retour au menu principal.");
+        Menu.residentMainMenu(resident);
     }
 }

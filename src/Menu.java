@@ -174,22 +174,16 @@ public class Menu {
         System.out.println("--------------------------");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Bienvenue sur le portail d'inscription des résident!");
+        System.out.println("Bienvenue sur le portail d'inscription des résidents!");
 
-        System.out.print("Veuillez entrer votre prénom >: ");
-        String firstNameResident = in.nextLine();
-        System.out.print("Veuillez entrer votre nom de famille >: ");
-        String lastNameResident = in.nextLine();
-        System.out.print("Adresse courriel >: ");
-        String emailResident = in.nextLine();
-        System.out.print("Mot de passe >: ");
-        String passwordResident = in.nextLine();
-        System.out.print("Numéro de téléphone (optionnel) >: ");
-        String phoneResident = in.nextLine();
-        System.out.print("Adresse >: ");
-        String addressResident = in.nextLine();
-        System.out.print("Date de naissance (format dd/mm/yy) >: ");
-        String dobResident = in.nextLine();
+        // Function to ensure non-empty input
+        String firstNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre prénom >: ");
+        String lastNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre nom de famille >: ");
+        String emailResident = promptForNonEmptyInput(in, "Adresse courriel >: ");
+        String passwordResident = promptForNonEmptyInput(in, "Mot de passe >: ");
+        String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel) >: "); // Optional field
+        String addressResident = promptForNonEmptyInput(in, "Adresse >: ");
+        String dobResident = promptForNonEmptyInput(in, "Date de naissance (format dd/mm/yy) >: ");
 
         Resident resident = new Resident(
                 firstNameResident, lastNameResident, emailResident, passwordResident,
@@ -201,6 +195,20 @@ public class Menu {
         System.out.println("Bienvenue " + resident.getFirstName() + "! Vous pouvez maintenant vous connecter.");
         residentLogInMenu();
     }
+
+    // Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie
+    private String promptForNonEmptyInput(Scanner in, String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = in.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ce champ est obligatoire. Veuillez entrer une valeur.");
+            }
+        } while (input.isEmpty());
+        return input;
+    }
+
 
     /**
      * Affiche le menu d'inscription pour les intervenants et enregistre un nouvel intervenant.
@@ -315,7 +323,7 @@ public class Menu {
                 "\n----------------------------\n" +
                         "Bienvenue " + resident.getFirstName() +
                         "! Vous êtes actuellement sur le menu des résidents de l'application Ma Ville.\n" +
-                        "\nVeuillez choisir une option dans la liste de souhait suivante : \n" +
+                        "\nVeuillez choisir une option dans la liste suivante: \n" +
                         "\t 1. Consulter les travaux en cours ou à venir.\n" +
                         "\t 2. Rechercher des travaux\n" +
                         "\t 3. Recevoir des notifications personnalisées.\n" +
@@ -334,17 +342,64 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("Entrer les critères de recherche (par titre, types de travaux ou quartier) :");
-                System.out.println("Tapez '0' pour retourner au menu principal.");
+                System.out.println("1. Par titre\n" + "2. Par types de travaux\n" + "3. Par Quartier" +
+                        "4. Tapez '0' pour retourner au menu principal.");
                 choice = in.nextInt();
                 in.nextLine();
-                if(choice==0){
-                    residentMainMenu(resident);}
+                switch(choice){
+                    case 1:
+                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 2:
+                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 3:
+                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 0:
+                        residentMainMenu(resident);
+                        break;
+                }
                 break;
             case 3:
                 resident.recevoirNotificationsPersonalisees(resident);
                 break;
             case 4:
-                System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");        System.out.println("Tapez '0' pour retourner au menu principal.");
+                System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");
+                System.out.println(
+                        "1. Fournir mes préférences\n" + "2. Fournir celles des autres\n" +
+                                "3. Tapez '0' pour retourner au menu principal.");
+                switch(choice){
+                    case 1:
+                        System.out.print("Voici les dernières préférences que vous avez mises et celles des autres:");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucune préférences disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 2:
+                        System.out.print("Voici les dernières préférences que vous avez mises et celles des autres:");
+                        AppSimulation.simulateLoading();
+                        AppSimulation.simulateWaitTime();
+                        System.out.println("Retour au menu principal, aucune préférences disponible.");
+                        residentMainMenu(resident);
+                        break;
+                    case 0:
+                        residentMainMenu(resident);
+                        break;
+                }
                 choice = in.nextInt();
                 in.nextLine();
                 if(choice==0){
