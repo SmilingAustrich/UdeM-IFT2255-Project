@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java">
-      <change afterPath="$PROJECT_DIR$/images/activity_diagram_resident.svg" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="diagramme d'activités.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/activity_diagram_resident.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/activity_diagram_resident.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -167,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728430169873</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="diagramme d'activités.">
+      <option name="closed" value="true" />
+      <created>1728583656356</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1728583656356</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +200,7 @@
     <MESSAGE value="Ajout de deux nouvelles classes, &quot;intervenant&quot; et &quot;resident&quot;." />
     <MESSAGE value="Ajout de l'interface &quot;User&quot;.&#10;Mise à jour des classes intervenant et resident&#10;Mise à jour de la classe AuthenticationService" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/Intervenant.java&#10;#&#9;src/Menus.java&#10;#&#9;src/Resident.java" />
+    <MESSAGE value="diagramme d'activités." />
+    <option name="LAST_COMMIT_MESSAGE" value="diagramme d'activités." />
   </component>
 </project>
