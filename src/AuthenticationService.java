@@ -17,11 +17,11 @@ public class AuthenticationService {
      */
     static {
         // Création d'un résident de test avec un mot de passe
-        Resident testResident = new Resident("John", "Smiths", "resident@example.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", "01/01/1980");
+        Resident testResident = new Resident("John", "Smiths", "resident@prototype.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", "01/01/1980");
         residentMap.put(testResident.getEmail(), testResident);
 
         // Création d'un intervenant de test avec un mot de passe
-        Intervenant testIntervenant = new Intervenant("Jane", "Doe", "intervenant@example.com", "password456", "12345678", 1);
+        Intervenant testIntervenant = new Intervenant("Jane", "Doe", "intervenant@prototype.com", "password456", "12345678", 1);
         intervenantMap.put(testIntervenant.getEmail(), testIntervenant);
     }
 

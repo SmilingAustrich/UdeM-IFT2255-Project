@@ -187,7 +187,7 @@ public class Menu {
         String lastNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre nom de famille >: ");
         String emailResident = promptForValidEmail(in, "Adresse courriel >: ");
         String passwordResident = promptForPassword(in, "Mot de passe >: ");
-        String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel) >: "); // Optional field
+        String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel, tapez 0 et valider) >: "); // Optional field
         String addressResident = promptForNonEmptyInput(in, "Adresse >: ");
         String dobResident = promptForValidDate(in, "Date de naissance (format jj/mm/aaaa) >: ");
 
@@ -336,6 +336,7 @@ public class Menu {
                         "\t 3. Mettre à jour les informations d'un chantier.\n" +
                         "\t 4. Proposer une plage horaire pour les travaux.\n" +
                         "\t 5. Soumettre une candidature pour un travail.\n" +
+                        "\t 6. Se déconnnecter.\n" +
                         "\r - Tapez '0' à tout moment pour retourner au menu principal.\n" +
                         "\nInsérer le numéro qui correspond à votre choix : "
         );
@@ -376,6 +377,12 @@ public class Menu {
                 System.out.println("Soumission d'une candidature pour un travail...");
                 intervenant.soumettreCandidatureTravail(intervenant);
                 break;
+            case 6:
+                System.out.print("Déconnexion en cours ");
+                AppSimulation.simulateLoading();
+                System.out.println("Au revoir " + intervenant.getFirstName());
+                break;
+
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
                 intervenantMainMenu(intervenant); // Rappelle le menu si choix invalide
@@ -399,6 +406,7 @@ public class Menu {
                         "\t 4. Proposer des plages horaires pour des travaux. \n" +
                         "\t 5. Soumettre une requête de travail. \n" +
                         "\t 6. Signaler un problème à la ville. \n" +
+                        "\t 7. Se déconnecter. \n" +
                         "\nInsérer le numéro qui correspond à votre choix :> "
         );
         int choice = in.nextInt();
@@ -412,7 +420,8 @@ public class Menu {
             case 2:
                 System.out.println("Entrer les critères de recherche (par titre, types de travaux ou quartier) :");
                 System.out.println("1. Par titre\n" + "2. Par types de travaux\n" + "3. Par Quartier" +
-                        "4. Tapez '0' pour retourner au menu principal.");
+                        "\n4. Tapez '0' pour retourner au menu principal.");
+                System.out.print("Insérer le numéro qui correspond à votre choix :> ");
                 choice = in.nextInt();
                 in.nextLine();
                 // Simuler la liste des travaux
@@ -431,7 +440,9 @@ public class Menu {
                             System.out.println(travail);
                         }
                         AppSimulation.simulateWaitTime();
-                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
+                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
+
                         residentMainMenu(resident);
                         break;
                     case 2:
@@ -441,7 +452,9 @@ public class Menu {
                             System.out.println(travail);
                         }
                         AppSimulation.simulateWaitTime();
-                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
+                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
+
                         residentMainMenu(resident);
                         break;
                     case 3:
@@ -451,8 +464,9 @@ public class Menu {
                             System.out.println(travail);
                         }
                         AppSimulation.simulateWaitTime();
-                        AppSimulation.simulateLoading();
-                        System.out.println("Retour au menu principal, aucun travail disponible.");
+                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
+                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
+
                         residentMainMenu(resident);
                         break;
                     case 0:
@@ -490,7 +504,10 @@ public class Menu {
                             System.out.println(preference);
                         }
                         AppSimulation.simulateWaitTime();
-                        System.out.println("Retour au menu principal, aucune préférences disponible.");
+
+                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
+                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
+
                         residentMainMenu(resident);
                         break;
                     case 2:
@@ -500,7 +517,10 @@ public class Menu {
                             System.out.println(preference);
                         }
                         AppSimulation.simulateWaitTime();
-                        System.out.println("Retour au menu principal, aucune préférences disponible.");
+                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
+                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
+
+                        in.nextLine();
                         residentMainMenu(resident);
                         break;
                     case 0:
@@ -517,6 +537,11 @@ public class Menu {
                 break;
             case 6:
                 resident.signalerProbleme(resident);
+                break;
+            case 7:
+                System.out.print("Déconnexion en cours ");
+                AppSimulation.simulateLoading();
+                System.out.println("Au revoir " + resident.getFirstName());
                 break;
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="devoir1:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Changes to Menus">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Changes to Menus, implémentations et simulation de CUs. Finalisation du prototype avant la remise.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthenticationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
@@ -53,7 +59,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "Application.Menus.executor": "Run",
     "JavaScript Debug.rapport.html.executor": "Run",
     "JavaScript Debug.template.html.executor": "Run",
@@ -198,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728589163760</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Changes to Menus, implémentations et simulation de CUs. Finalisation du prototype avant la remise.">
+      <option name="closed" value="true" />
+      <created>1728679717980</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728679717981</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +240,7 @@
     <MESSAGE value="diagramme d'activités." />
     <MESSAGE value="changes in the side bar" />
     <MESSAGE value="Changes to Menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes to Menus" />
+    <MESSAGE value="Changes to Menus, implémentations et simulation de CUs. Finalisation du prototype avant la remise." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to Menus, implémentations et simulation de CUs. Finalisation du prototype avant la remise." />
   </component>
 </project>

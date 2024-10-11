@@ -173,7 +173,7 @@ public class Resident implements User {
         System.out.println("2. Type de travaux");
         System.out.println("3. Rue");
         System.out.println("Tapez '0' pour retourner au menu principal.");
-        System.out.print("Veuillez entrer votre choix (0-3) : ");
+        System.out.print("Veuillez entrer votre choix numérique (0-3) : ");
         int choix = in.nextInt();
         in.nextLine();
 
@@ -197,6 +197,8 @@ public class Resident implements User {
                     System.out.println("- " + travail);
                 }
                 AppSimulation.simulateWaitTime();
+                System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+                in.nextLine();
                 System.out.println("Retour au menu principal.");
                 Menu.residentMainMenu(resident);
                 break;
@@ -215,6 +217,8 @@ public class Resident implements User {
                     System.out.println("- " + travail);
                 }
                 AppSimulation.simulateWaitTime();
+                System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+                in.nextLine();
                 System.out.println("Retour au menu principal.");
                 Menu.residentMainMenu(resident);
                 break;
@@ -232,6 +236,8 @@ public class Resident implements User {
                 for (String travail : travauxRue) {
                     System.out.println("- " + travail);
                 }
+                System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+                in.nextLine();
                 AppSimulation.simulateWaitTime();
                 System.out.println("Retour au menu principal.");
                 Menu.residentMainMenu(resident);
@@ -365,6 +371,9 @@ public class Resident implements User {
         System.out.println("------------------------------");
 
         AppSimulation.simulateWaitTime();
+        System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+        in.nextInt();
+        in.nextLine();
         System.out.println("Retour au menu principal.");
         Menu.residentMainMenu(resident);
     }

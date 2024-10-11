@@ -311,6 +311,10 @@ public class Intervenant implements User {
         System.out.println("Date de fin : " + dateFin);
         System.out.println("Horaire des travaux : " + horaire);
 
+        System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+        in.nextInt();
+        in.nextLine();
+
         // Retour au menu principal
         Menu.intervenantMainMenu(intervenant);
     }
@@ -369,6 +373,9 @@ public class Intervenant implements User {
         System.out.println("Date de fin : " + dateFin);
         System.out.println("--------------------------");
 
+        System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+        in.nextInt();
+        in.nextLine();
         // Retour au menu principal
         Menu.intervenantMainMenu(intervenant);
     }
