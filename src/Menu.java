@@ -1,4 +1,10 @@
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * La classe {@code Menu} représente le menu principal de l'application Ma Ville.
@@ -176,14 +182,14 @@ public class Menu {
         Scanner in = new Scanner(System.in);
         System.out.println("Bienvenue sur le portail d'inscription des résidents!");
 
-        // Function to ensure non-empty input
+        // Validation des différents champs
         String firstNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre prénom >: ");
         String lastNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre nom de famille >: ");
-        String emailResident = promptForNonEmptyInput(in, "Adresse courriel >: ");
-        String passwordResident = promptForNonEmptyInput(in, "Mot de passe >: ");
+        String emailResident = promptForValidEmail(in, "Adresse courriel >: ");
+        String passwordResident = promptForPassword(in, "Mot de passe >: ");
         String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel) >: "); // Optional field
         String addressResident = promptForNonEmptyInput(in, "Adresse >: ");
-        String dobResident = promptForNonEmptyInput(in, "Date de naissance (format dd/mm/yy) >: ");
+        String dobResident = promptForValidDate(in, "Date de naissance (format jj/mm/aaaa) >: ");
 
         Resident resident = new Resident(
                 firstNameResident, lastNameResident, emailResident, passwordResident,
@@ -196,7 +202,9 @@ public class Menu {
         residentLogInMenu();
     }
 
-    // Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie
+    /**
+     * Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie.
+     */
     private String promptForNonEmptyInput(Scanner in, String prompt) {
         String input;
         do {
@@ -209,6 +217,69 @@ public class Menu {
         return input;
     }
 
+    /**
+     * Valide l'adresse email.
+     */
+    private String promptForValidEmail(Scanner in, String prompt) {
+        String email;
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+        do {
+            System.out.print(prompt);
+            email = in.nextLine().trim();
+            Matcher matcher = pattern.matcher(email);
+            if (!matcher.matches()) {
+                System.out.println("Adresse email invalide. Veuillez entrer une adresse email valide.");
+            }
+        } while (!pattern.matcher(email).matches());
+        return email;
+    }
+
+    /**
+     * Demande un mot de passe en cachant les caractères avec des étoiles.
+     */
+    private String promptForPassword(Scanner in, String prompt) {
+        Console console = System.console();
+        String password;
+        if (console != null) {
+            password = new String(console.readPassword(prompt));
+        } else {
+            // En cas d'absence de console (IDE), utilisation classique
+            password = promptForNonEmptyInput(in, prompt);
+        }
+        return password;
+    }
+
+    /**
+     * Valide la date de naissance selon le format jj/mm/aaaa.
+     */
+    private String promptForValidDate(Scanner in, String prompt) {
+        String date;
+        Pattern pattern = Pattern.compile("^\\d{2}/\\d{2}/\\d{4}$");
+        do {
+            System.out.print(prompt);
+            date = in.nextLine().trim();
+            Matcher matcher = pattern.matcher(date);
+            if (!matcher.matches()) {
+                System.out.println("Date invalide. Veuillez entrer une date au format jj/mm/aaaa.");
+            }
+        } while (!pattern.matcher(date).matches());
+        return date;
+    }
+
+    /**
+     * Valide que l'identifiant de la ville est un code à 8 chiffres.
+     */
+    private String promptForValidCityId(Scanner in, String prompt) {
+        String cityId;
+        do {
+            System.out.print(prompt);
+            cityId = in.nextLine().trim();
+            if (!cityId.matches("\\d{8}")) {
+                System.out.println("L'identifiant de la ville doit être un code à 8 chiffres, veuillez réessayer.");
+            }
+        } while (!cityId.matches("\\d{8}"));
+        return cityId;
+    }
 
     /**
      * Affiche le menu d'inscription pour les intervenants et enregistre un nouvel intervenant.
@@ -223,23 +294,16 @@ public class Menu {
         Scanner in = new Scanner(System.in);
         System.out.println("Bienvenue sur le portail d'inscription des intervenants.\n");
 
-        System.out.print("Veuillez entrer votre prénom >: ");
-        String firstNameIntervenant = in.nextLine();
-        System.out.print("Veuillez entrer votre nom de famille >: ");
-        String lastNameIntervenant = in.nextLine();
-        System.out.print("Adresse courriel >: ");
-        String emailIntervenant = in.nextLine();
-        System.out.print("Mot de passe >: ");
-        String passwordIntervenant = in.nextLine();
-        System.out.print("Identifiant de la ville (code à 8 chiffres) >: ");
-        String cityId = in.nextLine();
-        while (cityId.length() != 8) {
-            System.out.print("L'identifiant de la ville doit être un code à 8 chiffres, veuillez réessayer >: ");
-            cityId = in.nextLine();
-        }
+        // Validation des différents champs
+        String firstNameIntervenant = promptForNonEmptyInput(in, "Veuillez entrer votre prénom >: ");
+        String lastNameIntervenant = promptForNonEmptyInput(in, "Veuillez entrer votre nom de famille >: ");
+        String emailIntervenant = promptForValidEmail(in, "Adresse courriel >: ");
+        String passwordIntervenant = promptForPassword(in, "Mot de passe >: ");
+        String cityId = promptForValidCityId(in, "Identifiant de la ville (code à 8 chiffres) >: ");
+
         System.out.print("Type d'entrepreneur (numérique)\n" +
                 "1. Entreprise privée\n" +
-                "2. Entreprise public\n" +
+                "2. Entreprise publique\n" +
                 "3. Particulier\n >: ");
         int entrepreneurType = in.nextInt();
 
@@ -254,6 +318,7 @@ public class Menu {
         AppSimulation.simulateLoading();
         intervenantLogInMenu();
     }
+
 
     /**
      * Affiche le menu principal pour les intervenants une fois connectés.
@@ -271,6 +336,7 @@ public class Menu {
                         "\t 3. Mettre à jour les informations d'un chantier.\n" +
                         "\t 4. Proposer une plage horaire pour les travaux.\n" +
                         "\t 5. Soumettre une candidature pour un travail.\n" +
+                        "\r - Tapez '0' à tout moment pour retourner au menu principal.\n" +
                         "\nInsérer le numéro qui correspond à votre choix : "
         );
         int choice = in.nextInt();
@@ -278,38 +344,41 @@ public class Menu {
         System.out.println("--------------------------");
 
         switch (choice) {
+            case 0:
+                intervenantMainMenu(intervenant); // Retourne au menu principal de l'application
+                break;
             case 1:
-                intervenant.consulterListeRequetesTravaux(intervenant);
+                System.out.println("Consultation des requêtes de travaux disponibles...");
+                intervenant.consulterListeRequetesTravaux(intervenant,new ArrayList<>(Arrays.asList("Travaux routiers", "Entretien électrique")));
                 break;
             case 2:
-                System.out.println("Fournissez les informations suivantes (titre du projet, description du projet," +
-                        "types de travaux, quartiers affectés, rues affectées, date de début, date de fin, horaire des travaux) pour soumettre un projet :");
-                System.out.println("Tapez '0' pour retourner au menu principal.");
-                choice = in.nextInt();
-                in.nextLine();
-                if(choice==0){
-                    intervenantMainMenu(intervenant);
-                }
-
-
+                System.out.println("Soumission d'un nouveau projet de travaux...");
+                intervenant.soumettreProjetTravaux(intervenant);
                 break;
             case 3:
+                System.out.println("Mettre à jour les informations d'un chantier.");
                 System.out.println("Que voulez-vous mettre à jour ? La description du projet, la date de fin prévue" +
                         " ou voulez-vous changer le statut du projet ? :");
                 System.out.println("Tapez '0' pour retourner au menu principal.");
-                choice = in.nextInt();
+                int updateChoice = in.nextInt();
                 in.nextLine();
-                if(choice==0){
-                    intervenantMainMenu(intervenant);}
+                if (updateChoice == 0) {
+                    intervenantMainMenu(intervenant); // Retourne au menu principal de l'intervenant
+                } else {
+                    System.out.println("Mise à jour des informations du chantier...");
+                }
                 break;
             case 4:
+                System.out.println("Proposer une nouvelle plage horaire pour les travaux...");
                 intervenant.proposerPlageHoraire(intervenant);
-            break;
+                break;
             case 5:
+                System.out.println("Soumission d'une candidature pour un travail...");
                 intervenant.soumettreCandidatureTravail(intervenant);
-            break;
+                break;
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
+                intervenantMainMenu(intervenant); // Rappelle le menu si choix invalide
         }
     }
 
@@ -346,25 +415,43 @@ public class Menu {
                         "4. Tapez '0' pour retourner au menu principal.");
                 choice = in.nextInt();
                 in.nextLine();
+                // Simuler la liste des travaux
+                String[] travaux = {
+                        "Travaux de réfection de la route sur Rue Saint-Denis",
+                        "Travaux de réaménagement des espaces verts dans le Quartier Mile-End",
+                        "Installation de nouvelles conduites d'eau sur Rue de la Montagne",
+                        "Travaux de rénovation de l'éclairage public dans le Quartier Vieux-Montréal"
+                };
+
                 switch(choice){
                     case 1:
-                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        System.out.println("Voici les travaux pour votre critère numéro " + choice + " :");
                         AppSimulation.simulateLoading();
+                        for (String travail : travaux) {
+                            System.out.println(travail);
+                        }
                         AppSimulation.simulateWaitTime();
                         System.out.println("Retour au menu principal, aucun travail disponible.");
                         residentMainMenu(resident);
                         break;
                     case 2:
-                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        System.out.println("Voici les travaux pour votre critère numéro " + choice + " :");
                         AppSimulation.simulateLoading();
+                        for (String travail : travaux) {
+                            System.out.println(travail);
+                        }
                         AppSimulation.simulateWaitTime();
                         System.out.println("Retour au menu principal, aucun travail disponible.");
                         residentMainMenu(resident);
                         break;
                     case 3:
-                        System.out.print("Voici les travaux disponibles avec votre critère ");
+                        System.out.println("Voici les travaux pour votre critère numéro " + choice + " :");
                         AppSimulation.simulateLoading();
+                        for (String travail : travaux) {
+                            System.out.println(travail);
+                        }
                         AppSimulation.simulateWaitTime();
+                        AppSimulation.simulateLoading();
                         System.out.println("Retour au menu principal, aucun travail disponible.");
                         residentMainMenu(resident);
                         break;
@@ -381,17 +468,37 @@ public class Menu {
                 System.out.println(
                         "1. Fournir mes préférences\n" + "2. Fournir celles des autres\n" +
                                 "3. Tapez '0' pour retourner au menu principal.");
+
+                // Simuler les préférences
+                String[] preferencesPersonnelles = {
+                        "Préférence 1 : Travaux routiers en semaine uniquement.",
+                        "Préférence 2 : Pas de travaux après 18h.",
+                        "Préférence 3 : Minimiser les interruptions d'eau."
+                };
+
+                String[] preferencesAutres = {
+                        "Préférence 1 : Travaux durant le week-end seulement.",
+                        "Préférence 2 : Pas de travaux durant les vacances scolaires.",
+                        "Préférence 3 : Préférence pour travaux sur les trottoirs."
+                };
+
                 switch(choice){
                     case 1:
-                        System.out.print("Voici les dernières préférences que vous avez mises et celles des autres:");
+                        System.out.println("Voici les dernières préférences que vous avez mises et celles des autres (selon le critère numéro " + choice + ") :");
                         AppSimulation.simulateLoading();
+                        for (String preference : preferencesPersonnelles) {
+                            System.out.println(preference);
+                        }
                         AppSimulation.simulateWaitTime();
                         System.out.println("Retour au menu principal, aucune préférences disponible.");
                         residentMainMenu(resident);
                         break;
                     case 2:
-                        System.out.print("Voici les dernières préférences que vous avez mises et celles des autres:");
+                        System.out.println("Voici les dernières préférences que vous avez mises et celles des autres (selon le critère numéro " + choice + ") :");
                         AppSimulation.simulateLoading();
+                        for (String preference : preferencesAutres) {
+                            System.out.println(preference);
+                        }
                         AppSimulation.simulateWaitTime();
                         System.out.println("Retour au menu principal, aucune préférences disponible.");
                         residentMainMenu(resident);

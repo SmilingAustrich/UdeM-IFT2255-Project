@@ -1,5 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
 /**
  * La classe {@code Resident} représente un utilisateur résident dans l'application Ma Ville.
  * Un résident peut consulter les travaux, signaler des problèmes, et recevoir des notifications personnalisées.
@@ -149,8 +150,23 @@ public class Resident implements User {
     /**
      * Permet au résident de consulter les travaux en cours ou à venir avec une option pour retourner au menu principal.
      * Le résident peut filtrer les travaux par quartier, type de travaux, ou rue.
+     *
+     * @param resident Le résident actuellement connecté
      */
     public void consulterTravaux(Resident resident) {
+        // Création de listes simulées de travaux pour différents critères
+        List<String> travauxQuartier = new ArrayList<>();
+        travauxQuartier.add("Travaux de réfection de la rue Saint-Denis");
+        travauxQuartier.add("Construction de nouvelles pistes cyclables dans le quartier Plateau-Mont-Royal");
+
+        List<String> travauxType = new ArrayList<>();
+        travauxType.add("Travaux routiers sur la rue Sherbrooke");
+        travauxType.add("Installation de nouveaux éclairages publics");
+
+        List<String> travauxRue = new ArrayList<>();
+        travauxRue.add("Travaux de réfection de trottoir sur la rue Crescent");
+        travauxRue.add("Construction d’un nouveau parc sur la rue Laurier");
+
         Scanner in = new Scanner(System.in);
         System.out.println("Voulez-vous filtrer les travaux par : ");
         System.out.println("1. Quartier");
@@ -159,10 +175,11 @@ public class Resident implements User {
         System.out.println("Tapez '0' pour retourner au menu principal.");
         System.out.print("Veuillez entrer votre choix (0-3) : ");
         int choix = in.nextInt();
-        in.nextLine(); // Consomme le retour de ligne
+        in.nextLine();
 
         if (choix == 0) {
             Menu.residentMainMenu(resident);
+            return;
         }
 
         switch (choix) {
@@ -171,10 +188,14 @@ public class Resident implements User {
                 String quartier = in.nextLine();
                 if (quartier.equals("0")) {
                     Menu.residentMainMenu(resident);
+                    return;
                 }
                 System.out.println("Voici les travaux pour le quartier " + quartier + " :");
-                // Afficher les travaux pour le quartier donné
                 AppSimulation.simulateLoading();
+                // Imprimer les travaux du quartier simulé
+                for (String travail : travauxQuartier) {
+                    System.out.println("- " + travail);
+                }
                 AppSimulation.simulateWaitTime();
                 System.out.println("Retour au menu principal.");
                 Menu.residentMainMenu(resident);
@@ -184,32 +205,42 @@ public class Resident implements User {
                 System.out.print("Entrez le type de travaux (routiers, électricité, etc.) : ");
                 String typeTravaux = in.nextLine();
                 if (typeTravaux.equals("0")) {
-                    Menu.residentMainMenu(resident);; // Retourne au menu principal
+                    Menu.residentMainMenu(resident);
+                    return;
                 }
                 System.out.println("Voici les travaux du type " + typeTravaux + " :");
                 AppSimulation.simulateLoading();
+                // Imprimer les travaux du type simulé
+                for (String travail : travauxType) {
+                    System.out.println("- " + travail);
+                }
                 AppSimulation.simulateWaitTime();
                 System.out.println("Retour au menu principal.");
                 Menu.residentMainMenu(resident);
-                // Afficher les travaux par type
                 break;
 
             case 3:
                 System.out.print("Entrez le nom de la rue : ");
                 String rue = in.nextLine();
                 if (rue.equals("0")) {
-                    Menu.residentMainMenu(resident);; // Retourne au menu principal
+                    Menu.residentMainMenu(resident);
+                    return;
                 }
                 System.out.println("Voici les travaux pour la rue " + rue + " :");
                 AppSimulation.simulateLoading();
+                // Imprimer les travaux de la rue simulée
+                for (String travail : travauxRue) {
+                    System.out.println("- " + travail);
+                }
                 AppSimulation.simulateWaitTime();
                 System.out.println("Retour au menu principal.");
                 Menu.residentMainMenu(resident);
-                // Afficher les travaux pour la rue donnée
                 break;
 
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");
+                consulterTravaux(resident); // Relance la méthode en cas de choix invalide
+                break;
         }
     }
 
@@ -248,20 +279,94 @@ public class Resident implements User {
 
     /**
      * Permet au résident de soumettre une requête de travail avec une option pour retourner au menu principal.
+     * Le résident doit fournir des détails sur le type de travaux, le quartier, et la date prévue de début des travaux.
+     *
+     * @param resident Le résident actuellement connecté
      */
     public void soumettreRequeteTravail(Resident resident) {
         Scanner in = new Scanner(System.in);
         System.out.println("Tapez '0' à tout moment pour retourner au menu principal.");
-        System.out.print("Description des travaux >: ");
+
+        System.out.print("Description des travaux (minimum 5 caractères) >: ");
         String description = in.nextLine();
         if (description.equals("0")) {
             Menu.residentMainMenu(resident); // Retourne au menu principal
+            return;
+        }
+        while (description.length() < 5) {
+            System.out.println("La description doit contenir au moins 5 caractères.");
+            System.out.print("Description des travaux >: ");
+            description = in.nextLine();
+            if (description.equals("0")) {
+                Menu.residentMainMenu(resident);
+                return;
+            }
         }
 
-        System.out.println("Requête soumise avec succès : " + description);
+        System.out.print("Type de travaux (routiers, électricité, plomberie, etc.) >: ");
+        String typeTravaux = in.nextLine();
+        if (typeTravaux.equals("0")) {
+            Menu.residentMainMenu(resident); // Retourne au menu principal
+            return;
+        }
+        while (!typeTravaux.matches("routiers|électricité|plomberie|autre")) {
+            System.out.println("Type de travaux invalide. Veuillez choisir parmi : routiers, électricité, plomberie, autre.");
+            System.out.print("Type de travaux >: ");
+            typeTravaux = in.nextLine();
+            if (typeTravaux.equals("0")) {
+                Menu.residentMainMenu(resident);
+                return;
+            }
+        }
+
+        System.out.print("Quartier concerné (ex : Centre-Ville, NDG, Villeray) >: ");
+        String quartier = in.nextLine();
+        if (quartier.equals("0")) {
+            Menu.residentMainMenu(resident); // Retourne au menu principal
+            return;
+        }
+        while (quartier.length() < 3) {
+            System.out.println("Le nom du quartier doit contenir au moins 3 caractères.");
+            System.out.print("Quartier concerné >: ");
+            quartier = in.nextLine();
+            if (quartier.equals("0")) {
+                Menu.residentMainMenu(resident);
+                return;
+            }
+        }
+
+        System.out.print("Date de début prévue (format jj/mm/aaaa) >: ");
+        String dateDebut = in.nextLine();
+        if (dateDebut.equals("0")) {
+            Menu.residentMainMenu(resident); // Retourne au menu principal
+            return;
+        }
+        while (!dateDebut.matches("\\d{2}/\\d{2}/\\d{4}")) {
+            System.out.println("Le format de la date est invalide. Veuillez entrer la date au format jj/mm/aaaa.");
+            System.out.print("Date de début prévue >: ");
+            dateDebut = in.nextLine();
+            if (dateDebut.equals("0")) {
+                Menu.residentMainMenu(resident);
+                return;
+            }
+        }
+
+        // Simulation de la soumission de la requête
+        System.out.println("Soumission de la requête en cours...");
         AppSimulation.simulateLoading();
+
+        // Affichage des détails de la requête soumise
+        System.out.println("\n------------------------------");
+        System.out.println("Requête soumise avec succès !");
+        System.out.println("Description des travaux : " + description);
+        System.out.println("Type de travaux : " + typeTravaux);
+        System.out.println("Quartier concerné : " + quartier);
+        System.out.println("Date de début prévue : " + dateDebut);
+        System.out.println("------------------------------");
+
         AppSimulation.simulateWaitTime();
         System.out.println("Retour au menu principal.");
         Menu.residentMainMenu(resident);
     }
+
 }
