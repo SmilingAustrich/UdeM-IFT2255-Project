@@ -158,6 +158,9 @@ public class Intervenant implements User {
         }
 
         AppSimulation.simulateWaitTime();
+        AppSimulation.simulateWaitTime();
+        System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
+        in.nextLine();
         System.out.println("Retour au menu principal.");
         Menu.intervenantMainMenu(intervenant);
     }

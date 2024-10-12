@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="changement au rapport.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,29 +53,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.rapport.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.template.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Menus.executor": "Run",
+    "JavaScript Debug.rapport.html.executor": "Run",
+    "JavaScript Debug.template.html.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/images" />
@@ -111,7 +111,8 @@
       <workItem from="1728160870896" duration="19007000" />
       <workItem from="1728430031229" duration="330000" />
       <workItem from="1728587575333" duration="1783000" />
-      <workItem from="1728682629528" duration="2631000" />
+      <workItem from="1728682629528" duration="2681000" />
+      <workItem from="1728692629597" duration="379000" />
     </task>
     <task id="LOCAL-00001" summary="base code.">
       <option name="closed" value="true" />
@@ -241,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728684405906</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="changement au rapport.html">
+      <option name="closed" value="true" />
+      <created>1728685601742</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728685601742</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
