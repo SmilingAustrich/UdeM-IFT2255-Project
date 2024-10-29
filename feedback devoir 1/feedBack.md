@@ -1,5 +1,5 @@
 
-# Glossaire (12 points)
+# Glossaire 
 - Système d'authentification 
 - Menu principal 
 - README
@@ -10,14 +10,14 @@
 Les termes listés ici ne sont pas pertinents pour le glossaire de votre projet. Votre glossaire doit uniquement contenir des termes techniques liés à la description du projet.
 
 # Diagramme de cas d'utilisation
-   - Respect du formalisme (10 points)
-   - Identification des acteurs (10 points)
-   - Cas d'utilisation (30 points)
+   - Respect du formalisme 
+   - Identification des acteurs 
+   - Cas d'utilisation 
 - Le CU **Modifier son profil** est manquant dans le diagramme de cas d'utilisation.
 - **Partager son avis** est manquant dans le diagramme de cas d'utilisation.
 - 🗒️ Le diagramme corrigé peut aussi être consulté dans le fichier feedback diagrammes.
 
-# Scénarios (79 points)
+# Scénarios 
 Le système est marqué comme acteur secondaire, pourtant le système n'est pas un acteur, et on ne voit pas d'acteur secondaire qui intervient pour les CUs dans le diagramme de CU.
 - **Consulter les travaux en cours ou à venir** :
    - Le point 1 **Le résident se connecte à l'application** n'est pas cohérent avec la précondition, qui dit que le résident est déjà connecté à l'application.
@@ -57,32 +57,32 @@ Le système est marqué comme acteur secondaire, pourtant le système n'est pas 
    - Proposer des plages horaires pour les travaux
    - ...
 
-# Diagramme d'activités (50 points)
+# Diagramme d'activités 
 - ⚠️ Juste un diagramme d'activité fait.
 - Les erreurs relevées sur le diagramme peuvent être consultées dans le fichier feedback diagramme.
 
-# Analyse 📈 (55 points)
-#### Risques (25 points)
-#### Besoins non fonctionnels (20 points)
+# Analyse 📈 
+#### Risques 
+#### Besoins non fonctionnels 
 - **Pouvoir tenir une augmentation du nombre d'utilisateurs** :
    - Les besoins non fonctionnels sont caractérisés par des termes techniques bien spécifiques (e.g. sécurité, performance, etc.).
    
-#### Besoins matériels (2 points)
-#### Solution de stockage (3 points)
-#### Solutions d'intégration (5 points)
+#### Besoins matériels 
+#### Solution de stockage 
+#### Solutions d'intégration 
 
-# Prototype (10 points)
+# Prototype 
    - Le prototype est très bien fait 👏
 
-# Git (5 points)
+# Git 
 - Le README est bien complété ✅
 - Selon les commits, tout le monde a participé ✅
 - Un release a bien été fait ✅
 - La date limite a été respectée ✅
 
-# Rapports (5 points)
+# Rapports 
 - Rapport bien structuré
 
-# Bonus (4 points)
+# Bonus 
 - Merci pour l'implémentation de ce prototype fonctionnel.
     - Rmq: il y a un soucis lors qu'on soumette une requete de travail
