@@ -920,6 +920,15 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#conception">Conception</a></h3>
+                    <ul class="bare-list nav-item-details">
+                        <a href="#architecture"><li class="dash">Architecture</li></a>
+                        <a href="#diagramme-classes"><li class="dash">Diagramme de classes</li></a>
+                        <a href="#diagrammes-sequence"><li class="dash">Diagrammes de séquence</li></a>
+                        <a href="#justification-design"><li class="dash">Justification des choix du design</li></a>
+                    </ul>
+                </li>
+                <li class="nav-item">
                     <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Guide pour le prototype</a> </h3>
                 </li>
             </ul>
@@ -997,11 +1006,6 @@
                 <dt class="glossary-term">Mobilité urbaine</dt>
                 <dd class="glossary-def">Ensemble des modes de déplacement utilisés par les résidents dans une ville, incluant la marche, les vélos, les voitures, les transports en commun, et leur accessibilité.</dd>
 
-                <dt class="glossary-term">Système d’authentification</dt>
-                <dd class="glossary-def">Mécanisme permettant de vérifier l'identité des utilisateurs qui souhaitent accéder à des fonctionnalités spécifiques de l'application, que ce soit en tant que résident ou intervenant.</dd>
-
-                <dt class="glossary-term">Menu principal</dt>
-                <dd class="glossary-def">Interface initiale de l'application offrant les différentes options d'actions possibles pour l'utilisateur connecté, avec une structure hiérarchique claire et des niveaux d’imbrication limités.</dd>
 
                 <dt class="glossary-term">Application MaVille</dt>
                 <dd class="glossary-def">Application proposée dans le cadre du projet visant à centraliser et améliorer la communication entre les résidents et les intervenants au sujet des travaux publics et privés.</dd>
@@ -1060,38 +1064,17 @@
                 <dt class="glossary-term">Quartier</dt>
                 <dd class="glossary-def">Secteur géographique de Montréal utilisé pour filtrer ou associer des projets de travaux aux résidents et intervenants.</dd>
 
-                <dt class="glossary-term">GitHub</dt>
-                <dd class="glossary-def">Plateforme de gestion de versions utilisée pour héberger et collaborer sur le code source du projet. Les équipes y soumettent leurs modifications (commits) et effectuent des releases à la fin du projet.</dd>
-
-                <dt class="glossary-term">Commit</dt>
-                <dd class="glossary-def">Action d’enregistrer des modifications apportées au code source dans un dépôt Git. Chaque membre de l’équipe doit avoir au moins un commit pour démontrer sa participation active au projet.</dd>
-
                 <dt class="glossary-term">Release</dt>
                 <dd class="glossary-def">Version stable du projet ou prototype, soumise à la fin du développement. Une "release" officielle doit être faite lors de la remise du projet.</dd>
 
                 <dt class="glossary-term">Prototype</dt>
                 <dd class="glossary-def">Première version fonctionnelle de l'application, réalisée dans un cadre limité. Pour ce projet, le prototype se limite à une interaction en ligne de commande, permettant de simuler certaines fonctionnalités de base de l'application.</dd>
 
-                <dt class="glossary-term">README</dt>
-                <dd class="glossary-def">Fichier texte situé dans le répertoire du projet GitHub, décrivant brièvement le projet, son organisation, et les étapes pour l'exécuter ou le tester.</dd>
-
                 <dt class="glossary-term">Système de stockage</dt>
                 <dd class="glossary-def">Solution technique utilisée pour conserver les données relatives aux utilisateurs, aux travaux et aux notifications dans l'application.</dd>
 
                 <dt class="glossary-term">Interface utilisateur</dt>
                 <dd class="glossary-def">Ensemble des menus et options affichés aux utilisateurs pour interagir avec l’application. Dans ce projet, elle est limitée à une interface en ligne de commande.</dd>
-
-                <dt class="glossary-term">Cas d'utilisation (CU)</dt>
-                <dd class="glossary-def">Scénarios ou situations spécifiques dans lesquelles un utilisateur interagit avec l’application. Chaque CU décrit une fonctionnalité particulière, comme la recherche de travaux ou la soumission d’une requête.</dd>
-
-                <dt class="glossary-term">Diagramme d’activités</dt>
-                <dd class="glossary-def">Représentation visuelle des flux de travail dans l’application, montrant les étapes que suit un utilisateur pour accomplir une tâche donnée.</dd>
-
-                <dt class="glossary-term">Besoins fonctionnels</dt>
-                <dd class="glossary-def">Exigences décrivant les actions spécifiques que l'application doit permettre, comme la consultation des travaux en cours ou la soumission de projets par les intervenants.</dd>
-
-                <dt class="glossary-term">Besoins non fonctionnels</dt>
-                <dd class="glossary-def">Exigences portant sur la qualité de l’application, telles que sa rapidité, sa sécurité, ou sa capacité à gérer un grand nombre d'utilisateurs simultanés.</dd>
 
                 <dt class="glossary-term">Risques</dt>
                 <dd class="glossary-def">Problèmes potentiels liés à la mise en œuvre ou à l’utilisation de l’application, pouvant inclure des défaillances de sécurité, des bugs, ou une mauvaise adoption par les utilisateurs.</dd>
@@ -2009,6 +1992,41 @@
                     Pour les intervenants privés, nous souhaitons également mettre en place un portail dédié qui leur permettra de soumettre directement leurs projets via l'application.
                 </p>
             </div>
+        </section>
+
+        <section class="main-section">
+            <h2 id="conception" class="section-title report-title">Conception</h2>
+
+            <h3 class="subsection-title" id="architecture">Architecture</h3>
+            <p>Présentation du style d'architecture choisi (par exemple, architecture en couches, MVC, microservices, etc.). Illustration des principales composantes de l'application et des communications entre elles :</p>
+            <ul>
+                <li><strong>Utilisateurs de l'application :</strong> Explication des moyens de communication avec l'application.</li>
+                <li><strong>Composantes liées au style d'architecture :</strong> Composants principaux de l'application dans le contexte de l'architecture.</li>
+                <li><strong>Composantes additionnelles :</strong> Autres éléments clés de l'application.</li>
+                <li><strong>Espace de stockage :</strong> Base de données ou solutions de stockage utilisées.</li>
+                <li><strong>Services externes :</strong> API et services tiers.</li>
+            </ul>
+            <img src="images/architecture_diagram.png" alt="Diagramme d'architecture" class="preview-img">
+
+            <h3 class="subsection-title" id="diagramme-classes">Diagramme de classes</h3>
+            <p>Diagramme de classes simplifié, en omettant les getters, setters, constructeurs, et classes utilitaires. Inclut des abstractions pour montrer les relations principales.</p>
+            <img src="images/class_diagram.png" alt="Diagramme de classes" class="preview-img">
+
+            <h3 class="subsection-title" id="diagrammes-sequence">Diagrammes de séquence</h3>
+            <p>Diagrammes de séquence pour représenter le traitement des cas suivants :</p>
+            <ul>
+                <li>Consulter les entraves</li>
+                <li>Soumettre une requête de travail</li>
+                <li>Consulter la liste des requêtes de travail</li>
+            </ul>
+            <img src="images/sequence_diagram1.png" alt="Diagramme de séquence - Consulter les entraves" class="preview-img">
+            <img src="images/sequence_diagram2.png" alt="Diagramme de séquence - Soumettre une requête de travail" class="preview-img">
+            <img src="images/sequence_diagram3.png" alt="Diagramme de séquence - Consulter la liste des requêtes" class="preview-img">
+
+            <h3 class="subsection-title" id="justification-design">Justification des choix du design</h3>
+            <p>
+                Explication des choix de conception pris pour l'application, en termes d'abstraction, couplage, cohésion et encapsulation, afin de garantir la modularité, la flexibilité et l'interopérabilité.
+            </p>
         </section>
 
         <section class="main-section">
