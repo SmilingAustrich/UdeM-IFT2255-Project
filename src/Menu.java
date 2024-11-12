@@ -4,7 +4,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * La classe {@code Menu} représente le menu principal de l'application Ma Ville.
@@ -74,25 +80,34 @@ public class Menu {
 
         boolean loggedInResident = false;
         int numberOfTries = 0;
-        Resident resident;
+        Resident resident = null;
 
-        while (!loggedInResident) {
+        while (!loggedInResident && numberOfTries < 3) {
             System.out.print("Email >: ");
             String email = in.nextLine();
             System.out.print("Mot de passe >: ");
             String password = in.nextLine();
 
             loggedInResident = AuthenticationService.loginResident(email, password);
-            resident = AuthenticationService.getResidentByEmail(email);
-
-            if (!loggedInResident) {
+            if (loggedInResident) {
+                resident = AuthenticationService.getResidentByEmail(email);
+                if (resident != null) {
+                    System.out.print("\nConnexion réussie ! Bienvenue.\nChargement de la page ");
+                    AppSimulation.simulateLoading();
+                    AppSimulation.simulateWaitTime();
+                    residentMainMenu(resident); // Pass the authenticated resident
+                } else {
+                    System.out.println("Erreur : le résident n'a pas été trouvé dans la base de données.");
+                    loggedInResident = false; // Set to false to retry or fail
+                }
+            } else {
                 System.out.print("--------------------------\n");
                 System.out.println("Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.");
                 System.out.print("--------------------------\n");
                 numberOfTries++;
             }
 
-            if (numberOfTries >= 2) {
+            if (numberOfTries >= 2 && !loggedInResident) {
                 System.out.println("Désolé, mais votre nom d'utilisateur ou votre mot de passe semble incorrect.");
                 System.out.print(
                         "Vous ne semblez pas être inscrits en tant que résident, redirection vers " +
@@ -101,13 +116,6 @@ public class Menu {
                 AppSimulation.simulateLoading();
                 residentInscriptionMenu();
                 break;
-            }
-
-            if (loggedInResident) {
-                System.out.print("\nConnexion réussie ! Bienvenue.\nChargement de la page ");
-                AppSimulation.simulateLoading();
-                AppSimulation.simulateWaitTime();
-                residentMainMenu(resident); // Redirige vers le menu des résidents
             }
         }
     }
@@ -173,7 +181,7 @@ public class Menu {
      * Affiche le menu d'inscription pour les résidents et enregistre un nouveau résident.
      * Une fois l'inscription réussie, le résident est redirigé vers le menu de connexion.
      */
-    public void residentInscriptionMenu() {
+    public String residentInscriptionMenu() {
         System.out.print("--------------------------\n" +
                 "Chargement du portail d'inscription des résidents. ");
         AppSimulation.simulateLoading();
@@ -189,17 +197,21 @@ public class Menu {
         String passwordResident = promptForPassword(in, "Mot de passe >: ");
         String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel, tapez 0 et valider) >: "); // Optional field
         String addressResident = promptForNonEmptyInput(in, "Adresse >: ");
-        String dobResident = promptForValidDate(in, "Date de naissance (format jj/mm/aaaa) >: ");
+        int age = promptForValidDate(in, "Date de naissance (format jj/mm/aaaa) >: ");
 
+        if(age < 16){
+            return "Le compte ne peut pas être créer, vous devez avoir minimum 16 ans.";
+        }
         Resident resident = new Resident(
                 firstNameResident, lastNameResident, emailResident, passwordResident,
-                phoneResident, addressResident, dobResident
+                phoneResident, addressResident, age
         );
 
         AuthenticationService.signUpResident(resident);
 
         System.out.println("Bienvenue " + resident.getFirstName() + "! Vous pouvez maintenant vous connecter.");
         residentLogInMenu();
+        return firstNameResident;
     }
 
     /**
@@ -252,18 +264,29 @@ public class Menu {
     /**
      * Valide la date de naissance selon le format jj/mm/aaaa.
      */
-    private String promptForValidDate(Scanner in, String prompt) {
+    private int promptForValidDate(Scanner in, String prompt) {
         String date;
         Pattern pattern = Pattern.compile("^\\d{2}/\\d{2}/\\d{4}$");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate birthDate = null;
         do {
             System.out.print(prompt);
             date = in.nextLine().trim();
             Matcher matcher = pattern.matcher(date);
             if (!matcher.matches()) {
                 System.out.println("Date invalide. Veuillez entrer une date au format jj/mm/aaaa.");
+                continue;
             }
-        } while (!pattern.matcher(date).matches());
-        return date;
+            try {
+                birthDate = LocalDate.parse(date, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Erreur de formatage de la date. Veuillez réessayer.");
+            }
+        } while (birthDate == null);
+
+        // Calculate age
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     /**
@@ -415,67 +438,13 @@ public class Menu {
 
         switch (choice) {
             case 1:
-                resident.consulterTravaux(resident);
+                resident.consulterTravaux();
                 break;
             case 2:
-                System.out.println("Entrer les critères de recherche (par titre, types de travaux ou quartier) :");
-                System.out.println("1. Par titre\n" + "2. Par types de travaux\n" + "3. Par Quartier" +
-                        "\n4. Tapez '0' pour retourner au menu principal.");
-                System.out.print("Insérer le numéro qui correspond à votre choix :> ");
-                choice = in.nextInt();
-                in.nextLine();
-                // Simuler la liste des travaux
-                String[] travaux = {
-                        "Travaux de réfection de la route sur Rue Saint-Denis",
-                        "Travaux de réaménagement des espaces verts dans le Quartier Mile-End",
-                        "Installation de nouvelles conduites d'eau sur Rue de la Montagne",
-                        "Travaux de rénovation de l'éclairage public dans le Quartier Vieux-Montréal"
-                };
+                resident.rechercherTravaux();
 
-                switch(choice){
-                    case 1:
-                        System.out.println("Voici les travaux pour votre critère numéro " + choice + " :");
-                        AppSimulation.simulateLoading();
-                        for (String travail : travaux) {
-                            System.out.println(travail);
-                        }
-                        AppSimulation.simulateWaitTime();
-                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
-                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
-
-                        residentMainMenu(resident);
-                        break;
-                    case 2:
-                        System.out.println("Voici les travaux pour votre critère numéro " + choice + " :");
-                        AppSimulation.simulateLoading();
-                        for (String travail : travaux) {
-                            System.out.println(travail);
-                        }
-                        AppSimulation.simulateWaitTime();
-                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
-                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
-
-                        residentMainMenu(resident);
-                        break;
-                    case 3:
-                        System.out.println("Voici les travaux pour votre critère numéro " + choice + " :");
-                        AppSimulation.simulateLoading();
-                        for (String travail : travaux) {
-                            System.out.println(travail);
-                        }
-                        AppSimulation.simulateWaitTime();
-                        System.out.println("Tapez sur n'importe quelle touche pour retourner au menu principal.");
-                        in.nextLine();  // Attend que l'utilisateur appuie sur Entrée
-
-                        residentMainMenu(resident);
-                        break;
-                    case 0:
-                        residentMainMenu(resident);
-                        break;
-                }
-                break;
             case 3:
-                resident.recevoirNotificationsPersonalisees(resident);
+                resident.recevoirNotificationsPersonalisees();
                 break;
             case 4:
                 System.out.println("Voulez-vous fournir des préférences ou consulter celles des autres ?");
@@ -536,7 +505,7 @@ public class Menu {
                 resident.soumettreRequeteTravail(resident);
                 break;
             case 6:
-                resident.signalerProbleme(resident);
+
                 break;
             case 7:
                 System.out.print("Déconnexion en cours ");

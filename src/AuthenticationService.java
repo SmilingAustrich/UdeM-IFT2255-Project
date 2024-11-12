@@ -17,8 +17,11 @@ public class AuthenticationService {
      */
     static {
         // Création d'un résident de test avec un mot de passe
-        Resident testResident = new Resident("John", "Smiths", "resident@prototype.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", "01/01/1980");
+        Resident testResident = new Resident("John", "Smiths", "resident@prototype.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", 18);
         residentMap.put(testResident.getEmail(), testResident);
+
+        Resident fastTestResident = new Resident("John", "Smiths", "test", "test", "514-555-1234", "123 Rue de la Paix, Montréal", 18);
+        residentMap.put(fastTestResident.getEmail(), fastTestResident);
 
         // Création d'un intervenant de test avec un mot de passe
         Intervenant testIntervenant = new Intervenant("Jane", "Doe", "intervenant@prototype.com", "password456", "12345678", 1);

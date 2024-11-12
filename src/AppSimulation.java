@@ -12,20 +12,20 @@ public class AppSimulation {
      * le système est en train de charger ou de traiter une tâche.
      */
     public static void simulateLoading() {
-        // Boucle pour afficher 5 points représentant le chargement
-        for (int i = 0; i < 5; i++) {
-            try {
-                // Pause de 500 millisecondes entre chaque point
-                Thread.sleep(500);
-                // Afficher un point pour indiquer la progression du chargement
-                System.out.print(".");
-            } catch (InterruptedException e) {
-                // Gérer une interruption inattendue pendant le chargement
-                e.printStackTrace();
-            }
-        }
-        // Ajouter une nouvelle ligne après avoir affiché les points
-        System.out.println();
+//        // Boucle pour afficher 5 points représentant le chargement
+//        for (int i = 0; i < 5; i++) {
+//            try {
+//                // Pause de 500 millisecondes entre chaque point
+//                Thread.sleep(500);
+//                // Afficher un point pour indiquer la progression du chargement
+//                System.out.print(".");
+//            } catch (InterruptedException e) {
+//                // Gérer une interruption inattendue pendant le chargement
+//                e.printStackTrace();
+//            }
+//        }
+//        // Ajouter une nouvelle ligne après avoir affiché les points
+//        System.out.println();
     }
 
     /**
@@ -35,12 +35,12 @@ public class AppSimulation {
      * opérations dans l'application.
      */
     public static void simulateWaitTime() {
-        try {
-            // Pause de 1500 millisecondes pour simuler une attente
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            // Gérer une interruption inattendue pendant l'attente
-            e.printStackTrace();
-        }
+//        try {
+//            // Pause de 1500 millisecondes pour simuler une attente
+//            Thread.sleep(1500);
+//        } catch (InterruptedException e) {
+//            // Gérer une interruption inattendue pendant l'attente
+//            e.printStackTrace();
+//        }
     }
 }
