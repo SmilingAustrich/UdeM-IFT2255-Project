@@ -8,9 +8,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * La classe {@code Menu} représente le menu principal de l'application Ma Ville.
@@ -26,7 +23,7 @@ public class Menu {
         System.out.println(
                 "\033[1;34m**************************************************\033[0m\n" +
                         "\033[1;34m*                                                *\033[0m\n" +
-                        "\033[1;34m*   \033[1;33mBIENVENUE SUR tVOTRE APPLICATION MA VILLE!\033[1;34m    *\033[0m\n" +
+                        "\033[1;34m*   \033[1;33mBIENVENUE SUR VOTRE APPLICATION MA VILLE!\033[1;34m    *\033[0m\n" +
                         "\033[1;34m*                                                *\033[0m\n" +
                         "\033[1;34m**************************************************\033[0m\n"
         );
@@ -36,12 +33,12 @@ public class Menu {
      * Affiche le menu de connexion et d'inscription pour les résidents et les intervenants.
      * L'utilisateur peut choisir entre se connecter ou s'inscrire.
      */
-    public void InitializeApp() {
+    public void InitializeMainMenu() {
         afficherLogoBienvenue();
         Scanner in = new Scanner(System.in);
         System.out.print(
                 "\033[1;32m==================================================\033[0m\n" +
-                        "\033[1;32m|            \033[1;37mMENU PRINCIPAL - MA VILLE\033[1;32m            |\033[0m\n" +
+                        "\033[1;32m|            \033[1;37mMENU PRINCIPAL - MA VILLE\033[1;32m           |\033[0m\n" +
                         "\033[1;32m==================================================\033[0m\n" +
                         "\033[1;32m|                                                |\033[0m\n" +
                         "\033[1;32m|  \033[1;33mI. Se connecter en tant que :\033[1;32m                 |\033[0m\n" +
@@ -52,6 +49,8 @@ public class Menu {
                         "\033[1;32m|     \033[1;37m3. Résident\033[1;32m                                |\033[0m\n" +
                         "\033[1;32m|     \033[1;37m4. Intervenant\033[1;32m                             |\033[0m\n" +
                         "\033[1;32m|                                                |\033[0m\n" +
+                        "\033[1;32m|   \u001B[1;31mImportant\u001B[0m: Vous devez avoir au moins 16 ans  |\033[0m\n" +
+                        "\033[1;32m|   \u001B[0mpour pouvoir utiliser Ma Ville.              |\033[0m\n" +
                         "\033[1;32m==================================================\033[0m\n" +
                         "\033[1;36m:> \033[0m"
         );
@@ -73,7 +72,7 @@ public class Menu {
                 break;
             default:
                 System.out.println("\033[1;31m\nChoix invalide. Veuillez réessayer.\033[0m");
-                InitializeApp();
+                InitializeMainMenu();
                 break;
         }
     }
@@ -88,7 +87,7 @@ public class Menu {
                         "\033[1;32m|          \033[1;37mPORTAIL DE CONNEXION - RÉSIDENT\033[1;32m       |\033[0m\n" +
                         "\033[1;32m==================================================\033[0m\n"
         );
-        AppSimulation.simulateLoading();
+        
 
         Scanner in = new Scanner(System.in);
         System.out.println(
@@ -111,7 +110,7 @@ public class Menu {
                 resident = AuthenticationService.getResidentByEmail(email);
                 if (resident != null) {
                     System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + resident.getFirstName() + ".\033[0m\n");
-                    AppSimulation.simulateLoading();
+                    
                     residentMainMenu(resident);
                 } else {
                     System.out.println("\033[1;31mErreur : le résident n'a pas été trouvé dans la base de données.\033[0m");
@@ -130,7 +129,7 @@ public class Menu {
                         "\033[1;33mVous ne semblez pas être inscrit en tant que résident, redirection vers " +
                                 "la page d'inscription.\033[0m\n"
                 );
-                AppSimulation.simulateLoading();
+                
                 residentInscriptionMenu();
                 break;
             }
@@ -148,7 +147,7 @@ public class Menu {
                         "\033[1;32m|         \033[1;37mPORTAIL DE CONNEXION - INTERVENANT\033[1;32m     |\033[0m\n" +
                         "\033[1;32m==================================================\033[0m\n"
         );
-        AppSimulation.simulateLoading();
+        
 
         Scanner in = new Scanner(System.in);
         System.out.println(
@@ -171,7 +170,7 @@ public class Menu {
                 intervenant = AuthenticationService.getIntervenantByEmail(email);
                 if (intervenant != null) {
                     System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + intervenant.getFirstName() + ".\033[0m\n");
-                    AppSimulation.simulateLoading();
+                    
                     intervenantMainMenu(intervenant);
                 } else {
                     System.out.println("\033[1;31mErreur : l'intervenant n'a pas été trouvé dans la base de données.\033[0m");
@@ -190,7 +189,7 @@ public class Menu {
                         "\033[1;33mVous ne semblez pas être inscrit en tant qu'intervenant, redirection vers " +
                                 "la page d'inscription.\033[0m\n"
                 );
-                AppSimulation.simulateLoading();
+                
                 intervenantInscriptionMenu();
                 break;
             }
@@ -206,7 +205,7 @@ public class Menu {
     public String residentInscriptionMenu() {
         System.out.print("--------------------------\n" +
                 "Chargement du portail d'inscription des résidents. ");
-        AppSimulation.simulateLoading();
+        
         System.out.println("--------------------------");
 
         Scanner in = new Scanner(System.in);
@@ -336,7 +335,7 @@ public class Menu {
                 "==========================================\n\n");
 
         System.out.print("Chargement du portail d'inscription …\n");
-        AppSimulation.simulateLoading();
+        
         System.out.print("\n------------------------------------------\n");
 
         Scanner in = new Scanner(System.in);
@@ -360,11 +359,11 @@ public class Menu {
         );
 
         System.out.println("\n\ud83c\udf89 Merci pour votre inscription, " + intervenant.getFirstName() + " ! Nous validons vos informations …");
-        AppSimulation.simulateLoading();
+        
         AuthenticationService.signUpIntervenant(intervenant);
 
         System.out.print("\n\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\n\n");
-        AppSimulation.simulateLoading();
+        
         intervenantLogInMenu();
     }
 
@@ -427,7 +426,7 @@ public class Menu {
                 break;
             case 6:
                 System.out.print("\033[1;33m Déconnexion en cours\033[0m");
-                AppSimulation.simulateLoading();
+                
                 System.out.println("\033[1;33mAu revoir, " + intervenant.getFirstName() + "! \033[0m");
                 break;
 
@@ -444,7 +443,7 @@ public class Menu {
     public static void residentMainMenu(Resident resident) {
         Scanner in = new Scanner(System.in);
         System.out.print(
-                "\033[1;34m\n★****************************★\033[0m\n" +
+                        "\033[1;34m\n★**********************************************************************★\033[0m\n" +
                         "\033[1;32m  Bienvenue, " + resident.getFirstName() + "! \033[0m\n" +
                         "\033[1;36m  Vous êtes sur le menu principal des résidents de l'application Ma Ville.\033[0m\n" +
                         "\033[1;36m  Veuillez choisir une option dans la liste suivante :\033[0m\n" +
@@ -455,11 +454,13 @@ public class Menu {
                         "\033[1;37m    5. Soumettre une requête de travail.\033[0m\n" +
                         "\033[1;37m    6. Consulter les entraves en cours.\033[0m\n" +
                         "\033[1;37m    7. Se déconnecter.\033[0m\n" +
+                        "\033[1;34m★**********************************************************************★\033[0m\n" +
                         "\033[1;33m\n Insérer le numéro qui correspond à votre choix >: \033[0m"
         );
+
         int choice = in.nextInt();
         in.nextLine();
-        System.out.println("\033[1;34m****************************\033[0m\n");
+        System.out.println( "\n"+"\033[1;34m★**********************************************************************★\033[0m\n");
 
         switch (choice) {
             case 1:
@@ -486,19 +487,19 @@ public class Menu {
                 switch (preferenceChoice) {
                     case 1:
                         System.out.println("\033[1;36m Voici les préférences personnelles :\033[0m");
-                        AppSimulation.simulateLoading();
+                        
                         System.out.println("\033[1;37m- Préférence 1 : Travaux routiers en semaine uniquement.\033[0m");
                         System.out.println("\033[1;37m- Préférence 2 : Pas de travaux après 18h.\033[0m");
                         System.out.println("\033[1;37m- Préférence 3 : Minimiser les interruptions d'eau.\033[0m");
-                        AppSimulation.simulateWaitTime();
+                        
                         break;
                     case 2:
                         System.out.println("\033[1;36m  Voici les préférences des autres résidents :\033[0m");
-                        AppSimulation.simulateLoading();
+                        
                         System.out.println("\033[1;37m- Préférence 1 : Travaux durant le week-end seulement.\033[0m");
                         System.out.println("\033[1;37m- Préférence 2 : Pas de travaux durant les vacances scolaires.\033[0m");
                         System.out.println("\033[1;37m- Préférence 3 : Travaux sur les trottoirs préférés.\033[0m");
-                        AppSimulation.simulateWaitTime();
+                        
                         break;
                     case 0:
                         residentMainMenu(resident);
@@ -519,7 +520,7 @@ public class Menu {
                 break;
             case 7:
                 System.out.print("\033[1;33m️ Déconnexion en cours\033[0m");
-                AppSimulation.simulateLoading();
+                
                 System.out.println("\033[1;33mAu revoir, " + resident.getFirstName() + "! \033[0m");
                 break;
             default:
@@ -532,6 +533,6 @@ public class Menu {
      * Démarre l'application en affichant le menu principal.
      */
     public void start() {
-        InitializeApp();
+        InitializeMainMenu();
     }
 }

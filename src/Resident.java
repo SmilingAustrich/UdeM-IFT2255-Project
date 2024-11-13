@@ -427,14 +427,14 @@ public class Resident implements User {
                 Menu.residentMainMenu(this); // Retourne au menu principal
             }
             System.out.println("Vous recevrez maintenant des notifications pour des projets dans la zone : " + zoneSupplementaire);
-            AppSimulation.simulateLoading();
-            AppSimulation.simulateWaitTime();
+            
+            
             System.out.println("Retour au menu principal.");
             Menu.residentMainMenu(this);
         } else {
             System.out.println("Aucune autre zone n'a été ajoutée. Vous continuerez à recevoir des notifications pour votre quartier.");
-            AppSimulation.simulateLoading();
-            AppSimulation.simulateWaitTime();
+            
+            
             System.out.println("Retour au menu principal.");
             Menu.residentMainMenu(this);
         }
@@ -516,7 +516,7 @@ public class Resident implements User {
 
         // Simulation de la soumission de la requête
         System.out.println("Soumission de la requête en cours...");
-        AppSimulation.simulateLoading();
+        
 
         // Affichage des détails de la requête soumise
         System.out.println("\n------------------------------");
@@ -527,7 +527,7 @@ public class Resident implements User {
         System.out.println("Date de début prévue : " + dateDebut);
         System.out.println("------------------------------");
 
-        AppSimulation.simulateWaitTime();
+        
         System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
         in.nextInt();
         in.nextLine();

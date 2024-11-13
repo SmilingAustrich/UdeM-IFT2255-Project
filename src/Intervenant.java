@@ -157,8 +157,8 @@ public class Intervenant implements User {
                 System.out.println("Choix invalide. Veuillez réessayer.");
         }
 
-        AppSimulation.simulateWaitTime();
-        AppSimulation.simulateWaitTime();
+        
+        
         System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
         in.nextLine();
         System.out.println("Retour au menu principal.");
@@ -193,8 +193,8 @@ public class Intervenant implements User {
 
         System.out.println("Plage horaire proposée : " + date + " de " + heureDebut + " à " + heureFin);
 
-        AppSimulation.simulateLoading();
-        AppSimulation.simulateWaitTime();
+        
+        
 
         System.out.println("Retour au menu principal");
         Menu.intervenantMainMenu(intervenant);
@@ -366,7 +366,7 @@ public class Intervenant implements User {
         }
 
         // Simulation de la soumission de la candidature
-        AppSimulation.simulateLoading();
+        
         System.out.println("--------------------------");
         System.out.println("Candidature soumise avec succès.");
         System.out.println("Résumé de la candidature soumise :");
