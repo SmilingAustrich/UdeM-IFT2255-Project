@@ -375,37 +375,37 @@ public class Menu {
     public static void intervenantMainMenu(Intervenant intervenant) {
         Scanner in = new Scanner(System.in);
         System.out.print(
-                "\033[1;33m\n⭐️****************************⭐️\033[0m\n" +
-                        "\033[1;32m🥇 Bienvenue, " + intervenant.getFirstName() + "! 🥇\033[0m\n" +
-                        "\033[1;36mVous êtes sur le menu principal des intervenants de l'application Ma Ville.\033[0m\n" +
-                        "\033[1;36m💻 Veuillez choisir une option dans la liste suivante :\033[0m\n" +
-                        "\033[1;37m    1. 🛠️ Consulter la liste des requêtes de travail.\033[0m\n" +
-                        "\033[1;37m    2. 📈 Soumettre un nouveau projet de travaux.\033[0m\n" +
-                        "\033[1;37m    3. 🔧 Mettre à jour les informations d'un chantier.\033[0m\n" +
-                        "\033[1;37m    4. 📅 Proposer une plage horaire pour les travaux.\033[0m\n" +
-                        "\033[1;37m    5. 🛍️ Soumettre une candidature pour un travail.\033[0m\n" +
-                        "\033[1;37m    6. 🔒 Se déconnecter.\033[0m\n" +
-                        "\033[1;36m⏳ Tapez '0' à tout moment pour retourner au menu principal.\033[0m\n" +
-                        "\033[1;33m\n✍️ Insérer le numéro qui correspond à votre choix : \033[0m"
+                "\033[1;33m\n★****************************★\033[0m\n" +
+                        "\033[1;32m★  Bienvenue, " + intervenant.getFirstName() + "! ★\033[0m\n" +
+                        "\033[1;36m  Vous êtes sur le menu principal des intervenants de l'application Ma Ville.\033[0m\n" +
+                        "\033[1;36m  Veuillez choisir une option dans la liste suivante :\033[0m\n" +
+                        "\033[1;37m    1.  Consulter la liste des requêtes de travail.\033[0m\n" +
+                        "\033[1;37m    2.  Soumettre un nouveau projet de travaux.\033[0m\n" +
+                        "\033[1;37m    3.  Mettre à jour les informations d'un chantier.\033[0m\n" +
+                        "\033[1;37m    4.  Proposer une plage horaire pour les travaux.\033[0m\n" +
+                        "\033[1;37m    5.  Soumettre une candidature pour un travail.\033[0m\n" +
+                        "\033[1;37m    6.  Se déconnecter.\033[0m\n" +
+                        "\033[1;36m Tapez '0' à tout moment pour retourner au menu principal.\033[0m\n" +
+                        "\033[1;33m\n Insérer le numéro qui correspond à votre choix >: \033[0m"
         );
         int choice = in.nextInt();
         in.nextLine();
-        System.out.println("\033[1;33m⭐️****************************⭐️\033[0m\n");
+        System.out.println("\033[1;33m****************************\033[0m\n");
 
         switch (choice) {
             case 0:
                 intervenantMainMenu(intervenant); // Retourne au menu principal de l'application
                 break;
             case 1:
-                System.out.println("\033[1;36m📚 Consultation des requêtes de travaux disponibles...\033[0m");
+                System.out.println("\033[1;36m Consultation des requêtes de travaux disponibles...\033[0m");
                 intervenant.consulterListeRequetesTravaux(intervenant, new ArrayList<>(Arrays.asList("Travaux routiers", "Entretien électrique")));
                 break;
             case 2:
-                System.out.println("\033[1;36m📖 Soumission d'un nouveau projet de travaux...\033[0m");
+                System.out.println("\033[1;36m Soumission d'un nouveau projet de travaux...\033[0m");
                 intervenant.soumettreProjetTravaux(intervenant);
                 break;
             case 3:
-                System.out.println("\033[1;36m🔨 Mise à jour des informations d'un chantier.\033[0m");
+                System.out.println("\033[1;36m Mise à jour des informations d'un chantier.\033[0m");
                 System.out.println("\033[1;36mQue voulez-vous mettre à jour ? La description du projet, la date de fin prévue\033[0m" +
                         "\033[1;36m ou voulez-vous changer le statut du projet ? :\033[0m");
                 System.out.println("\033[1;36mTapez '0' pour retourner au menu principal.\033[0m");
@@ -414,21 +414,21 @@ public class Menu {
                 if (updateChoice == 0) {
                     intervenantMainMenu(intervenant); // Retourne au menu principal de l'intervenant
                 } else {
-                    System.out.println("\033[1;36m🔧 Mise à jour des informations du chantier en cours...\033[0m");
+                    System.out.println("\033[1;36m Mise à jour des informations du chantier en cours...\033[0m");
                 }
                 break;
             case 4:
-                System.out.println("\033[1;36m📅 Proposer une nouvelle plage horaire pour les travaux...\033[0m");
+                System.out.println("\033[1;36m Proposer une nouvelle plage horaire pour les travaux...\033[0m");
                 intervenant.proposerPlageHoraire(intervenant);
                 break;
             case 5:
-                System.out.println("\033[1;36m🛍️ Soumission d'une candidature pour un travail...\033[0m");
+                System.out.println("\033[1;36m Soumission d'une candidature pour un travail...\033[0m");
                 intervenant.soumettreCandidatureTravail(intervenant);
                 break;
             case 6:
-                System.out.print("\033[1;33m🚶️ Déconnexion en cours\033[0m");
+                System.out.print("\033[1;33m Déconnexion en cours\033[0m");
                 AppSimulation.simulateLoading();
-                System.out.println("\033[1;33mAu revoir, " + intervenant.getFirstName() + "! 👋\033[0m");
+                System.out.println("\033[1;33mAu revoir, " + intervenant.getFirstName() + "! \033[0m");
                 break;
 
             default:
@@ -444,48 +444,48 @@ public class Menu {
     public static void residentMainMenu(Resident resident) {
         Scanner in = new Scanner(System.in);
         System.out.print(
-                "\033[1;34m\n🏠****************************🏠\033[0m\n" +
-                        "\033[1;32m🍀 Bienvenue, " + resident.getFirstName() + "! 🍀\033[0m\n" +
-                        "\033[1;36mVous êtes sur le menu principal des résidents de l'application Ma Ville.\033[0m\n" +
-                        "\033[1;36m📄 Veuillez choisir une option dans la liste suivante :\033[0m\n" +
-                        "\033[1;37m    1. 🛠️ Consulter les travaux en cours ou à venir.\033[0m\n" +
-                        "\033[1;37m    2. 🔍 Rechercher des travaux.\033[0m\n" +
-                        "\033[1;37m    3. 📢 Recevoir des notifications personnalisées.\033[0m\n" +
-                        "\033[1;37m    4. 📅 Proposer des plages horaires pour des travaux.\033[0m\n" +
-                        "\033[1;37m    5. 📜 Soumettre une requête de travail.\033[0m\n" +
-                        "\033[1;37m    6. 🔗 Consulter les entraves en cours.\033[0m\n" +
-                        "\033[1;37m    7. 🔒 Se déconnecter.\033[0m\n" +
-                        "\033[1;33m\n✍️ Insérer le numéro qui correspond à votre choix : \033[0m"
+                "\033[1;34m\n★****************************★\033[0m\n" +
+                        "\033[1;32m  Bienvenue, " + resident.getFirstName() + "! \033[0m\n" +
+                        "\033[1;36m  Vous êtes sur le menu principal des résidents de l'application Ma Ville.\033[0m\n" +
+                        "\033[1;36m  Veuillez choisir une option dans la liste suivante :\033[0m\n" +
+                        "\033[1;37m    1.  Consulter les travaux en cours ou à venir.\033[0m\n" +
+                        "\033[1;37m    2. Rechercher des travaux.\033[0m\n" +
+                        "\033[1;37m    3. Recevoir des notifications personnalisées.\033[0m\n" +
+                        "\033[1;37m    4. Proposer des plages horaires pour des travaux.\033[0m\n" +
+                        "\033[1;37m    5. Soumettre une requête de travail.\033[0m\n" +
+                        "\033[1;37m    6. Consulter les entraves en cours.\033[0m\n" +
+                        "\033[1;37m    7. Se déconnecter.\033[0m\n" +
+                        "\033[1;33m\n Insérer le numéro qui correspond à votre choix >: \033[0m"
         );
         int choice = in.nextInt();
         in.nextLine();
-        System.out.println("\033[1;34m🏠****************************🏠\033[0m\n");
+        System.out.println("\033[1;34m****************************\033[0m\n");
 
         switch (choice) {
             case 1:
-                System.out.println("\033[1;36m🛠️ Consultation des travaux en cours ou à venir...\033[0m");
+                System.out.println("\033[1;36m Consultation des travaux en cours ou à venir...\033[0m");
                 resident.consulterTravaux();
                 break;
             case 2:
-                System.out.println("\033[1;36m🔍 Recherche de travaux...\033[0m");
+                System.out.println("\033[1;36m Recherche de travaux...\033[0m");
                 resident.rechercherTravaux();
                 break;
             case 3:
-                System.out.println("\033[1;36m📢 Configuration des notifications personnalisées...\033[0m");
+                System.out.println("\033[1;36m Configuration des notifications personnalisées...\033[0m");
                 resident.recevoirNotificationsPersonalisees();
                 break;
             case 4:
-                System.out.println("\033[1;36m📅 Voulez-vous fournir des préférences ou consulter celles des autres ?\033[0m");
+                System.out.println("\033[1;36m Voulez-vous fournir des préférences ou consulter celles des autres ?\033[0m");
                 System.out.println(
-                        "\033[1;36m1. 🌱 Fournir mes préférences\033[0m\n" +
-                                "\033[1;36m2. 🎓 Consulter celles des autres\033[0m\n" +
-                                "\033[1;36m3. ⏹ Tapez '0' pour retourner au menu principal.\033[0m"
+                        "\033[1;36m1.  Fournir mes préférences\033[0m\n" +
+                                "\033[1;36m2.  Consulter celles des autres\033[0m\n" +
+                                "\033[1;36m3.  Tapez '0' pour retourner au menu principal.\033[0m"
                 );
                 int preferenceChoice = in.nextInt();
                 in.nextLine();
                 switch (preferenceChoice) {
                     case 1:
-                        System.out.println("\033[1;36m📖 Voici les préférences personnelles :\033[0m");
+                        System.out.println("\033[1;36m Voici les préférences personnelles :\033[0m");
                         AppSimulation.simulateLoading();
                         System.out.println("\033[1;37m- Préférence 1 : Travaux routiers en semaine uniquement.\033[0m");
                         System.out.println("\033[1;37m- Préférence 2 : Pas de travaux après 18h.\033[0m");
@@ -493,7 +493,7 @@ public class Menu {
                         AppSimulation.simulateWaitTime();
                         break;
                     case 2:
-                        System.out.println("\033[1;36m📖 Voici les préférences des autres résidents :\033[0m");
+                        System.out.println("\033[1;36m  Voici les préférences des autres résidents :\033[0m");
                         AppSimulation.simulateLoading();
                         System.out.println("\033[1;37m- Préférence 1 : Travaux durant le week-end seulement.\033[0m");
                         System.out.println("\033[1;37m- Préférence 2 : Pas de travaux durant les vacances scolaires.\033[0m");
@@ -510,20 +510,20 @@ public class Menu {
                 residentMainMenu(resident);
                 break;
             case 5:
-                System.out.println("\033[1;36m📜 Soumission d'une requête de travail...\033[0m");
+                System.out.println("\033[1;36m Soumission d'une requête de travail...\033[0m");
                 resident.soumettreRequeteTravail(resident);
                 break;
             case 6:
-                System.out.println("\033[1;36m🔗 Consultation des entraves en cours...\033[0m");
+                System.out.println("\033[1;36m Consultation des entraves en cours...\033[0m");
                 resident.consulterEntraves();
                 break;
             case 7:
-                System.out.print("\033[1;33m🚶️ Déconnexion en cours\033[0m");
+                System.out.print("\033[1;33m️ Déconnexion en cours\033[0m");
                 AppSimulation.simulateLoading();
-                System.out.println("\033[1;33mAu revoir, " + resident.getFirstName() + "! 👋\033[0m");
+                System.out.println("\033[1;33mAu revoir, " + resident.getFirstName() + "! \033[0m");
                 break;
             default:
-                System.out.println("\033[1;31m⚠ Choix invalide. Veuillez réessayer.\033[0m");
+                System.out.println("\033[1;31m Choix invalide. Veuillez réessayer.\033[0m");
                 residentMainMenu(resident);
         }
     }

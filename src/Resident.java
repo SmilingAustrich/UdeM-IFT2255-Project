@@ -144,55 +144,55 @@ public class Resident implements User {
                 JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
                 JsonArray travaux = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
 
-                // Étape 3 : Afficher tous les travaux
-                System.out.println("\n[1;34m➞ Liste des travaux en cours :\n[0m");
+                // [34mÉtape 3 : Afficher tous les travaux[0m
+                System.out.println("\n[32m[INFO] Liste des travaux en cours :\n[0m");
                 for (int i = 0; i < travaux.size(); i++) {
                     JsonObject travail = travaux.get(i).getAsJsonObject();
-                    System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
-                    System.out.println("\u001B[1;33mArrondissement: \u001B[0m" + getAsStringSafe(travail.get("boroughid")));
-                    System.out.println("\u001B[1;33mMotif du travail: \u001B[0m" + getAsStringSafe(travail.get("reason_category")));
-                    System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
-                    System.out.println("\u001B[1;34m-------------------------\u001B[0m");
+                    System.out.println("\u001b[33m[ID]:\u001b[0m " + getAsStringSafe(travail.get("id")));
+                    System.out.println("\u001b[33m[Arrondissement]:\u001b[0m " + getAsStringSafe(travail.get("boroughid")));
+                    System.out.println("\u001b[33m[Motif du travail]:\u001b[0m " + getAsStringSafe(travail.get("reason_category")));
+                    System.out.println("\u001b[33m[Nom de l'intervenant]:\u001b[0m " + getAsStringSafe(travail.get("organizationname")));
+                    System.out.println("\u001b[35m-------------------------\u001b[0m");
                 }
 
                 // Étape 4 : Demander au résident s'il souhaite filtrer ou revenir au menu principal
                 boolean continueFiltering = true;
                 while (continueFiltering) {
-                    System.out.println("\n[1;32mVoulez-vous filtrer la liste des travaux ou revenir au menu principal ?\u001B[0m");
-                    System.out.println("\u001B[1;32m1. Filtrer par quartier\u001B[0m");
-                    System.out.println("\u001B[1;32m2. Filtrer par type de travail\u001B[0m");
-                    System.out.println("\u001B[1;32m3. Revenir au menu principal\u001B[0m");
-                    System.out.print("\u001B[1;36mChoisissez une option: \u001B[0m");
+                    System.out.println("\n[32m[OPTIONS] Voulez-vous filtrer la liste des travaux ou revenir au menu principal ?\u001b[0m");
+                    System.out.println("\u001b[36m1. Filtrer par quartier\u001b[0m");
+                    System.out.println("\u001b[36m2. Filtrer par type de travail\u001b[0m");
+                    System.out.println("\u001b[36m3. Revenir au menu principal\u001b[0m");
+                    System.out.print("\u001b[33mChoisissez une option: \u001b[0m");
 
                     int choice = scanner.nextInt();
                     scanner.nextLine(); // Consommer la nouvelle ligne
 
                     switch (choice) {
                         case 1:
-                            System.out.print("\u001B[1;35mEntrez l'arrondissement: \u001B[0m");
+                            System.out.print("\u001b[33mEntrez l'arrondissement: \u001b[0m");
                             String arrondissement = scanner.nextLine();
-                            System.out.println("\n[1;34m➞ Travaux filtrés par arrondissement (" + arrondissement + ") :\n[0m");
+                            System.out.println("\n[32m[INFO] Travaux filtrés par arrondissement (" + arrondissement + ") :\n[0m");
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
                                 if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(arrondissement)) {
-                                    System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
-                                    System.out.println("\u001B[1;33mType de travail: \u001B[0m" + getAsStringSafe(travail.get("reason_category")));
-                                    System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
-                                    System.out.println("\u001B[1;34m-------------------------\u001B[0m");
+                                    System.out.println("\u001b[33m[ID]:\u001b[0m " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("\u001b[33m[Type de travail]:\u001b[0m " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("\u001b[33m[Nom de l'intervenant]:\u001b[0m " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("\u001b[35m-------------------------\u001b[0m");
                                 }
                             }
                             break;
                         case 2:
-                            System.out.print("\u001B[1;35mEntrez le motif du travail: \u001B[0m");
+                            System.out.print("\u001b[33mEntrez le motif du travail: \u001b[0m");
                             String motif = scanner.nextLine();
-                            System.out.println("\n[1;34m➞ Travaux filtrés par motif du travail (" + motif + ") :\n[0m");
+                            System.out.println("\n[32m[INFO] Travaux filtrés par motif du travail (" + motif + ") :\n[0m");
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
                                 if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(motif)) {
-                                    System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
-                                    System.out.println("\u001B[1;33mQuartier: \u001B[0m" + getAsStringSafe(travail.get("boroughid")));
-                                    System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
-                                    System.out.println("\u001B[1;34m-------------------------\u001B[0m");
+                                    System.out.println("\u001b[33m[ID]:\u001b[0m " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("\u001b[33m[Quartier]:\u001b[0m " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("\u001b[33m[Nom de l'intervenant]:\u001b[0m " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("\u001b[35m-------------------------\u001b[0m");
                                 }
                             }
                             break;
@@ -201,15 +201,15 @@ public class Resident implements User {
                             Menu.residentMainMenu(this);
                             break;
                         default:
-                            System.out.println("\u001B[1;31mOption invalide. Veuillez essayer à nouveau.\u001B[0m");
+                            System.out.println("\u001b[31m[ERREUR] Option invalide. Veuillez essayer à nouveau.\u001b[0m");
                     }
                 }
             } else {
-                System.out.println("\u001B[1;31mUne erreur est survenue lors de la récupération des données. Veuillez réessayer plus tard.\u001B[0m");
+                System.out.println("\u001b[31m[ERREUR] Une erreur est survenue lors de la récupération des données. Veuillez réessayer plus tard.\u001b[0m");
             }
 
         } catch (Exception e) {
-            System.out.println("\u001B[1;31mUne erreur est survenue lors de la récupération des données. Veuillez réessayer plus tard.\u001B[0m");
+            System.out.println("\u001b[31m[ERREUR] Une erreur est survenue lors de la récupération des données. Veuillez réessayer plus tard.\u001b[0m");
             e.printStackTrace();
         }
     }
@@ -232,7 +232,7 @@ public class Resident implements User {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            // Étape 1 : Récupérer les données depuis l'API
+            // [34mÉtape 1 : Récupérer les données depuis l'API[0m
             URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -255,132 +255,132 @@ public class Resident implements User {
                 // Étape 3 : Demander au résident pour les critères de recherche
                 boolean continueSearching = true;
                 while (continueSearching) {
-                    System.out.println("\n==============================================");
-                    System.out.println("           RECHERCHE DES TRAVAUX              ");
-                    System.out.println("==============================================");
-                    System.out.println("1. Rechercher par titre");
-                    System.out.println("2. Rechercher par type de travaux");
-                    System.out.println("3. Rechercher par quartier");
-                    System.out.println("4. Revenir au menu principal");
-                    System.out.println("----------------------------------------------");
-                    System.out.print("Choisissez une option: ");
+                    System.out.println("\n[32m==============================================[0m");
+                    System.out.println("[32m           RECHERCHE DES TRAVAUX              [0m");
+                    System.out.println("[32m==============================================[0m");
+                    System.out.println("[36m1. Rechercher par titre[0m");
+                    System.out.println("[36m2. Rechercher par type de travaux[0m");
+                    System.out.println("[36m3. Rechercher par quartier[0m");
+                    System.out.println("[36m4. Revenir au menu principal[0m");
+                    System.out.println("[35m----------------------------------------------[0m");
+                    System.out.print("[33mChoisissez une option: [0m");
 
                     int choice;
                     try {
                         choice = Integer.parseInt(scanner.nextLine());
                     } catch (NumberFormatException e) {
-                        System.out.println("\nOption invalide. Veuillez entrer un nombre.");
+                        System.out.println("\n[31m[ERREUR] Option invalide. Veuillez entrer un nombre.[0m");
                         continue;
                     }
 
                     switch (choice) {
                         case 1:
-                            System.out.print("\nEntrez le titre: ");
+                            System.out.print("\n[33mEntrez le titre: [0m");
                             String titre = scanner.nextLine();
-                            System.out.println("\n==============================================");
-                            System.out.println("   TRAVAUX TROUVÉS PAR TITRE (" + titre + ")  ");
-                            System.out.println("==============================================");
+                            System.out.println("\n[32m==============================================[0m");
+                            System.out.println("[32m   TRAVAUX TROUVÉS PAR TITRE (" + titre + ")  [0m");
+                            System.out.println("[32m==============================================[0m");
                             boolean foundTitle = false;
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
                                 if (getAsStringSafe(travail.get("id")).contains(titre)) {
                                     foundTitle = true;
-                                    System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
-                                    System.out.println("Arrondissement: " + getAsStringSafe(travail.get("boroughid")));
-                                    System.out.println("Motif du travail: " + getAsStringSafe(travail.get("reason_category")));
-                                    System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
-                                    System.out.println("----------------------------------------------");
+                                    System.out.println("\n[33m[ID]:[0m " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("[33m[Arrondissement]:[0m " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("[33m[Motif du travail]:[0m " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("[33m[Nom de l'intervenant]:[0m " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("[35m----------------------------------------------[0m");
                                 }
                             }
                             if (!foundTitle) {
-                                System.out.println("\nAucun travail trouvé pour le titre spécifié.");
+                                System.out.println("\n[31m[ERREUR] Aucun travail trouvé pour le titre spécifié.[0m");
                             }
-                            System.out.print("Appuyez sur une touche pour revenir au menu principal...");
+                            System.out.print("[33mAppuyez sur une touche pour revenir au menu principal...[0m");
                             scanner.nextLine();
                             Menu.residentMainMenu(this);
                             break;
                         case 2:
-                            System.out.println("\nTypes de travaux disponibles :");
-                            System.out.println("1. Travaux routiers");
-                            System.out.println("2. Travaux de gaz ou électricité");
-                            System.out.println("3. Construction ou rénovation");
-                            System.out.println("4. Entretien paysager");
-                            System.out.println("5. Travaux liés aux transports en commun");
-                            System.out.println("6. Travaux de signalisation et éclairage");
-                            System.out.println("7. Travaux souterrains");
-                            System.out.println("8. Travaux résidentiel");
-                            System.out.println("9. Entretien urbain");
-                            System.out.println("10. Entretien des réseaux de télécommunication");
-                            System.out.print("Choisissez le type de travaux (1-10): ");
+                            System.out.println("\n[32mTypes de travaux disponibles :[0m");
+                            System.out.println("[36m1. Travaux routiers[0m");
+                            System.out.println("[36m2. Travaux de gaz ou électricité[0m");
+                            System.out.println("[36m3. Construction ou rénovation[0m");
+                            System.out.println("[36m4. Entretien paysager[0m");
+                            System.out.println("[36m5. Travaux liés aux transports en commun[0m");
+                            System.out.println("[36m6. Travaux de signalisation et éclairage[0m");
+                            System.out.println("[36m7. Travaux souterrains[0m");
+                            System.out.println("[36m8. Travaux résidentiel[0m");
+                            System.out.println("[36m9. Entretien urbain[0m");
+                            System.out.println("[36m10. Entretien des réseaux de télécommunication[0m");
+                            System.out.print("[33mChoisissez le type de travaux (1-10): [0m");
                             int typeChoice;
                             try {
                                 typeChoice = Integer.parseInt(scanner.nextLine());
                             } catch (NumberFormatException e) {
-                                System.out.println("\nOption invalide. Veuillez entrer un nombre.");
+                                System.out.println("\n[31m[ERREUR] Option invalide. Veuillez entrer un nombre.[0m");
                                 continue;
                             }
                             String typeTravaux = getTypeTravaux(typeChoice);
-                            System.out.println("\n==============================================");
-                            System.out.println(" TRAVAUX TROUVÉS PAR TYPE DE TRAVAUX (" + typeTravaux + ") ");
-                            System.out.println("==============================================");
+                            System.out.println("\n[32m==============================================[0m");
+                            System.out.println("[32m TRAVAUX TROUVÉS PAR TYPE DE TRAVAUX (" + typeTravaux + ") [0m");
+                            System.out.println("[32m==============================================[0m");
                             boolean foundType = false;
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
                                 if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(typeTravaux)) {
                                     foundType = true;
-                                    System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
-                                    System.out.println("Arrondissement: " + getAsStringSafe(travail.get("boroughid")));
-                                    System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
-                                    System.out.println("----------------------------------------------");
+                                    System.out.println("\n[33m[ID]:[0m " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("[33m[Arrondissement]:[0m " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("[33m[Nom de l'intervenant]:[0m " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("[35m----------------------------------------------[0m");
                                 }
                             }
                             if (!foundType) {
-                                System.out.println("\nAucun travail trouvé pour le type spécifié.");
+                                System.out.println("\n[31m[ERREUR] Aucun travail trouvé pour le type spécifié.[0m");
                             }
-                            System.out.print("Appuyez sur une touche pour revenir au menu principal...");
+                            System.out.print("[33mAppuyez sur une touche pour revenir au menu principal...[0m");
                             scanner.nextLine();
                             Menu.residentMainMenu(this);
                             break;
                         case 3:
-                            System.out.print("\nEntrez le quartier: ");
+                            System.out.print("\n[33mEntrez le quartier: [0m");
                             String quartier = scanner.nextLine();
-                            System.out.println("\n==============================================");
-                            System.out.println("     TRAVAUX TROUVÉS PAR QUARTIER (" + quartier + ")  ");
-                            System.out.println("==============================================");
+                            System.out.println("\n[32m==============================================[0m");
+                            System.out.println("[32m     TRAVAUX TROUVÉS PAR QUARTIER (" + quartier + ")  [0m");
+                            System.out.println("[32m==============================================[0m");
                             boolean foundQuartier = false;
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
                                 if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(quartier)) {
                                     foundQuartier = true;
-                                    System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
-                                    System.out.println("Motif du travail: " + getAsStringSafe(travail.get("reason_category")));
-                                    System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
-                                    System.out.println("----------------------------------------------");
+                                    System.out.println("\n[33m[ID]:[0m " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("[33m[Motif du travail]:[0m " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("[33m[Nom de l'intervenant]:[0m " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("[35m----------------------------------------------[0m");
                                 }
                             }
                             if (!foundQuartier) {
-                                System.out.println("\nAucun travail trouvé pour le quartier spécifié.");
+                                System.out.println("\n[31m[ERREUR] Aucun travail trouvé pour le quartier spécifié.[0m");
                             }
-                            System.out.print("Appuyez sur une touche pour revenir au menu principal...");
+                            System.out.print("[33mAppuyez sur une touche pour revenir au menu principal...[0m");
                             scanner.nextLine();
                             Menu.residentMainMenu(this);
                             break;
                         case 4:
                             continueSearching = false;
-                            System.out.println("\nRetour au menu principal...\n");
+                            System.out.println("\n[32mRetour au menu principal...\n[0m");
                             Menu.residentMainMenu(this);
                             break;
                         default:
-                            System.out.println("\nOption invalide. Veuillez essayer à nouveau.");
+                            System.out.println("\n[31m[ERREUR] Option invalide. Veuillez essayer à nouveau.[0m");
                     }
                 }
 
             } else {
-                System.out.println("\nUne erreur est survenue lors de la recherche des travaux. Veuillez réessayer plus tard.");
+                System.out.println("\n[31m[ERREUR] Une erreur est survenue lors de la recherche des travaux. Veuillez réessayer plus tard.[0m");
             }
 
         } catch (Exception e) {
-            System.out.println("\nUne erreur est survenue lors de la recherche des travaux. Veuillez réessayer plus tard.");
+            System.out.println("\n[31m[ERREUR] Une erreur est survenue lors de la recherche des travaux. Veuillez réessayer plus tard.[0m");
             e.printStackTrace();
         }
     }
