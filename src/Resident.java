@@ -36,7 +36,7 @@ public class Resident implements User {
      * @param password  Le mot de passe du résident
      * @param phone     Le numéro de téléphone du résident (optionnel)
      * @param address   L'adresse résidentielle
-     * @param dob       La date de naissance du résident (format dd/mm/yy)
+     * @param age       La date de naissance du résident (format dd/mm/yy)
      */
     public Resident(String firstName, String lastName, String email, String password, String phone, String address, int age) {
         this.firstName = firstName;
