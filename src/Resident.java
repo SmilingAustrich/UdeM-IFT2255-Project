@@ -75,7 +75,7 @@ public class Resident implements User {
      */
     @Override
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     /**
