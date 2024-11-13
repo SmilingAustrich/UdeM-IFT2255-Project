@@ -448,7 +448,7 @@ public class Menu {
                         "\033[1;32m  Bienvenue, " + resident.getFirstName() + "! \033[0m\n" +
                         "\033[1;36m  Vous êtes sur le menu principal des résidents de l'application Ma Ville.\033[0m\n" +
                         "\033[1;36m  Veuillez choisir une option dans la liste suivante :\033[0m\n" +
-                        "\033[1;37m    1.  Consulter les travaux en cours ou à venir.\033[0m\n" +
+                        "\033[1;37m    1. Consulter les travaux en cours ou à venir.\033[0m\n" +
                         "\033[1;37m    2. Rechercher des travaux.\033[0m\n" +
                         "\033[1;37m    3. Recevoir des notifications personnalisées.\033[0m\n" +
                         "\033[1;37m    4. Proposer des plages horaires pour des travaux.\033[0m\n" +

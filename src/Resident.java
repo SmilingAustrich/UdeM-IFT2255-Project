@@ -149,8 +149,8 @@ public class Resident implements User {
                 for (int i = 0; i < travaux.size(); i++) {
                     JsonObject travail = travaux.get(i).getAsJsonObject();
                     System.out.println("\u001b[33m[ID]:\u001b[0m " + getAsStringSafe(travail.get("id")));
-                    System.out.println("\u001b[33m[Arrondissement]:\u001b[0m " + getAsStringSafe(travail.get("boroughid")));
-                    System.out.println("\u001b[33m[Motif du travail]:\u001b[0m " + getAsStringSafe(travail.get("reason_category")));
+                    System.out.println("\u001b[33m[Quartier]:\u001b[0m " + getAsStringSafe(travail.get("boroughid")));
+                    System.out.println("\u001b[33m[Type de travail]:\u001b[0m " + getAsStringSafe(travail.get("reason_category")));
                     System.out.println("\u001b[33m[Nom de l'intervenant]:\u001b[0m " + getAsStringSafe(travail.get("organizationname")));
                     System.out.println("\u001b[35m-------------------------\u001b[0m");
                 }
@@ -169,12 +169,12 @@ public class Resident implements User {
 
                     switch (choice) {
                         case 1:
-                            System.out.print("\u001b[33mEntrez l'arrondissement: \u001b[0m");
-                            String arrondissement = scanner.nextLine();
-                            System.out.println("\n[32m[INFO] Travaux filtrés par arrondissement (" + arrondissement + ") :\n[0m");
+                            System.out.print("\u001b[33mEntrez l'Quartier: \u001b[0m");
+                            String Quartier = scanner.nextLine();
+                            System.out.println("\n[32m[INFO] Travaux filtrés par Quartier (" + Quartier + ") :\n[0m");
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
-                                if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(arrondissement)) {
+                                if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(Quartier)) {
                                     System.out.println("\u001b[33m[ID]:\u001b[0m " + getAsStringSafe(travail.get("id")));
                                     System.out.println("\u001b[33m[Type de travail]:\u001b[0m " + getAsStringSafe(travail.get("reason_category")));
                                     System.out.println("\u001b[33m[Nom de l'intervenant]:\u001b[0m " + getAsStringSafe(travail.get("organizationname")));
@@ -183,9 +183,9 @@ public class Resident implements User {
                             }
                             break;
                         case 2:
-                            System.out.print("\u001b[33mEntrez le motif du travail: \u001b[0m");
+                            System.out.print("\u001b[33mEntrez le Type de travail: \u001b[0m");
                             String motif = scanner.nextLine();
-                            System.out.println("\n[32m[INFO] Travaux filtrés par motif du travail (" + motif + ") :\n[0m");
+                            System.out.println("\n[32m[INFO] Travaux filtrés par Type de travail (" + motif + ") :\n[0m");
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
                                 if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(motif)) {
@@ -286,8 +286,8 @@ public class Resident implements User {
                                 if (getAsStringSafe(travail.get("id")).contains(titre)) {
                                     foundTitle = true;
                                     System.out.println("\n[33m[ID]:[0m " + getAsStringSafe(travail.get("id")));
-                                    System.out.println("[33m[Arrondissement]:[0m " + getAsStringSafe(travail.get("boroughid")));
-                                    System.out.println("[33m[Motif du travail]:[0m " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("[33m[Quartier]:[0m " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("[33m[Type de travail]:[0m " + getAsStringSafe(travail.get("reason_category")));
                                     System.out.println("[33m[Nom de l'intervenant]:[0m " + getAsStringSafe(travail.get("organizationname")));
                                     System.out.println("[35m----------------------------------------------[0m");
                                 }
@@ -329,7 +329,7 @@ public class Resident implements User {
                                 if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(typeTravaux)) {
                                     foundType = true;
                                     System.out.println("\n[33m[ID]:[0m " + getAsStringSafe(travail.get("id")));
-                                    System.out.println("[33m[Arrondissement]:[0m " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("[33m[Quartier]:[0m " + getAsStringSafe(travail.get("boroughid")));
                                     System.out.println("[33m[Nom de l'intervenant]:[0m " + getAsStringSafe(travail.get("organizationname")));
                                     System.out.println("[35m----------------------------------------------[0m");
                                 }
@@ -353,7 +353,7 @@ public class Resident implements User {
                                 if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(quartier)) {
                                     foundQuartier = true;
                                     System.out.println("\n[33m[ID]:[0m " + getAsStringSafe(travail.get("id")));
-                                    System.out.println("[33m[Motif du travail]:[0m " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("[33m[Type de travail]:[0m " + getAsStringSafe(travail.get("reason_category")));
                                     System.out.println("[33m[Nom de l'intervenant]:[0m " + getAsStringSafe(travail.get("organizationname")));
                                     System.out.println("[35m----------------------------------------------[0m");
                                 }
