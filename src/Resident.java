@@ -2,15 +2,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
-import java.util.Scanner;
+
 
 /**
  * La classe {@code Resident} représente un utilisateur résident dans l'application Ma Ville.
@@ -124,77 +125,87 @@ public class Resident implements User {
 
         try {
             // Étape 1 : Récupérer les données depuis l'API
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b"))
-                    .GET()
-                    .build();
+            URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
 
-            // Étape 2 : Analyser les données JSON
-            JsonObject jsonResponse = JsonParser.parseString(response.body()).getAsJsonObject();
-            JsonArray travaux = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
-
-            // Étape 3 : Afficher tous les travaux
-            System.out.println("\n[1;34m➔ Liste des travaux en cours :\n[0m");
-            for (int i = 0; i < travaux.size(); i++) {
-                JsonObject travail = travaux.get(i).getAsJsonObject();
-                System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
-                System.out.println("\u001B[1;33mArrondissement: \u001B[0m" + getAsStringSafe(travail.get("boroughid")));
-                System.out.println("\u001B[1;33mMotif du travail: \u001B[0m" + getAsStringSafe(travail.get("reason_category")));
-                System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
-                System.out.println("\u001B[1;34m-------------------------\u001B[0m");
-            }
-
-            // Étape 4 : Demander au résident s'il souhaite filtrer ou revenir au menu principal
-            boolean continueFiltering = true;
-            while (continueFiltering) {
-                System.out.println("\n[1;32mVoulez-vous filtrer la liste des travaux ou revenir au menu principal ?\u001B[0m");
-                System.out.println("\u001B[1;32m1. Filtrer par quartier\u001B[0m");
-                System.out.println("\u001B[1;32m2. Filtrer par type de travail\u001B[0m");
-                System.out.println("\u001B[1;32m3. Revenir au menu principal\u001B[0m");
-                System.out.print("\u001B[1;36mChoisissez une option: \u001B[0m");
-
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consommer la nouvelle ligne
-
-                switch (choice) {
-                    case 1:
-                        System.out.print("\u001B[1;35mEntrez l'arrondissement: \u001B[0m");
-                        String arrondissement = scanner.nextLine();
-                        System.out.println("\n[1;34m➔ Travaux filtrés par arrondissement (" + arrondissement + ") :\n[0m");
-                        for (int i = 0; i < travaux.size(); i++) {
-                            JsonObject travail = travaux.get(i).getAsJsonObject();
-                            if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(arrondissement)) {
-                                System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
-                                System.out.println("\u001B[1;33mType de travail: \u001B[0m" + getAsStringSafe(travail.get("reason_category")));
-                                System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
-                                System.out.println("\u001B[1;34m-------------------------\u001B[0m");
-                            }
-                        }
-                        break;
-                    case 2:
-                        System.out.print("\u001B[1;35mEntrez le motif du travail: \u001B[0m");
-                        String motif = scanner.nextLine();
-                        System.out.println("\n[1;34m➔ Travaux filtrés par motif du travail (" + motif + ") :\n[0m");
-                        for (int i = 0; i < travaux.size(); i++) {
-                            JsonObject travail = travaux.get(i).getAsJsonObject();
-                            if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(motif)) {
-                                System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
-                                System.out.println("\u001B[1;33mQuartier: \u001B[0m" + getAsStringSafe(travail.get("boroughid")));
-                                System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
-                                System.out.println("\u001B[1;34m-------------------------\u001B[0m");
-                            }
-                        }
-                        break;
-                    case 3:
-                        continueFiltering = false;
-                        Menu.residentMainMenu(this);
-                        break;
-                    default:
-                        System.out.println("\u001B[1;31mOption invalide. Veuillez essayer à nouveau.\u001B[0m");
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
                 }
+                in.close();
+
+                // Étape 2 : Analyser les données JSON
+                JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
+                JsonArray travaux = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
+
+                // Étape 3 : Afficher tous les travaux
+                System.out.println("\n[1;34m➞ Liste des travaux en cours :\n[0m");
+                for (int i = 0; i < travaux.size(); i++) {
+                    JsonObject travail = travaux.get(i).getAsJsonObject();
+                    System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
+                    System.out.println("\u001B[1;33mArrondissement: \u001B[0m" + getAsStringSafe(travail.get("boroughid")));
+                    System.out.println("\u001B[1;33mMotif du travail: \u001B[0m" + getAsStringSafe(travail.get("reason_category")));
+                    System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
+                    System.out.println("\u001B[1;34m-------------------------\u001B[0m");
+                }
+
+                // Étape 4 : Demander au résident s'il souhaite filtrer ou revenir au menu principal
+                boolean continueFiltering = true;
+                while (continueFiltering) {
+                    System.out.println("\n[1;32mVoulez-vous filtrer la liste des travaux ou revenir au menu principal ?\u001B[0m");
+                    System.out.println("\u001B[1;32m1. Filtrer par quartier\u001B[0m");
+                    System.out.println("\u001B[1;32m2. Filtrer par type de travail\u001B[0m");
+                    System.out.println("\u001B[1;32m3. Revenir au menu principal\u001B[0m");
+                    System.out.print("\u001B[1;36mChoisissez une option: \u001B[0m");
+
+                    int choice = scanner.nextInt();
+                    scanner.nextLine(); // Consommer la nouvelle ligne
+
+                    switch (choice) {
+                        case 1:
+                            System.out.print("\u001B[1;35mEntrez l'arrondissement: \u001B[0m");
+                            String arrondissement = scanner.nextLine();
+                            System.out.println("\n[1;34m➞ Travaux filtrés par arrondissement (" + arrondissement + ") :\n[0m");
+                            for (int i = 0; i < travaux.size(); i++) {
+                                JsonObject travail = travaux.get(i).getAsJsonObject();
+                                if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(arrondissement)) {
+                                    System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
+                                    System.out.println("\u001B[1;33mType de travail: \u001B[0m" + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("\u001B[1;34m-------------------------\u001B[0m");
+                                }
+                            }
+                            break;
+                        case 2:
+                            System.out.print("\u001B[1;35mEntrez le motif du travail: \u001B[0m");
+                            String motif = scanner.nextLine();
+                            System.out.println("\n[1;34m➞ Travaux filtrés par motif du travail (" + motif + ") :\n[0m");
+                            for (int i = 0; i < travaux.size(); i++) {
+                                JsonObject travail = travaux.get(i).getAsJsonObject();
+                                if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(motif)) {
+                                    System.out.println("\u001B[1;33mID: \u001B[0m" + getAsStringSafe(travail.get("id")));
+                                    System.out.println("\u001B[1;33mQuartier: \u001B[0m" + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("\u001B[1;33mNom de l'intervenant: \u001B[0m" + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("\u001B[1;34m-------------------------\u001B[0m");
+                                }
+                            }
+                            break;
+                        case 3:
+                            continueFiltering = false;
+                            Menu.residentMainMenu(this);
+                            break;
+                        default:
+                            System.out.println("\u001B[1;31mOption invalide. Veuillez essayer à nouveau.\u001B[0m");
+                    }
+                }
+            } else {
+                System.out.println("\u001B[1;31mUne erreur est survenue lors de la récupération des données. Veuillez réessayer plus tard.\u001B[0m");
             }
 
         } catch (Exception e) {
@@ -222,139 +233,150 @@ public class Resident implements User {
 
         try {
             // Étape 1 : Récupérer les données depuis l'API
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b"))
-                    .GET()
-                    .build();
+            URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
 
-            // Étape 2 : Analyser les données JSON
-            JsonObject jsonResponse = JsonParser.parseString(response.body()).getAsJsonObject();
-            JsonArray travaux = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
 
-            // Étape 3 : Demander au résident pour les critères de recherche
-            boolean continueSearching = true;
-            while (continueSearching) {
-                System.out.println("\n==============================================");
-                System.out.println("           RECHERCHE DES TRAVAUX              ");
-                System.out.println("==============================================");
-                System.out.println("1. Rechercher par titre");
-                System.out.println("2. Rechercher par type de travaux");
-                System.out.println("3. Rechercher par quartier");
-                System.out.println("4. Revenir au menu principal");
-                System.out.println("----------------------------------------------");
-                System.out.print("Choisissez une option: ");
+                // Étape 2 : Analyser les données JSON
+                JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
+                JsonArray travaux = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
 
-                int choice;
-                try {
-                    choice = Integer.parseInt(scanner.nextLine());
-                } catch (NumberFormatException e) {
-                    System.out.println("\nOption invalide. Veuillez entrer un nombre.");
-                    continue;
+                // Étape 3 : Demander au résident pour les critères de recherche
+                boolean continueSearching = true;
+                while (continueSearching) {
+                    System.out.println("\n==============================================");
+                    System.out.println("           RECHERCHE DES TRAVAUX              ");
+                    System.out.println("==============================================");
+                    System.out.println("1. Rechercher par titre");
+                    System.out.println("2. Rechercher par type de travaux");
+                    System.out.println("3. Rechercher par quartier");
+                    System.out.println("4. Revenir au menu principal");
+                    System.out.println("----------------------------------------------");
+                    System.out.print("Choisissez une option: ");
+
+                    int choice;
+                    try {
+                        choice = Integer.parseInt(scanner.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("\nOption invalide. Veuillez entrer un nombre.");
+                        continue;
+                    }
+
+                    switch (choice) {
+                        case 1:
+                            System.out.print("\nEntrez le titre: ");
+                            String titre = scanner.nextLine();
+                            System.out.println("\n==============================================");
+                            System.out.println("   TRAVAUX TROUVÉS PAR TITRE (" + titre + ")  ");
+                            System.out.println("==============================================");
+                            boolean foundTitle = false;
+                            for (int i = 0; i < travaux.size(); i++) {
+                                JsonObject travail = travaux.get(i).getAsJsonObject();
+                                if (getAsStringSafe(travail.get("id")).contains(titre)) {
+                                    foundTitle = true;
+                                    System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("Arrondissement: " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("Motif du travail: " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("----------------------------------------------");
+                                }
+                            }
+                            if (!foundTitle) {
+                                System.out.println("\nAucun travail trouvé pour le titre spécifié.");
+                            }
+                            System.out.print("Appuyez sur une touche pour revenir au menu principal...");
+                            scanner.nextLine();
+                            Menu.residentMainMenu(this);
+                            break;
+                        case 2:
+                            System.out.println("\nTypes de travaux disponibles :");
+                            System.out.println("1. Travaux routiers");
+                            System.out.println("2. Travaux de gaz ou électricité");
+                            System.out.println("3. Construction ou rénovation");
+                            System.out.println("4. Entretien paysager");
+                            System.out.println("5. Travaux liés aux transports en commun");
+                            System.out.println("6. Travaux de signalisation et éclairage");
+                            System.out.println("7. Travaux souterrains");
+                            System.out.println("8. Travaux résidentiel");
+                            System.out.println("9. Entretien urbain");
+                            System.out.println("10. Entretien des réseaux de télécommunication");
+                            System.out.print("Choisissez le type de travaux (1-10): ");
+                            int typeChoice;
+                            try {
+                                typeChoice = Integer.parseInt(scanner.nextLine());
+                            } catch (NumberFormatException e) {
+                                System.out.println("\nOption invalide. Veuillez entrer un nombre.");
+                                continue;
+                            }
+                            String typeTravaux = getTypeTravaux(typeChoice);
+                            System.out.println("\n==============================================");
+                            System.out.println(" TRAVAUX TROUVÉS PAR TYPE DE TRAVAUX (" + typeTravaux + ") ");
+                            System.out.println("==============================================");
+                            boolean foundType = false;
+                            for (int i = 0; i < travaux.size(); i++) {
+                                JsonObject travail = travaux.get(i).getAsJsonObject();
+                                if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(typeTravaux)) {
+                                    foundType = true;
+                                    System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("Arrondissement: " + getAsStringSafe(travail.get("boroughid")));
+                                    System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("----------------------------------------------");
+                                }
+                            }
+                            if (!foundType) {
+                                System.out.println("\nAucun travail trouvé pour le type spécifié.");
+                            }
+                            System.out.print("Appuyez sur une touche pour revenir au menu principal...");
+                            scanner.nextLine();
+                            Menu.residentMainMenu(this);
+                            break;
+                        case 3:
+                            System.out.print("\nEntrez le quartier: ");
+                            String quartier = scanner.nextLine();
+                            System.out.println("\n==============================================");
+                            System.out.println("     TRAVAUX TROUVÉS PAR QUARTIER (" + quartier + ")  ");
+                            System.out.println("==============================================");
+                            boolean foundQuartier = false;
+                            for (int i = 0; i < travaux.size(); i++) {
+                                JsonObject travail = travaux.get(i).getAsJsonObject();
+                                if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(quartier)) {
+                                    foundQuartier = true;
+                                    System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
+                                    System.out.println("Motif du travail: " + getAsStringSafe(travail.get("reason_category")));
+                                    System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
+                                    System.out.println("----------------------------------------------");
+                                }
+                            }
+                            if (!foundQuartier) {
+                                System.out.println("\nAucun travail trouvé pour le quartier spécifié.");
+                            }
+                            System.out.print("Appuyez sur une touche pour revenir au menu principal...");
+                            scanner.nextLine();
+                            Menu.residentMainMenu(this);
+                            break;
+                        case 4:
+                            continueSearching = false;
+                            System.out.println("\nRetour au menu principal...\n");
+                            Menu.residentMainMenu(this);
+                            break;
+                        default:
+                            System.out.println("\nOption invalide. Veuillez essayer à nouveau.");
+                    }
                 }
 
-                switch (choice) {
-                    case 1:
-                        System.out.print("\nEntrez le titre: ");
-                        String titre = scanner.nextLine();
-                        System.out.println("\n==============================================");
-                        System.out.println("   TRAVAUX TROUVÉS PAR TITRE (" + titre + ")  ");
-                        System.out.println("==============================================");
-                        boolean foundTitle = false;
-                        for (int i = 0; i < travaux.size(); i++) {
-                            JsonObject travail = travaux.get(i).getAsJsonObject();
-                            if (getAsStringSafe(travail.get("id")).contains(titre)) {
-                                foundTitle = true;
-                                System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
-                                System.out.println("Arrondissement: " + getAsStringSafe(travail.get("boroughid")));
-                                System.out.println("Motif du travail: " + getAsStringSafe(travail.get("reason_category")));
-                                System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
-                                System.out.println("----------------------------------------------");
-                            }
-                        }
-                        if (!foundTitle) {
-                            System.out.println("\nAucun travail trouvé pour le titre spécifié.");
-                        }
-                        System.out.print("Appuyez sur une touche pour revenir au menu principal...");
-                        scanner.nextLine();
-                        Menu.residentMainMenu(this);
-                        break;
-                    case 2:
-                        System.out.println("\nTypes de travaux disponibles :");
-                        System.out.println("1. Travaux routiers");
-                        System.out.println("2. Travaux de gaz ou électricité");
-                        System.out.println("3. Construction ou rénovation");
-                        System.out.println("4. Entretien paysager");
-                        System.out.println("5. Travaux liés aux transports en commun");
-                        System.out.println("6. Travaux de signalisation et éclairage");
-                        System.out.println("7. Travaux souterrains");
-                        System.out.println("8. Travaux résidentiel");
-                        System.out.println("9. Entretien urbain");
-                        System.out.println("10. Entretien des réseaux de télécommunication");
-                        System.out.print("Choisissez le type de travaux (1-10): ");
-                        int typeChoice;
-                        try {
-                            typeChoice = Integer.parseInt(scanner.nextLine());
-                        } catch (NumberFormatException e) {
-                            System.out.println("\nOption invalide. Veuillez entrer un nombre.");
-                            continue;
-                        }
-                        String typeTravaux = getTypeTravaux(typeChoice);
-                        System.out.println("\n==============================================");
-                        System.out.println(" TRAVAUX TROUVÉS PAR TYPE DE TRAVAUX (" + typeTravaux + ") ");
-                        System.out.println("==============================================");
-                        boolean foundType = false;
-                        for (int i = 0; i < travaux.size(); i++) {
-                            JsonObject travail = travaux.get(i).getAsJsonObject();
-                            if (getAsStringSafe(travail.get("reason_category")).equalsIgnoreCase(typeTravaux)) {
-                                foundType = true;
-                                System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
-                                System.out.println("Arrondissement: " + getAsStringSafe(travail.get("boroughid")));
-                                System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
-                                System.out.println("----------------------------------------------");
-                            }
-                        }
-                        if (!foundType) {
-                            System.out.println("\nAucun travail trouvé pour le type spécifié.");
-                        }
-                        System.out.print("Appuyez sur une touche pour revenir au menu principal...");
-                        scanner.nextLine();
-                        Menu.residentMainMenu(this);
-                        break;
-                    case 3:
-                        System.out.print("\nEntrez le quartier: ");
-                        String quartier = scanner.nextLine();
-                        System.out.println("\n==============================================");
-                        System.out.println("     TRAVAUX TROUVÉS PAR QUARTIER (" + quartier + ")  ");
-                        System.out.println("==============================================");
-                        boolean foundQuartier = false;
-                        for (int i = 0; i < travaux.size(); i++) {
-                            JsonObject travail = travaux.get(i).getAsJsonObject();
-                            if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(quartier)) {
-                                foundQuartier = true;
-                                System.out.println("\nID: " + getAsStringSafe(travail.get("id")));
-                                System.out.println("Motif du travail: " + getAsStringSafe(travail.get("reason_category")));
-                                System.out.println("Nom de l'intervenant: " + getAsStringSafe(travail.get("organizationname")));
-                                System.out.println("----------------------------------------------");
-                            }
-                        }
-                        if (!foundQuartier) {
-                            System.out.println("\nAucun travail trouvé pour le quartier spécifié.");
-                        }
-                        System.out.print("Appuyez sur une touche pour revenir au menu principal...");
-                        scanner.nextLine();
-                        Menu.residentMainMenu(this);
-                        break;
-                    case 4:
-                        continueSearching = false;
-                        System.out.println("\nRetour au menu principal...\n");
-                        Menu.residentMainMenu(this);
-                        break;
-                    default:
-                        System.out.println("\nOption invalide. Veuillez essayer à nouveau.");
-                }
+            } else {
+                System.out.println("\nUne erreur est survenue lors de la recherche des travaux. Veuillez réessayer plus tard.");
             }
 
         } catch (Exception e) {
@@ -522,105 +544,116 @@ public class Resident implements User {
 
         try {
             // Étape 1 : Récupérer les données depuis l'API des entraves
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=a2bc8014-488c-495d-941b-e7ae1999d1bd"))
-                    .GET()
-                    .build();
+            URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=a2bc8014-488c-495d-941b-e7ae1999d1bd");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
 
-            // Étape 2 : Analyser les données JSON
-            JsonObject jsonResponse = JsonParser.parseString(response.body()).getAsJsonObject();
-            JsonArray entraves = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
 
-            // Étape 3 : Demander au résident pour les critères de recherche
-            boolean continueSearching = true;
-            while (continueSearching) {
-                System.out.println("\n==============================================");
-                System.out.println("           CONSULTATION DES ENTRAVES           ");
-                System.out.println("==============================================");
-                System.out.println("1. Voir toutes les entraves");
-                System.out.println("2. Rechercher par identifiant de travail");
-                System.out.println("3. Rechercher par nom de rue");
-                System.out.println("4. Revenir au menu principal");
-                System.out.println("----------------------------------------------");
-                System.out.print("Choisissez une option: ");
+                // Étape 2 : Analyser les données JSON
+                JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
+                JsonArray entraves = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
 
-                int choice;
-                try {
-                    choice = Integer.parseInt(scanner.nextLine());
-                } catch (NumberFormatException e) {
-                    System.out.println("\nOption invalide. Veuillez entrer un nombre.");
-                    continue;
+                // Étape 3 : Demander au résident pour les critères de recherche
+                boolean continueSearching = true;
+                while (continueSearching) {
+                    System.out.println("\n[1;34m==============================================[0m");
+                    System.out.println("[1;36m           CONSULTATION DES ENTRAVES           [0m");
+                    System.out.println("\u001B[1;34m==============================================[0m");
+                    System.out.println("\u001B[1;32m1. Voir toutes les entraves[0m");
+                    System.out.println("\u001B[1;32m2. Rechercher par identifiant de travail[0m");
+                    System.out.println("\u001B[1;32m3. Rechercher par nom de rue[0m");
+                    System.out.println("\u001B[1;31m4. Revenir au menu principal[0m");
+                    System.out.println("\u001B[1;34m----------------------------------------------[0m");
+                    System.out.print("\u001B[1;33mChoisissez une option: [0m");
+
+                    int choice;
+                    try {
+                        choice = Integer.parseInt(scanner.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("\u001B[1;31m\nOption invalide. Veuillez entrer un nombre.[0m");
+                        continue;
+                    }
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println("\n[1;34m==============================================[0m");
+                            System.out.println("[1;36m           LISTE DE TOUTES LES ENTRAVES        [0m");
+                            System.out.println("\u001B[1;34m==============================================[0m");
+                            for (int i = 0; i < entraves.size(); i++) {
+                                JsonObject entrave = entraves.get(i).getAsJsonObject();
+                                System.out.println("\n[1;33mID du travail : [0m" + getAsStringSafe(entrave.get("id_request")));
+                                System.out.println("\u001B[1;33mNom de la rue : [0m" + getAsStringSafe(entrave.get("shortname")));
+                                System.out.println("\u001B[1;33mImpact sur la rue : [0m" + getAsStringSafe(entrave.get("streetimpacttype")));
+                                System.out.println("\u001B[1;34m----------------------------------------------[0m");
+                            }
+                            break;
+                        case 2:
+                            System.out.print("\n[1;35mEntrez l'identifiant du travail: [0m");
+                            String idTravail = scanner.nextLine();
+                            System.out.println("\n[1;34m==============================================[0m");
+                            System.out.println("[1;36m  ENTRAVES ASSOCIÉES AU TRAVAIL (ID: " + idTravail + ") [0m");
+                            System.out.println("\u001B[1;34m==============================================[0m");
+                            boolean foundEntraveById = false;
+                            for (int i = 0; i < entraves.size(); i++) {
+                                JsonObject entrave = entraves.get(i).getAsJsonObject();
+                                if (getAsStringSafe(entrave.get("id_request")).equalsIgnoreCase(idTravail)) {
+                                    foundEntraveById = true;
+                                    System.out.println("\n[1;33mID du travail : [0m" + getAsStringSafe(entrave.get("id_request")));
+                                    System.out.println("\u001B[1;33mNom de la rue : [0m" + getAsStringSafe(entrave.get("shortname")));
+                                    System.out.println("\u001B[1;33mImpact sur la rue : [0m" + getAsStringSafe(entrave.get("streetimpacttype")));
+                                    System.out.println("\u001B[1;34m----------------------------------------------[0m");
+                                }
+                            }
+                            if (!foundEntraveById) {
+                                System.out.println("\u001B[1;31m\nAucune entrave trouvée pour l'identifiant du travail spécifié.[0m");
+                            }
+                            break;
+                        case 3:
+                            System.out.print("\n[1;35mEntrez le nom de la rue: [0m");
+                            String nomRue = scanner.nextLine();
+                            System.out.println("\n[1;34m==============================================[0m");
+                            System.out.println("[1;36m       ENTRAVES ASSOCIÉES À LA RUE (" + nomRue + ") [0m");
+                            System.out.println("\u001B[1;34m==============================================[0m");
+                            boolean foundEntraveByStreet = false;
+                            for (int i = 0; i < entraves.size(); i++) {
+                                JsonObject entrave = entraves.get(i).getAsJsonObject();
+                                if (getAsStringSafe(entrave.get("shortname")).equalsIgnoreCase(nomRue)) {
+                                    foundEntraveByStreet = true;
+                                    System.out.println("\n[1;33mID du travail : [0m" + getAsStringSafe(entrave.get("id_request")));
+                                    System.out.println("\u001B[1;33mImpact sur la rue : [0m" + getAsStringSafe(entrave.get("streetimpacttype")));
+                                    System.out.println("\u001B[1;34m----------------------------------------------[0m");
+                                }
+                            }
+                            if (!foundEntraveByStreet) {
+                                System.out.println("\u001B[1;31m\nAucune entrave trouvée pour la rue spécifiée.[0m");
+                            }
+                            break;
+                        case 4:
+                            continueSearching = false;
+                            System.out.println("\u001B[1;36m\nRetour au menu principal...\u001B[0m\n");
+                            Menu.residentMainMenu(this);
+                            break;
+                        default:
+                            System.out.println("\u001B[1;31m\nOption invalide. Veuillez essayer à nouveau.[0m");
+                    }
                 }
 
-                switch (choice) {
-                    case 1:
-                        System.out.println("\n==============================================");
-                        System.out.println("           LISTE DE TOUTES LES ENTRAVES        ");
-                        System.out.println("==============================================");
-                        for (int i = 0; i < entraves.size(); i++) {
-                            JsonObject entrave = entraves.get(i).getAsJsonObject();
-                            System.out.println("\nID du travail : " + getAsStringSafe(entrave.get("id_request")));
-                            System.out.println("Nom de la rue : " + getAsStringSafe(entrave.get("shortname")));
-                            System.out.println("Impact sur la rue : " + getAsStringSafe(entrave.get("streetimpacttype")));
-                            System.out.println("----------------------------------------------");
-                        }
-                        break;
-                    case 2:
-                        System.out.print("\nEntrez l'identifiant du travail: ");
-                        String idTravail = scanner.nextLine();
-                        System.out.println("\n==============================================");
-                        System.out.println("  ENTRAVES ASSOCIÉES AU TRAVAIL (ID: " + idTravail + ") ");
-                        System.out.println("==============================================");
-                        boolean foundEntraveById = false;
-                        for (int i = 0; i < entraves.size(); i++) {
-                            JsonObject entrave = entraves.get(i).getAsJsonObject();
-                            if (getAsStringSafe(entrave.get("id_request")).equalsIgnoreCase(idTravail)) {
-                                foundEntraveById = true;
-                                System.out.println("\nID du travail : " + getAsStringSafe(entrave.get("id_request")));
-                                System.out.println("Nom de la rue : " + getAsStringSafe(entrave.get("shortname")));
-                                System.out.println("Impact sur la rue : " + getAsStringSafe(entrave.get("streetimpacttype")));
-                                System.out.println("----------------------------------------------");
-                            }
-                        }
-                        if (!foundEntraveById) {
-                            System.out.println("\nAucune entrave trouvée pour l'identifiant du travail spécifié.");
-                        }
-                        break;
-                    case 3:
-                        System.out.print("\nEntrez le nom de la rue: ");
-                        String nomRue = scanner.nextLine();
-                        System.out.println("\n==============================================");
-                        System.out.println("       ENTRAVES ASSOCIÉES À LA RUE (" + nomRue + ") ");
-                        System.out.println("==============================================");
-                        boolean foundEntraveByStreet = false;
-                        for (int i = 0; i < entraves.size(); i++) {
-                            JsonObject entrave = entraves.get(i).getAsJsonObject();
-                            if (getAsStringSafe(entrave.get("shortname")).equalsIgnoreCase(nomRue)) {
-                                foundEntraveByStreet = true;
-                                System.out.println("\nID du travail : " + getAsStringSafe(entrave.get("id_request")));
-                                System.out.println("Impact sur la rue : " + getAsStringSafe(entrave.get("streetimpacttype")));
-                                System.out.println("----------------------------------------------");
-                            }
-                        }
-                        if (!foundEntraveByStreet) {
-                            System.out.println("\nAucune entrave trouvée pour la rue spécifiée.");
-                        }
-                        break;
-                    case 4:
-                        continueSearching = false;
-                        System.out.println("\nRetour au menu principal...\n");
-                        Menu.residentMainMenu(this);
-                        break;
-                    default:
-                        System.out.println("\nOption invalide. Veuillez essayer à nouveau.");
-                }
+            } else {
+                System.out.println("\u001B[1;31m\nUne erreur est survenue lors de la consultation des entraves. Veuillez réessayer plus tard.[0m");
             }
 
         } catch (Exception e) {
-            System.out.println("\nUne erreur est survenue lors de la consultation des entraves. Veuillez réessayer plus tard.");
+            System.out.println("\u001B[1;31m\nUne erreur est survenue lors de la consultation des entraves. Veuillez réessayer plus tard.[0m");
             e.printStackTrace();
         }
     }
