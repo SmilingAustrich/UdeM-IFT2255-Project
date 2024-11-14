@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -454,19 +457,25 @@ public class Resident implements User {
         Scanner in = new Scanner(System.in);
         System.out.println("Tapez '0' à tout moment pour retourner au menu principal.");
 
-        System.out.print("Description des travaux (minimum 5 caractères) >: ");
-        String description = in.nextLine();
-        if (description.equals("0")) {
-            Menu.residentMainMenu(resident); // Retourne au menu principal
-            return;
-        }
-        while (description.length() < 5) {
-            System.out.println("La description doit contenir au moins 5 caractères.");
-            System.out.print("Description des travaux >: ");
-            description = in.nextLine();
-            if (description.equals("0")) {
-                Menu.residentMainMenu(resident);
-                return;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = null;
+        int attempts = 0;
+        final int maxAttempts = 3;
+
+        while (attempts < maxAttempts) {
+            System.out.println("Veuillez fournir une plage horaire où vous préférez avoir des travaux dans votre quartier" +
+                    " (respectez le format suivant : jj/MM/aaaa) : ");
+            String input = in.nextLine();
+
+            try {
+                date = LocalDate.parse(input, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                attempts++;
+                System.out.println("Format de date incorrect. Veuillez réessayer.");
+                if (attempts == maxAttempts){
+                    System.out.println("Désolé, le nombre maximum de tentative a été dépassé.");
+                }
             }
         }
 
@@ -525,7 +534,6 @@ public class Resident implements User {
         // Affichage des détails de la requête soumise
         System.out.println("\n------------------------------");
         System.out.println("Requête soumise avec succès !");
-        System.out.println("Description des travaux : " + description);
         System.out.println("Type de travaux : " + typeTravaux);
         System.out.println("Quartier concerné : " + quartier);
         System.out.println("Date de début prévue : " + dateDebut);
