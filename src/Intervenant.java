@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 /**
@@ -218,6 +221,27 @@ public class Intervenant implements User {
         preferencesResidents.put("Hochelaga", "Après-midi (12h-16h)");
 
         System.out.println("Tapez '0' à tout moment pour retourner au menu principal.");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = null;
+        int attempts = 0;
+        final int maxAttempts = 3;
+
+        while (attempts < maxAttempts) {
+            System.out.println("Veuillez entrer une date (respectez le format suivant : jj/MM/aaaa) : ");
+            String input = in.nextLine();
+
+            try {
+                date = LocalDate.parse(input, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                attempts++;
+                System.out.println("Format de date incorrect. Veuillez réessayer.");
+                if (attempts == maxAttempts){
+                    System.out.println("Désolé, le nombre maximum de tentative a été dépassé.");
+                }
+            }
+        }
 
         System.out.print("Titre du projet >: ");
         String titre = in.nextLine();

@@ -9,7 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="1. suppression de certaines définitions dans le glossaire après le feedback.&#10;2. Ajout de la section conception dans le rapport html.">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Modification de certains points dans les scénarios pour">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_11_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_8.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-10,_15_49_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024-10-10__15_49__Changes_.xml" beforeDir="false" />
@@ -25,9 +26,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024-10-11__15_38__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppSimulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +44,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -61,6 +65,9 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Resident.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -80,7 +87,9 @@
     &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
     &quot;JavaScript Debug.rapport.html.executor&quot;: &quot;Run&quot;,
     &quot;JavaScript Debug.template.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;devoir2&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images&quot;,
@@ -109,18 +118,12 @@
     <configuration name="template.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UdeM-IFT2255-Groupe01/devoir1/template.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JavaScript Debug.rapport.html" />
-        <item itemvalue="JavaScript Debug.template.html" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-3183f394aec4-8ce719b4" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-4caba194b151-9b16c6e2" />
       </set>
     </attachedChunks>
   </component>
