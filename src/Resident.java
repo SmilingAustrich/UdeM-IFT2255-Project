@@ -165,25 +165,29 @@ public class Resident implements User {
                     System.out.println("\u001b[36m1. Filtrer par quartier\u001b[0m");
                     System.out.println("\u001b[36m2. Filtrer par type de travail\u001b[0m");
                     System.out.println("\u001b[36m3. Revenir au menu principal\u001b[0m");
-                    System.out.print("\u001b[33mChoisissez une option: \u001b[0m");
+                    System.out.print("\u001b[33mChoisissez une option >: \u001b[0m");
 
                     int choice = scanner.nextInt();
                     scanner.nextLine(); // Consommer la nouvelle ligne
 
                     switch (choice) {
                         case 1:
-                            System.out.print("\u001b[33mEntrez l'Quartier: \u001b[0m");
+                            System.out.print("\u001b[33m Veuillez entrer le nom du quartier s'il vous plait >: \u001b[0m");
                             String Quartier = scanner.nextLine();
-                            System.out.println("\n[32m[INFO] Travaux filtrés par Quartier (" + Quartier + ") :\n[0m");
+                            System.out.println("\n[32m[INFO] Merci. Travaux filtrés par Quartier (" + Quartier + ") :\n[0m");
                             for (int i = 0; i < travaux.size(); i++) {
                                 JsonObject travail = travaux.get(i).getAsJsonObject();
-                                if (getAsStringSafe(travail.get("boroughid")).equalsIgnoreCase(Quartier)) {
+                                String boroughId = getAsStringSafe(travail.get("boroughid")).toLowerCase();
+                                String quartier = Quartier.toLowerCase();
+
+                                if (boroughId.contains(quartier)) {
                                     System.out.println("\u001b[33m[ID]:\u001b[0m " + getAsStringSafe(travail.get("id")));
                                     System.out.println("\u001b[33m[Type de travail]:\u001b[0m " + getAsStringSafe(travail.get("reason_category")));
                                     System.out.println("\u001b[33m[Nom de l'intervenant]:\u001b[0m " + getAsStringSafe(travail.get("organizationname")));
                                     System.out.println("\u001b[35m-------------------------\u001b[0m");
                                 }
                             }
+                            System.out.println("\n[32m[INFO] Voici tous les travaux filtrés pour votre quartier:(" + Quartier + ") :\n[0m");System.out.println("\n[32m[INFO] Voici tous les travaux filtrés pour votre quartier:(" + Quartier + ") :\n[0m");
                             break;
                         case 2:
                             System.out.print("\u001b[33mEntrez le Type de travail: \u001b[0m");
@@ -235,7 +239,7 @@ public class Resident implements User {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            // [34mÉtape 1 : Récupérer les données depuis l'API[0m
+            // [34mÉtape 1 : Récupérer les données depuis l'API
             URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -604,9 +608,12 @@ public class Resident implements User {
                                 System.out.println("\u001B[1;33mImpact sur la rue : [0m" + getAsStringSafe(entrave.get("streetimpacttype")));
                                 System.out.println("\u001B[1;34m----------------------------------------------[0m");
                             }
+                            System.out.println("\n[32m[INFO] " + this.getFirstName() +", voici la liste des entraves en cours. Nous sommes désolé pour toute gène occasionnée lors des travaux. [0m");
+                            System.out.println("\n[32m Retour au menu de consultation des entraves. [0m");
+
                             break;
                         case 2:
-                            System.out.print("\n[1;35mEntrez l'identifiant du travail: [0m");
+                            System.out.print("[1;35mEntrez l'identifiant du travail: [0m");
                             String idTravail = scanner.nextLine();
                             System.out.println("\n[1;34m==============================================[0m");
                             System.out.println("[1;36m  ENTRAVES ASSOCIÉES AU TRAVAIL (ID: " + idTravail + ") [0m");

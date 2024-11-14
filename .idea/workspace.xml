@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="J'ai ajouté la fonctionnalité qui permet à l'intervenant de préciser la date de début et de fin de travail lorsqu'il dépose une candidature pour une requête de travail&#10;&#10;&#10;J'ai aussi ajouté la fonctionnalité au résident de choisir la plage horaire appropriée lorsqu'il soumet une requête de travail.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale.">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +102,11 @@
     <configuration name="template.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UdeM-IFT2255-Groupe01/devoir1/template.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.rapport.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -313,7 +319,8 @@
     <MESSAGE value="changement au rapport.html" />
     <MESSAGE value="1. suppression de certaines définitions dans le glossaire après le feedback.&#10;2. Ajout de la section conception dans le rapport html." />
     <MESSAGE value="J'ai ajouté la fonctionnalité qui permet à l'intervenant de préciser la date de début et de fin de travail lorsqu'il dépose une candidature pour une requête de travail&#10;&#10;&#10;J'ai aussi ajouté la fonctionnalité au résident de choisir la plage horaire appropriée lorsqu'il soumet une requête de travaul" />
-    <option name="LAST_COMMIT_MESSAGE" value="J'ai ajouté la fonctionnalité qui permet à l'intervenant de préciser la date de début et de fin de travail lorsqu'il dépose une candidature pour une requête de travail&#10;&#10;&#10;J'ai aussi ajouté la fonctionnalité au résident de choisir la plage horaire appropriée lorsqu'il soumet une requête de travaul" />
+    <MESSAGE value="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale." />
+    <option name="LAST_COMMIT_MESSAGE" value="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
