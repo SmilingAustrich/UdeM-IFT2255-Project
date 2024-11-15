@@ -1913,14 +1913,13 @@
                 <ol class="risks">
                     <li>
                         <strong>Mauvaise adoption par les utilisateurs</strong><br>
-                        <strong>Justification :</strong> Si les résidents et les intervenants trouvent l'application compliquée à utiliser ou qu'elle ne répond pas à leurs attentes, il est probable qu'ils ne l'adoptent pas. Cela pourrait nuire à l'efficacité du projet.<br>
-                        <strong>Solution :</strong> Il est essentiel de concevoir une interface simple et intuitive, accompagnée d'un tutoriel clair. Prévoir également une assistance et un support technique lors du lancement pour faciliter une adoption rapide et positive.
+                        <strong>Justification :</strong> Si les résidents et les intervenants trouvent l'application difficile à utiliser ou qu'elle ne répond pas à leurs besoins, ils risquent de ne pas l'adopter. Cela compromettrait l'efficacité du projet. Par ailleurs, L'introduction de nouvelles fonctionnalités telles que les notifications personnalisées et les préférences de travaux pourrait perturber les utilisateur.<br>
+                        <strong>Solution :</strong> Concevoir une interface simple, intuitive et accompagnée d'un tutoriel clair. De plus, il serait utile de prévoir une assistance et un support technique pour encourager une adoption rapide et positive.
                     </li>
                     <li>
                         <strong>Données inexactes ou non mises à jour</strong><br>
-                        <strong>Justification :</strong> Si les informations ne sont pas actualisées en temps réel, les utilisateurs risquent de consulter des données erronées, ce qui pourrait entraîner des frustrations.<br>
-                        <strong>Solution :</strong> Mettre en place un système de mise à jour automatique des données et envoyer des notifications en temps réel pour informer les utilisateurs de toute modification concernant les projets en cours.
-                    </li>
+                        <strong>Justification :</strong> Si les informations ne sont pas mises à jour en temps réel, les utilisateurs risquent de consulter des données erronées.<br>
+                        <strong>Solution :</strong> Utiliser les APIs en temps réel de la ville de Montréal pour les mises à jour automatiques et des notifications des modifications.
                     <li>
                         <strong>Problèmes de sécurité des données</strong><br>
                         <strong>Justification :</strong> L'application manipule des données personnelles, telles que des noms, des adresses et des courriels. Une faille de sécurité pourrait causer des fuites de données sensibles.<br>
@@ -1929,13 +1928,12 @@
                     <li>
                         <strong>Manque de coordination entre les intervenants</strong><br>
                         <strong>Justification :</strong> Une mauvaise coordination entre les intervenants publics et privés peut conduire à des chevauchements de projets, ce qui augmente les perturbations pour les résidents.<br>
-                        <strong>Solution :</strong> Mettre en place un système de validation des calendriers lors de la soumission des projets pour éviter les conflits. De plus, rendre les préférences des résidents accessibles à tous les intervenants peut favoriser la collaboration.
+                        <strong>Solution :</strong> La mise en place d'un système de suggestion automatique de créneaux basés sur les préférences et les plages disponibles permettrait de faciliter la planification.
                     </li>
                     <li>
                         <strong>Complexité technique du déploiement de l’application</strong><br>
-                        <strong>Justification :</strong> Le développement et la gestion d'une telle application nécessitent une infrastructure robuste, ce qui peut faire augmenter les coûts et compliquer le déploiement.<br>
-                        <strong>Solution :</strong> Adopter une approche agile pour le développement et réaliser des tests en plusieurs phases pour identifier et résoudre les problèmes avant un déploiement à grande échelle.
-                    </li>
+                        <strong>Justification :</strong> Le projet implique des intégrations API et une infrastructure de support de données volumineuses, ce qui peut augmenter les coûts et compliquer son déploiement.<br>
+                        <strong>Solution :</strong> Architecture modulaire avec phases de tests itératives et vérifications de performance pour les API et les capacités de notification.
                 </ol>
             </div>
             
@@ -1949,19 +1947,19 @@
         </li>
         <li>
             <strong>Performance</strong><br>
-            L’application doit être capable de répondre rapidement aux demandes, surtout lorsque les utilisateurs consultent des projets ou des travaux. Des temps de réponse lents pourraient décourager l'utilisation.
+            L’application doit être capable de répondre rapidement aux demandes, en particulier lorsque les utilisateurs consultent des projets, travaux ou entraves. Des temps de réponse lents pourraient décourager l'utilisation.
         </li>
         <li>
             <strong>Accessibilité</strong><br>
             L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
         </li>
         <li>
-            <strong>Pouvoir tenir une augmentation du nombre d'utilisateurs</strong><br>
+            <strong>Scalabilité</strong><br>
             L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
         </li>
         <li>
             <strong>Facilité de maintenance</strong><br>
-            L’application devra être régulièrement mise à jour pour corriger des bugs, ajouter des fonctionnalités ou s’adapter à l’évolution technologique.
+            L’application devra bénéficier de mises à jour continues pour assurer la compatibilité des API de la ville de Montréal et l'ajout de nouvelles fonctionnalités.
         </li>
     </ol>
 </div>
@@ -1977,9 +1975,7 @@
             <div>
                 <h3 class="subsection-title" id="stockage">Solution de stockage</h3>
                 <p>
-                    Pour gérer les informations des utilisateurs et des projets, nous opterons pour une base de données relationnelle, comme MySQL. 
-                    Afin d'assurer une gestion efficace, nous organiserons les données relatives aux travaux et aux requêtes dans des tables distinctes. 
-                    De plus, le stockage dans le cloud sera privilégié pour garantir la résilience et la disponibilité des données.
+                    Actuellement, l’application sera initialisée avec des données de test (plus de 3 résidents, 3 intervenants et 3 requêtes de travail) directement intégrées dans le code pour permettre un démarrage rapide et une simulation de fonctionnement. Toutefois, à long terme, pour gérer les informations des utilisateurs et des projets de manière plus robuste, nous envisagerons l'utilisation d'une base de données relationnelle, comme MySQL.
                 </p>
             </div>
 
@@ -1987,9 +1983,7 @@
                 <h3 class="subsection-title" id="integration">Solution d'intégration</h3>
 
                 <p>
-                    Pour assurer une communication fluide, notre application devra s'intégrer aux systèmes d'information de la ville de Montréal. 
-                    Cela nous permettra d'accéder aux données en temps réel concernant les travaux publics. 
-                    Pour les intervenants privés, nous souhaitons également mettre en place un portail dédié qui leur permettra de soumettre directement leurs projets via l'application.
+                    L’application MaVille doit s’intégrer avec les APIs de la Ville de Montréal pour obtenir des données en temps réel sur les travaux publics et leurs impacts (entraves). L’accès aux données municipales permettra aux résidents d’obtenir des informations actuelles sur les projets en cours ou à venir dans leur quartier. Pour les intervenants privés, un portail dédié sera mis en place au sein de l’application, leur permettant de soumettre directement leurs projets et de les gérer. Cette intégration facilitera la centralisation des informations de travaux et optimisera la coordination entre les acteurs publics et privés.
                 </p>
             </div>
         </section>
