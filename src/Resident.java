@@ -666,5 +666,18 @@ public class Resident implements User {
         }
     }
 
+    public RequeteTravailResidentiel creerRequete(String description){
+        RequeteTravailResidentiel requete = new RequeteTravailResidentiel(this, description);
+        AuthenticationService.getResidentMap().put(this.getEmail(),this);
+        return requete;
+    }
+
+    public void fermerRequete(RequeteTravailResidentiel requete){
+        if (!requete.isAvailable()){
+            System.out.println("La requête est fermée par " + this.getFirstName());
+            AuthenticationService.getResidentMap().remove(this.getEmail());
+        }
+    }
+
 
 }

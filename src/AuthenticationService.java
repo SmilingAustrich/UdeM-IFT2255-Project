@@ -113,4 +113,13 @@ public class AuthenticationService {
     public static Intervenant getIntervenantByEmail(String email) {
         return intervenantMap.get(email); // Retourne l'intervenant correspondant à cet email
     }
+
+    public static Map<String, Resident> getResidentMap() {
+        return residentMap;
+    }
+
+    public static Map<String, Intervenant> getIntervenantMap() {
+        return intervenantMap;
+    }
 }
+

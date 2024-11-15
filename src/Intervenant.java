@@ -407,5 +407,20 @@ public class Intervenant implements User {
         Menu.intervenantMainMenu(intervenant);
     }
 
+    public void soumettreCandidature(RequeteTravailResidentiel requete, String message) {
+        if (requete.isAvailable()) {
+            requete.ajouterCandidature(this, message);
+        } else {
+            System.out.println("La requête n'est plus disponible.");
+        }
+    }
+
+    public void retirerCandidature(RequeteTravailResidentiel requete) {
+        requete.retirerCandidature(this);
+    }
+
+    public void confirmerCandidature(RequeteTravailResidentiel requete) {
+        requete.confirmerCandidature();
+    }
 
 }
