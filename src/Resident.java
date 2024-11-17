@@ -1,12 +1,8 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.io.Serializable;
+import java.util.Map;
 import java.util.Scanner;
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,13 +10,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 
 /**
  * La classe {@code Resident} représente un utilisateur résident dans l'application Ma Ville.
  * Un résident peut consulter les travaux, signaler des problèmes, et recevoir des notifications personnalisées.
  */
-public class Resident implements User {
+public class Resident implements User, Serializable {
 
     private String firstName;
     private String lastName;
@@ -447,105 +447,143 @@ public class Resident implements User {
         }
     }
 
+
     /**
      * Permet au résident de soumettre une requête de travail avec une option pour retourner au menu principal.
      * Le résident doit fournir des détails sur le type de travaux, le quartier, et la date prévue de début des travaux.
      *
      * @param resident Le résident actuellement connecté
      */
-    public void soumettreRequeteTravail(Resident resident) {
+    public void soumettreRequeteTravail(Resident this) {
+        String workTitle;
+        String quartier;
+        String detailedWorkDescription;
+        int workType;
+
         Scanner in = new Scanner(System.in);
-        System.out.println("Tapez '0' à tout moment pour retourner au menu principal.");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = null;
-        int attempts = 0;
-        final int maxAttempts = 3;
+        final String RESET = "[0m";
+        final String BORDER_COLOR = "[35m"; // Magenta border for a symmetric look
+        final String HEADER_COLOR = "[34m"; // Blue for headers
+        final String INPUT_COLOR = "[32m"; // Green for user inputs
+        final String OPTION_COLOR = "[36m"; // Cyan for options
+        final String CONFIRMATION_COLOR = "[33m"; // Yellow for confirmation messages
 
-        while (attempts < maxAttempts) {
-            System.out.println("Veuillez fournir une plage horaire où vous préférez avoir des travaux dans votre quartier" +
-                    " (respectez le format suivant : jj/MM/aaaa) : ");
-            String input = in.nextLine();
+        // Introduction and instructions
+        System.out.println(BORDER_COLOR + "\n===========================================" + RESET);
+        System.out.println(HEADER_COLOR + "        Soumission de Requête de Travaux       " + RESET);
+        System.out.println(BORDER_COLOR + "===========================================\n" + RESET);
 
-            try {
-                date = LocalDate.parse(input, formatter);
+        // Collecting work title
+        System.out.print(INPUT_COLOR + "Titre des travaux >: " + RESET);
+        workTitle = in.nextLine();
+
+        // Collecting detailed work description
+        System.out.print(INPUT_COLOR + "Description détaillée des travaux >: " + RESET);
+        detailedWorkDescription = in.nextLine();
+
+        // Collecting detailed work description
+        System.out.print(INPUT_COLOR + "Quartier >: " + RESET);
+        quartier = in.nextLine();
+
+        // Selecting work type
+        System.out.println(BORDER_COLOR + "\n-------------------------------------------" + RESET);
+        System.out.println(HEADER_COLOR + "Types de travaux disponibles: " + RESET);
+        System.out.println(OPTION_COLOR + "1. Travaux routiers" + RESET);
+        System.out.println(OPTION_COLOR + "2. Travaux de gaz ou électricité" + RESET);
+        System.out.println(OPTION_COLOR + "3. Construction ou rénovation" + RESET);
+        System.out.println(OPTION_COLOR + "4. Entretien paysager" + RESET);
+        System.out.println(OPTION_COLOR + "5. Travaux liés aux transports en commun" + RESET);
+        System.out.println(OPTION_COLOR + "6. Travaux de signalisation et éclairage" + RESET);
+        System.out.println(OPTION_COLOR + "7. Travaux souterrains" + RESET);
+        System.out.println(OPTION_COLOR + "8. Travaux résidentiels" + RESET);
+        System.out.println(OPTION_COLOR + "9. Entretien urbain" + RESET);
+        System.out.println(OPTION_COLOR + "10. Entretien des réseaux de télécommunication" + RESET);
+        System.out.println(BORDER_COLOR + "-------------------------------------------\n" + RESET);
+        System.out.print(INPUT_COLOR + "Veuillez entrer le numéro correspondant au type de travaux >: " + RESET);
+        workType = in.nextInt();
+        in.nextLine(); // Consume newline
+
+        String workTypeString;
+        switch (workType) {
+            case 1:
+                workTypeString = "Travaux routiers";
                 break;
-            } catch (DateTimeParseException e) {
-                attempts++;
-                System.out.println("Format de date incorrect. Veuillez réessayer.");
-                if (attempts == maxAttempts){
-                    System.out.println("Désolé, le nombre maximum de tentative a été dépassé.");
+            case 2:
+                workTypeString = "Travaux de gaz ou électricité";
+                break;
+            case 3:
+                workTypeString = "Construction ou rénovation";
+                break;
+            case 4:
+                workTypeString = "Entretien paysager";
+                break;
+            case 5:
+                workTypeString = "Travaux liés aux transports en commun";
+                break;
+            case 6:
+                workTypeString = "Travaux de signalisation et éclairage";
+                break;
+            case 7:
+                workTypeString = "Travaux souterrains";
+                break;
+            case 8:
+                workTypeString = "Travaux résidentiels";
+                break;
+            case 9:
+                workTypeString = "Entretien urbain";
+                break;
+            case 10:
+                workTypeString = "Entretien des réseaux de télécommunication";
+                break;
+            default:
+                workTypeString = "Inconnu";
+        }
+
+        // Collecting wished start date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate today = LocalDate.now();
+        LocalDate workStartDate = null;
+        String workWishedStartDate;
+        boolean validDate = false;
+
+        while (!validDate) {
+            System.out.print(INPUT_COLOR + "Date prévue de début des travaux (format: JJ/MM/AAAA): " + RESET);
+            workWishedStartDate = in.nextLine();
+            try {
+                workStartDate = LocalDate.parse(workWishedStartDate, formatter);
+                if (workStartDate.isBefore(today)) {
+                    System.out.println(RESET + "\n" + CONFIRMATION_COLOR + "La date ne peut pas être dans le passé. Veuillez entrer une date valide." + RESET);
+                } else {
+                    validDate = true;
                 }
+            } catch (DateTimeParseException e) {
+                System.out.println(RESET + "\n" + CONFIRMATION_COLOR + "Format de date invalide. Veuillez respecter le format JJ/MM/AAAA." + RESET);
             }
         }
 
-        System.out.print("Type de travaux (routiers, électricité, plomberie, etc.) >: ");
-        String typeTravaux = in.nextLine();
-        if (typeTravaux.equals("0")) {
-            Menu.residentMainMenu(resident); // Retourne au menu principal
-            return;
-        }
-        while (!typeTravaux.matches("routiers|électricité|plomberie|autre")) {
-            System.out.println("Type de travaux invalide. Veuillez choisir parmi : routiers, électricité, plomberie, autre.");
-            System.out.print("Type de travaux >: ");
-            typeTravaux = in.nextLine();
-            if (typeTravaux.equals("0")) {
-                Menu.residentMainMenu(resident);
-                return;
-            }
-        }
+        // Display a summary of the work request
+        System.out.println(BORDER_COLOR + "\n===========================================" + RESET);
+        System.out.println(HEADER_COLOR + "             Résumé de la requête             " + RESET);
+        System.out.println(BORDER_COLOR + "===========================================\n" + RESET);
+        System.out.println(HEADER_COLOR + "Titre: " + RESET + workTitle);
+        System.out.println(HEADER_COLOR + "Description: " + RESET + detailedWorkDescription);
+        System.out.println(HEADER_COLOR + "Quartier: " + RESET + quartier);
+        System.out.println(HEADER_COLOR + "Type: " + RESET + workTypeString);
+        System.out.println(HEADER_COLOR + "Date prévue de début: " + RESET + workStartDate.format(formatter));
+        System.out.println(BORDER_COLOR + "===========================================\n" + RESET);
 
-        System.out.print("Quartier concerné (ex : Centre-Ville, NDG, Villeray) >: ");
-        String quartier = in.nextLine();
-        if (quartier.equals("0")) {
-            Menu.residentMainMenu(resident); // Retourne au menu principal
-            return;
-        }
-        while (quartier.length() < 3) {
-            System.out.println("Le nom du quartier doit contenir au moins 3 caractères.");
-            System.out.print("Quartier concerné >: ");
-            quartier = in.nextLine();
-            if (quartier.equals("0")) {
-                Menu.residentMainMenu(resident);
-                return;
-            }
-        }
-
-        System.out.print("Date de début prévue (format jj/mm/aaaa) >: ");
-        String dateDebut = in.nextLine();
-        if (dateDebut.equals("0")) {
-            Menu.residentMainMenu(resident); // Retourne au menu principal
-            return;
-        }
-        while (!dateDebut.matches("\\d{2}/\\d{2}/\\d{4}")) {
-            System.out.println("Le format de la date est invalide. Veuillez entrer la date au format jj/mm/aaaa.");
-            System.out.print("Date de début prévue >: ");
-            dateDebut = in.nextLine();
-            if (dateDebut.equals("0")) {
-                Menu.residentMainMenu(resident);
-                return;
-            }
-        }
-
-        // Simulation de la soumission de la requête
-        System.out.println("Soumission de la requête en cours...");
-        
-
-        // Affichage des détails de la requête soumise
-        System.out.println("\n------------------------------");
-        System.out.println("Requête soumise avec succès !");
-        System.out.println("Type de travaux : " + typeTravaux);
-        System.out.println("Quartier concerné : " + quartier);
-        System.out.println("Date de début prévue : " + dateDebut);
-        System.out.println("------------------------------");
-
-        
-        System.out.println("Tapez sur n'importe quel touche pour retourner au menu principal.");
-        in.nextInt();
+        // Inform the resident that the request has been submitted successfully
+        System.out.println(CONFIRMATION_COLOR + "Votre requête a été soumise avec succès." + RESET);
+        System.out.println(HEADER_COLOR + "Appuyez sur Entrée pour retourner au menu principal." + RESET);
         in.nextLine();
-        System.out.println("Retour au menu principal.");
-        Menu.residentMainMenu(resident);
+        creerRequete(workTitle,detailedWorkDescription,workTypeString,workStartDate, quartier);
+        Menu.residentMainMenu(this);
     }
+
+
+
+
 
     /**
      * Permet au résident de consulter les entraves sur le réseau routier causées par les travaux en cours.
@@ -673,17 +711,21 @@ public class Resident implements User {
         }
     }
 
-    public RequeteTravailResidentiel creerRequete(String description){
-        RequeteTravailResidentiel requete = new RequeteTravailResidentiel(this, description);
-        AuthenticationService.getResidentMap().put(this.getEmail(),this);
-        return requete;
+    public void creerRequete(String workTitle, String detailedWorkDescription, String workType, LocalDate workWishedStartDate, String quartier){
+        RequeteTravailResidentiel requete = new RequeteTravailResidentiel(this, workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier);
+        Database.getRequeteTravailMap().put(this,requete);
+//        Map<Resident, RequeteTravailResidentiel > lol = Database.getRequeteTravailMap();
     }
 
     public void fermerRequete(RequeteTravailResidentiel requete){
-        if (!requete.isAvailable()){
+        if (!requete.isWorkAvailable()){
             System.out.println("La requête est fermée par " + this.getFirstName());
-            AuthenticationService.getResidentMap().remove(this.getEmail());
+            Database.getRequeteTravailMap().remove(this.getEmail());
         }
+    }
+
+    public void suivreRequetesResidentielles(){
+
     }
 
 

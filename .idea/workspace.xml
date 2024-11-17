@@ -9,9 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale.">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Correction d'un bug dans le fichier workspace.xml survenu lors d'un merge.">
+      <change afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RequeteTravailResidentiel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RequeteTravailResidentiel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +32,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
         <option value="module-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -65,31 +76,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.rapport.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.template.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;devoir2&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Menus.executor": "Run",
+    "JavaScript Debug.rapport.html.executor": "Run",
+    "JavaScript Debug.template.html.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "devoir2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/images" />
@@ -287,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731551434265</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Correction d'un bug dans le fichier workspace.xml survenu lors d'un merge.">
+      <option name="closed" value="true" />
+      <created>1731615207565</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1731615207565</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,18 +339,15 @@
     <MESSAGE value="1. suppression de certaines définitions dans le glossaire après le feedback.&#10;2. Ajout de la section conception dans le rapport html." />
     <MESSAGE value="J'ai ajouté la fonctionnalité qui permet à l'intervenant de préciser la date de début et de fin de travail lorsqu'il dépose une candidature pour une requête de travail&#10;&#10;&#10;J'ai aussi ajouté la fonctionnalité au résident de choisir la plage horaire appropriée lorsqu'il soumet une requête de travaul" />
     <MESSAGE value="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale." />
-    <option name="LAST_COMMIT_MESSAGE" value="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale." />
+    <MESSAGE value="Correction d'un bug dans le fichier workspace.xml survenu lors d'un merge." />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction d'un bug dans le fichier workspace.xml survenu lors d'un merge." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Resident.java</url>
-          <line>538</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="requeteTravailMap" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,8 +1,10 @@
- /**
+import java.io.Serializable;
+
+/**
  * L'interface {@code User} définit les méthodes essentielles pour obtenir les informations d'un utilisateur,
  * telles que le mot de passe, l'email, le prénom et le nom de famille.
  */
-public interface User {
+public interface User{
 
     /**
      * Retourne le mot de passe de l'utilisateur.

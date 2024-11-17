@@ -1,6 +1,7 @@
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -107,7 +108,7 @@ public class Menu {
 
             loggedInResident = AuthenticationService.loginResident(email, password);
             if (loggedInResident) {
-                resident = AuthenticationService.getResidentByEmail(email);
+                resident = Database.getResidentByEmail(email);
                 if (resident != null) {
                     System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + resident.getFirstName() + ".\033[0m\n");
                     
@@ -167,7 +168,7 @@ public class Menu {
 
             loggedInIntervenant = AuthenticationService.loginIntervenant(email, password);
             if (loggedInIntervenant) {
-                intervenant = AuthenticationService.getIntervenantByEmail(email);
+                intervenant = Database.getIntervenantByEmail(email);
                 if (intervenant != null) {
                     System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + intervenant.getFirstName() + ".\033[0m\n");
                     
@@ -199,41 +200,48 @@ public class Menu {
 
 
     /**
-     * Affiche le menu d'inscription pour les résidents et enregistre un nouveau résident.
+     * Affiche un menu d'inscription magnifiquement présenté pour les résidents, et enregistre un nouveau résident.
      * Une fois l'inscription réussie, le résident est redirigé vers le menu de connexion.
      */
-    public String residentInscriptionMenu() {
-        System.out.print("--------------------------\n" +
-                "Chargement du portail d'inscription des résidents. ");
-        
-        System.out.println("--------------------------");
+    public void residentInscriptionMenu() {
+        System.out.print("\u001B[35m\n==========================================\n\u001B[0m" +
+                "\u001B[34m\u2728 \u001B[1mBienvenue au Portail d'Inscription des Résidents \u2728\u001B[0m\n" +
+                "\u001B[35m==========================================\n\u001B[0m\n\n");
+
+        System.out.print("\u001B[36m\u25b6\ufe0f Chargement du portail d'inscription des résidents …\u001B[0m\n");
+
+        System.out.print("\u001B[35m\n------------------------------------------\n\u001B[0m");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Bienvenue sur le portail d'inscription des résidents!");
+        System.out.println("\u001B[31m\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n\u001B[0m");
 
         // Validation des différents champs
-        String firstNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre prénom >: ");
-        String lastNameResident = promptForNonEmptyInput(in, "Veuillez entrer votre nom de famille >: ");
-        String emailResident = promptForValidEmail(in, "Adresse courriel >: ");
-        String passwordResident = promptForPassword(in, "Mot de passe >: ");
-        String phoneResident = promptForNonEmptyInput(in, "Numéro de téléphone (optionnel, tapez 0 et valider) >: "); // Optional field
-        String addressResident = promptForNonEmptyInput(in, "Adresse >: ");
-        int age = promptForValidDate(in, "Date de naissance (format jj/mm/aaaa) >: ");
+        String firstNameResident = promptForNonEmptyInput(in, "\u001B[33m\u1f464 \u001B[1mPrénom >: \u001B[0m");
+        String lastNameResident = promptForNonEmptyInput(in, "\u001B[33m\u1f465 \u001B[1mNom de famille >: \u001B[0m");
+        String emailResident = promptForValidEmail(in, "\u001B[33m\u1f4bb \u001B[1mAdresse courriel >: \u001B[0m");
+        String passwordResident = promptForPassword(in, "\u001B[33m\ud83d\udd12 \u001B[1mMot de passe (minimum 8 caractères) >: \u001B[0m");
+        String phoneResident = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udcde \u001B[1mNuméro de téléphone (optionnel, tapez 0 et valider) >: \u001B[0m");
+        String addressResident = promptForNonEmptyInput(in, "\u001B[33m\ud83c\udfe0 \u001B[1mAdresse >: \u001B[0m");
+        int age = promptForValidDate(in, "\u001B[33m\ud83d\udcc5 \u001B[1mDate de naissance (format jj/mm/aaaa) >: \u001B[0m");
 
         if(age < 16){
-            return "Le compte ne peut pas être créer, vous devez avoir minimum 16 ans.";
+            System.out.println("\u001B[31m\u26a0\ufe0f \u001B[1mLe compte ne peut pas être créé, vous devez avoir minimum 16 ans.\u001B[0m");
+            return;
         }
         Resident resident = new Resident(
                 firstNameResident, lastNameResident, emailResident, passwordResident,
                 phoneResident, addressResident, age
         );
 
+        System.out.println("\n\u001B[32m\ud83c\udf89 \u001B[1mMerci pour votre inscription, " + resident.getFirstName() + " ! Nous validons vos informations …\u001B[0m");
+
         AuthenticationService.signUpResident(resident);
 
-        System.out.println("Bienvenue " + resident.getFirstName() + "! Vous pouvez maintenant vous connecter.");
+        System.out.print("\n\u001B[36m\u26a1\ufe0f \u001B[1mInscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
+
         residentLogInMenu();
-        return firstNameResident;
     }
+
 
     /**
      * Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie.
@@ -330,40 +338,40 @@ public class Menu {
      * Une fois l'inscription réussie, l'intervenant est redirigé vers le menu de connexion.
      */
     public void intervenantInscriptionMenu() {
-        System.out.print("\n==========================================\n" +
-                "\u2728 Bienvenue au Portail d'Inscription des Intervenants \u2728\n" +
-                "==========================================\n\n");
+        System.out.print("\u001B[35m\n==========================================\n\u001B[0m" +
+                "\u001B[34m\u2728 Bienvenue au Portail d'Inscription des Intervenants \u2728\u001B[0m\n" +
+                "\u001B[35m==========================================\n\u001B[0m\n\n");
 
-        System.out.print("Chargement du portail d'inscription …\n");
-        
-        System.out.print("\n------------------------------------------\n");
+        System.out.print("\u001B[36mChargement du portail d'inscription …\u001B[0m\n");
+
+        System.out.print("\u001B[35m\n------------------------------------------\n\u001B[0m");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n");
+        System.out.println("\u001B[31m\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n\u001B[0m");
 
         // Validation des différents champs
-        String firstNameIntervenant = promptForNonEmptyInput(in, "\ud83d\udc64 Prénom >: ");
-        String lastNameIntervenant = promptForNonEmptyInput(in, "\ud83d\udc65 Nom de famille >: ");
-        String emailIntervenant = promptForValidEmail(in, "\ud83d\udcbb Adresse courriel >: ");
-        String passwordIntervenant = promptForPassword(in, "\ud83d\udd12 Mot de passe (minimum 8 caractères) >: ");
-        String cityId = promptForValidCityId(in, "\ud83c\udfd9 Identifiant de la ville (code à 8 chiffres) >: ");
+        String firstNameIntervenant = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udc64 Prénom >: \u001B[0m");
+        String lastNameIntervenant = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udc65 Nom de famille >: \u001B[0m");
+        String emailIntervenant = promptForValidEmail(in, "\u001B[33m\ud83d\udcbb Adresse courriel >: \u001B[0m");
+        String passwordIntervenant = promptForPassword(in, "\u001B[33m\ud83d\udd12 Mot de passe (minimum 8 caractères) >: \u001B[0m");
+        String cityId = promptForValidCityId(in, "\u001B[33m\ud83c\udfd9 Identifiant de la ville (code à 8 chiffres) >: \u001B[0m");
 
-        System.out.print("\n\ud83c\udf93 Type d'entrepreneur (numérique)\n" +
-                "1. \ud83d\udcbc Entreprise privée\n" +
-                "2. \ud83c\udfe2 Entreprise publique\n" +
-                "3. \ud83c\udf6d Particulier\n >: ");
+        System.out.print("\n\u001B[34m\ud83c\udf93 Type d'entrepreneur (numérique)\u001B[0m\n" +
+                "\u001B[36m1. \ud83d\udcbc Entreprise privée\u001B[0m\n" +
+                "\u001B[36m2. \ud83c\udfe2 Entreprise publique\u001B[0m\n" +
+                "\u001B[36m3. \ud83c\udf6d Particulier\u001B[0m\n >: ");
         int entrepreneurType = in.nextInt();
 
         Intervenant intervenant = new Intervenant(
                 firstNameIntervenant, lastNameIntervenant, emailIntervenant, passwordIntervenant, cityId, entrepreneurType
         );
 
-        System.out.println("\n\ud83c\udf89 Merci pour votre inscription, " + intervenant.getFirstName() + " ! Nous validons vos informations …");
-        
+        System.out.println("\n\u001B[32m\ud83c\udf89 Merci pour votre inscription, " + intervenant.getFirstName() + " ! Nous validons vos informations …\u001B[0m");
+
         AuthenticationService.signUpIntervenant(intervenant);
 
-        System.out.print("\n\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\n\n");
-        
+        System.out.print("\n\u001B[36m\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
+
         intervenantLogInMenu();
     }
 
@@ -372,67 +380,91 @@ public class Menu {
      * @param intervenant L'intervenant connecté
      */
     public static void intervenantMainMenu(Intervenant intervenant) {
+
+
+        List<RequeteTravailResidentiel> requetes = new ArrayList<>();
+        List<Project> projects = new ArrayList<>();
         Scanner in = new Scanner(System.in);
+
         System.out.print(
-                "\033[1;33m\n★****************************★\033[0m\n" +
-                        "\033[1;32m★  Bienvenue, " + intervenant.getFirstName() + "! ★\033[0m\n" +
+                "\033[1;34m\n★**********************************************************************★\033[0m\n" +
+                        "\033[1;32m  Bienvenue, " + intervenant.getFirstName() + "! \033[0m\n" +
                         "\033[1;36m  Vous êtes sur le menu principal des intervenants de l'application Ma Ville.\033[0m\n" +
                         "\033[1;36m  Veuillez choisir une option dans la liste suivante :\033[0m\n" +
-                        "\033[1;37m    1.  Consulter la liste des requêtes de travail.\033[0m\n" +
-                        "\033[1;37m    2.  Soumettre un nouveau projet de travaux.\033[0m\n" +
-                        "\033[1;37m    3.  Mettre à jour les informations d'un chantier.\033[0m\n" +
-                        "\033[1;37m    4.  Proposer une plage horaire pour les travaux.\033[0m\n" +
-                        "\033[1;37m    5.  Soumettre une candidature pour un travail.\033[0m\n" +
-                        "\033[1;37m    6.  Se déconnecter.\033[0m\n" +
-                        "\033[1;36m Tapez '0' à tout moment pour retourner au menu principal.\033[0m\n" +
+                        "\033[1;37m    1. Consulter la liste des requêtes de travail.\033[0m\n" +
+                        "\033[1;37m    2. Soumettre un nouveau projet de travaux.\033[0m\n" +
+                        "\033[1;37m    3. Mettre à jour les informations d'un chantier.\033[0m\n" +
+                        "\033[1;37m    4. Proposer des plages horaires pour des travaux.\033[0m\n" +
+                        "\033[1;37m    5. Soumettre une candidature pour un travail.\033[0m\n" +
+                        "\033[1;37m    6. Se déconnecter.\033[0m\n" +
+                        "\033[1;34m★**********************************************************************★\033[0m\n" +
                         "\033[1;33m\n Insérer le numéro qui correspond à votre choix >: \033[0m"
         );
+
         int choice = in.nextInt();
         in.nextLine();
-        System.out.println("\033[1;33m****************************\033[0m\n");
+        System.out.println("\n" + "\033[1;34m★**********************************************************************★\033[0m\n");
 
         switch (choice) {
-            case 0:
-                intervenantMainMenu(intervenant); // Retourne au menu principal de l'application
-                break;
             case 1:
                 System.out.println("\033[1;36m Consultation des requêtes de travaux disponibles...\033[0m");
-                intervenant.consulterListeRequetesTravaux(intervenant, new ArrayList<>(Arrays.asList("Travaux routiers", "Entretien électrique")));
+                intervenant.consulterListeRequetesTravaux(Database.getRequeteTravailMap());
                 break;
             case 2:
-                System.out.println("\033[1;36m Soumission d'un nouveau projet de travaux...\033[0m");
-                intervenant.soumettreProjetTravaux(intervenant);
+                System.out.println("\033[1;36m Création d'un nouveau projet de travaux. 033[0m");
+
+                Intervenant ProjectOwner = intervenant;
+
+                // Saisie du nom du projet
+                System.out.print("Veuillez entrer une description pour le projet : ");
+                String projectName = in.nextLine();
+
+                // Saisie de la description du projet
+                System.out.print("Veuillez entrer une description pour le projet : ");
+                String projectDescription = in.nextLine();
+
+                // Saisie du type du projet
+                System.out.print("Veuillez entrer une description pour le projet : ");
+                String projectType = in.nextLine();
+
+                // Saisie du status du projet
+                System.out.print("Veuillez entrer une description pour le projet : ");
+                String projectStatus = in.nextLine();
+
+                // Saisie de la date du début du projet
+                System.out.print("Veuillez entrer la date de début du projet dans la forme jj/mm/aaaa en ométtant les barres obliques: ");
+                int startDate = in.nextInt();
+
+                // Saisie de la date de la fin du projet
+                System.out.print("Veuillez entrer la date de fin du projet dans la forme jj/mm/aaaa en ométtant les barres obliques: ");
+                int endDate = in.nextInt();
+
+
+
+                // Création du projet de travaux
+                Project newProject = new Project(projectName, projectDescription, projectType, projectStatus, startDate, endDate, ProjectOwner);
+                projects.add(newProject);
+                System.out.println("\033[1;32m Projet de travaux créé avec succès !\033[0m");
                 break;
             case 3:
-                System.out.println("\033[1;36m Mise à jour des informations d'un chantier.\033[0m");
-                System.out.println("\033[1;36mQue voulez-vous mettre à jour ? La description du projet, la date de fin prévue\033[0m" +
-                        "\033[1;36m ou voulez-vous changer le statut du projet ? :\033[0m");
-                System.out.println("\033[1;36mTapez '0' pour retourner au menu principal.\033[0m");
-                int updateChoice = in.nextInt();
-                in.nextLine();
-                if (updateChoice == 0) {
-                    intervenantMainMenu(intervenant); // Retourne au menu principal de l'intervenant
-                } else {
-                    System.out.println("\033[1;36m Mise à jour des informations du chantier en cours...\033[0m");
-                }
+                System.out.println("\033[1;36m Mise à jour des informations d'un chantier...\033[0m");
+//                intervenant.mettreAJourChantier();
                 break;
             case 4:
-                System.out.println("\033[1;36m Proposer une nouvelle plage horaire pour les travaux...\033[0m");
-                intervenant.proposerPlageHoraire(intervenant);
+                System.out.println("\033[1;36m Proposer des plages horaires pour des travaux...\033[0m");
+                intervenant.proposerPlageHoraire();
                 break;
             case 5:
                 System.out.println("\033[1;36m Soumission d'une candidature pour un travail...\033[0m");
-                intervenant.soumettreCandidatureTravail(intervenant);
+//                intervenant.soumettreCandidature();
                 break;
             case 6:
-                System.out.print("\033[1;33m Déconnexion en cours\033[0m");
-                
-                System.out.println("\033[1;33mAu revoir, " + intervenant.getFirstName() + "! \033[0m");
+                System.out.print("\033[1;33m Déconnexion en cours... \033[0m");
+                System.out.println("\033[1;33m Au revoir, " + intervenant.getFirstName() + "! \033[0m");
                 break;
-
             default:
-                System.out.println("\033[1;31m⚠ Choix invalide. Veuillez réessayer.\033[0m");
-                intervenantMainMenu(intervenant); // Rappelle le menu si choix invalide
+                System.out.println("\033[1;31m Choix invalide. Veuillez réessayer.\033[0m");
+                intervenantMainMenu(intervenant);
         }
     }
 
@@ -451,9 +483,10 @@ public class Menu {
                         "\033[1;37m    2. Rechercher des travaux.\033[0m\n" +
                         "\033[1;37m    3. Recevoir des notifications personnalisées.\033[0m\n" +
                         "\033[1;37m    4. Proposer des plages horaires pour des travaux.\033[0m\n" +
-                        "\033[1;37m    5. Soumettre une requête de travail.\033[0m\n" +
+                        "\033[1;37m    5. Soumettre une requête de travail résidentiel.\033[0m\n" +
                         "\033[1;37m    6. Consulter les entraves en cours.\033[0m\n" +
-                        "\033[1;37m    7. Se déconnecter.\033[0m\n" +
+                        "\033[1;37m    7. Suivre mes requêtes de travaux résidentiels.\033[0m\n" +
+                        "\033[1;37m    8. Se déconnecter.\033[0m\n" +
                         "\033[1;34m★**********************************************************************★\033[0m\n" +
                         "\033[1;33m\n Insérer le numéro qui correspond à votre choix >: \033[0m"
         );
@@ -512,15 +545,18 @@ public class Menu {
                 break;
             case 5:
                 System.out.println("\033[1;36m Soumission d'une requête de travail...\033[0m");
-                resident.soumettreRequeteTravail(resident);
+                resident.soumettreRequeteTravail();
                 break;
             case 6:
                 System.out.println("\033[1;36m Consultation des entraves en cours...\033[0m");
                 resident.consulterEntraves();
                 break;
             case 7:
-                System.out.print("\033[1;33m️ Déconnexion en cours\033[0m");
-                
+
+                break;
+            case 8:
+                System.out.print("\033[1;33m️ Déconnexion en cours \033[0m");
+
                 System.out.println("\033[1;33mAu revoir, " + resident.getFirstName() + "! \033[0m");
                 break;
             default:

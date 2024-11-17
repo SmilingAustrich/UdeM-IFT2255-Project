@@ -1,18 +1,30 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.time.LocalDate;
 
-public class RequeteTravailResidentiel {
+
+public class RequeteTravailResidentiel implements Serializable {
+    private String workTitle;
+    private String detailedWorkDescription;
+    private String workType;
+    private String quartier;
+    private LocalDate workWishedStartDate;
     private Resident resident;
-    private String description;
-    private boolean isAvailable;
+
+    private boolean isWorkAvailable;
     private Map<Intervenant, String> candidatures;
     private Intervenant intervenantChoisi;
 
-    public RequeteTravailResidentiel(Resident resident, String description) {
+    public RequeteTravailResidentiel(Resident resident, String workTitle, String detailedWorkDescription, String workType, LocalDate workWishedStartDate, String quartier) {
         this.resident = resident;
-        this.description = description;
-        this.isAvailable = true;
+        this.isWorkAvailable = true;
         this.candidatures = new HashMap<>();
+        this.workTitle = workTitle;
+        this.detailedWorkDescription = detailedWorkDescription;
+        this.workType = workType;
+        this.workWishedStartDate = workWishedStartDate;
+        this.quartier = quartier;
     }
 
     public Resident getResident() {
@@ -20,23 +32,23 @@ public class RequeteTravailResidentiel {
     }
 
     public String getDescription() {
-        return description;
+        return detailedWorkDescription;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public boolean isWorkAvailable() {
+        return isWorkAvailable;
     }
 
     public void rendreDisponible() {
-        this.isAvailable = true;
+        this.isWorkAvailable = true;
     }
 
     public void rendreIndisponible() {
-        this.isAvailable = false;
+        this.isWorkAvailable = false;
     }
 
     public void ajouterCandidature(Intervenant intervenant, String message) {
-        if (isAvailable){
+        if (isWorkAvailable){
             candidatures.put(intervenant,message);
             System.out.println("Candidature soumise par " + intervenant.getFirstName());
         }
@@ -62,6 +74,22 @@ public class RequeteTravailResidentiel {
             rendreIndisponible();
             System.out.println("Candidature confirmée par l'intervenant " + intervenantChoisi.getFirstName());
         }
+    }
+
+    public String getTitre() {
+        return workTitle;
+    }
+
+    public LocalDate getDateDebut() {
+        return workWishedStartDate;
+    }
+
+    public String getTypeTravaux() {
+        return workType;
+    }
+
+    public String getQuartier() {
+        return quartier;
     }
 }
 

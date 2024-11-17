@@ -1,4 +1,4 @@
-/**
+/**w
  * Classe principale {@code Main} pour démarrer l'application Ma Ville.
  * Ce programme a été réalisé dans le cadre d'un devoir universitaire.
  *
