@@ -13,7 +13,6 @@ import com.google.gson.JsonElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 
 
 /**
@@ -29,6 +28,7 @@ public class Resident implements User, Serializable {
     private String phone;
     private String address;
     private int age;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructeur de la classe {@code Resident}.
@@ -712,21 +712,58 @@ public class Resident implements User, Serializable {
     }
 
     public void creerRequete(String workTitle, String detailedWorkDescription, String workType, LocalDate workWishedStartDate, String quartier){
-        RequeteTravailResidentiel requete = new RequeteTravailResidentiel(this, workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier);
-        Database.getRequeteTravailMap().put(this,requete);
-//        Map<Resident, RequeteTravailResidentiel > lol = Database.getRequeteTravailMap();
+        ResidentialWorkRequest requete = new ResidentialWorkRequest(this, workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier);
+        Database.getResidentialWorkMap().put(this,requete);
+        Database.saveData(); // update
+//        Map<Resident, ResidentialWorkRequest > lol = Database.getRequeteTravailMap();
     }
 
-    public void fermerRequete(RequeteTravailResidentiel requete){
+    public void fermerRequete(ResidentialWorkRequest requete){
         if (!requete.isWorkAvailable()){
             System.out.println("La requête est fermée par " + this.getFirstName());
-            Database.getRequeteTravailMap().remove(this.getEmail());
+            Database.getResidentialWorkMap().remove(this.getEmail());
         }
     }
 
-    public void suivreRequetesResidentielles(){
+    public void suivreRequetesResidentielles() {
+        Scanner scanner = new Scanner(System.in);
+        Map<Resident, ResidentialWorkRequest> requetes = Database.getResidentialWorkMap();
 
+        // Check if there is an active work request for this resident
+        if (!requetes.containsKey(this)) {
+            System.out.println("\u001B[31m[INFO] Vous n'avez aucune requête en cours.\u001B[0m");
+            Menu.residentMainMenu(this);
+        }
+
+        // Display the current work request
+        ResidentialWorkRequest requete = requetes.get(this);
+        System.out.println("\u001B[34m[INFO] Votre requête actuelle :\u001B[0m");
+        System.out.println("\u001B[33mTitre :\u001B[0m " + requete.getTitle());
+        System.out.println("\u001B[33mDescription :\u001B[0m " + requete.getDescription());
+        System.out.println("\u001B[33mType de travaux :\u001B[0m " + requete.getWorkType());
+        System.out.println("\u001B[33mQuartier :\u001B[0m " + requete.getNeighbourhood());
+        System.out.println("\u001B[33mDate de début prévue :\u001B[0m " + requete.getStartDate());
+        System.out.println("\n\u001B[32m[OPTIONS] Que souhaitez-vous faire avec cette requête ?\u001B[0m");
+        System.out.println("\u001B[36m1. Fermer la requête\u001B[0m");
+        System.out.println("\u001B[36m2. Retourner au menu principal\u001B[0m");
+        System.out.print("\u001B[33mChoisissez une option >: \u001B[0m");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                fermerRequete(requete);
+                break;
+            case 2:
+                Menu.residentMainMenu(this);
+                break;
+            default:
+                System.out.println("\u001B[31m[ERREUR] Option invalide. Veuillez essayer à nouveau.\u001B[0m");
+                Menu.residentMainMenu(this);
+        }
     }
+
 
 
 }

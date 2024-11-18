@@ -20,7 +20,7 @@ public class Intervenant implements User, Serializable {
     private String password;
     private String cityIdCode;
     private int entrepreneurType;
-
+    private static final long serialVersionUID = 1L;
     /**
      * Constructeur de la classe {@code Intervenant}.
      *
@@ -105,7 +105,7 @@ public class Intervenant implements User, Serializable {
      *
      * @param requetes Map des résidents et leurs requêtes de travail
      */
-    public void consulterListeRequetesTravaux(Map<Resident, RequeteTravailResidentiel> requetes) {
+    public void consulterListeRequetesTravaux(Map<Resident, ResidentialWorkRequest> requetes) {
         Scanner in = new Scanner(System.in);
 
         final String RESET = "[0m";
@@ -115,7 +115,7 @@ public class Intervenant implements User, Serializable {
         final String OPTION_COLOR = "[36m"; // Cyan for options
 
         // Fetching all requests from the database
-        Map<Resident, RequeteTravailResidentiel> allRequests = Database.getRequeteTravailMap();
+        Map<Resident, ResidentialWorkRequest> allRequests = Database.getResidentialWorkMap();
 
         // Filtering options
         System.out.println(BORDER_COLOR + "\n===========================================" + RESET);
@@ -129,21 +129,21 @@ public class Intervenant implements User, Serializable {
         int filterOption = in.nextInt();
         in.nextLine(); // Consume newline
 
-        List<RequeteTravailResidentiel> filteredRequests = allRequests.values().stream().collect(Collectors.toList());
+        List<ResidentialWorkRequest> filteredRequests = allRequests.values().stream().collect(Collectors.toList());
 
         switch (filterOption) {
             case 1:
                 System.out.print(INPUT_COLOR + "Veuillez entrer le type de travaux: " + RESET);
                 String typeTravaux = in.nextLine();
                 filteredRequests = filteredRequests.stream()
-                        .filter(req -> req.getTypeTravaux().equalsIgnoreCase(typeTravaux))
+                        .filter(req -> req.getWorkType().equalsIgnoreCase(typeTravaux))
                         .collect(Collectors.toList());
                 break;
             case 2:
                 System.out.print(INPUT_COLOR + "Veuillez entrer le quartier: " + RESET);
                 String quartier = in.nextLine();
                 filteredRequests = filteredRequests.stream()
-                        .filter(req -> req.getQuartier().equalsIgnoreCase(quartier))
+                        .filter(req -> req.getNeighbourhood().equalsIgnoreCase(quartier))
                         .collect(Collectors.toList());
                 break;
             case 3:
@@ -152,7 +152,7 @@ public class Intervenant implements User, Serializable {
                 try {
                     LocalDate dateDebut = LocalDate.parse(dateDebutStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     filteredRequests = filteredRequests.stream()
-                            .filter(req -> !req.getDateDebut().isBefore(dateDebut))
+                            .filter(req -> !req.getStartDate().isBefore(dateDebut))
                             .collect(Collectors.toList());
                 } catch (DateTimeParseException e) {
                     System.out.println(RESET + "\n" + OPTION_COLOR + "Format de date invalide. Aucune requête filtrée." + RESET);
@@ -169,11 +169,11 @@ public class Intervenant implements User, Serializable {
         System.out.println(BORDER_COLOR + "\n===========================================" + RESET);
         System.out.println(HEADER_COLOR + "        Liste des Requêtes de Travaux        " + RESET);
         System.out.println(BORDER_COLOR + "===========================================\n" + RESET);
-        for (RequeteTravailResidentiel req : filteredRequests) {
-            System.out.println(HEADER_COLOR + "Titre: " + RESET + req.getTitre());
-            System.out.println(HEADER_COLOR + "Type: " + RESET + req.getTypeTravaux());
-            System.out.println(HEADER_COLOR + "Quartier: " + RESET + req.getQuartier());
-            System.out.println(HEADER_COLOR + "Date de début: " + RESET + req.getDateDebut().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        for (ResidentialWorkRequest req : filteredRequests) {
+            System.out.println(HEADER_COLOR + "Titre: " + RESET + req.getTitle());
+            System.out.println(HEADER_COLOR + "Type: " + RESET + req.getWorkType());
+            System.out.println(HEADER_COLOR + "Quartier: " + RESET + req.getNeighbourhood());
+            System.out.println(HEADER_COLOR + "Date de début: " + RESET + req.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             System.out.println(BORDER_COLOR + "-------------------------------------------" + RESET);
         }
 
@@ -184,8 +184,8 @@ public class Intervenant implements User, Serializable {
         if (reponse == 1) {
             System.out.print(INPUT_COLOR + "Veuillez entrer le titre de la requête: " + RESET);
             String titreRequete = in.nextLine();
-            RequeteTravailResidentiel requeteChoisie = filteredRequests.stream()
-                    .filter(req -> req.getTitre().equalsIgnoreCase(titreRequete))
+            ResidentialWorkRequest requeteChoisie = filteredRequests.stream()
+                    .filter(req -> req.getTitle().equalsIgnoreCase(titreRequete))
                     .findFirst()
                     .orElse(null);
 
@@ -382,7 +382,7 @@ public class Intervenant implements User, Serializable {
     }
 
 
-    public void soumettreCandidature(RequeteTravailResidentiel requete, String message) {
+    public void soumettreCandidature(ResidentialWorkRequest requete, String message) {
         if (requete.isWorkAvailable()) {
             requete.ajouterCandidature(this, message);
         } else {
@@ -390,12 +390,17 @@ public class Intervenant implements User, Serializable {
         }
     }
 
-    public void retirerCandidature(RequeteTravailResidentiel requete) {
-        requete.retirerCandidature(this);
+    public void retirerCandidature(ResidentialWorkRequest requete) {
+        requete.rendreIndisponible();
+        System.out.println("Candidature confirmée par l'intervenant " + this.firstName);
+
+
     }
 
-    public void confirmerCandidature(RequeteTravailResidentiel requete) {
-        requete.confirmerCandidature();
+    public void confirmerCandidature(ResidentialWorkRequest requete) {
+        requete.rendreDisponible();
+        System.out.println("Candidature confirmée par l'intervenant " + this.firstName);
+
     }
 
 }

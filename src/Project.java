@@ -9,7 +9,7 @@ public class Project implements Serializable {
     private int StartDate;
     private int EndDate;
     private Intervenant projectOwner;
-
+    private static final long serialVersionUID = 1L;
     public Project(String projectName, String projectDescription, String projectType, String projectStatus, int startDate, int endDate, Intervenant projectOwner) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;

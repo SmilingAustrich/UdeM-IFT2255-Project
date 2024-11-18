@@ -1,6 +1,5 @@
 import java.io.Console;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -237,6 +236,9 @@ public class Menu {
 
         AuthenticationService.signUpResident(resident);
 
+        Database.saveData(); // update
+
+
         System.out.print("\n\u001B[36m\u26a1\ufe0f \u001B[1mInscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
 
         residentLogInMenu();
@@ -370,6 +372,7 @@ public class Menu {
 
         AuthenticationService.signUpIntervenant(intervenant);
 
+        Database.saveData(); // update
         System.out.print("\n\u001B[36m\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
 
         intervenantLogInMenu();
@@ -382,7 +385,7 @@ public class Menu {
     public static void intervenantMainMenu(Intervenant intervenant) {
 
 
-        List<RequeteTravailResidentiel> requetes = new ArrayList<>();
+        List<ResidentialWorkRequest> requetes = new ArrayList<>();
         List<Project> projects = new ArrayList<>();
         Scanner in = new Scanner(System.in);
 
@@ -408,7 +411,7 @@ public class Menu {
         switch (choice) {
             case 1:
                 System.out.println("\033[1;36m Consultation des requêtes de travaux disponibles...\033[0m");
-                intervenant.consulterListeRequetesTravaux(Database.getRequeteTravailMap());
+                intervenant.consulterListeRequetesTravaux(Database.getResidentialWorkMap());
                 break;
             case 2:
                 System.out.println("\033[1;36m Création d'un nouveau projet de travaux. 033[0m");
@@ -552,7 +555,7 @@ public class Menu {
                 resident.consulterEntraves();
                 break;
             case 7:
-
+                resident.suivreRequetesResidentielles();
                 break;
             case 8:
                 System.out.print("\033[1;33m️ Déconnexion en cours \033[0m");

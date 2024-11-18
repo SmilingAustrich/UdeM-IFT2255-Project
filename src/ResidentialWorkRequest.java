@@ -4,19 +4,22 @@ import java.util.Map;
 import java.time.LocalDate;
 
 
-public class RequeteTravailResidentiel implements Serializable {
+public class ResidentialWorkRequest implements Serializable {
     private String workTitle;
     private String detailedWorkDescription;
     private String workType;
-    private String quartier;
+    private String neighbourhood;
     private LocalDate workWishedStartDate;
     private Resident resident;
 
+
+
     private boolean isWorkAvailable;
     private Map<Intervenant, String> candidatures;
-    private Intervenant intervenantChoisi;
+    private Intervenant chosenIntervenant;
+    private static final long serialVersionUID = 1L;
 
-    public RequeteTravailResidentiel(Resident resident, String workTitle, String detailedWorkDescription, String workType, LocalDate workWishedStartDate, String quartier) {
+    public ResidentialWorkRequest(Resident resident, String workTitle, String detailedWorkDescription, String workType, LocalDate workWishedStartDate, String quartier) {
         this.resident = resident;
         this.isWorkAvailable = true;
         this.candidatures = new HashMap<>();
@@ -24,7 +27,7 @@ public class RequeteTravailResidentiel implements Serializable {
         this.detailedWorkDescription = detailedWorkDescription;
         this.workType = workType;
         this.workWishedStartDate = workWishedStartDate;
-        this.quartier = quartier;
+        this.neighbourhood = quartier;
     }
 
     public Resident getResident() {
@@ -59,9 +62,10 @@ public class RequeteTravailResidentiel implements Serializable {
         System.out.println("Candidature retirée par " + intervenant.getFirstName());
     }
 
+    //TODO: implementer et lié la méthode pour le devoir 3
     public void choisirCandidature(Intervenant intervenantChoisi, String messageResident){
         if (candidatures.containsKey(intervenantChoisi)){
-            this.intervenantChoisi = intervenantChoisi;
+            this.chosenIntervenant = intervenantChoisi;
             System.out.println("Candidature choisie : " + intervenantChoisi.getFirstName());
             if (messageResident != null){
                 System.out.println("Message du résident : " + messageResident);
@@ -69,27 +73,22 @@ public class RequeteTravailResidentiel implements Serializable {
         }
     }
 
-    public void confirmerCandidature(){
-        if (intervenantChoisi != null){
-            rendreIndisponible();
-            System.out.println("Candidature confirmée par l'intervenant " + intervenantChoisi.getFirstName());
-        }
-    }
 
-    public String getTitre() {
+
+    public String getTitle() {
         return workTitle;
     }
 
-    public LocalDate getDateDebut() {
+    public LocalDate getStartDate() {
         return workWishedStartDate;
     }
 
-    public String getTypeTravaux() {
+    public String getWorkType() {
         return workType;
     }
 
-    public String getQuartier() {
-        return quartier;
+    public String getNeighbourhood() {
+        return neighbourhood;
     }
 }
 

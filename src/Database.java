@@ -12,7 +12,7 @@ public abstract class Database {
     // Stockage des résidents et des intervenants dans des maps, avec l'email comme clé.
     private static Map<String, Resident> residentMap = new HashMap<>();
     private static Map<String, Intervenant> intervenantMap = new HashMap<>();
-    private static Map<Resident, RequeteTravailResidentiel> requeteTravailMap = new HashMap<>();
+    private static Map<Resident, ResidentialWorkRequest> residentialWorkMap = new HashMap<>();
 
     /**
      * Bloc statique pour initialiser ou charger des utilisateurs dans l'application.
@@ -20,7 +20,7 @@ public abstract class Database {
     static {
         System.out.println("\u001B[33mChargement du fichier de configuration...\u001B[0m");
         loadData();
-        if (residentMap.isEmpty() && intervenantMap.isEmpty() && requeteTravailMap.isEmpty()) {
+        if (residentMap.isEmpty() && intervenantMap.isEmpty() && residentialWorkMap.isEmpty()) {
             System.out.println("\u001B[31mFichier non existant, création du répertoire Ma Ville...\u001B[0m");
             initializeTestData();
             saveData();
@@ -54,13 +54,13 @@ public abstract class Database {
         intervenantMap.put(intervenant3.getEmail(), intervenant3);
 
         // Création de requêtes de travail résidentielles pour les résidents
-        RequeteTravailResidentiel requete1 = new RequeteTravailResidentiel(resident1, "Réparation de toiture", "Réparer la toiture endommagée", "Construction", LocalDate.of(2024, 11, 20), "Vieux-Montréal");
-        RequeteTravailResidentiel requete2 = new RequeteTravailResidentiel(resident2, "Réfection de la clôture", "Refaire la clôture du jardin", "Aménagement paysager", LocalDate.of(2024, 11, 25), "Plateau-Mont-Royal");
-        RequeteTravailResidentiel requete3 = new RequeteTravailResidentiel(resident3, "Installation de panneaux solaires", "Installer des panneaux solaires sur le toit", "Énergie renouvelable", LocalDate.of(2024, 12, 5), "Rosemont");
+        ResidentialWorkRequest requete1 = new ResidentialWorkRequest(resident1, "Réparation de toiture", "Réparer la toiture endommagée", "Construction", LocalDate.of(2024, 11, 20), "Vieux-Montréal");
+        ResidentialWorkRequest requete2 = new ResidentialWorkRequest(resident2, "Réfection de la clôture", "Refaire la clôture du jardin", "Aménagement paysager", LocalDate.of(2024, 11, 25), "Plateau-Mont-Royal");
+        ResidentialWorkRequest requete3 = new ResidentialWorkRequest(resident3, "Installation de panneaux solaires", "Installer des panneaux solaires sur le toit", "Énergie renouvelable", LocalDate.of(2024, 12, 5), "Rosemont");
 
-        requeteTravailMap.put(resident1, requete1);
-        requeteTravailMap.put(resident2, requete2);
-        requeteTravailMap.put(resident3, requete3);
+        residentialWorkMap.put(resident1, requete1);
+        residentialWorkMap.put(resident2, requete2);
+        residentialWorkMap.put(resident3, requete3);
     }
 
     /**
@@ -83,7 +83,7 @@ public abstract class Database {
             System.out.println("\u001B[32mCréation du fichier database.ser...\u001B[0m");
             oos.writeObject(residentMap);
             oos.writeObject(intervenantMap);
-            oos.writeObject(requeteTravailMap);
+            oos.writeObject(residentialWorkMap);
         } catch (IOException e) {
             System.err.println("Erreur lors de la sauvegarde des données: " + e.getMessage());
         }
@@ -99,8 +99,13 @@ public abstract class Database {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
                 residentMap = (Map<String, Resident>) ois.readObject();
                 intervenantMap = (Map<String, Intervenant>) ois.readObject();
-                requeteTravailMap = (Map<Resident, RequeteTravailResidentiel>) ois.readObject();
+                residentialWorkMap = (Map<Resident, ResidentialWorkRequest>) ois.readObject();
                 System.out.println("\u001B[32mChargement réussi des données de configuration.\u001B[0m");
+
+                // Debugging : Afficher les données chargées
+                System.out.println("Résidents chargés : " + residentMap);
+                System.out.println("Intervenants chargés : " + intervenantMap);
+                System.out.println("Requêtes chargées : " + residentialWorkMap);
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Erreur lors du chargement des données: " + e.getMessage());
             }
@@ -137,7 +142,9 @@ public abstract class Database {
         return residentMap;
     }
 
-    public static Map<Resident, RequeteTravailResidentiel> getRequeteTravailMap() {
-        return requeteTravailMap;
+    public static Map<Resident, ResidentialWorkRequest> getResidentialWorkMap() {
+        return residentialWorkMap;
     }
+
+
 }
