@@ -30,14 +30,16 @@ Les intervenants ont la possibilité de :
 Le répertoire `src` contient les classes Java principales du projet, organisées comme suit :
 
 ```plaintext
+
 src
-├── AppSimulation.java        # Gère la simulation des chargements et des délais.
-├── AuthenticationService.java # Service pour gérer l'authentification des résidents et intervenants.
-├── Intervenant.java           # Classe représentant un intervenant (entreprise ou particulier).
-├── Main.java                  # Classe principale pour démarrer l'application.
-├── Menu.java                  # Gère l'interface en ligne de commande pour la navigation.
-├── Resident.java              # Classe représentant un résident de Montréal.
-└── User.java                  # Interface commune pour les utilisateurs résidents et intervenants.
+├── User.java                   # Interface commune pour les utilisateurs résidents et intervenants.
+├── Intervenant.java            # Classe représentant un intervenant (entreprise ou particulier).
+├── Resident.java               # Classe représentant un résident avec des méthodes pour consulter les entraves et travaux.
+├── Main.java                   # Classe principale pour démarrer l'application.
+├── Menu.java                   # Gère l'interface en ligne de commande pour la navigation.
+├── AuthenticationService.java  # Service pour gérer l'authentification des résidents et intervenants.
+├── Database.java               # Classe contenant toutes les données du système.
+
 ```
 
 ## 👥 Auteurs
