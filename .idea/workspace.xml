@@ -9,17 +9,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Refactorisation des classes Intervenant et Resident pour une meilleure fonctionnalité&#10;&#10;Amélioration de la classe Intervenant pour supporter Serializable et affiner le filtrage des demandes de travaux. Introduction de la classe Database pour centraliser la gestion des demandes et modification de la classe Resident pour s'aligner avec les nouvelles soumissions et le suivi des demandes.">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Intervenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RequeteTravailResidentiel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ResidentialWorkRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/activity_diagram_resident.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/activity_diagram_resident.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/use_case_diagram.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/use_case_diagram.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/auth/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ResidentialWorkRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,31 +79,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Debug",
-    "Application.Menus.executor": "Run",
-    "JavaScript Debug.rapport.html.executor": "Run",
-    "JavaScript Debug.template.html.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "devoir2",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.rapport.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.template.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;devoir2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/images" />
@@ -311,7 +317,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731810517446</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur.">
+      <option name="closed" value="true" />
+      <created>1731961828157</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1731961828157</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,14 +360,15 @@
     <MESSAGE value="Amélioration de la logique de filtrage et des prompts en CLI&#10;&#10;Mise à jour du filtrage pour utiliser la correspondance insensible à la casse pour les arrondissements et amélioration des diverses prompts pour plus de clarté. Ajout de messages informatifs pour améliorer l'orientation des utilisateurs et l'expérience globale." />
     <MESSAGE value="Correction d'un bug dans le fichier workspace.xml survenu lors d'un merge." />
     <MESSAGE value="Refactorisation des classes Intervenant et Resident pour une meilleure fonctionnalité&#10;&#10;Amélioration de la classe Intervenant pour supporter Serializable et affiner le filtrage des demandes de travaux. Introduction de la classe Database pour centraliser la gestion des demandes et modification de la classe Resident pour s'aligner avec les nouvelles soumissions et le suivi des demandes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactorisation des classes Intervenant et Resident pour une meilleure fonctionnalité&#10;&#10;Amélioration de la classe Intervenant pour supporter Serializable et affiner le filtrage des demandes de travaux. Introduction de la classe Database pour centraliser la gestion des demandes et modification de la classe Resident pour s'aligner avec les nouvelles soumissions et le suivi des demandes." />
+    <MESSAGE value="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Menu.java</url>
-          <line>342</line>
+          <url>file://$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java</url>
+          <line>347</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>

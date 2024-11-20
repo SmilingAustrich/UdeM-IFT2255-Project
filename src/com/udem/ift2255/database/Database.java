@@ -1,3 +1,8 @@
+package com.udem.ift2255.database;
+import com.udem.ift2255.model.*;
+import com.udem.ift2255.ui.*;
+import com.udem.ift2255.auth.AuthenticationService;
+
 import java.io.*;
 import java.nio.file.Paths;
 import java.time.LocalDate;

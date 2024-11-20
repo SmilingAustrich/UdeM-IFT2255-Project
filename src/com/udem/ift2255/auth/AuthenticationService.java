@@ -1,7 +1,9 @@
-import java.util.HashMap;
-import java.util.Map;
+package com.udem.ift2255.auth;
 
-class AuthenticationService {
+import com.udem.ift2255.database.Database;
+import com.udem.ift2255.model.*;
+
+public class AuthenticationService {
 
     /**
      * Inscrit un nouveau résident dans l'application.

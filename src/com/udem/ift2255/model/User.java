@@ -1,7 +1,7 @@
-import java.io.Serializable;
+package com.udem.ift2255.model;
 
 /**
- * L'interface {@code User} définit les méthodes essentielles pour obtenir les informations d'un utilisateur,
+ * L'interface {@code com.udem.ift2255.model.User} définit les méthodes essentielles pour obtenir les informations d'un utilisateur,
  * telles que le mot de passe, l'email, le prénom et le nom de famille.
  */
 public interface User{

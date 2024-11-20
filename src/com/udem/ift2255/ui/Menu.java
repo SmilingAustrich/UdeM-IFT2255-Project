@@ -1,3 +1,13 @@
+package com.udem.ift2255.ui;
+
+import com.udem.ift2255.auth.AuthenticationService;
+import com.udem.ift2255.database.Database;
+import com.udem.ift2255.model.Intervenant;
+import com.udem.ift2255.model.Resident;
+import com.udem.ift2255.model.ResidentialWorkRequest;
+import com.udem.ift2255.model.Project;
+
+
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * La classe {@code Menu} représente le menu principal de l'application Ma Ville.
+ * La classe {@code com.udem.ift2255.ui.Menu} représente le menu principal de l'application Ma Ville.
  * Elle permet aux utilisateurs de se connecter, de s'inscrire et d'accéder aux différentes fonctionnalités
  * en fonction de leur statut (résident ou intervenant).
  */

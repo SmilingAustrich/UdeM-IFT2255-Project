@@ -1,3 +1,5 @@
+package com.udem.ift2255.model;
+
 import java.io.Serializable;
 
 public class Project implements Serializable {
