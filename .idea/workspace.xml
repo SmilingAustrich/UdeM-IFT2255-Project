@@ -12,7 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,6 +85,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "devoir2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/IFT2255/devoir 2/UdeM-IFT2255-Groupe01/images",
     "node.js.detected.package.eslint": "true",
@@ -106,7 +111,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ResidentTest">
+  <component name="RunManager" selected="JavaScript Debug.rapport.html">
     <configuration name="AuthenticationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devoir1" />
       <extension name="coverage">
@@ -161,6 +166,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.rapport.html" />
         <item itemvalue="JUnit.ResidentTest" />
         <item itemvalue="JUnit.ResidentTest.testFetchTravauxData" />
         <item itemvalue="JUnit.AuthenticationServiceTest" />

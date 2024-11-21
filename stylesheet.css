@@ -630,10 +630,37 @@ ul, ol, li {
     font-size: 1.4em;
 }
 
-.preview-img {
-    display: block;
-    width: 800px;
-    height: auto;
+
+.activity {
+    text-align: center; /* Centers the content horizontally */
+}
+
+.image-container {
+    display: flex; /* Flexbox layout for responsive alignment */
+    flex-wrap: wrap; /* Allows images to wrap to the next line if needed */
+    justify-content: center; /* Centers images within the container */
+    gap: 16px; /* Adds space between images */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensures images don't exceed their container width */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: contain; /* Ensures the image fits within the bounds without distortion */
+    border: 1px solid #ccc; /* Optional: Adds a border for aesthetics */
+    border-radius: 4px; /* Optional: Adds rounded corners for aesthetics */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+}
+
+.large-image {
+    flex: 2 1 300px; /* Larger images take up more space */
+}
+
+.medium-image {
+    flex: 1 1 200px; /* Medium images */
+}
+
+.small-image {
+    flex: 1 1 150px; /* Smaller images take up less space */
 }
 
 #github{

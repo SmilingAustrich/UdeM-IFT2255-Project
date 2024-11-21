@@ -1126,14 +1126,15 @@
             <h3 class="subsection-title" id="activitydiag">Diagramme d'activités</h3>
             <div class="activity">
                 <h4>Diagramme d'activité pour les résidents.</h4>
-                <img class="activity-diagram" src="images/MenuResident.svg" alt="Diagramme d'activités style = width: 400px; height: auto;">
-                <img class="activity-diagram" src="images/ConsulterTravaux.svg" alt="Diagramme d'activités style= width: 400px; height: auto;">
-                <img class="activity-diagram" src="images/ConsulterEntraves.svg" alt="Diagramme d'activités style= width: 400px; height: auto;">
-                <img class="activity-diagram" src="images/RechercherTravaux.svg" alt="Diagramme d'activités style= width: 400px; height: auto;">
-                <img class="activity-diagram" src="images/NotificationsPersonnalisées.svg" alt="Diagramme d'activités style= width: 400px; height: auto;">
-                <img class="activity-diagram" src="images/PlanificationParticipative.svg" alt="Diagramme d'activités style= width: 400px; height: auto;">
-                <img class="activity-diagram" src="images/RequêteTravail.svg" alt="Diagramme d'activités style= width: 400px; height: auto;">
-
+                <div class="image-container">
+                    <img class="large-image" src="images/MenuResident.svg" alt="Diagramme d'activités">
+                    <img class="medium-image" src="images/ConsulterTravaux.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/ConsulterEntraves.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/RechercherTravaux.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/NotificationsPersonnalisées.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/PlanificationParticipative.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/RequêteTravail.svg" alt="Diagramme d'activités">
+                </div>
             </div>
         </section>
 
@@ -1236,7 +1237,9 @@
                 <br>
                 <li><strong>Services externes :</strong> L'application fait appel à des APIs fournies par la ville de Montréal pour consulter les travaux en cours et les entraves routières.</li>
             </ul>
-            <img src="images/c4_diagram.svg" alt="Diagramme d'architecture" class="preview-img">
+            <div class="image-container">
+            <img src="images/c4_diagram.svg" alt="Diagramme d'architecture" class="small-image">
+            </div>
 
             <h3 class="subsection-title" id="architecture-3-tier">Décomposition de l'architecture 3-tier</h3>
             <p>
@@ -1279,7 +1282,9 @@
 
             <h3 class="subsection-title" id="diagramme-classes">Diagramme de classes</h3>
             <p>Le diagramme de classes ci-dessous présente une vue simplifiée du système, en omettant les getters, setters, constructeurs, et classes utilitaires. Il inclut des abstractions visant à montrer les relations principales entre les composantes du projet.</p>
-            <img src="images/class_diagram.svg" alt="Diagramme de classes" class="preview-img">
+            <div class="image-container">
+            <img src="images/class_diagram.svg" alt="Diagramme de classes" class="small-image">
+            </div>
 
             <h3 class="subsection-title" id="diagrammes-sequence">Diagrammes de séquence</h3>
             <p>Les diagrammes de séquence suivants représentent le traitement des principaux cas d'utilisation :</p>
@@ -1288,12 +1293,13 @@
                 <li>Soumettre une requête de travail</li>
                 <li>Consulter la liste des requêtes de travail</li>
             </ul>
-            <img src="images/consulter_entraves.svg" alt="Diagramme de séquence - Consulter les entraves" class="preview-img">
+            <div class="image-container">
+            <img src="images/consulter_entraves.svg" alt="Diagramme de séquence - Consulter les entraves" class="large-image">
             <br>
-            <img src="images/soumettre_requete_travail.svg" alt="Diagramme de séquence - Soumettre une requête de travail" class="preview-img">
+            <img src="images/soumettre_requete_travail.svg" alt="Diagramme de séquence - Soumettre une requête de travail" class="large-image">
             <br>
-            <img src="images/consulter_requete_travaux.svg" alt="Diagramme de séquence - Consulter la liste des requêtes" class="preview-img">
-
+            <img src="images/consulter_requete_travaux.svg" alt="Diagramme de séquence - Consulter la liste des requêtes" class="large-image">
+            </div>
             <h3 class="subsection-title" id="justification-design">Justification des choix de conception</h3>
             <p>
                 Les choix de conception de l'application reposent sur plusieurs principes clés : l'abstraction, le couplage faible, la cohésion forte, et l'encapsulation.
