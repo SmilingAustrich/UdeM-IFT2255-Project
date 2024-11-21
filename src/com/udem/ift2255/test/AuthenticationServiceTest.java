@@ -1,3 +1,5 @@
+package com.udem.ift2255.test;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -7,6 +9,7 @@ import com.udem.ift2255.database.Database;
 import com.udem.ift2255.model.Intervenant;
 import com.udem.ift2255.model.Resident;
 
+/* Classe test codée par Karim*/
 public class AuthenticationServiceTest {
     @Test
     public void testLoginIntervenant() {

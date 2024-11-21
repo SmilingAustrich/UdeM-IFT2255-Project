@@ -2,7 +2,6 @@ package com.udem.ift2255.database;
 
 import com.udem.ift2255.model.*;
 
-import java.io.*;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import java.util.Map;
 public abstract class Database {
 
     private static final String DIRECTORY_PATH = Paths.get(System.getProperty("user.home"), "Desktop", "Ma Ville").toString();
-    private static final String FILE_PATH = DIRECTORY_PATH + "/database.ser";
 
     // Stockage des résidents et des intervenants dans des maps, avec l'email comme clé.
     private static Map<String, Resident> residentMap = new HashMap<>();
@@ -19,22 +17,9 @@ public abstract class Database {
     private static Map<Resident, ResidentialWorkRequest> residentialWorkMap = new HashMap<>();
 
     /**
-     * Bloc statique pour initialiser ou charger des utilisateurs dans l'application.
+     * bloc statique pour initialiser les utilisateurs de test.
      */
-    static {
-        System.out.println("\u001B[33mChargement du fichier de configuration...\u001B[0m");
-        loadData();
-        if (residentMap.isEmpty() && intervenantMap.isEmpty() && residentialWorkMap.isEmpty()) {
-            System.out.println("\u001B[31mFichier non existant, création du répertoire Ma Ville...\u001B[0m");
-            initializeTestData();
-            saveData();
-        }
-    }
-
-    /**
-     * Méthode pour initialiser les utilisateurs de test.
-     */
-    private static void initializeTestData() {
+   static {
         // Création de résidents de test avec des mots de passe
         Resident testResident = new Resident("John", "Smiths", "resident@prototype.com", "password123", "514-555-1234", "123 Rue de la Paix, Montréal", 25);
 
@@ -89,57 +74,6 @@ public abstract class Database {
         residentialWorkMap.put(resident4, requete4);
         residentialWorkMap.put(resident5, requete5);
         residentialWorkMap.put(resident6, requete6);
-    }
-
-    /**
-     * Méthode pour sauvegarder les données dans un fichier.
-     */
-    public static void saveData() {
-        File directory = new File(DIRECTORY_PATH);
-        if (!directory.exists()) {
-            System.out.println("\u001B[31mCréation du répertoire Ma Ville...\u001B[0m");
-            directory.mkdirs();
-        }
-
-        File file = new File(FILE_PATH);
-        if (file.exists()) {
-            System.out.println("\u001B[33mLe fichier database.ser existe déjà, aucune sauvegarde supplémentaire n'est effectuée pour éviter l'écrasement des données.\u001B[0m");
-            return;
-        }
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
-            System.out.println("\u001B[32mCréation du fichier database.ser...\u001B[0m");
-            oos.writeObject(residentMap);
-            oos.writeObject(intervenantMap);
-            oos.writeObject(residentialWorkMap);
-        } catch (IOException e) {
-            System.err.println("Erreur lors de la sauvegarde des données: " + e.getMessage());
-        }
-    }
-
-    /**
-     * Méthode pour charger les données depuis un fichier.
-     */
-    @SuppressWarnings("unchecked")
-    public static void loadData() {
-        File file = new File(FILE_PATH);
-        if (file.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                residentMap = (Map<String, Resident>) ois.readObject();
-                intervenantMap = (Map<String, Intervenant>) ois.readObject();
-                residentialWorkMap = (Map<Resident, ResidentialWorkRequest>) ois.readObject();
-                System.out.println("\u001B[32mChargement réussi des données de configuration.\u001B[0m");
-
-                // Debugging : Afficher les données chargées
-                System.out.println("Résidents chargés : " + residentMap);
-                System.out.println("Intervenants chargés : " + intervenantMap);
-                System.out.println("Requêtes chargées : " + residentialWorkMap);
-            } catch (IOException | ClassNotFoundException e) {
-                System.err.println("Erreur lors du chargement des données: " + e.getMessage());
-            }
-        } else {
-            System.out.println("\u001B[31mFichier de configuration non trouvé, création des données initiales...\u001B[0m");
-        }
     }
 
     /**

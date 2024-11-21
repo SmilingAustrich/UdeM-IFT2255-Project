@@ -433,7 +433,7 @@ public class Menu {
 
         AuthenticationService.signUpResident(resident);
 
-        Database.saveData(); // update
+        
 
 
         System.out.print("\n\u001B[36m\u26a1\ufe0f \u001B[1mInscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
@@ -568,7 +568,7 @@ public class Menu {
 
         AuthenticationService.signUpIntervenant(intervenant);
 
-        Database.saveData(); // update
+        
         System.out.print("\n\u001B[36m\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
 
         intervenantLogInMenu();

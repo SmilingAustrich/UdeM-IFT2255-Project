@@ -92,5 +92,21 @@ public class ResidentialWorkRequest implements Serializable {
     public String getNeighbourhood() {
         return neighbourhood;
     }
+
+    public String getDetailedWorkDescription() {
+        return detailedWorkDescription;
+    }
+
+    public String getWorkTitle() {
+        return workTitle;
+    }
+
+    public LocalDate getWorkWishedStartDate() {
+        return workWishedStartDate;
+    }
+
+    public String getQuartier() {
+        return neighbourhood;
+    }
 }
 

@@ -19,7 +19,6 @@ public class Main {
      * @param args Arguments de la ligne de commande (non utilisés)
      */
     public static void main(String[] args) {
-        Database.loadData();
         Menu menu = new Menu();
         menu.start();  // Lance l'application Ma Ville
     }
