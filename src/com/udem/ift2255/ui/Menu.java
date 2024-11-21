@@ -78,10 +78,6 @@ public class Menu {
                 System.out.print("Veuillez entrer une description pour le projet : ");
                 String projectType = in.nextLine();
 
-                // Saisie du status du projet
-                System.out.print("Veuillez entrer une description pour le projet : ");
-                String projectStatus = in.nextLine();
-
                 // Saisie de la date du début du projet
                 System.out.print("Veuillez entrer la date de début du projet dans la forme jj/mm/aaaa en ométtant les barres obliques: ");
                 int startDate = in.nextInt();
@@ -93,7 +89,7 @@ public class Menu {
 
 
                 // Création du projet de travaux
-                Project newProject = new Project(projectName, projectDescription, projectType, projectStatus, startDate, endDate, ProjectOwner);
+                Project newProject = new Project(projectName, projectDescription, projectType, startDate, endDate, ProjectOwner);
                 projects.add(newProject);
                 System.out.println("\033[1;32m Projet de travaux créé avec succès !\033[0m");
                 break;
