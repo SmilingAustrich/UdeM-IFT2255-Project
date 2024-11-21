@@ -662,6 +662,8 @@ ul, ol, li {
     padding-left: -5px;
 }
 
+
+
 .large-image {
     flex: 2 1 300px; /* Larger images take up more space */
 }
