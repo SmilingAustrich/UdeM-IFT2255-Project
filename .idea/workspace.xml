@@ -12,24 +12,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Transformation du projet en package pour faciliter l'organisation.">
-      <change afterPath="$PROJECT_DIR$/images/c4_diagram.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/class_diagram.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/consulter_entraves.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/consulter_requete_travaux.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/soumettre_requete_travail.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/auth/AuthenticationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Resident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732064803847</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css">
+      <option name="closed" value="true" />
+      <created>1732149340067</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1732149340068</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,7 +373,8 @@
     <MESSAGE value="Refactorisation des classes Intervenant et Resident pour une meilleure fonctionnalité&#10;&#10;Amélioration de la classe Intervenant pour supporter Serializable et affiner le filtrage des demandes de travaux. Introduction de la classe Database pour centraliser la gestion des demandes et modification de la classe Resident pour s'aligner avec les nouvelles soumissions et le suivi des demandes." />
     <MESSAGE value="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur." />
     <MESSAGE value="Transformation du projet en package pour faciliter l'organisation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Transformation du projet en package pour faciliter l'organisation." />
+    <MESSAGE value="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
