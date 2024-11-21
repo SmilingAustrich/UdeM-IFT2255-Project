@@ -12,9 +12,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="changement au rapport.html, disposition des images.">
+      <change afterPath="$PROJECT_DIR$/images/echeancier.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/devoir1_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/echeancier.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +98,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -392,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732149340068</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="changement au rapport.html, disposition des images.">
+      <option name="closed" value="true" />
+      <created>1732224285316</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1732224285317</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -430,7 +442,8 @@
     <MESSAGE value="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur." />
     <MESSAGE value="Transformation du projet en package pour faciliter l'organisation." />
     <MESSAGE value="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mise à jour du rapport.html&#10;- intégration de la partie conception ainsi que de son diagramme C4 correspondant&#10;- séparation de la partie CSS; creation du fichier stylesheet.css" />
+    <MESSAGE value="changement au rapport.html, disposition des images." />
+    <option name="LAST_COMMIT_MESSAGE" value="changement au rapport.html, disposition des images." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

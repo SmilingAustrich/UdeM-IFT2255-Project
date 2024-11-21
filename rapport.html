@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="./stylesheet.css">
 
 </head>
-
 <body>
-<aside class="report-aside">
+<aside class="lateral-left-bar">
     <nav>
         <ul class="bare-list nav">
             <li class="nav-item">
@@ -60,7 +59,7 @@
         </ul>
     </nav>
 </aside>
-<div class="content-wrapper">
+<div class="header">
     <header class="report-header">
         <div class="title-section">
             <div>
@@ -157,7 +156,9 @@
             </ul>
         </div>
     </header>
-<main class="report-body">
+
+</div>
+<main class="main-content">
 
     <div class="report-main">
 
@@ -175,9 +176,69 @@
                     En favorisant une meilleure collaboration entre la ville, les entreprises et les citoyens, "Ma Ville" a pour objectif d'améliorer la coordination des travaux et de minimiser les désagréments pour les résidents.
                 </em>
             </p>
-            <h3 class="subsection-title" id="echeancier">Échéancier</h3>
-            <div>
-                <img src="images/echeancier.jpg" alt="echeancier" class="preview-img">
+            <h3 class="subsection-title" id="echeancier">Échéancier et répartition des tâches</h3>
+            <table class="task-table">
+                <thead>
+                <tr>
+                    <th>Membre</th>
+                    <th>Tâches Assignées <strong>(Plus de détails sont disponibles dans les issues)</strong>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Ilyesse</td>
+                    <td>
+                        <ul>
+                            <li>Diagramme d'activités</li>
+                            <li>Diagrammes de séquence</li>
+                            <li>Retrait du CU "Signaler problème à la ville"</li>
+                            <li>Ajout des précisions de dates pour l'intervenant</li>
+                            <li>Ajout des plages horaires pour le résident</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tarek</td>
+                    <td>
+                        <ul>
+                            <li>Exigences, échéancier, ajout de la section conception au rapport</li>
+                            <li>Diagramme de classes</li>
+                            <li>Intégration de l'API</li>
+                            <li>Diagrammes de séquences</li>
+                            <li>Diagramme de cas d'utilisations</li>
+                            <li>Architecture</li>
+                            <li>Ajout du CU "Soumettre un projet de travail" avec statut initial</li>
+                            <li>Changement de DOB à âge</li>
+                            <li>Retrait de l'option de partager son avis</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Karim</td>
+                    <td>
+                        <ul>
+                            <li>Analyse</li>
+                            <li>Justification des choix du design</li>
+                            <li>Architecture</li>
+                            <li>Consultation des entraves routières</li>
+                            <li>Possibilité de plusieurs candidatures pour une requête</li>
+                            <li>Retrait de l'option "Consulter travaux à venir par rue"</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Équipe</td>
+                    <td>
+                        <ul>
+                            <li>Tests unitaires liés aux tâches assignées</li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="image-container">
+                <img src="images/echeancier.svg" alt="echeancier" class="small-image">
             </div>
 
             <h3 class="subsection-title" id="hypotheses">Hypothèses</h3>
@@ -370,8 +431,9 @@
 
             <h3 class="subsection-title" id="use-case">Cas d'utilisation</h3>
             <div class="use-case">
-                <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="preview-img">
-
+                <div class="image-container">
+                <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="small-image">
+                </div>
                 <p class="use-case-notes">
 
 
@@ -1135,7 +1197,10 @@
                     <img class="small-image" src="images/PlanificationParticipative.svg" alt="Diagramme d'activités">
                     <img class="small-image" src="images/RequêteTravail.svg" alt="Diagramme d'activités">
                 </div>
-            </div>
+
+                <div class="modal" id="imageModal">
+                    <img id="modalImage" src="" alt="Agrandissement de l'image">
+                </div>
         </section>
 
         <section class="main-section">
@@ -1171,31 +1236,31 @@
             </div>
 
 
-<div>
-    <h3 class="subsection-title" id="besoinsnf">Besoins non-fonctionnels</h3>
-    <ol class="nf-requirements">
-        <li>
-            <strong>Sécurité des données</strong><br>
-            L'application devra traiter des informations sensibles et personnelles. Il est donc crucial d'assurer la confidentialité des utilisateurs.
-        </li>
-        <li>
-            <strong>Performance</strong><br>
-            L’application doit être capable de répondre rapidement aux demandes, en particulier lorsque les utilisateurs consultent des projets, travaux ou entraves. Des temps de réponse lents pourraient décourager l'utilisation.
-        </li>
-        <li>
-            <strong>Accessibilité</strong><br>
-            L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
-        </li>
-        <li>
-            <strong>Scalabilité</strong><br>
-            L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
-        </li>
-        <li>
-            <strong>Facilité de maintenance</strong><br>
-            L’application devra bénéficier de mises à jour continues pour assurer la compatibilité des API de la ville de Montréal et l'ajout de nouvelles fonctionnalités.
-        </li>
-    </ol>
-</div>
+            <div>
+                <h3 class="subsection-title" id="besoinsnf">Besoins non-fonctionnels</h3>
+                <ol class="nf-requirements">
+                    <li>
+                        <strong>Sécurité des données</strong><br>
+                        L'application devra traiter des informations sensibles et personnelles. Il est donc crucial d'assurer la confidentialité des utilisateurs.
+                    </li>
+                    <li>
+                        <strong>Performance</strong><br>
+                        L’application doit être capable de répondre rapidement aux demandes, en particulier lorsque les utilisateurs consultent des projets, travaux ou entraves. Des temps de réponse lents pourraient décourager l'utilisation.
+                    </li>
+                    <li>
+                        <strong>Accessibilité</strong><br>
+                        L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
+                    </li>
+                    <li>
+                        <strong>Scalabilité</strong><br>
+                        L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
+                    </li>
+                    <li>
+                        <strong>Facilité de maintenance</strong><br>
+                        L’application devra bénéficier de mises à jour continues pour assurer la compatibilité des API de la ville de Montréal et l'ajout de nouvelles fonctionnalités.
+                    </li>
+                </ol>
+            </div>
 
             <div>
                 <h3 class="subsection-title" id="besoinsmt">Besoins matériels</h3>
@@ -1238,7 +1303,7 @@
                 <li><strong>Services externes :</strong> L'application fait appel à des APIs fournies par la ville de Montréal pour consulter les travaux en cours et les entraves routières.</li>
             </ul>
             <div class="image-container">
-            <img src="images/c4_diagram.svg" alt="Diagramme d'architecture" class="small-image">
+                <img src="images/c4_diagram.svg" alt="Diagramme d'architecture" class="small-image">
             </div>
 
             <h3 class="subsection-title" id="architecture-3-tier">Décomposition de l'architecture 3-tier</h3>
@@ -1283,7 +1348,7 @@
             <h3 class="subsection-title" id="diagramme-classes">Diagramme de classes</h3>
             <p>Le diagramme de classes ci-dessous présente une vue simplifiée du système, en omettant les getters, setters, constructeurs, et classes utilitaires. Il inclut des abstractions visant à montrer les relations principales entre les composantes du projet.</p>
             <div class="image-container">
-            <img src="images/class_diagram.svg" alt="Diagramme de classes" class="small-image">
+                <img src="images/class_diagram.svg" alt="Diagramme de classes" class="small-image">
             </div>
 
             <h3 class="subsection-title" id="diagrammes-sequence">Diagrammes de séquence</h3>
@@ -1294,11 +1359,11 @@
                 <li>Consulter la liste des requêtes de travail</li>
             </ul>
             <div class="image-container">
-            <img src="images/consulter_entraves.svg" alt="Diagramme de séquence - Consulter les entraves" class="large-image">
-            <br>
-            <img src="images/soumettre_requete_travail.svg" alt="Diagramme de séquence - Soumettre une requête de travail" class="large-image">
-            <br>
-            <img src="images/consulter_requete_travaux.svg" alt="Diagramme de séquence - Consulter la liste des requêtes" class="large-image">
+                <img src="images/consulter_entraves.svg" alt="Diagramme de séquence - Consulter les entraves" class="large-image">
+                <br>
+                <img src="images/soumettre_requete_travail.svg" alt="Diagramme de séquence - Soumettre une requête de travail" class="large-image">
+                <br>
+                <img src="images/consulter_requete_travaux.svg" alt="Diagramme de séquence - Consulter la liste des requêtes" class="large-image">
             </div>
             <h3 class="subsection-title" id="justification-design">Justification des choix de conception</h3>
             <p>
@@ -1404,7 +1469,22 @@
         </section>
     </div>
 </main>
-</div>
+<script>
+    const images = document.querySelectorAll('.image-container img');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            modalImage.src = image.src;
+            modal.style.display = 'flex';
+        });
+    });
+
+    modal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+</script>
 </body>
 
 <footer class="report-footer">

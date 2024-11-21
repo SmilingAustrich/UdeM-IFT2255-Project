@@ -1,3 +1,10 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html, body {
     position: relative;
     height: 100%;
@@ -7,6 +14,11 @@ html, body {
     scroll-behavior: smooth;
     background: #f5f5f5;
 }
+/* Body Styling */
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .bubble-title {
     font-family: 'Baloo 2', sans-serif;
     font-weight: 700; /* Chunky style */
@@ -29,6 +41,14 @@ h5 { font-size: 1.6em; }
 h6 { font-size: 1.5em; margin-top: 0; }
 
 p, li, td, th { font-size: 1.5em; }
+
+/* Paragraph Styling */
+p {
+    max-width: 100%; /* Prevents text from overflowing the container */
+    word-wrap: break-word; /* Break long words if necessary */
+    overflow-wrap: break-word; /* Modern equivalent for breaking long words */
+    margin: 10px 0; /* Adds space around paragraphs */
+}
 
 td p, td li, th li,
 li li, li p, li td, li th { font-size: 1em; }
@@ -326,16 +346,6 @@ th { text-align: center; }
     margin-left: 300px;
 }
 
-.report-aside {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 270px;
-    background-color: royalblue;
-    padding: 12px 12px;
-    height: 100vh;
-    overflow-y: auto;
-}
 
 /* Appliquer le style aux titres principaux de la barre latérale */
 .nav-item-title {
@@ -635,20 +645,19 @@ ul, ol, li {
     text-align: center; /* Centers the content horizontally */
 }
 
-.image-container {
-    display: flex; /* Flexbox layout for responsive alignment */
-    flex-wrap: wrap; /* Allows images to wrap to the next line if needed */
-    justify-content: center; /* Centers images within the container */
-    gap: 16px; /* Adds space between images */
-}
 
-.image-container img {
-    max-width: 100%; /* Ensures images don't exceed their container width */
-    height: auto; /* Maintains aspect ratio */
-    object-fit: contain; /* Ensures the image fits within the bounds without distortion */
-    border: 1px solid #ccc; /* Optional: Adds a border for aesthetics */
-    border-radius: 4px; /* Optional: Adds rounded corners for aesthetics */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+/* Sidebar (report-aside) */
+.lateral-left-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 270px; /* Fixed width for the sidebar */
+    background-color: royalblue;
+    padding: 12px;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enable scrolling for sidebar content */
+    z-index: 1000; /* Ensure it appears above other elements */
+    color: white; /* Text color for better contrast */
 }
 
 .large-image {
@@ -841,4 +850,114 @@ h1:hover, h2:hover{
 a:link, a:visited {
     color: inherit; /* This keeps the link's color the same as the surrounding text */
     text-decoration: none; /* If you don't want underlines on the links */
+}
+-----------------------------------------------------------------------------------------------------------------
+.header {
+    position: fixed;
+    top: 0;
+    left: 270px; /* Offset to make room for the sidebar */
+    width: calc(100% - 270px); /* Adjust width to not overlap with sidebar */
+    height: 60px; /* Example height for the header */
+    background-color: #3b82f6;
+    z-index: 900; /* Lower than the sidebar but still high enough */
+    padding: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+}
+
+.main-content {
+    margin-left: 270px; /* Create space for the sidebar */
+    padding: 20px; /* Adds some padding for content */
+    margin-top: 60px; /* Create space for the header */
+    min-height: calc(100vh - 60px); /* Full height minus header */
+    overflow-y: auto; /* Allow scrolling for the main content if needed */
+}
+
+
+.lateral-left-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 270px; /* Fixed width for the sidebar */
+    background-color: royalblue;
+    padding: 12px;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enable scrolling for sidebar content */
+    z-index: 1000; /* Ensure it appears above other elements */
+    color: white; /* Text color for better contrast */
+}
+
+      /* Image Container Styling */
+  .image-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px; /* Space between images */
+      padding: 20px;
+      max-width: 1200px; /* Optional: limit the width of the container */
+      margin: auto; /* Center the container */
+  }
+
+/* Individual Image Styling */
+.image-container img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Smooth corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.image-container img:hover {
+    transform: scale(1.05); /* Slight zoom */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Emphasize shadow on hover */
+}
+
+.task-table {
+    width: 90%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin: 20px;
+}
+.task-table thead {
+    background-color: royalblue;
+    color: #ffffff;
+}
+.task-table th, .task-table td {
+    border: 1px solid #dddddd;
+    padding: 20px;
+    text-align: left;
+}
+.task-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.task-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.task-table tbody td {
+    font-weight: 500;
+    padding-bottom: 30px;
+    line-height: 1.5;
+}
+.task-table tbody tr:hover {
+    background-color: #e6f7ff;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+img{
+    cursor: pointer;
+}
+.modal img {
+    max-width: 90%;
+    max-height: 90%;
 }
