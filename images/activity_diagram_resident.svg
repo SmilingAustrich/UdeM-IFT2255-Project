@@ -940,7 +940,7 @@
     /></g
     ><g font-size="11px" transform="translate(1560,752)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="12" xml:space="preserve" y="17" clip-path="url(#clipPath52)" stroke="none"
-      >Intervenant dépose</text
+      >com.udem.ift2255.model.Intervenant dépose</text
       ><text x="24" xml:space="preserve" y="31" clip-path="url(#clipPath52)" stroke="none"
       >sa candidature</text
     ></g
@@ -961,7 +961,7 @@
     /></g
     ><g font-size="11px" transform="translate(1554,1046)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" image-rendering="optimizeQuality" font-family="sans-serif" stroke="black" stroke-opacity="1"
     ><text x="10" xml:space="preserve" y="17" clip-path="url(#clipPath42)" stroke="none"
-      >Intervenant a le</text
+      >com.udem.ift2255.model.Intervenant a le</text
       ><text x="35" xml:space="preserve" y="31" clip-path="url(#clipPath42)" stroke="none"
       >travail</text
     ></g

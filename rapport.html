@@ -8,826 +8,97 @@
     <title>IFT2255 | Rapport DM1</title>
     <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <style>
-        html, body {
-            position: relative;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font: normal 10px 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, Helvetica, sans-serif;
-            scroll-behavior: smooth;
-            background: #f5f5f5;
-        }
-        .bubble-title {
-            font-family: 'Baloo 2', sans-serif;
-            font-weight: 700; /* Chunky style */
-            font-size: 2.5em; /* Taille plus grande pour un effet pro */
-            color: #3b82f6; /* Couleur du texte */
-        }
+    <link rel="stylesheet" href="./stylesheet.css">
 
-        h1, h2 { margin: 0; }
-
-        h1 { font-size: 4em; font-weight: normal; }
-
-        h2 { font-size: 3em; }
-
-        h3 { font-size: 2.2em; font-weight: normal; }
-
-        h4 { font-size: 1.8em }
-
-        h5 { font-size: 1.6em; }
-
-        h6 { font-size: 1.5em; margin-top: 0; }
-
-        p, li, td, th { font-size: 1.5em; }
-
-        td p, td li, th li,
-        li li, li p, li td, li th { font-size: 1em; }
-
-        table, th, td { border: 1px solid #555; border-collapse: collapse; }
-
-        th { text-align: center; }
-
-        .btn {
-            font-family: 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, sans-serif;
-            text-decoration: none; text-align: center;
-            border: none;
-            background: none;
-            outline-width: 0;
-        }
-
-        .font-ui { font-family: 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, sans-serif; }
-
-
-        /* Organization
-        ---------------------------------------------------------------------------- */
-
-        .left { float: left; }
-
-        .right { float: right; }
-
-        .clear-fix { clear: both; display: block; }
-        .clear-fix:after {
-            content: ".";
-            clear: both;
-            display: block;
-            height: 0;
-            visibility: hidden;
-        }
-
-        .row { display: table-row; }
-
-        .cell { display: table-cell; }
-
-        /* Reset */
-
-        .bare-list { margin: 0; padding: 0; list-style: none; align-items: center}
-
-        .bare-link { text-decoration: none; color: inherit; }
-
-        .bare-table { border: none; table-layout: fixed; }
-
-        .bare-table td,
-        .bare-table th {
-            border: none;
-        }
-
-        .bare-table th {
-            vertical-align: top;
-            text-align: left;
-        }
-
-
-        .inline-link { text-decoration: underline; }
-
-        .output { text-decoration: none; font-style: normal; }
-
-        /* State
-        ---------------------------------------------------------------------------- */
-
-        .hidden { display: none; }
-
-        .fit-content { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-
-        * {
-            box-sizing: border-box;
-        }
-        .dash {
-            background-color: #4169E1;
-            transition: background-color 0.3s ease;
-        }
-
-        .dash:hover {
-            background-color: rgba(56, 162, 223, 0.6);
-        }
-
-        .helper {
-            position: absolute;
-            top: 100%; left: 0;
-            min-width: 60px;
-            padding: 3px 6px 4px;
-            border-radius: 1px;
-            font-size: 1.3rem; font-weight: 500; font-style: normal;
-            color: #555;
-            background-color: #e5e4e2;
-            box-shadow: 0 1px 2px -1px #999;
-            opacity: 0;
-            transition: .2s;
-            transform: scale(0); transition-property: opacity, transform;
-            z-index: 20;
-        }
-
-        .ico-helper {
-            display: inline-block;  text-align: center;
-            font-size: 1.2rem; font-weight: bold;
-            height: 18px; width: 18px;
-            color: #fff;
-            border-radius: 50%;
-            background-color: #6667AB;
-            font-style: normal;
-        }
-
-        .has-helper {
-            position: relative;
-        }
-
-        .has-helper:hover > .helper {
-            opacity: 1;
-            transform: scale(1) translateY(2px);
-        }
-        .ico-helper:focus + .helper {
-            opacity: 1;
-            transform: scale(1) translateY(2px);
-        }
-
-        .has-def {
-            position: relative;
-            display: inline-block;
-        }
-
-        .def-term {
-            position: relative;
-            display: flex; align-items: center;
-            color: #6667AB;
-            padding-left: 2px; padding-right: 2px;
-            border-bottom: 3px solid currentColor;
-            cursor: default;
-            font-style: normal; font-weight: 500;
-        }
-        .def-term:after {
-            content: "?";
-            text-align: center;
-            font-weight: bold;
-            margin-left: 3px;
-            height: 18px; width: 18px;
-            font-size: 1.2rem;
-            border-radius: 50%;
-            background-color: #6667AB;
-            color: #fff;
-        }
-
-
-        .def {
-            position: absolute;
-            top: 100%; left: 0;
-            min-width: 300px;
-            padding: 3px 6px 4px;
-            border-radius: 1px;
-            font-size: 1.3rem; font-weight: 500; font-style: normal;
-            color: #fff;
-            background-color: #232425;
-            box-shadow: 0 1px 2px -1px #999;
-            opacity: 0;
-            transform: scale(0);
-            transition: .2s; transition-property: opacity, transform;
-            z-index: 20;
-        }
-
-        .has-def:hover > .def {
-            opacity: 1;
-            transform: scale(1) translateY(2px);
-        }
-
-        .report-header {
-            padding-top: 24px;
-            padding-bottom: 24px;
-            background-color: #fff;
-            margin-left: 300px;
-        }
-
-        .title-section {
-            display: flex; align-items: flex-start; justify-content: space-between;
-            padding-left: 5vw;
-            padding-right: 5vw;
-        }
-
-        .report-title {
-            color: royalblue;
-            font-family: 'Poppins', sans-serif; /* Une police moderne et épurée */
-            font-size: 2.5em; /* Taille modérée pour attirer l'attention sans être trop imposant */
-            text-align: center; /* Centrer le texte pour plus de focus */
-            letter-spacing: 0.05em; /* Un léger espacement des lettres pour l'élégance */
-            font-weight: 600; /* Semi-gras pour une bonne visibilité sans trop de lourdeur */
-            text-transform: uppercase; /* Mettre en majuscules pour un style professionnel */
-            position: relative; /* Nécessaire pour l'effet de surbrillance */
-            display: inline-block;
-            padding: 0.2em 0.5em; /* Légère marge intérieure pour plus de confort visuel */
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Ombre douce pour un effet de légèreté */
-            border-radius: 8px; /* Coins légèrement arrondis pour un effet moderne */
-            transition: all 0.3s ease-in-out;
-        }
-
-
-
-
-        .report-summary {
-            max-width: 800px;
-            font-size: 1.4em;
-            color: #555;
-        }
-
-        .report-resources {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .report-resource {
-            margin-left: 12px;
-        }
-
-        .report-resource-link {
-            padding: 8px 12px;
-            font-weight: bold;
-            color: #fff;
-            border-radius: 2px;
-            text-decoration: none;
-            background-color: #232425;
-        }
-        .report-resource-link:hover {
-            background-color: #1b1f23;
-        }
-
-        .section-title {
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            font-size: 2.4em; font-weight: 300;
-        }
-
-        .subsection-title {
-            margin-bottom: 3px;
-            font-size: 2em; font-weight: bold;
-            color: #555;
-        }
-
-        .team-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 24px;
-        }
-
-        .team-title {
-            font-weight: 500;
-            margin-bottom: 12px;
-            color: #1C3A94;
-        }
-
-        .members {
-            display: flex; flex-direction: row;
-        }
-
-        .member {
-            display: flex; flex-direction: column;
-        }
-        .member:not(:last-child) {
-            margin-right: 12px;
-        }
-
-        .member-pic {
-            display: block;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-        }
-
-        .member-role {
-            font-size: 0.9em; font-weight: 500;
-            color: #555;
-        }
-
-        .report-body {
-            display: flex;
-            min-height: calc(100vh - 96px);
-            margin-left: 300px;
-        }
-
-        .report-aside {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 300px;
-            background-color: royalblue;
-            padding: 24px 12px;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .report-aside .section-title {
-            color: #fff;
-        }
-
-        .report-main {
-            padding-top: 24px;
-            padding-left: 2%;
-            padding-right: 5vw;
-            flex-grow: 1;
-        }
-        .main-section {
-            margin-bottom: 24px;
-        }
-
-        .nav {
-            color: #ffffff;
-
-        }
-
-        .nav-item-title {
-            font-size: 1.1em;
-            margin: 0;
-        }
-
-        .nav-item-title__link {
-            display: block;
-            color: #fff;
-            font-weight: 500;
-            padding: 6px;
-            text-decoration: none;
-            background-color: #4169E1; /* Bleu royal */
-            transition: background-color 0.3s ease;
-        }
-        .nav-item-title__link:hover{
-            background-color: rgba(56, 95, 223, 0.6);
-        }
-
-        .nav-item-details {
-            color: #f5f5f5;
-            padding-left: 6px;
-            line-height: 1.5;
-        }
-
-        .glossary-term {
-            font-weight: bold;
-            background: #222;
-            padding: 3px 6px;
-            display: inline-block;
-            border-radius: 2px;
-            color: #fff;
-            transition: background-color 0.3s ease;
-        }
-
-        .glossary-term:hover{
-            background-color: rgb(29, 97, 220);
-        }
-
-        .glossary-def {
-            margin-top: -6px; margin-left: 6px; margin-bottom: 6px;
-            padding: 12px 6px 4px;
-            background-color: #e5e4e2;
-            border-radius: 4px;
-        }
-
-        .personas {
-            display: flex;
-        }
-
-        .persona {
-            position: relative;
-            display: flex; flex-direction: column;
-            margin-right: 12px;
-            max-width: 360px;
-            padding: 6px 12px;
-            border-radius: 2px;
-            box-shadow: 0 1px 2px -1px #999;
-            background-color: #fff;
-            z-index: 2;
-        }
-
-        .persona-stat {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .persona-type {
-            display: flex; align-items: center; justify-content: center;
-            height: 40px; width: 40px;
-            font-size: 1.3rem; font-weight: bold;
-            border-radius: 50%;
-        }
-
-        .persona-type--pp {
-            background-color: #FF6F61;
-        }
-
-        .persona-type--eco {
-            background-color: #88B04B;
-        }
-
-        .persona-market {
-            display: flex; align-items: center; justify-content: center;
-            margin-left: 6px;
-            height: 40px; width: 40px;
-            color: #444;
-            font-size: 1.3rem; font-weight: bold;
-            border-radius: 50%;
-            background-color: #d5d5d5;
-        }
-
-        .persona-color {
-            display: flex; align-items: center; justify-content: center;
-            background-color: #FF6F61;
-            height: 42px; width: 42px; font-weight: bold;
-            justify-self: center; align-self: center;
-            font-size: 1.3rem;
-            border-radius: 50%;
-        }
-
-        .persona-identity {
-            display: flex;
-        }
-
-        .persona-name {
-            font-size: 1.2em; font-weight: 300;
-            flex-grow: 2;
-        }
-
-        .persona-demography-line {
-            display: flex;
-        }
-
-        .persona-background {
-            padding: 6px;
-            color: #555;
-        }
-
-        .persona-title {
-            margin-top: 6px; margin-bottom: 3px;
-            color: #222;
-            font-size: 1.1em; font-weight: 500;
-        }
-
-        .use-case {
-            display: block;
-            margin-bottom: 24px;
-        }
-
-
-        .use-case-notes {
-            margin-top: 16px;
-        }
-
-
-        .use-case-diagram {
-            width: 100%;
-            height: auto;
-            max-width: 1000px;
-            margin-bottom: 16px;
-        }
-
-
-        .use-case-notes {
-            margin-left: 12px;
-            margin-top: 16px;
-        }
-
-        .scenario {
-            display: flex;
-            margin-bottom: 12px;
-            background-color: #fff;
-            border-radius: 3px;
-            box-shadow: 0 1px 2px #a9a9a9;
-        }
-
-        .scenario-meta {
-            padding: 12px;
-            max-width: 40%;
-            background-color: #e5e4e2;
-        }
-
-        .scenario-main {
-            flex-grow: 2;
-            padding: 12px;
-            margin-left: 12px;
-        }
-
-        .scenario-main-title {
-            margin: 0;
-            color: royalblue;
-        }
-
-        .scenario-alt-title {
-            margin: 0;
-            color: #FF6F61;
-        }
-
-        .cu-actors {
-            display: flex;
-        }
-
-        .cu-actor {
-            margin-right: 6px;
-            padding: 4px 6px;
-            color: #fff; font-weight: 500;
-            background-color: #6667AB;
-            border-radius: 1px;
-        }
-
-        .cu-name {
-            margin: 0;
-            font-weight: 500;
-        }
-
-        .cu-goal {
-            margin: 0;
-            font-size: 1.6em;
-        }
-
-        .cu-part--notes {
-            margin-top: 12px;
-        }
-
-        .cu-part-title {
-            margin: 0;
-            margin-top: 6px;
-        }
-
-        .cu-conditions {
-            font-weight: 500;
-        }
-
-        .cu-notes {
-            color: #555;
-            margin: 0;
-            font-size: 1.4em;
-        }
-
-        .scenario-main-steps {
-            margin: 0; padding-left: 16px;
-        }
-
-        .scenario-alt {
-            margin-top: 6px;
-        }
-
-        .scenario-alt p { margin: 0; }
-
-        .scenario-alt-steps { counter-reset: topLevel; }
-        .scenario-alt-steps:not(:last-child) { margin-bottom: 6px; }
-        .scenario-alt-step { counter-increment: topLevel; font-weight: 500; }
-        .scenario-alt-step:before { content: attr(value) counter(topLevel, lower-alpha) '. '; }
-        .scenario-alt-steps ol { font-weight: 400; counter-reset: secondLevel; }
-        .scenario-alt-steps ol li { counter-increment: secondLevel; margin-left: 12px; }
-        .scenario-alt-steps ol li:before { content: attr(value) counter(topLevel, lower-alpha) '.' counter(secondLevel, decimal) '. '}
-
-        .glossary {
-            font-size: 1.4em;
-        }
-
-        .preview-img {
-            display: block;
-            width: 600px;
-            height: auto;
-        }
-
-        #github{
-            color: white;
-        }
-
-        .report-footer {
-            clear: both;
-            position: relative;
-            padding: 24px 5vw 24px;
-            color: #fff;
-            background-color: #292723;
-            text-align: center;
-        }
-
-        .report-footer p {
-            margin: 0; margin-bottom: 6px;
-        }
-
-        .activity-diagram {
-            width: 100%;
-            height: auto;
-            max-width: 1000px;
-            margin-bottom: 16px;
-            background-color: #d5d5d5;
-
-        }
-
-        .dash:before {
-            content: '-';
-            margin-left: 4px;
-            margin-right: 8px;
-            font-weight: bold;
-            color: currentColor;
-        }
-
-        .check:before {
-            margin-left: 2px;
-            margin-right: 4px;
-            font-weight: bold;
-            content: '🗸';
-            color: currentColor;
-        }
-
-        @media (max-width: 800px) {
-            .report-body {
-                flex-direction: column;
-                margin-left: 0;
-            }
-
-            .report-aside {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }}
-        .section-title {
-            font-size: 2.4em;
-            margin-bottom: 16px;
-            color: royalblue;
-            font-weight: bold;
-        }
-
-        .steps-container {
-            margin-top: 20px;
-        }
-
-        .step {
-            background-color: #f5f5f5;
-            padding: 16px;
-            margin-bottom: 24px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .step-title {
-            font-size: 1.8em;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .step-number {
-            background-color: royalblue;
-            color: white;
-            border-radius: 50%;
-            padding: 4px 12px;
-            margin-right: 8px;
-            font-weight: bold;
-        }
-
-        .step-description {
-            font-size: 1.4em;
-            margin-bottom: 12px;
-        }
-
-        .code-snippet {
-            background-color: #292723;
-            color: #f5f5f5;
-            padding: 12px;
-            border-radius: 4px;
-            overflow-x: auto;
-            font-family: Consolas, Courier, monospace;
-        }
-
-        .test-accounts {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 12px;
-        }
-
-        .account {
-            padding: 16px;
-            background-color: #e5e4e2;
-            border-radius: 6px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .checklist {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .checklist .check:before {
-            content: '✔';
-            color: green;
-            margin-right: 8px;
-        }
-
-        .report-link {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 10px 20px;
-            background-color: royalblue;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-
-        .report-link:hover {
-            background-color: #1c2b80;
-        }
-
-        .member-name{
-            font-weight: bold;
-        }
-
-        p:hover, a:hover, li:hover {
-            transform: scale(1.02);
-            transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-            cursor: pointer;
-        }
-
-
-        h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover{
-            transform: scale(1.008) rotate(0.1deg);
-            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
-            cursor: pointer;
-            text-shadow: 0 0 8px rgb(0, 56, 221), 0 0 8px rgba(25, 0, 255, 0.7);
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .glossary-term:hover, .glossary-def:hover {
-            transform: scale(1.02) rotate(-0.1deg);
-            transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-            cursor: pointer;
-        }
-
-        .section-title:hover {
-            transform: scale(1.01) rotate(0.1deg);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
-            cursor: pointer;
-            text-shadow: 0 0 8px RoyalBlue, 0 0 12px #003fff;
-            color: #ffffff;
-        }
-
-        .nav-item-title__link:hover, .checklist li:hover {
-            text-shadow: 0 0 8px RoyalBlue, 0 0 12px #003efd;
-            transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out, color 0.3s ease-in-out;
-            transform: scale(1.01);
-        }
-        a:link, a:visited {
-            color: inherit; /* This keeps the link's color the same as the surrounding text */
-            text-decoration: none; /* If you don't want underlines on the links */
-        }
-
-
-    </style>
 </head>
-
 <body>
-<header class="report-header">
-    <div class="title-section">
-        <div>
-            <h1 class="report-title">Rapport pour l'application Ma ville</h1>
-            <p class="report-summary">
-                <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur l'analyse
-                et le développement d'une application dédiée à la gestion et à l'amélioration des
-                services urbains dans notre ville. À travers ce projet, nous avons identifié les
-                besoins des citoyens, évalué les infrastructures existantes et proposé des solutions
-                innovantes. L'objectif est de favoriser l'interaction entre les habitants et les services
-                municipaux, tout en optimisant la gestion des ressources. Ce rapport présente
-                les étapes de notre démarche, les outils utilisés, ainsi que les résultats obtenus
-                et les perspectives d'évolution pour notre application.
-            </p>
-        </div>
+<aside class="lateral-left-bar">
+    <nav>
+        <ul class="bare-list nav">
+            <li class="nav-item">
+                <h3 class="nav-item-title"><a class="nav-item-title__link" href="#plan">Cadre du projet</a></h3>
+                <ul class="bare-list nav-item-details">
+                    <a href="#introduction"><li class="dash">Introduction</li></a>
+                    <a href="#echeancier"><li class="dash">Échéancier</li></a>
+                    <a href="#hypotheses"><li class="dash">Hypothèses</li></a>
 
-        <ul class="bare-list report-resources">
-            <li class="report-resource">
-                <a  id="github" class="report-resource-link" href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01" target="_blank">
-                    Répertoire GitHub
-                </a>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <h3 class="nav-item-title"><a class="nav-item-title__link" href="#requirements">Exigences</a></h3>
+                <ul class="bare-list nav-item-details">
+                    <a href="#glossaire"><li class="dash">Glossaire</li></a>
+                    <a href="#persona"><li class="dash">Persona</li></a>
+                    <a href="#use-case"><li class="dash">Cas d'utilisation</li></a>
+                    <a href="#scenarios"><li class="dash">Scénarios</li></a>
+                    <a href="#activitydiag"><li class="dash">Diagramme d'activités</li></a>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <h3 class="nav-item-title"><a class="nav-item-title__link" href="#analysis">Analyse</a></h3>
+                <ul class="bare-list nav-item-details">
+                    <a href="#risques"><li class="dash">Risques</li></a>
+                    <a href="#besoinsnf"><li class="dash">Besoins non fonctionnels</li></a>
+                    <a href="#besoinsmt"><li class="dash">Besoins matériels</li></a>
+                    <a href="#stockage"><li class="dash">Stockage</li></a>
+                    <a href="#integration"><li class="dash">Intégration</li></a>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <h3 class="nav-item-title"><a class="nav-item-title__link" href="#conception">Conception</a></h3>
+                <ul class="bare-list nav-item-details">
+                    <a href="#architecture"><li class="dash">Architecture</li></a>
+                    <a href="#diagramme-classes"><li class="dash">Diagramme de classes</li></a>
+                    <a href="#diagrammes-sequence"><li class="dash">Diagrammes de séquence</li></a>
+                    <a href="#justification-design"><li class="dash">Justification des choix du design</li></a>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Guide pour le prototype</a> </h3>
             </li>
         </ul>
-    </div>
+    </nav>
+</aside>
+<div class="header">
+    <header class="report-header">
+        <div class="title-section">
+            <div>
+                <h1 class="report-title">Rapport pour l'application Ma ville</h1>
+                <p class="report-summary">
+                    <em>Court résumé du rapport</em> &ndash; Ce livrable se concentre sur l'analyse
+                    et le développement d'une application dédiée à la gestion et à l'amélioration des
+                    services urbains dans notre ville. À travers ce projet, nous avons identifié les
+                    besoins des citoyens, évalué les infrastructures existantes et proposé des solutions
+                    innovantes. L'objectif est de favoriser l'interaction entre les habitants et les services
+                    municipaux, tout en optimisant la gestion des ressources. Ce rapport présente
+                    les étapes de notre démarche, les outils utilisés, ainsi que les résultats obtenus
+                    et les perspectives d'évolution pour notre application.
+                </p>
+            </div>
 
-    <div class="team-section">
-        <h2 class="team-title report-title">Équipe #01</h2>
-        <br>
-        <ul class="bare-list members">
-            <li class="member">
-                <img class="member-pic" src="images/avatar.png" alt="" >
-                <br>
-                <div class="member-identification">
-                    <span class="member-name">Tarik Hireche</span>
-                    <span class="member-id">202 301 89</span>
-                </div>
-                <span>Discord: @soymyo</span>
-                <a href="mailto:tarik.hireche@umontreal.ca">tarik.hireche@umontreal.ca</a>
-                <span class="member-role">
+            <ul class="bare-list report-resources">
+                <li class="report-resource">
+                    <a  id="github" class="report-resource-link" href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01" target="_blank">
+                        Répertoire GitHub
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title report-title">Équipe #01</h2>
+            <br>
+            <ul class="bare-list members">
+                <li class="member">
+                    <img class="member-pic" src="images/tarek.jpeg" alt="" >
+                    <br>
+                    <div class="member-identification">
+                        <span class="member-name">Tarik Hireche</span>
+                        <span class="member-id">202 301 89</span>
+                    </div>
+                    <span>Discord: @soymyo</span>
+                    <a href="mailto:tarik.hireche@umontreal.ca">tarik.hireche@umontreal.ca</a>
+                    <span class="member-role">
                     <br>
                     <strong>Chargé de faire</strong>:
                         <ul>
@@ -840,17 +111,17 @@
                             <li>Design/Structure du rapport & CSS</li>
                         </ul>
                     </span>
-            </li>
-            <li class="member">
-                <img class="member-pic" src="images/avatar.png" alt="" >
-                <br>
-                <div class="member-identification">
-                    <span class="member-name">Karim Ndoye</span>
-                    <span class="member-id">202 898 24</span>
-                </div>
-                <span>Discord: @karimndoye</span>
-                <a href="mailto:karim.ndoye@umontreal.ca">karim.ndoye@umontreal.ca</a>
-                <span class="member-role">
+                </li>
+                <li class="member">
+                    <img class="member-pic" src="images/avatar.png" alt="" >
+                    <br>
+                    <div class="member-identification">
+                        <span class="member-name">Karim Ndoye</span>
+                        <span class="member-id">202 898 24</span>
+                    </div>
+                    <span>Discord: @karimndoye</span>
+                    <a href="mailto:karim.ndoye@umontreal.ca">karim.ndoye@umontreal.ca</a>
+                    <span class="member-role">
                     <br>
                     <strong>Chargé de faire</strong>:
                         <ul>
@@ -861,17 +132,17 @@
                             <li>Analyse (risques, besoins, stockage et intégration)</li>
                             <li>Hypothèses</li>
                         </ul> </span>
-            </li>
-            <li class="member">
-                <img class="member-pic" src="images/avatar.png" alt="" >
-                <br>
-                <div class="member-identification">
-                    <span class="member-name">Ilyesse Bouzommita</span>
-                    <span class="member-id">202 761 43</span>
-                </div>
-                <span>Discord: @ilyaoooo</span>
-                <a href="mailto:ilyesse.bouzommita@umontreal.ca">ilyesse.bouzommita@umontreal.ca</a>
-            <span class="member-role">
+                </li>
+                <li class="member">
+                    <img class="member-pic" src="images/avatar.png" alt="" >
+                    <br>
+                    <div class="member-identification">
+                        <span class="member-name">Ilyesse Bouzommita</span>
+                        <span class="member-id">202 761 43</span>
+                    </div>
+                    <span>Discord: @ilyaoooo</span>
+                    <a href="mailto:ilyesse.bouzommita@umontreal.ca">ilyesse.bouzommita@umontreal.ca</a>
+                    <span class="member-role">
                 <br>
                 <strong>Chargé de faire</strong>:
                         <ul>
@@ -881,51 +152,16 @@
                             <li>L'intégration des scénarios alternatifs dans le rapport</li>
                             <li>Diagramme d'activités</li>
                         </ul> </span>
-            </li>
-        </ul>
-    </div>
-</header>
-<main class="report-body">
-    <aside class="report-aside">
-        <nav>
-            <h2 class="section-title">Contenu</h2>
-            <ul class="bare-list nav">
-                <li class="nav-item">
-                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#plan">Cadre du projet</a></h3>
-                    <ul class="bare-list nav-item-details">
-                        <a href="#introduction"><li class="dash">Introduction</li></a>
-                        <a href="#echeancier"><li class="dash">Échéancier</li></a>
-                        <a href="#hypotheses"><li class="dash">Hypothèses</li></a>
-                        
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#requirements">Exigences</a></h3>
-                    <ul class="bare-list nav-item-details">
-                        <a href="#glossaire"><li class="dash">Glossaire</li></a>
-                        <a href="#persona"><li class="dash">Persona</li></a>
-                        <a href="#use-case"><li class="dash">Cas d'utilisation</li></a>
-                        <a href="#scenarios"><li class="dash">Scénarios</li></a>
-                        <a href="#activitydiag"><li class="dash">Diagramme d'activités</li></a>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#analysis">Analyse</a></h3>
-                    <ul class="bare-list nav-item-details">
-                        <a href="#risques"><li class="dash">Risques</li></a>
-                        <a href="#besoinsnf"><li class="dash">Besoins non fonctionnels</li></a>
-                        <a href="#besoinsmt"><li class="dash">Besoins matériels</li></a>
-                        <a href="#stockage"><li class="dash">Stockage</li></a>
-                        <a href="#integration"><li class="dash">Intégration</li></a>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Guide pour le prototype</a> </h3>
                 </li>
             </ul>
-        </nav>
-    </aside>
+        </div>
+    </header>
+
+</div>
+<main class="main-content">
+
     <div class="report-main">
+
         <section class="main-section">
             <h2 id="plan" class="section-title report-title">Cadre du projet</h2>
             <h3 class="subsection-title" id="introduction">Introduction</h3>
@@ -940,10 +176,69 @@
                     En favorisant une meilleure collaboration entre la ville, les entreprises et les citoyens, "Ma Ville" a pour objectif d'améliorer la coordination des travaux et de minimiser les désagréments pour les résidents.
                 </em>
             </p>
-            <h3 class="subsection-title" id="echeancier">Échéancier</h3>
-            <div>
-                <em>Présentation de l'échéancier et la distribution des taches (au moins pour le devoir 1)</em>
-                <img src="images/echeancier.jpg" alt="echeancier" class="preview-img">
+            <h3 class="subsection-title" id="echeancier">Échéancier et répartition des tâches</h3>
+            <table class="task-table">
+                <thead>
+                <tr>
+                    <th>Membre</th>
+                    <th>Tâches Assignées <strong>(Plus de détails sont disponibles dans les issues)</strong>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Ilyesse</td>
+                    <td>
+                        <ul>
+                            <li>Diagramme d'activités</li>
+                            <li>Diagrammes de séquence</li>
+                            <li>Retrait du CU "Signaler problème à la ville"</li>
+                            <li>Ajout des précisions de dates pour l'intervenant</li>
+                            <li>Ajout des plages horaires pour le résident</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tarek</td>
+                    <td>
+                        <ul>
+                            <li>Exigences, échéancier, ajout de la section conception au rapport</li>
+                            <li>Diagramme de classes</li>
+                            <li>Intégration de l'API</li>
+                            <li>Diagrammes de séquences</li>
+                            <li>Diagramme de cas d'utilisations</li>
+                            <li>Architecture</li>
+                            <li>Ajout du CU "Soumettre un projet de travail" avec statut initial</li>
+                            <li>Changement de DOB à âge</li>
+                            <li>Retrait de l'option de partager son avis</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Karim</td>
+                    <td>
+                        <ul>
+                            <li>Analyse</li>
+                            <li>Justification des choix du design</li>
+                            <li>Architecture</li>
+                            <li>Consultation des entraves routières</li>
+                            <li>Possibilité de plusieurs candidatures pour une requête</li>
+                            <li>Retrait de l'option "Consulter travaux à venir par rue"</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Équipe</td>
+                    <td>
+                        <ul>
+                            <li>Tests unitaires liés aux tâches assignées</li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="image-container">
+                <img src="images/echeancier.svg" alt="echeancier" class="small-image">
             </div>
 
             <h3 class="subsection-title" id="hypotheses">Hypothèses</h3>
@@ -997,11 +292,6 @@
                 <dt class="glossary-term">Mobilité urbaine</dt>
                 <dd class="glossary-def">Ensemble des modes de déplacement utilisés par les résidents dans une ville, incluant la marche, les vélos, les voitures, les transports en commun, et leur accessibilité.</dd>
 
-                <dt class="glossary-term">Système d’authentification</dt>
-                <dd class="glossary-def">Mécanisme permettant de vérifier l'identité des utilisateurs qui souhaitent accéder à des fonctionnalités spécifiques de l'application, que ce soit en tant que résident ou intervenant.</dd>
-
-                <dt class="glossary-term">Menu principal</dt>
-                <dd class="glossary-def">Interface initiale de l'application offrant les différentes options d'actions possibles pour l'utilisateur connecté, avec une structure hiérarchique claire et des niveaux d’imbrication limités.</dd>
 
                 <dt class="glossary-term">Application MaVille</dt>
                 <dd class="glossary-def">Application proposée dans le cadre du projet visant à centraliser et améliorer la communication entre les résidents et les intervenants au sujet des travaux publics et privés.</dd>
@@ -1060,38 +350,17 @@
                 <dt class="glossary-term">Quartier</dt>
                 <dd class="glossary-def">Secteur géographique de Montréal utilisé pour filtrer ou associer des projets de travaux aux résidents et intervenants.</dd>
 
-                <dt class="glossary-term">GitHub</dt>
-                <dd class="glossary-def">Plateforme de gestion de versions utilisée pour héberger et collaborer sur le code source du projet. Les équipes y soumettent leurs modifications (commits) et effectuent des releases à la fin du projet.</dd>
-
-                <dt class="glossary-term">Commit</dt>
-                <dd class="glossary-def">Action d’enregistrer des modifications apportées au code source dans un dépôt Git. Chaque membre de l’équipe doit avoir au moins un commit pour démontrer sa participation active au projet.</dd>
-
                 <dt class="glossary-term">Release</dt>
                 <dd class="glossary-def">Version stable du projet ou prototype, soumise à la fin du développement. Une "release" officielle doit être faite lors de la remise du projet.</dd>
 
                 <dt class="glossary-term">Prototype</dt>
                 <dd class="glossary-def">Première version fonctionnelle de l'application, réalisée dans un cadre limité. Pour ce projet, le prototype se limite à une interaction en ligne de commande, permettant de simuler certaines fonctionnalités de base de l'application.</dd>
 
-                <dt class="glossary-term">README</dt>
-                <dd class="glossary-def">Fichier texte situé dans le répertoire du projet GitHub, décrivant brièvement le projet, son organisation, et les étapes pour l'exécuter ou le tester.</dd>
-
                 <dt class="glossary-term">Système de stockage</dt>
                 <dd class="glossary-def">Solution technique utilisée pour conserver les données relatives aux utilisateurs, aux travaux et aux notifications dans l'application.</dd>
 
                 <dt class="glossary-term">Interface utilisateur</dt>
                 <dd class="glossary-def">Ensemble des menus et options affichés aux utilisateurs pour interagir avec l’application. Dans ce projet, elle est limitée à une interface en ligne de commande.</dd>
-
-                <dt class="glossary-term">Cas d'utilisation (CU)</dt>
-                <dd class="glossary-def">Scénarios ou situations spécifiques dans lesquelles un utilisateur interagit avec l’application. Chaque CU décrit une fonctionnalité particulière, comme la recherche de travaux ou la soumission d’une requête.</dd>
-
-                <dt class="glossary-term">Diagramme d’activités</dt>
-                <dd class="glossary-def">Représentation visuelle des flux de travail dans l’application, montrant les étapes que suit un utilisateur pour accomplir une tâche donnée.</dd>
-
-                <dt class="glossary-term">Besoins fonctionnels</dt>
-                <dd class="glossary-def">Exigences décrivant les actions spécifiques que l'application doit permettre, comme la consultation des travaux en cours ou la soumission de projets par les intervenants.</dd>
-
-                <dt class="glossary-term">Besoins non fonctionnels</dt>
-                <dd class="glossary-def">Exigences portant sur la qualité de l’application, telles que sa rapidité, sa sécurité, ou sa capacité à gérer un grand nombre d'utilisateurs simultanés.</dd>
 
                 <dt class="glossary-term">Risques</dt>
                 <dd class="glossary-def">Problèmes potentiels liés à la mise en œuvre ou à l’utilisation de l’application, pouvant inclure des défaillances de sécurité, des bugs, ou une mauvaise adoption par les utilisateurs.</dd>
@@ -1162,8 +431,9 @@
 
             <h3 class="subsection-title" id="use-case">Cas d'utilisation</h3>
             <div class="use-case">
-                <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="preview-img">
-
+                <div class="image-container">
+                <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation" class="small-image">
+                </div>
                 <p class="use-case-notes">
 
 
@@ -1918,8 +1188,19 @@
             <h3 class="subsection-title" id="activitydiag">Diagramme d'activités</h3>
             <div class="activity">
                 <h4>Diagramme d'activité pour les résidents.</h4>
-                <img class="activity-diagram" src="images/activity_diagram_resident.svg" alt="Diagramme d'activités">
-            </div>
+                <div class="image-container">
+                    <img class="large-image" src="images/MenuResident.svg" alt="Diagramme d'activités">
+                    <img class="medium-image" src="images/ConsulterTravaux.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/ConsulterEntraves.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/RechercherTravaux.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/NotificationsPersonnalisées.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/PlanificationParticipative.svg" alt="Diagramme d'activités">
+                    <img class="small-image" src="images/RequêteTravail.svg" alt="Diagramme d'activités">
+                </div>
+
+                <div class="modal" id="imageModal">
+                    <img id="modalImage" src="" alt="Agrandissement de l'image">
+                </div>
         </section>
 
         <section class="main-section">
@@ -1930,14 +1211,13 @@
                 <ol class="risks">
                     <li>
                         <strong>Mauvaise adoption par les utilisateurs</strong><br>
-                        <strong>Justification :</strong> Si les résidents et les intervenants trouvent l'application compliquée à utiliser ou qu'elle ne répond pas à leurs attentes, il est probable qu'ils ne l'adoptent pas. Cela pourrait nuire à l'efficacité du projet.<br>
-                        <strong>Solution :</strong> Il est essentiel de concevoir une interface simple et intuitive, accompagnée d'un tutoriel clair. Prévoir également une assistance et un support technique lors du lancement pour faciliter une adoption rapide et positive.
+                        <strong>Justification :</strong> Si les résidents et les intervenants trouvent l'application difficile à utiliser ou qu'elle ne répond pas à leurs besoins, ils risquent de ne pas l'adopter. Cela compromettrait l'efficacité du projet. Par ailleurs, L'introduction de nouvelles fonctionnalités telles que les notifications personnalisées et les préférences de travaux pourrait perturber les utilisateur.<br>
+                        <strong>Solution :</strong> Concevoir une interface simple, intuitive et accompagnée d'un tutoriel clair. De plus, il serait utile de prévoir une assistance et un support technique pour encourager une adoption rapide et positive.
                     </li>
                     <li>
                         <strong>Données inexactes ou non mises à jour</strong><br>
-                        <strong>Justification :</strong> Si les informations ne sont pas actualisées en temps réel, les utilisateurs risquent de consulter des données erronées, ce qui pourrait entraîner des frustrations.<br>
-                        <strong>Solution :</strong> Mettre en place un système de mise à jour automatique des données et envoyer des notifications en temps réel pour informer les utilisateurs de toute modification concernant les projets en cours.
-                    </li>
+                        <strong>Justification :</strong> Si les informations ne sont pas mises à jour en temps réel, les utilisateurs risquent de consulter des données erronées.<br>
+                        <strong>Solution :</strong> Utiliser les APIs en temps réel de la ville de Montréal pour les mises à jour automatiques et des notifications des modifications.
                     <li>
                         <strong>Problèmes de sécurité des données</strong><br>
                         <strong>Justification :</strong> L'application manipule des données personnelles, telles que des noms, des adresses et des courriels. Une faille de sécurité pourrait causer des fuites de données sensibles.<br>
@@ -1946,47 +1226,46 @@
                     <li>
                         <strong>Manque de coordination entre les intervenants</strong><br>
                         <strong>Justification :</strong> Une mauvaise coordination entre les intervenants publics et privés peut conduire à des chevauchements de projets, ce qui augmente les perturbations pour les résidents.<br>
-                        <strong>Solution :</strong> Mettre en place un système de validation des calendriers lors de la soumission des projets pour éviter les conflits. De plus, rendre les préférences des résidents accessibles à tous les intervenants peut favoriser la collaboration.
+                        <strong>Solution :</strong> La mise en place d'un système de suggestion automatique de créneaux basés sur les préférences et les plages disponibles permettrait de faciliter la planification.
                     </li>
                     <li>
                         <strong>Complexité technique du déploiement de l’application</strong><br>
-                        <strong>Justification :</strong> Le développement et la gestion d'une telle application nécessitent une infrastructure robuste, ce qui peut faire augmenter les coûts et compliquer le déploiement.<br>
-                        <strong>Solution :</strong> Adopter une approche agile pour le développement et réaliser des tests en plusieurs phases pour identifier et résoudre les problèmes avant un déploiement à grande échelle.
+                        <strong>Justification :</strong> Le projet implique des intégrations API et une infrastructure de support de données volumineuses, ce qui peut augmenter les coûts et compliquer son déploiement.<br>
+                        <strong>Solution :</strong> Architecture modulaire avec phases de tests itératives et vérifications de performance pour les API et les capacités de notification.
+                </ol>
+            </div>
+
+
+            <div>
+                <h3 class="subsection-title" id="besoinsnf">Besoins non-fonctionnels</h3>
+                <ol class="nf-requirements">
+                    <li>
+                        <strong>Sécurité des données</strong><br>
+                        L'application devra traiter des informations sensibles et personnelles. Il est donc crucial d'assurer la confidentialité des utilisateurs.
+                    </li>
+                    <li>
+                        <strong>Performance</strong><br>
+                        L’application doit être capable de répondre rapidement aux demandes, en particulier lorsque les utilisateurs consultent des projets, travaux ou entraves. Des temps de réponse lents pourraient décourager l'utilisation.
+                    </li>
+                    <li>
+                        <strong>Accessibilité</strong><br>
+                        L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
+                    </li>
+                    <li>
+                        <strong>Scalabilité</strong><br>
+                        L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
+                    </li>
+                    <li>
+                        <strong>Facilité de maintenance</strong><br>
+                        L’application devra bénéficier de mises à jour continues pour assurer la compatibilité des API de la ville de Montréal et l'ajout de nouvelles fonctionnalités.
                     </li>
                 </ol>
             </div>
-            
-
-<div>
-    <h3 class="subsection-title" id="besoinsnf">Besoins non-fonctionnels</h3>
-    <ol class="nf-requirements">
-        <li>
-            <strong>Sécurité des données</strong><br>
-            L'application devra traiter des informations sensibles et personnelles. Il est donc crucial d'assurer la confidentialité des utilisateurs.
-        </li>
-        <li>
-            <strong>Performance</strong><br>
-            L’application doit être capable de répondre rapidement aux demandes, surtout lorsque les utilisateurs consultent des projets ou des travaux. Des temps de réponse lents pourraient décourager l'utilisation.
-        </li>
-        <li>
-            <strong>Accessibilité</strong><br>
-            L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
-        </li>
-        <li>
-            <strong>Pouvoir tenir une augmentation du nombre d'utilisateurs</strong><br>
-            L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
-        </li>
-        <li>
-            <strong>Facilité de maintenance</strong><br>
-            L’application devra être régulièrement mise à jour pour corriger des bugs, ajouter des fonctionnalités ou s’adapter à l’évolution technologique.
-        </li>
-    </ol>
-</div>
 
             <div>
                 <h3 class="subsection-title" id="besoinsmt">Besoins matériels</h3>
                 <p>
-                    L’application aura besoin d’une infrastructure serveur capable de supporter plusieurs centaines de connexions simultanées. 
+                    L’application aura besoin d’une infrastructure serveur capable de supporter plusieurs centaines de connexions simultanées.
                     Un hébergement cloud, comme Google Cloud, est recommandé pour sa scalabilité et ses options de sauvegarde automatique.
                 </p>
             </div>
@@ -1994,9 +1273,7 @@
             <div>
                 <h3 class="subsection-title" id="stockage">Solution de stockage</h3>
                 <p>
-                    Pour gérer les informations des utilisateurs et des projets, nous opterons pour une base de données relationnelle, comme MySQL. 
-                    Afin d'assurer une gestion efficace, nous organiserons les données relatives aux travaux et aux requêtes dans des tables distinctes. 
-                    De plus, le stockage dans le cloud sera privilégié pour garantir la résilience et la disponibilité des données.
+                    Actuellement, l’application sera initialisée avec des données de test (plus de 3 résidents, 3 intervenants et 3 requêtes de travail) directement intégrées dans le code pour permettre un démarrage rapide et une simulation de fonctionnement. Toutefois, à long terme, pour gérer les informations des utilisateurs et des projets de manière plus robuste, nous envisagerons l'utilisation d'une base de données relationnelle, comme MySQL.
                 </p>
             </div>
 
@@ -2004,11 +1281,101 @@
                 <h3 class="subsection-title" id="integration">Solution d'intégration</h3>
 
                 <p>
-                    Pour assurer une communication fluide, notre application devra s'intégrer aux systèmes d'information de la ville de Montréal. 
-                    Cela nous permettra d'accéder aux données en temps réel concernant les travaux publics. 
-                    Pour les intervenants privés, nous souhaitons également mettre en place un portail dédié qui leur permettra de soumettre directement leurs projets via l'application.
+                    L’application MaVille doit s’intégrer avec les APIs de la Ville de Montréal pour obtenir des données en temps réel sur les travaux publics et leurs impacts (entraves). L’accès aux données municipales permettra aux résidents d’obtenir des informations actuelles sur les projets en cours ou à venir dans leur quartier. Pour les intervenants privés, un portail dédié sera mis en place au sein de l’application, leur permettant de soumettre directement leurs projets et de les gérer. Cette intégration facilitera la centralisation des informations de travaux et optimisera la coordination entre les acteurs publics et privés.
                 </p>
             </div>
+        </section>
+
+        <section class="main-section">
+            <h2 id="conception" class="section-title report-title">Conception</h2>
+
+            <h3 class="subsection-title" id="architecture">Architecture</h3>
+            <p>Pour le projet 'MaVille', nous avons choisi une architecture en couches, plus précisément une architecture de type <strong>3-tier</strong>. Cette approche divise les responsabilités en trois couches distinctes : <strong>présentation</strong>, <strong>logique métier</strong> et <strong>accès aux données</strong>. L'architecture en couches permet une séparation claire des préoccupations, favorisant la modularité, la maintenabilité et l'évolutivité du projet. Elle assure également une meilleure répartition des tâches entre les différentes composantes, facilitant ainsi l'ajout de nouvelles fonctionnalités et la collaboration entre les membres de l'équipe.</p>
+            <ul>
+                <li><strong>Utilisateurs de l'application :</strong> Les utilisateurs,résidents comme intervenants, interagissent avec l'application via une interface en ligne de commande. Le système est conçu pour être intuitif, en présentant des menus qui guident l'utilisateur tout au long des différentes opérations disponibles.</li>
+                <br>
+                <li><strong>Composantes liées au style d'architecture :</strong> Les principales composantes incluent la couche présentation (Menu), la couche logique métier (Resident, Intervenant, ResidentialWorkRequest, etc.), et la couche d'accès aux données (Database). Chaque composante a un rôle spécifique pour assurer une organisation optimale.</li>
+                <br>
+                <li><strong>Composantes additionnelles :</strong> La classe <code>Authentification</code> permet de gérer les connexions des utilisateurs, garantissant ainsi la sécurité et la confidentialité des données.</li>
+                <br>
+                <li><strong>Espace de stockage :</strong> Le stockage des informations repose sur une base de données implémentée sous forme de <code>HashMaps</code>, permettant de conserver les données des utilisateurs et des travaux en cours.</li>
+                <br>
+                <li><strong>Services externes :</strong> L'application fait appel à des APIs fournies par la ville de Montréal pour consulter les travaux en cours et les entraves routières.</li>
+            </ul>
+            <div class="image-container">
+                <img src="images/c4_diagram.svg" alt="Diagramme d'architecture" class="small-image">
+            </div>
+
+            <h3 class="subsection-title" id="architecture-3-tier">Décomposition de l'architecture 3-tier</h3>
+            <p>
+                Le choix d'une architecture de type <strong>3-tier</strong> permet une séparation claire des responsabilités : la <strong>couche présentation</strong>, la <strong>couche logique métier</strong> et la <strong>couche accès aux données</strong>. Cette stratégie favorise la modularité, la maintenabilité et l'évolutivité de l'application.
+            </p>
+
+            <h4>Couche Présentation</h4>
+            <p>
+                La <strong>couche présentation</strong> est représentée par la classe <code>Menu</code>, située dans le package <code>src.com.udem.ift2255.ui</code>.
+            </p>
+            <ul>
+                <li>Cette classe est chargée d'interagir avec l'utilisateur, en présentant le <strong>menu principal</strong> et en permettant à l'utilisateur de se connecter en tant que résident ou intervenant.</li>
+                <li>Selon le rôle choisi, l'utilisateur est redirigé vers son menu principal spécifique, et peut alors effectuer les actions prévues pour son profil.</li>
+                <li>La classe <code>Menu</code> centralise tous les menus et sert de point d'entrée pour appeler les méthodes associées aux actions que l'utilisateur souhaite effectuer.</li>
+            </ul>
+
+            <h4>Couche Logique Métier</h4>
+            <p>
+                La <strong>couche logique métier</strong> est constituée des classes suivantes, situées dans les packages <code>src.com.udem.ift2255.model</code> et <code>src.com.udem.ift2255.auth</code> :
+            </p>
+            <ul>
+                <li><strong>Classe <code>Resident</code></strong> : Contient les méthodes spécifiques aux résidents, notamment pour accéder à l'API de la ville de Montréal afin de récupérer des informations sur les travaux en cours.</li>
+                <li><strong>Classe <code>Intervenant</code></strong> : Implémente les fonctionnalités dédiées aux intervenants, telles que la soumission de rapports et la gestion des travaux.</li>
+                <li><strong>Classe <code>ResidentialWorkRequest</code></strong> : Représente les demandes de travaux résidentiels et centralise leur gestion, facilitant ainsi le suivi des requêtes.</li>
+                <li><strong>Classe <code>Authentication</code></strong> : Située dans <code>src.com.udem.ift2255.auth</code>, cette classe gère la vérification des comptes utilisateurs. Elle s'appuie sur les getters de la classe <code>Database</code> pour vérifier l'existence des comptes ou en ajouter de nouveaux lors de la création de comptes.</li>
+            </ul>
+
+            <h4>Couche Accès aux Données</h4>
+            <p>
+                La <strong>couche accès aux données</strong> est assurée par la classe <code>Database</code>, située dans le package <code>src.com.udem.ift2255.database</code>.
+            </p>
+            <ul>
+                <li>Cette classe contient des structures de données comme des <strong>HashMaps</strong> pour stocker les objets <code>Intervenant</code>, <code>Resident</code>, ainsi que les associations entre résidents et leurs demandes de travaux (<code>ResidentialWorkRequest</code>).</li>
+                <li>Elle gère toutes les interactions avec les données, offrant ainsi une interface fiable pour la couche logique métier, permettant une récupération et une mise à jour efficaces des informations.</li>
+            </ul>
+
+            <p>
+                Cette architecture en couches permet une organisation claire et une séparation logique des rôles de chaque composant. Elle garantit également une extensibilité future, notamment en facilitant l'intégration d'une interface graphique ou de nouvelles sources de données.
+            </p>
+
+            <h3 class="subsection-title" id="diagramme-classes">Diagramme de classes</h3>
+            <p>Le diagramme de classes ci-dessous présente une vue simplifiée du système, en omettant les getters, setters, constructeurs, et classes utilitaires. Il inclut des abstractions visant à montrer les relations principales entre les composantes du projet.</p>
+            <div class="image-container">
+                <img src="images/class_diagram.svg" alt="Diagramme de classes" class="small-image">
+            </div>
+
+            <h3 class="subsection-title" id="diagrammes-sequence">Diagrammes de séquence</h3>
+            <p>Les diagrammes de séquence suivants représentent le traitement des principaux cas d'utilisation :</p>
+            <ul>
+                <li>Consulter les entraves</li>
+                <li>Soumettre une requête de travail</li>
+                <li>Consulter la liste des requêtes de travail</li>
+            </ul>
+            <div class="image-container">
+                <img src="images/consulter_entraves.svg" alt="Diagramme de séquence - Consulter les entraves" class="large-image">
+                <br>
+                <img src="images/soumettre_requete_travail.svg" alt="Diagramme de séquence - Soumettre une requête de travail" class="large-image">
+                <br>
+                <img src="images/consulter_requete_travaux.svg" alt="Diagramme de séquence - Consulter la liste des requêtes" class="large-image">
+            </div>
+            <h3 class="subsection-title" id="justification-design">Justification des choix de conception</h3>
+            <p>
+                Les choix de conception de l'application reposent sur plusieurs principes clés : l'abstraction, le couplage faible, la cohésion forte, et l'encapsulation.
+            <ul>
+                <li><strong>Abstraction :</strong> Chaque classe est désignée pour répondre à une responsabilité bien définie, rendant le code plus lisible et facilitant la compréhension du système global.</li>
+                <li><strong>Couplage faible :</strong> Les classes sont dépendantes les unes des autres uniquement par le biais d'interfaces publiques et de méthodes d'abstraction, ce qui réduit les interactions complexes et simplifie les modifications.</li>
+                <li><strong>Cohésion forte :</strong> Les méthodes et attributs de chaque classe sont liés à sa responsabilité principale, augmentant ainsi la pertinence de chaque composant.</li>
+                <li><strong>Encapsulation :</strong> Les détails d'implémentation sont masqués aux autres composantes du système, assurant une meilleure sécurité des données et une flexibilité dans la modification des comportements internes.</li>
+            </ul>
+            Ces principes garantissent une architecture à la fois modulaire, flexible et interopérable, apte à évoluer avec les besoins futurs.
+            </p>
         </section>
 
         <section class="main-section">
@@ -2047,10 +1414,10 @@
                 <div class="step" id="step-3">
                     <h3 class="step-title"><span class="step-number">3.</span> Lancement du Prototype</h3>
                     <p class="step-description">
-                        Une fois Java installé, exécutez le fichier <code>MaVillePrototypeV0.1.0.jar</code> en utilisant la commande suivante dans le terminal ou via l'explorateur de fichiers :
+                        Une fois Java installé, exécutez le fichier <code>MaVillePrototypeV0.2.0.jar</code> en utilisant la commande suivante dans le terminal ou via l'explorateur de fichiers :
                     </p>
                     <div class="code-snippet">
-                        <pre><code>java -jar MaVillePrototypeV0.1.0.jar</code></pre>
+                        <pre><code>java -jar MaVillePrototypeV0.2.0.jar</code></pre>
                     </div>
                 </div>
 
@@ -2102,18 +1469,38 @@
         </section>
     </div>
 </main>
+<script>
+    const images = document.querySelectorAll('.image-container img');
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            modalImage.src = image.src;
+            modal.style.display = 'flex';
+        });
+    });
+
+    modal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+
+</script>
+</body>
+
+<div class="">
 <footer class="report-footer">
     <p>
-        Devoir 1 &ndash; Analyse des exigences<br>
-        IFT2255 (Génie logiciel) <br>
-        Automne 2024
+    Ce projet a été complété dans le cadre d'un devoir universitaire lors de la session d'automne 2024.
+        Design du rapport fait par Tarik Hireche.
     </p>
     <p>
         <em>
-            -
-       </em>
+
+        </em>
     </p>
 </footer>
-</body>
+    </div>
 
 </html>
