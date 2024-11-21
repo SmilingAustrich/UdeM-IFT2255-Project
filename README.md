@@ -48,6 +48,10 @@ src
     │
     ├── database
     │   ├── Database.java               # Classe contenant toutes les données du système.
+    ├── test
+    │   ├── AuthenticationServiceTest.java
+    │   ├── ResidentTest.java
+    │   ├── IntervenantTest.java
 
 ```
 
