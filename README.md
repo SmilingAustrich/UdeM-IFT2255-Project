@@ -30,15 +30,24 @@ Les intervenants ont la possibilité de :
 Le répertoire `src` contient les classes Java principales du projet, organisées comme suit :
 
 ```plaintext
-
 src
-├── User.java                   # Interface commune pour les utilisateurs résidents et intervenants.
-├── Intervenant.java            # Classe représentant un intervenant (entreprise ou particulier).
-├── Resident.java               # Classe représentant un résident avec des méthodes pour consulter les entraves et travaux.
-├── Main.java                   # Classe principale pour démarrer l'application.
-├── Menu.java                   # Gère l'interface en ligne de commande pour la navigation.
-├── AuthenticationService.java  # Service pour gérer l'authentification des résidents et intervenants.
-├── Database.java               # Classe contenant toutes les données du système.
+└── com.udem.ift2255
+    ├── model
+    │   ├── User.java                   # Interface commune pour les utilisateurs résidents et intervenants.
+    │   ├── Intervenant.java            # Classe représentant un intervenant (entreprise ou particulier).
+    │   ├── Resident.java               # Classe représentant un résident avec des méthodes pour consulter les entraves et travaux.
+    │   ├── ResidentialWorkRequest.java # Classe représentant une requête de travaux résidentiels.
+    │   ├── Project.java                # Classe représentant un projet de travaux.
+    │
+    ├── auth
+    │   ├── AuthenticationService.java  # Service pour gérer l'authentification des résidents et intervenants.
+    │
+    ├── ui
+    │   ├── Menu.java                   # Gère l'interface en ligne de commande pour la navigation.
+    │   ├── Main.java                   # Classe principale pour démarrer l'application.
+    │
+    ├── database
+    │   ├── Database.java               # Classe contenant toutes les données du système.
 
 ```
 
