@@ -27,368 +27,6 @@ import java.time.format.DateTimeParseException;
 public class Menu {
 
     /**
-     * Affiche un dessin de logo de bienvenue pour l'application "Ma Ville".
-     */
-    private void afficherLogoBienvenue() {
-        System.out.println(
-                "\033[1;34m**************************************************\033[0m\n" +
-                        "\033[1;34m*                                                *\033[0m\n" +
-                        "\033[1;34m*   \033[1;33mBIENVENUE SUR VOTRE APPLICATION MA VILLE!\033[1;34m    *\033[0m\n" +
-                        "\033[1;34m*                                                *\033[0m\n" +
-                        "\033[1;34m**************************************************\033[0m\n"
-        );
-    }
-
-    /**
-     * Affiche le menu de connexion et d'inscription pour les résidents et les intervenants.
-     * L'utilisateur peut choisir entre se connecter ou s'inscrire.
-     */
-    public void InitializeMainMenu() {
-        afficherLogoBienvenue();
-        Scanner in = new Scanner(System.in);
-        System.out.print(
-                "\033[1;32m==================================================\033[0m\n" +
-                        "\033[1;32m|            \033[1;37mMENU PRINCIPAL - MA VILLE\033[1;32m           |\033[0m\n" +
-                        "\033[1;32m==================================================\033[0m\n" +
-                        "\033[1;32m|                                                |\033[0m\n" +
-                        "\033[1;32m|  \033[1;33mI. Se connecter en tant que :\033[1;32m                 |\033[0m\n" +
-                        "\033[1;32m|     \033[1;37m1. Résident\033[1;32m                                |\033[0m\n" +
-                        "\033[1;32m|     \033[1;37m2. Intervenant\033[1;32m                             |\033[0m\n" +
-                        "\033[1;32m|                                                |\033[0m\n" +
-                        "\033[1;32m|  \033[1;33mII. S'inscrire en tant que :\033[1;32m                  |\033[0m\n" +
-                        "\033[1;32m|     \033[1;37m3. Résident\033[1;32m                                |\033[0m\n" +
-                        "\033[1;32m|     \033[1;37m4. Intervenant\033[1;32m                             |\033[0m\n" +
-                        "\033[1;32m|                                                |\033[0m\n" +
-                        "\033[1;32m|   \u001B[1;31mImportant\u001B[0m: Vous devez avoir au moins 16 ans  |\033[0m\n" +
-                        "\033[1;32m|   \u001B[0mpour pouvoir utiliser Ma Ville.              |\033[0m\n" +
-                        "\033[1;32m==================================================\033[0m\n" +
-                        "\033[1;36m:> \033[0m"
-        );
-        int choice = in.nextInt();
-        in.nextLine();
-
-        switch (choice) {
-            case 1:
-                residentLogInMenu();
-                break;
-            case 2:
-                intervenantLogInMenu();
-                break;
-            case 3:
-                residentInscriptionMenu();
-                break;
-            case 4:
-                intervenantInscriptionMenu();
-                break;
-            default:
-                System.out.println("\033[1;31m\nChoix invalide. Veuillez réessayer.\033[0m");
-                InitializeMainMenu();
-                break;
-        }
-    }
-
-    /**
-     * Affiche le menu de connexion des résidents et gère la connexion en demandant l'email et le mot de passe.
-     * En cas d'échec de connexion après deux essais, l'utilisateur est redirigé vers le menu d'inscription.
-     */
-    public void residentLogInMenu() {
-        System.out.print(
-                "\033[1;32m\n==================================================\033[0m\n" +
-                        "\033[1;32m|          \033[1;37mPORTAIL DE CONNEXION - RÉSIDENT\033[1;32m       |\033[0m\n" +
-                        "\033[1;32m==================================================\033[0m\n"
-        );
-        
-
-        Scanner in = new Scanner(System.in);
-        System.out.println(
-                "\n\033[1;36mBienvenue sur le portail de connexion des résidents.\033[0m\n" +
-                        "\033[1;36mVeuillez entrer votre email ainsi que votre mot de passe.\033[0m\n"
-        );
-
-        boolean loggedInResident = false;
-        int numberOfTries = 0;
-        Resident resident = null;
-
-        while (!loggedInResident && numberOfTries < 3) {
-            System.out.print("\033[1;33mEmail >: \033[0m");
-            String email = in.nextLine();
-            System.out.print("\033[1;33mMot de passe >: \033[0m");
-            String password = in.nextLine();
-
-            loggedInResident = AuthenticationService.loginResident(email, password);
-            if (loggedInResident) {
-                resident = Database.getResidentByEmail(email);
-                if (resident != null) {
-                    System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + resident.getFirstName() + ".\033[0m\n");
-                    
-                    residentMainMenu(resident);
-                } else {
-                    System.out.println("\033[1;31mErreur : le résident n'a pas été trouvé dans la base de données.\033[0m");
-                    loggedInResident = false; // Set to false to retry or fail
-                }
-            } else {
-                System.out.print("\033[1;31m\n--------------------------------------------------\n");
-                System.out.println("Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.");
-                System.out.print("--------------------------------------------------\033[0m\n");
-                numberOfTries++;
-            }
-
-            if (numberOfTries >= 2 && !loggedInResident) {
-                System.out.println("\n\033[1;31mDésolé, mais votre nom d'utilisateur ou votre mot de passe semble incorrect.\033[0m");
-                System.out.print(
-                        "\033[1;33mVous ne semblez pas être inscrit en tant que résident, redirection vers " +
-                                "la page d'inscription.\033[0m\n"
-                );
-                
-                residentInscriptionMenu();
-                break;
-            }
-        }
-    }
-
-
-    /**
-     * Affiche le menu de connexion des intervenants et gère la connexion en demandant l'email et le mot de passe.
-     * En cas d'échec de connexion après deux essais, l'utilisateur est redirigé vers le menu d'inscription.
-     */
-    public void intervenantLogInMenu() {
-        System.out.print(
-                "\033[1;32m\n==================================================\033[0m\n" +
-                        "\033[1;32m|         \033[1;37mPORTAIL DE CONNEXION - INTERVENANT\033[1;32m     |\033[0m\n" +
-                        "\033[1;32m==================================================\033[0m\n"
-        );
-        
-
-        Scanner in = new Scanner(System.in);
-        System.out.println(
-                "\n\033[1;36mBienvenue sur le portail de connexion des intervenants.\033[0m\n" +
-                        "\033[1;36mVeuillez entrer votre email ainsi que votre mot de passe.\033[0m\n"
-        );
-
-        boolean loggedInIntervenant = false;
-        int numberOfTries = 0;
-        Intervenant intervenant = null;
-
-        while (!loggedInIntervenant && numberOfTries < 3) {
-            System.out.print("\033[1;33mEmail >: \033[0m");
-            String email = in.nextLine();
-            System.out.print("\033[1;33mMot de passe >: \033[0m");
-            String password = in.nextLine();
-
-            loggedInIntervenant = AuthenticationService.loginIntervenant(email, password);
-            if (loggedInIntervenant) {
-                intervenant = Database.getIntervenantByEmail(email);
-                if (intervenant != null) {
-                    System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + intervenant.getFirstName() + ".\033[0m\n");
-                    
-                    intervenantMainMenu(intervenant);
-                } else {
-                    System.out.println("\033[1;31mErreur : l'intervenant n'a pas été trouvé dans la base de données.\033[0m");
-                    loggedInIntervenant = false; // Set to false to retry or fail
-                }
-            } else {
-                System.out.print("\033[1;31m\n--------------------------------------------------\n");
-                System.out.println("Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.");
-                System.out.print("--------------------------------------------------\033[0m\n");
-                numberOfTries++;
-            }
-
-            if (numberOfTries >= 2 && !loggedInIntervenant) {
-                System.out.println("\n\033[1;31mDésolé, mais votre nom d'utilisateur ou votre mot de passe semble incorrect.\033[0m");
-                System.out.print(
-                        "\033[1;33mVous ne semblez pas être inscrit en tant qu'intervenant, redirection vers " +
-                                "la page d'inscription.\033[0m\n"
-                );
-                
-                intervenantInscriptionMenu();
-                break;
-            }
-        }
-    }
-
-
-
-    /**
-     * Affiche un menu d'inscription magnifiquement présenté pour les résidents, et enregistre un nouveau résident.
-     * Une fois l'inscription réussie, le résident est redirigé vers le menu de connexion.
-     */
-    public void residentInscriptionMenu() {
-        System.out.print("\u001B[35m\n==========================================\n\u001B[0m" +
-                "\u001B[34m\u2728 \u001B[1mBienvenue au Portail d'Inscription des Résidents \u2728\u001B[0m\n" +
-                "\u001B[35m==========================================\n\u001B[0m\n\n");
-
-        System.out.print("\u001B[36m\u25b6\ufe0f Chargement du portail d'inscription des résidents …\u001B[0m\n");
-
-        System.out.print("\u001B[35m\n------------------------------------------\n\u001B[0m");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("\u001B[31m\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n\u001B[0m");
-
-        // Validation des différents champs
-        String firstNameResident = promptForNonEmptyInput(in, "\u001B[33m\u1f464 \u001B[1mPrénom >: \u001B[0m");
-        String lastNameResident = promptForNonEmptyInput(in, "\u001B[33m\u1f465 \u001B[1mNom de famille >: \u001B[0m");
-        String emailResident = promptForValidEmail(in, "\u001B[33m\u1f4bb \u001B[1mAdresse courriel >: \u001B[0m");
-        String passwordResident = promptForPassword(in, "\u001B[33m\ud83d\udd12 \u001B[1mMot de passe (minimum 8 caractères) >: \u001B[0m");
-        String phoneResident = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udcde \u001B[1mNuméro de téléphone (optionnel, tapez 0 et valider) >: \u001B[0m");
-        String addressResident = promptForNonEmptyInput(in, "\u001B[33m\ud83c\udfe0 \u001B[1mAdresse >: \u001B[0m");
-        int age = promptForValidDate(in, "\u001B[33m\ud83d\udcc5 \u001B[1mDate de naissance (format jj/mm/aaaa) >: \u001B[0m");
-
-        if(age < 16){
-            System.out.println("\u001B[31m\u26a0\ufe0f \u001B[1mLe compte ne peut pas être créé, vous devez avoir minimum 16 ans.\u001B[0m");
-            return;
-        }
-        Resident resident = new Resident(
-                firstNameResident, lastNameResident, emailResident, passwordResident,
-                phoneResident, addressResident, age
-        );
-
-        System.out.println("\n\u001B[32m\ud83c\udf89 \u001B[1mMerci pour votre inscription, " + resident.getFirstName() + " ! Nous validons vos informations …\u001B[0m");
-
-        AuthenticationService.signUpResident(resident);
-
-        Database.saveData(); // update
-
-
-        System.out.print("\n\u001B[36m\u26a1\ufe0f \u001B[1mInscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
-
-        residentLogInMenu();
-    }
-
-
-    /**
-     * Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie.
-     */
-    private String promptForNonEmptyInput(Scanner in, String prompt) {
-        String input;
-        do {
-            System.out.print(prompt);
-            input = in.nextLine().trim();
-            if (input.isEmpty()) {
-                System.out.println("Ce champ est obligatoire. Veuillez entrer une valeur.");
-            }
-        } while (input.isEmpty());
-        return input;
-    }
-
-    /**
-     * Valide l'adresse email.
-     */
-    private String promptForValidEmail(Scanner in, String prompt) {
-        String email;
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
-        do {
-            System.out.print(prompt);
-            email = in.nextLine().trim();
-            Matcher matcher = pattern.matcher(email);
-            if (!matcher.matches()) {
-                System.out.println("Adresse email invalide. Veuillez entrer une adresse email valide.");
-            }
-        } while (!pattern.matcher(email).matches());
-        return email;
-    }
-
-    /**
-     * Demande un mot de passe en cachant les caractères avec des étoiles.
-     */
-    private String promptForPassword(Scanner in, String prompt) {
-        Console console = System.console();
-        String password;
-        if (console != null) {
-            password = new String(console.readPassword(prompt));
-        } else {
-            // En cas d'absence de console (IDE), utilisation classique
-            password = promptForNonEmptyInput(in, prompt);
-        }
-        return password;
-    }
-
-    /**
-     * Valide la date de naissance selon le format jj/mm/aaaa.
-     */
-    private int promptForValidDate(Scanner in, String prompt) {
-        String date;
-        Pattern pattern = Pattern.compile("^\\d{2}/\\d{2}/\\d{4}$");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        LocalDate birthDate = null;
-        do {
-            System.out.print(prompt);
-            date = in.nextLine().trim();
-            Matcher matcher = pattern.matcher(date);
-            if (!matcher.matches()) {
-                System.out.println("Date invalide. Veuillez entrer une date au format jj/mm/aaaa.");
-                continue;
-            }
-            try {
-                birthDate = LocalDate.parse(date, formatter);
-            } catch (DateTimeParseException e) {
-                System.out.println("Erreur de formatage de la date. Veuillez réessayer.");
-            }
-        } while (birthDate == null);
-
-        // Calculate age
-        return Period.between(birthDate, LocalDate.now()).getYears();
-    }
-
-    /**
-     * Valide que l'identifiant de la ville est un code à 8 chiffres.
-     */
-    private String promptForValidCityId(Scanner in, String prompt) {
-        String cityId;
-        do {
-            System.out.print(prompt);
-            cityId = in.nextLine().trim();
-            if (!cityId.matches("\\d{8}")) {
-                System.out.println("L'identifiant de la ville doit être un code à 8 chiffres, veuillez réessayer.");
-            }
-        } while (!cityId.matches("\\d{8}"));
-        return cityId;
-    }
-
-    /**
-     * Affiche un menu d'inscription magnifiquement présenté pour les intervenants, et enregistre un nouvel intervenant.
-     * Une fois l'inscription réussie, l'intervenant est redirigé vers le menu de connexion.
-     */
-    public void intervenantInscriptionMenu() {
-        System.out.print("\u001B[35m\n==========================================\n\u001B[0m" +
-                "\u001B[34m\u2728 Bienvenue au Portail d'Inscription des Intervenants \u2728\u001B[0m\n" +
-                "\u001B[35m==========================================\n\u001B[0m\n\n");
-
-        System.out.print("\u001B[36mChargement du portail d'inscription …\u001B[0m\n");
-
-        System.out.print("\u001B[35m\n------------------------------------------\n\u001B[0m");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("\u001B[31m\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n\u001B[0m");
-
-        // Validation des différents champs
-        String firstNameIntervenant = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udc64 Prénom >: \u001B[0m");
-        String lastNameIntervenant = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udc65 Nom de famille >: \u001B[0m");
-        String emailIntervenant = promptForValidEmail(in, "\u001B[33m\ud83d\udcbb Adresse courriel >: \u001B[0m");
-        String passwordIntervenant = promptForPassword(in, "\u001B[33m\ud83d\udd12 Mot de passe (minimum 8 caractères) >: \u001B[0m");
-        String cityId = promptForValidCityId(in, "\u001B[33m\ud83c\udfd9 Identifiant de la ville (code à 8 chiffres) >: \u001B[0m");
-
-        System.out.print("\n\u001B[34m\ud83c\udf93 Type d'entrepreneur (numérique)\u001B[0m\n" +
-                "\u001B[36m1. \ud83d\udcbc Entreprise privée\u001B[0m\n" +
-                "\u001B[36m2. \ud83c\udfe2 Entreprise publique\u001B[0m\n" +
-                "\u001B[36m3. \ud83c\udf6d Particulier\u001B[0m\n >: ");
-        int entrepreneurType = in.nextInt();
-
-        Intervenant intervenant = new Intervenant(
-                firstNameIntervenant, lastNameIntervenant, emailIntervenant, passwordIntervenant, cityId, entrepreneurType
-        );
-
-        System.out.println("\n\u001B[32m\ud83c\udf89 Merci pour votre inscription, " + intervenant.getFirstName() + " ! Nous validons vos informations …\u001B[0m");
-
-        AuthenticationService.signUpIntervenant(intervenant);
-
-        Database.saveData(); // update
-        System.out.print("\n\u001B[36m\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
-
-        intervenantLogInMenu();
-    }
-
-    /**
      * Affiche le menu principal pour les intervenants une fois connectés.
      * @param intervenant L'intervenant connecté
      */
@@ -533,19 +171,19 @@ public class Menu {
                 switch (preferenceChoice) {
                     case 1:
                         System.out.println("\033[1;36m Voici les préférences personnelles :\033[0m");
-                        
+
                         System.out.println("\033[1;37m- Préférence 1 : Travaux routiers en semaine uniquement.\033[0m");
                         System.out.println("\033[1;37m- Préférence 2 : Pas de travaux après 18h.\033[0m");
                         System.out.println("\033[1;37m- Préférence 3 : Minimiser les interruptions d'eau.\033[0m");
-                        
+
                         break;
                     case 2:
                         System.out.println("\033[1;36m  Voici les préférences des autres résidents :\033[0m");
-                        
+
                         System.out.println("\033[1;37m- Préférence 1 : Travaux durant le week-end seulement.\033[0m");
                         System.out.println("\033[1;37m- Préférence 2 : Pas de travaux durant les vacances scolaires.\033[0m");
                         System.out.println("\033[1;37m- Préférence 3 : Travaux sur les trottoirs préférés.\033[0m");
-                        
+
                         break;
                     case 0:
                         residentMainMenu(resident);
@@ -576,6 +214,364 @@ public class Menu {
                 System.out.println("\033[1;31m Choix invalide. Veuillez réessayer.\033[0m");
                 residentMainMenu(resident);
         }
+    }
+
+    /**
+     * Affiche un dessin de logo de bienvenue pour l'application "Ma Ville".
+     */
+    private void afficherLogoBienvenue() {
+        System.out.println(
+                "\033[1;34m**************************************************\033[0m\n" +
+                        "\033[1;34m*                                                *\033[0m\n" +
+                        "\033[1;34m*   \033[1;33mBIENVENUE SUR VOTRE APPLICATION MA VILLE!\033[1;34m    *\033[0m\n" +
+                        "\033[1;34m*                                                *\033[0m\n" +
+                        "\033[1;34m**************************************************\033[0m\n"
+        );
+    }
+
+    /**
+     * Affiche le menu de connexion et d'inscription pour les résidents et les intervenants.
+     * L'utilisateur peut choisir entre se connecter ou s'inscrire.
+     */
+    public void InitializeMainMenu() {
+        afficherLogoBienvenue();
+        Scanner in = new Scanner(System.in);
+        System.out.print(
+                "\033[1;32m==================================================\033[0m\n" +
+                        "\033[1;32m|            \033[1;37mMENU PRINCIPAL - MA VILLE\033[1;32m           |\033[0m\n" +
+                        "\033[1;32m==================================================\033[0m\n" +
+                        "\033[1;32m|                                                |\033[0m\n" +
+                        "\033[1;32m|  \033[1;33mI. Se connecter en tant que :\033[1;32m                 |\033[0m\n" +
+                        "\033[1;32m|     \033[1;37m1. Résident\033[1;32m                                |\033[0m\n" +
+                        "\033[1;32m|     \033[1;37m2. Intervenant\033[1;32m                             |\033[0m\n" +
+                        "\033[1;32m|                                                |\033[0m\n" +
+                        "\033[1;32m|  \033[1;33mII. S'inscrire en tant que :\033[1;32m                  |\033[0m\n" +
+                        "\033[1;32m|     \033[1;37m3. Résident\033[1;32m                                |\033[0m\n" +
+                        "\033[1;32m|     \033[1;37m4. Intervenant\033[1;32m                             |\033[0m\n" +
+                        "\033[1;32m|                                                |\033[0m\n" +
+                        "\033[1;32m|   \u001B[1;31mImportant\u001B[0m: Vous devez avoir au moins 16 ans  |\033[0m\n" +
+                        "\033[1;32m|   \u001B[0mpour pouvoir utiliser Ma Ville.              |\033[0m\n" +
+                        "\033[1;32m==================================================\033[0m\n" +
+                        "\033[1;36m:> \033[0m"
+        );
+        int choice = in.nextInt();
+        in.nextLine();
+
+        switch (choice) {
+            case 1:
+                residentLogInMenu();
+                break;
+            case 2:
+                intervenantLogInMenu();
+                break;
+            case 3:
+                residentInscriptionMenu();
+                break;
+            case 4:
+                intervenantInscriptionMenu();
+                break;
+            default:
+                System.out.println("\033[1;31m\nChoix invalide. Veuillez réessayer.\033[0m");
+                InitializeMainMenu();
+                break;
+        }
+    }
+
+    /**
+     * Affiche le menu de connexion des résidents et gère la connexion en demandant l'email et le mot de passe.
+     * En cas d'échec de connexion après deux essais, l'utilisateur est redirigé vers le menu d'inscription.
+     */
+    public void residentLogInMenu() {
+        System.out.print(
+                "\033[1;32m\n==================================================\033[0m\n" +
+                        "\033[1;32m|          \033[1;37mPORTAIL DE CONNEXION - RÉSIDENT\033[1;32m       |\033[0m\n" +
+                        "\033[1;32m==================================================\033[0m\n"
+        );
+
+
+        Scanner in = new Scanner(System.in);
+        System.out.println(
+                "\n\033[1;36mBienvenue sur le portail de connexion des résidents.\033[0m\n" +
+                        "\033[1;36mVeuillez entrer votre email ainsi que votre mot de passe.\033[0m\n"
+        );
+
+        boolean loggedInResident = false;
+        int numberOfTries = 0;
+        Resident resident = null;
+
+        while (!loggedInResident && numberOfTries < 3) {
+            System.out.print("\033[1;33mEmail >: \033[0m");
+            String email = in.nextLine();
+            System.out.print("\033[1;33mMot de passe >: \033[0m");
+            String password = in.nextLine();
+
+            loggedInResident = AuthenticationService.loginResident(email, password);
+            if (loggedInResident) {
+                resident = Database.getResidentByEmail(email);
+                if (resident != null) {
+                    System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + resident.getFirstName() + ".\033[0m\n");
+
+                    residentMainMenu(resident);
+                } else {
+                    System.out.println("\033[1;31mErreur : le résident n'a pas été trouvé dans la base de données.\033[0m");
+                    loggedInResident = false; // Set to false to retry or fail
+                }
+            } else {
+                System.out.print("\033[1;31m\n--------------------------------------------------\n");
+                System.out.println("Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.");
+                System.out.print("--------------------------------------------------\033[0m\n");
+                numberOfTries++;
+            }
+
+            if (numberOfTries >= 2 && !loggedInResident) {
+                System.out.println("\n\033[1;31mDésolé, mais votre nom d'utilisateur ou votre mot de passe semble incorrect.\033[0m");
+                System.out.print(
+                        "\033[1;33mVous ne semblez pas être inscrit en tant que résident, redirection vers " +
+                                "la page d'inscription.\033[0m\n"
+                );
+
+                residentInscriptionMenu();
+                break;
+            }
+        }
+    }
+
+    /**
+     * Affiche le menu de connexion des intervenants et gère la connexion en demandant l'email et le mot de passe.
+     * En cas d'échec de connexion après deux essais, l'utilisateur est redirigé vers le menu d'inscription.
+     */
+    public void intervenantLogInMenu() {
+        System.out.print(
+                "\033[1;32m\n==================================================\033[0m\n" +
+                        "\033[1;32m|         \033[1;37mPORTAIL DE CONNEXION - INTERVENANT\033[1;32m     |\033[0m\n" +
+                        "\033[1;32m==================================================\033[0m\n"
+        );
+
+
+        Scanner in = new Scanner(System.in);
+        System.out.println(
+                "\n\033[1;36mBienvenue sur le portail de connexion des intervenants.\033[0m\n" +
+                        "\033[1;36mVeuillez entrer votre email ainsi que votre mot de passe.\033[0m\n"
+        );
+
+        boolean loggedInIntervenant = false;
+        int numberOfTries = 0;
+        Intervenant intervenant = null;
+
+        while (!loggedInIntervenant && numberOfTries < 3) {
+            System.out.print("\033[1;33mEmail >: \033[0m");
+            String email = in.nextLine();
+            System.out.print("\033[1;33mMot de passe >: \033[0m");
+            String password = in.nextLine();
+
+            loggedInIntervenant = AuthenticationService.loginIntervenant(email, password);
+            if (loggedInIntervenant) {
+                intervenant = Database.getIntervenantByEmail(email);
+                if (intervenant != null) {
+                    System.out.print("\n\033[1;32mConnexion réussie ! Bienvenue, " + intervenant.getFirstName() + ".\033[0m\n");
+
+                    intervenantMainMenu(intervenant);
+                } else {
+                    System.out.println("\033[1;31mErreur : l'intervenant n'a pas été trouvé dans la base de données.\033[0m");
+                    loggedInIntervenant = false; // Set to false to retry or fail
+                }
+            } else {
+                System.out.print("\033[1;31m\n--------------------------------------------------\n");
+                System.out.println("Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.");
+                System.out.print("--------------------------------------------------\033[0m\n");
+                numberOfTries++;
+            }
+
+            if (numberOfTries >= 2 && !loggedInIntervenant) {
+                System.out.println("\n\033[1;31mDésolé, mais votre nom d'utilisateur ou votre mot de passe semble incorrect.\033[0m");
+                System.out.print(
+                        "\033[1;33mVous ne semblez pas être inscrit en tant qu'intervenant, redirection vers " +
+                                "la page d'inscription.\033[0m\n"
+                );
+
+                intervenantInscriptionMenu();
+                break;
+            }
+        }
+    }
+
+    /**
+     * Affiche un menu d'inscription magnifiquement présenté pour les résidents, et enregistre un nouveau résident.
+     * Une fois l'inscription réussie, le résident est redirigé vers le menu de connexion.
+     */
+    public void residentInscriptionMenu() {
+        System.out.print("\u001B[35m\n==========================================\n\u001B[0m" +
+                "\u001B[34m\u2728 \u001B[1mBienvenue au Portail d'Inscription des Résidents \u2728\u001B[0m\n" +
+                "\u001B[35m==========================================\n\u001B[0m\n\n");
+
+        System.out.print("\u001B[36m\u25b6\ufe0f Chargement du portail d'inscription des résidents …\u001B[0m\n");
+
+        System.out.print("\u001B[35m\n------------------------------------------\n\u001B[0m");
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("\u001B[31m\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n\u001B[0m");
+
+        // Validation des différents champs
+        String firstNameResident = promptForNonEmptyInput(in, "\u001B[33m\u1f464 \u001B[1mPrénom >: \u001B[0m");
+        String lastNameResident = promptForNonEmptyInput(in, "\u001B[33m\u1f465 \u001B[1mNom de famille >: \u001B[0m");
+        String emailResident = promptForValidEmail(in, "\u001B[33m\u1f4bb \u001B[1mAdresse courriel >: \u001B[0m");
+        String passwordResident = promptForPassword(in, "\u001B[33m\ud83d\udd12 \u001B[1mMot de passe (minimum 8 caractères) >: \u001B[0m");
+        String phoneResident = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udcde \u001B[1mNuméro de téléphone (optionnel, tapez 0 et valider) >: \u001B[0m");
+        String addressResident = promptForNonEmptyInput(in, "\u001B[33m\ud83c\udfe0 \u001B[1mAdresse >: \u001B[0m");
+        int age = promptForValidDate(in, "\u001B[33m\ud83d\udcc5 \u001B[1mDate de naissance (format jj/mm/aaaa) >: \u001B[0m");
+
+        if(age < 16){
+            System.out.println("\u001B[31m\u26a0\ufe0f \u001B[1mLe compte ne peut pas être créé, vous devez avoir minimum 16 ans.\u001B[0m");
+            return;
+        }
+        Resident resident = new Resident(
+                firstNameResident, lastNameResident, emailResident, passwordResident,
+                phoneResident, addressResident, age
+        );
+
+        System.out.println("\n\u001B[32m\ud83c\udf89 \u001B[1mMerci pour votre inscription, " + resident.getFirstName() + " ! Nous validons vos informations …\u001B[0m");
+
+        AuthenticationService.signUpResident(resident);
+
+        Database.saveData(); // update
+
+
+        System.out.print("\n\u001B[36m\u26a1\ufe0f \u001B[1mInscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
+
+        residentLogInMenu();
+    }
+
+    /**
+     * Méthode d'assistance pour demander une entrée jusqu'à ce qu'une valeur non vide soit fournie.
+     */
+    private String promptForNonEmptyInput(Scanner in, String prompt) {
+        String input;
+        do {
+            System.out.print(prompt);
+            input = in.nextLine().trim();
+            if (input.isEmpty()) {
+                System.out.println("Ce champ est obligatoire. Veuillez entrer une valeur.");
+            }
+        } while (input.isEmpty());
+        return input;
+    }
+
+    /**
+     * Valide l'adresse email.
+     */
+    private String promptForValidEmail(Scanner in, String prompt) {
+        String email;
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+        do {
+            System.out.print(prompt);
+            email = in.nextLine().trim();
+            Matcher matcher = pattern.matcher(email);
+            if (!matcher.matches()) {
+                System.out.println("Adresse email invalide. Veuillez entrer une adresse email valide.");
+            }
+        } while (!pattern.matcher(email).matches());
+        return email;
+    }
+
+    /**
+     * Demande un mot de passe en cachant les caractères avec des étoiles.
+     */
+    private String promptForPassword(Scanner in, String prompt) {
+        Console console = System.console();
+        String password;
+        if (console != null) {
+            password = new String(console.readPassword(prompt));
+        } else {
+            // En cas d'absence de console (IDE), utilisation classique
+            password = promptForNonEmptyInput(in, prompt);
+        }
+        return password;
+    }
+
+    /**
+     * Valide la date de naissance selon le format jj/mm/aaaa.
+     */
+    private int promptForValidDate(Scanner in, String prompt) {
+        String date;
+        Pattern pattern = Pattern.compile("^\\d{2}/\\d{2}/\\d{4}$");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate birthDate = null;
+        do {
+            System.out.print(prompt);
+            date = in.nextLine().trim();
+            Matcher matcher = pattern.matcher(date);
+            if (!matcher.matches()) {
+                System.out.println("Date invalide. Veuillez entrer une date au format jj/mm/aaaa.");
+                continue;
+            }
+            try {
+                birthDate = LocalDate.parse(date, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Erreur de formatage de la date. Veuillez réessayer.");
+            }
+        } while (birthDate == null);
+
+        // Calculate age
+        return Period.between(birthDate, LocalDate.now()).getYears();
+    }
+
+    /**
+     * Valide que l'identifiant de la ville est un code à 8 chiffres.
+     */
+    private String promptForValidCityId(Scanner in, String prompt) {
+        String cityId;
+        do {
+            System.out.print(prompt);
+            cityId = in.nextLine().trim();
+            if (!cityId.matches("\\d{8}")) {
+                System.out.println("L'identifiant de la ville doit être un code à 8 chiffres, veuillez réessayer.");
+            }
+        } while (!cityId.matches("\\d{8}"));
+        return cityId;
+    }
+
+    /**
+     * Affiche un menu d'inscription magnifiquement présenté pour les intervenants, et enregistre un nouvel intervenant.
+     * Une fois l'inscription réussie, l'intervenant est redirigé vers le menu de connexion.
+     */
+    public void intervenantInscriptionMenu() {
+        System.out.print("\u001B[35m\n==========================================\n\u001B[0m" +
+                "\u001B[34m\u2728 Bienvenue au Portail d'Inscription des Intervenants \u2728\u001B[0m\n" +
+                "\u001B[35m==========================================\n\u001B[0m\n\n");
+
+        System.out.print("\u001B[36mChargement du portail d'inscription …\u001B[0m\n");
+
+        System.out.print("\u001B[35m\n------------------------------------------\n\u001B[0m");
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("\u001B[31m\u2764\ufe0f Nous sommes ravis de vous accueillir ! Veuillez fournir les informations ci-dessous pour vous inscrire.\n\u001B[0m");
+
+        // Validation des différents champs
+        String firstNameIntervenant = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udc64 Prénom >: \u001B[0m");
+        String lastNameIntervenant = promptForNonEmptyInput(in, "\u001B[33m\ud83d\udc65 Nom de famille >: \u001B[0m");
+        String emailIntervenant = promptForValidEmail(in, "\u001B[33m\ud83d\udcbb Adresse courriel >: \u001B[0m");
+        String passwordIntervenant = promptForPassword(in, "\u001B[33m\ud83d\udd12 Mot de passe (minimum 8 caractères) >: \u001B[0m");
+        String cityId = promptForValidCityId(in, "\u001B[33m\ud83c\udfd9 Identifiant de la ville (code à 8 chiffres) >: \u001B[0m");
+
+        System.out.print("\n\u001B[34m\ud83c\udf93 Type d'entrepreneur (numérique)\u001B[0m\n" +
+                "\u001B[36m1. \ud83d\udcbc Entreprise privée\u001B[0m\n" +
+                "\u001B[36m2. \ud83c\udfe2 Entreprise publique\u001B[0m\n" +
+                "\u001B[36m3. \ud83c\udf6d Particulier\u001B[0m\n >: ");
+        int entrepreneurType = in.nextInt();
+
+        Intervenant intervenant = new Intervenant(
+                firstNameIntervenant, lastNameIntervenant, emailIntervenant, passwordIntervenant, cityId, entrepreneurType
+        );
+
+        System.out.println("\n\u001B[32m\ud83c\udf89 Merci pour votre inscription, " + intervenant.getFirstName() + " ! Nous validons vos informations …\u001B[0m");
+
+        AuthenticationService.signUpIntervenant(intervenant);
+
+        Database.saveData(); // update
+        System.out.print("\n\u001B[36m\ud83d\udee0\ufe0f Inscription réussie ! Vous pouvez maintenant vous connecter.\u001B[0m\n\n");
+
+        intervenantLogInMenu();
     }
 
     /**

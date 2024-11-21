@@ -26,13 +26,13 @@ import java.time.format.DateTimeParseException;
  */
 public class Resident implements User, Serializable {
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String phone;
-    private String address;
-    private int age;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String password;
+    private final String phone;
+    private final String address;
+    private final int age;
     private static final long serialVersionUID = 1L;
 
     /**

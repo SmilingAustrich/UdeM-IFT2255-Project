@@ -7,17 +7,17 @@ import java.time.LocalDate;
 
 
 public class ResidentialWorkRequest implements Serializable {
-    private String workTitle;
-    private String detailedWorkDescription;
-    private String workType;
-    private String neighbourhood;
-    private LocalDate workWishedStartDate;
-    private Resident resident;
+    private final String workTitle;
+    private final String detailedWorkDescription;
+    private final String workType;
+    private final String neighbourhood;
+    private final LocalDate workWishedStartDate;
+    private final Resident resident;
 
 
 
     private boolean isWorkAvailable;
-    private Map<Intervenant, String> candidatures;
+    private final Map<Intervenant, String> candidatures;
     private Intervenant chosenIntervenant;
     private static final long serialVersionUID = 1L;
 

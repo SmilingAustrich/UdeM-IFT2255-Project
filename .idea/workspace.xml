@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="devoir1:jar" />
@@ -9,23 +12,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur.">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Transformation du projet en package pour faciliter l'organisation.">
+      <change afterPath="$PROJECT_DIR$/images/c4_diagram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/class_diagram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/consulter_entraves.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/consulter_requete_travaux.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/soumettre_requete_travail.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/activity_diagram_resident.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/activity_diagram_resident.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/use_case_diagram.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/use_case_diagram.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/auth/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Resident.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ResidentialWorkRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/auth/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/auth/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Resident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Resident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,37 +83,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Menus.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.rapport.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.template.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;devoir2&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/UdeM-IFT2255-Groupe01/images&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Menus.executor": "Run",
+    "JavaScript Debug.rapport.html.executor": "Run",
+    "JavaScript Debug.template.html.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "devoir2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/IFT2255/devoir 2/UdeM-IFT2255-Groupe01/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/devoir 1 2255/devoir1/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/images" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.rapport.html">
     <configuration name="rapport.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UdeM-IFT2255-Groupe01/devoir1/rapport.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -325,7 +333,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731961828157</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Transformation du projet en package pour faciliter l'organisation.">
+      <option name="closed" value="true" />
+      <created>1732064803847</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1732064803847</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +377,8 @@
     <MESSAGE value="Correction d'un bug dans le fichier workspace.xml survenu lors d'un merge." />
     <MESSAGE value="Refactorisation des classes Intervenant et Resident pour une meilleure fonctionnalité&#10;&#10;Amélioration de la classe Intervenant pour supporter Serializable et affiner le filtrage des demandes de travaux. Introduction de la classe Database pour centraliser la gestion des demandes et modification de la classe Resident pour s'aligner avec les nouvelles soumissions et le suivi des demandes." />
     <MESSAGE value="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactorisation des classes et méthodes de gestion des demandes de travail.&#10;&#10;Renommé `RequeteTravailResidentiel` en `ResidentialWorkRequest` afin de maintenir l'uniformité de la langue utilisée dans le code et mis à jour les références associées. Ajout de `serialVersionUID` à diverses classes. &#10;Amélioration des fonctionnalités de `Menu` et `Database` pour une meilleure persistance des données et interaction utilisateur." />
+    <MESSAGE value="Transformation du projet en package pour faciliter l'organisation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Transformation du projet en package pour faciliter l'organisation." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

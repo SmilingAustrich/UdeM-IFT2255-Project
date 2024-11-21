@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
  */
 public class Intervenant implements User, Serializable {
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String cityIdCode;
-    private int entrepreneurType;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String password;
+    private final String cityIdCode;
+    private final int entrepreneurType;
     private static final long serialVersionUID = 1L;
     /**
      * Constructeur de la classe {@code com.udem.ift2255.model.Intervenant}.

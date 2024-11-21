@@ -46,11 +46,8 @@ public class AuthenticationService {
     public static boolean loginResident(String email, String password) {
         Resident resident = Database.getResidentMap().get(email); // Récupérer le résident par email
 
-        if (resident != null && resident.getPassword().equals(password)) {
-            return true; // Connexion réussie
-        } else {
-            return false; // Connexion échouée
-        }
+        // Connexion échouée
+        return resident != null && resident.getPassword().equals(password); // Connexion réussie
     }
 
     /**
@@ -64,11 +61,8 @@ public class AuthenticationService {
     public static boolean loginIntervenant(String email, String password) {
         Intervenant intervenant = Database.getIntervenantMap().get(email); // Récupérer l'intervenant par email
 
-        if (intervenant != null && intervenant.getPassword().equals(password)) {
-            return true; // Connexion réussie
-        } else {
-            return false; // Connexion échouée
-        }
+        // Connexion échouée
+        return intervenant != null && intervenant.getPassword().equals(password); // Connexion réussie
     }
 
 }
