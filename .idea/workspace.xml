@@ -12,13 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="stylesheet.css update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/devoir1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/devoir1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Intervenant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/ResidentialWorkRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/test/IntervenantTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/test/IntervenantTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,9 +75,6 @@
     "Application.Menus.executor": "Run",
     "Downloaded.Files.Path.Enabled": "true",
     "JUnit.AuthenticationServiceTest.executor": "Run",
-    "JUnit.IntervenantTest.executor": "Run",
-    "JUnit.IntervenantTest.testIntervenantLogInMenu.executor": "Run",
-    "JUnit.IntervenantTest.testSignUpIntervenant.executor": "Run",
     "JUnit.ResidentTest.executor": "Run",
     "JUnit.ResidentTest.testFetchTravauxData.executor": "Run",
     "JavaScript Debug.rapport.html.executor": "Run",
@@ -91,7 +85,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "devoir2",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/IFT2255/devoir 2/UdeM-IFT2255-Groupe01/images",
     "node.js.detected.package.eslint": "true",
@@ -117,7 +111,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.rapport.html">
     <configuration name="AuthenticationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="devoir1" />
       <extension name="coverage">
@@ -129,38 +123,6 @@
       <option name="PACKAGE_NAME" value="com.udem.ift2255.test" />
       <option name="MAIN_CLASS_NAME" value="com.udem.ift2255.test.AuthenticationServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IntervenantTest.testIntervenantLogInMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="devoir1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.udem.ift2255.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.udem.ift2255.test" />
-      <option name="MAIN_CLASS_NAME" value="com.udem.ift2255.test.IntervenantTest" />
-      <option name="METHOD_NAME" value="testIntervenantLogInMenu" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IntervenantTest.testSignUpIntervenant" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="devoir1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.udem.ift2255.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.udem.ift2255.test" />
-      <option name="MAIN_CLASS_NAME" value="com.udem.ift2255.test.IntervenantTest" />
-      <option name="METHOD_NAME" value="testSignUpIntervenant" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,10 +158,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="rapport.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UdeM-IFT2255-Groupe01/devoir1/rapport.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="template.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/UdeM-IFT2255-Groupe01/devoir1/template.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.IntervenantTest.testIntervenantLogInMenu" />
-        <item itemvalue="JUnit.IntervenantTest.testSignUpIntervenant" />
+        <item itemvalue="JavaScript Debug.rapport.html" />
         <item itemvalue="JUnit.ResidentTest" />
         <item itemvalue="JUnit.ResidentTest.testFetchTravauxData" />
         <item itemvalue="JUnit.AuthenticationServiceTest" />
@@ -457,7 +424,23 @@
       <option name="project" value="LOCAL" />
       <updated>1732232128441</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="stylesheet.css update">
+      <option name="closed" value="true" />
+      <created>1732233708645</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1732233708645</updated>
+    </task>
+    <task id="LOCAL-00030" summary="stylesheet.css update">
+      <option name="closed" value="true" />
+      <created>1732234109452</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1732234109453</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,9 +482,19 @@
     <MESSAGE value="changement au rapport.html, disposition des images, ajout du tableau de la repartition des taches." />
     <MESSAGE value="changement au rapport.html, modification de la barre latérale, ajout de ma photo" />
     <MESSAGE value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
+    <MESSAGE value="stylesheet.css update" />
+    <option name="LAST_COMMIT_MESSAGE" value="stylesheet.css update" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java</url>
+          <line>343</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="requeteTravailMap" language="JAVA" />

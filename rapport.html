@@ -94,64 +94,33 @@
                     <br>
                     <div class="member-identification">
                         <span class="member-name">Tarik Hireche</span>
-                        <span class="member-id">202 301 89</span>
+                        <span class="member-id">| 202 301 89</span>
                     </div>
                     <span>Discord: @soymyo</span>
                     <a href="mailto:tarik.hireche@umontreal.ca">tarik.hireche@umontreal.ca</a>
-                    <span class="member-role">
-                    <br>
-                    <strong>Chargé de faire</strong>:
-                        <ul>
-                            <li>Service d'authentification</li>
-                            <li>implémentations de certains CUs</li>
-                            <li>la classe résidents et intervenant</li>
-                            <li>L'interface utilisateur & ses implémentations</li>
-                            <li>Le diagramme de cas d'utilisations</li>
-                            <li>README</li>
-                            <li>Design/Structure du rapport & CSS</li>
-                        </ul>
-                    </span>
+
                 </li>
                 <li class="member">
                     <img class="member-pic" src="images/avatar.png" alt="" >
                     <br>
                     <div class="member-identification">
                         <span class="member-name">Karim Ndoye</span>
-                        <span class="member-id">202 898 24</span>
+                        <span class="member-id">| 202 898 24</span>
                     </div>
                     <span>Discord: @karimndoye</span>
                     <a href="mailto:karim.ndoye@umontreal.ca">karim.ndoye@umontreal.ca</a>
-                    <span class="member-role">
-                    <br>
-                    <strong>Chargé de faire</strong>:
-                        <ul>
-                            <li>Proposer des plages horaires pour les travaux</li>
-                            <li>Soumettre une requete de travail</li>
-                            <li>Rechercher des travaux</li>
-                            <li>Soumettre une candidature pour un travail.</li>
-                            <li>Analyse (risques, besoins, stockage et intégration)</li>
-                            <li>Hypothèses</li>
-                        </ul> </span>
+
                 </li>
                 <li class="member">
                     <img class="member-pic" src="images/avatar.png" alt="" >
                     <br>
                     <div class="member-identification">
                         <span class="member-name">Ilyesse Bouzommita</span>
-                        <span class="member-id">202 761 43</span>
+                        <span class="member-id">| 202 761 43</span>
                     </div>
                     <span>Discord: @ilyaoooo</span>
                     <a href="mailto:ilyesse.bouzommita@umontreal.ca">ilyesse.bouzommita@umontreal.ca</a>
-                    <span class="member-role">
-                <br>
-                <strong>Chargé de faire</strong>:
-                        <ul>
-                            <li>Le menu principal du résident</li>
-                            <li>Le menu principal de l'intervenant</li>
-                            <li>L'intégration des scénarios principaux dans le rapport</li>
-                            <li>L'intégration des scénarios alternatifs dans le rapport</li>
-                            <li>Diagramme d'activités</li>
-                        </ul> </span>
+
                 </li>
             </ul>
         </div>
@@ -1188,6 +1157,9 @@
             <h3 class="subsection-title" id="activitydiag">Diagramme d'activités</h3>
             <div class="activity">
                 <h4>Diagramme d'activité pour les résidents.</h4>
+
+                <h5>Vous pouvez cliquer sur une image afin de l'agrandir.</h5>
+                <br>
                 <div class="image-container">
                     <img class="large-image" src="images/MenuResident.svg" alt="Diagramme d'activités">
                     <img class="medium-image" src="images/ConsulterTravaux.svg" alt="Diagramme d'activités">
@@ -1210,56 +1182,81 @@
                 <h3 id="risques" class="subsection-title">Risques</h3>
                 <ol class="risks">
                     <li>
+                        <br>
                         <strong>Mauvaise adoption par les utilisateurs</strong><br>
                         <strong>Justification :</strong> Si les résidents et les intervenants trouvent l'application difficile à utiliser ou qu'elle ne répond pas à leurs besoins, ils risquent de ne pas l'adopter. Cela compromettrait l'efficacité du projet. Par ailleurs, L'introduction de nouvelles fonctionnalités telles que les notifications personnalisées et les préférences de travaux pourrait perturber les utilisateur.<br>
                         <strong>Solution :</strong> Concevoir une interface simple, intuitive et accompagnée d'un tutoriel clair. De plus, il serait utile de prévoir une assistance et un support technique pour encourager une adoption rapide et positive.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Données inexactes ou non mises à jour</strong><br>
                         <strong>Justification :</strong> Si les informations ne sont pas mises à jour en temps réel, les utilisateurs risquent de consulter des données erronées.<br>
                         <strong>Solution :</strong> Utiliser les APIs en temps réel de la ville de Montréal pour les mises à jour automatiques et des notifications des modifications.
+                    </li>
+                    <br>
+
                     <li>
                         <strong>Problèmes de sécurité des données</strong><br>
                         <strong>Justification :</strong> L'application manipule des données personnelles, telles que des noms, des adresses et des courriels. Une faille de sécurité pourrait causer des fuites de données sensibles.<br>
                         <strong>Solution :</strong> Utiliser un système de cryptage pour protéger toutes les informations personnelles et effectuer des audits de sécurité réguliers afin d’identifier et de corriger les vulnérabilités.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Manque de coordination entre les intervenants</strong><br>
                         <strong>Justification :</strong> Une mauvaise coordination entre les intervenants publics et privés peut conduire à des chevauchements de projets, ce qui augmente les perturbations pour les résidents.<br>
                         <strong>Solution :</strong> La mise en place d'un système de suggestion automatique de créneaux basés sur les préférences et les plages disponibles permettrait de faciliter la planification.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Complexité technique du déploiement de l’application</strong><br>
                         <strong>Justification :</strong> Le projet implique des intégrations API et une infrastructure de support de données volumineuses, ce qui peut augmenter les coûts et compliquer son déploiement.<br>
                         <strong>Solution :</strong> Architecture modulaire avec phases de tests itératives et vérifications de performance pour les API et les capacités de notification.
+
                 </ol>
+                <br>
+
             </div>
 
 
             <div>
                 <h3 class="subsection-title" id="besoinsnf">Besoins non-fonctionnels</h3>
                 <ol class="nf-requirements">
+                    <br>
+
                     <li>
                         <strong>Sécurité des données</strong><br>
                         L'application devra traiter des informations sensibles et personnelles. Il est donc crucial d'assurer la confidentialité des utilisateurs.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Performance</strong><br>
                         L’application doit être capable de répondre rapidement aux demandes, en particulier lorsque les utilisateurs consultent des projets, travaux ou entraves. Des temps de réponse lents pourraient décourager l'utilisation.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Accessibilité</strong><br>
                         L’application doit être utilisable par tout le monde, y compris les personnes ayant des limitations physiques ou technologiques.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Scalabilité</strong><br>
                         L’application doit pouvoir gérer une augmentation du nombre d'utilisateurs et de requêtes, notamment durant les périodes de travaux intensifs.
                     </li>
+                    <br>
+
                     <li>
                         <strong>Facilité de maintenance</strong><br>
                         L’application devra bénéficier de mises à jour continues pour assurer la compatibilité des API de la ville de Montréal et l'ajout de nouvelles fonctionnalités.
                     </li>
                 </ol>
+                <br>
+
             </div>
 
             <div>
@@ -1269,6 +1266,7 @@
                     Un hébergement cloud, comme Google Cloud, est recommandé pour sa scalabilité et ses options de sauvegarde automatique.
                 </p>
             </div>
+            <br>
 
             <div>
                 <h3 class="subsection-title" id="stockage">Solution de stockage</h3>
@@ -1276,6 +1274,7 @@
                     Actuellement, l’application sera initialisée avec des données de test (plus de 3 résidents, 3 intervenants et 3 requêtes de travail) directement intégrées dans le code pour permettre un démarrage rapide et une simulation de fonctionnement. Toutefois, à long terme, pour gérer les informations des utilisateurs et des projets de manière plus robuste, nous envisagerons l'utilisation d'une base de données relationnelle, comme MySQL.
                 </p>
             </div>
+            <br>
 
             <div>
                 <h3 class="subsection-title" id="integration">Solution d'intégration</h3>
@@ -1296,12 +1295,15 @@
                 <br>
                 <li><strong>Composantes liées au style d'architecture :</strong> Les principales composantes incluent la couche présentation (Menu), la couche logique métier (Resident, Intervenant, ResidentialWorkRequest, etc.), et la couche d'accès aux données (Database). Chaque composante a un rôle spécifique pour assurer une organisation optimale.</li>
                 <br>
-                <li><strong>Composantes additionnelles :</strong> La classe <code>Authentification</code> permet de gérer les connexions des utilisateurs, garantissant ainsi la sécurité et la confidentialité des données.</li>
+                <li><strong>Composantes additionnelles :</strong> <code>AuthentificationService.java</code> Cette classe permet de gérer les connexions des utilisateurs, garantissant ainsi la sécurité et la confidentialité des données.</li>
                 <br>
-                <li><strong>Espace de stockage :</strong> Le stockage des informations repose sur une base de données implémentée sous forme de <code>HashMaps</code>, permettant de conserver les données des utilisateurs et des travaux en cours.</li>
+                <li><strong>Espace de stockage :</strong> Le stockage des informations repose sur une base de données implémentée sous forme de HashMaps, permettant de conserver les données des utilisateurs et des travaux en cours.</li>
                 <br>
                 <li><strong>Services externes :</strong> L'application fait appel à des APIs fournies par la ville de Montréal pour consulter les travaux en cours et les entraves routières.</li>
             </ul>
+            <br>
+            <h5>Vous pouvez cliquer sur l'image ci-dessous pour l'agrandir.</h5>
+            <br>
             <div class="image-container">
                 <img src="images/c4_diagram.svg" alt="Diagramme d'architecture" class="small-image">
             </div>
@@ -1312,41 +1314,56 @@
             </p>
 
             <h4>Couche Présentation</h4>
-            <p>
-                La <strong>couche présentation</strong> est représentée par la classe <code>Menu</code>, située dans le package <code>src.com.udem.ift2255.ui</code>.
-            </p>
+            <br>
             <ul>
-                <li>Cette classe est chargée d'interagir avec l'utilisateur, en présentant le <strong>menu principal</strong> et en permettant à l'utilisateur de se connecter en tant que résident ou intervenant.</li>
-                <li>Selon le rôle choisi, l'utilisateur est redirigé vers son menu principal spécifique, et peut alors effectuer les actions prévues pour son profil.</li>
-                <li>La classe <code>Menu</code> centralise tous les menus et sert de point d'entrée pour appeler les méthodes associées aux actions que l'utilisateur souhaite effectuer.</li>
+                <li>La <strong>couche présentation</strong> est représentée par la classe <code>Menu.java</code> Elle est située dans le package src.com.udem.ift2255.ui.
+            </p>
+                <p>Cette classe est chargée d'interagir avec l'utilisateur, en présentant le <strong>menu principal</strong> et en permettant à l'utilisateur de se connecter en tant que résident ou intervenant.</p>
+                <p>Selon le rôle choisi, l'utilisateur est redirigé vers son menu principal spécifique, et peut alors effectuer les actions prévues pour son profil.</p></li>
+
             </ul>
+
+            <br>
 
             <h4>Couche Logique Métier</h4>
-            <p>
-                La <strong>couche logique métier</strong> est constituée des classes suivantes, situées dans les packages <code>src.com.udem.ift2255.model</code> et <code>src.com.udem.ift2255.auth</code> :
-            </p>
             <ul>
-                <li><strong>Classe <code>Resident</code></strong> : Contient les méthodes spécifiques aux résidents, notamment pour accéder à l'API de la ville de Montréal afin de récupérer des informations sur les travaux en cours.</li>
-                <li><strong>Classe <code>Intervenant</code></strong> : Implémente les fonctionnalités dédiées aux intervenants, telles que la soumission de rapports et la gestion des travaux.</li>
-                <li><strong>Classe <code>ResidentialWorkRequest</code></strong> : Représente les demandes de travaux résidentiels et centralise leur gestion, facilitant ainsi le suivi des requêtes.</li>
-                <li><strong>Classe <code>Authentication</code></strong> : Située dans <code>src.com.udem.ift2255.auth</code>, cette classe gère la vérification des comptes utilisateurs. Elle s'appuie sur les getters de la classe <code>Database</code> pour vérifier l'existence des comptes ou en ajouter de nouveaux lors de la création de comptes.</li>
+            <p>
+                La <strong>couche logique métier</strong> est constituée des classes suivantes, dans les packages src.com.udem.ift2255.model et src.com.udem.ift2255.auth :
+            </p>
+
+                <li><code>Resident.java</code> Contient les méthodes spécifiques aux résidents, notamment pour accéder à l'API de la ville de Montréal afin de récupérer des informations sur les travaux en cours.</li>
+                <br>
+                <li><code>Intervenant.java</code>  Implémente les fonctionnalités dédiées aux intervenants, telles que la soumission de rapports et la gestion des travaux.</li>
+                <br>
+                <li><code>ResidentialWorkRequest.java</code>   Représente les demandes de travaux résidentiels et centralise leur gestion, facilitant ainsi le suivi des requêtes.</li>
+                <br>
+                <li><code>AuthenticationService.java</code>   Située dans src.com.udem.ift2255.auth, cette classe gère la vérification des comptes utilisateurs. Elle s'appuie sur les getters de la classe <code>Database.java</code> permet de vérifier l'existence des comptes ou en ajouter de nouveaux lors de la création de comptes.</li>
             </ul>
+            <br>
 
             <h4>Couche Accès aux Données</h4>
-            <p>
-                La <strong>couche accès aux données</strong> est assurée par la classe <code>Database</code>, située dans le package <code>src.com.udem.ift2255.database</code>.
-            </p>
             <ul>
-                <li>Cette classe contient des structures de données comme des <strong>HashMaps</strong> pour stocker les objets <code>Intervenant</code>, <code>Resident</code>, ainsi que les associations entre résidents et leurs demandes de travaux (<code>ResidentialWorkRequest</code>).</li>
+            <p>
+                La <strong>couche accès aux données</strong> est assurée par la classe <code>Database.java</code> Elle se trouve dans le package src.com.udem.ift2255.database.
+            </p>
+                <br>
+                <li>Cette classe contient des structures de données comme des <strong>HashMaps</strong> pour stocker les objets suivants:
+
+                    <code>Intervenant.java</code> <code>Resident.java</code> <code>ResidentialWorkRequest.java</code>
+                </li>
                 <li>Elle gère toutes les interactions avec les données, offrant ainsi une interface fiable pour la couche logique métier, permettant une récupération et une mise à jour efficaces des informations.</li>
             </ul>
 
             <p>
                 Cette architecture en couches permet une organisation claire et une séparation logique des rôles de chaque composant. Elle garantit également une extensibilité future, notamment en facilitant l'intégration d'une interface graphique ou de nouvelles sources de données.
             </p>
+            <br>
 
             <h3 class="subsection-title" id="diagramme-classes">Diagramme de classes</h3>
             <p>Le diagramme de classes ci-dessous présente une vue simplifiée du système, en omettant les getters, setters, constructeurs, et classes utilitaires. Il inclut des abstractions visant à montrer les relations principales entre les composantes du projet.</p>
+            <br>
+            <h5>Vous pouvez cliquer sur l'image afin de l'agrandir.</h5>
+            <br>
             <div class="image-container">
                 <img src="images/class_diagram.svg" alt="Diagramme de classes" class="small-image">
             </div>
@@ -1358,6 +1375,9 @@
                 <li>Soumettre une requête de travail</li>
                 <li>Consulter la liste des requêtes de travail</li>
             </ul>
+            <br>
+            <h5>Vous pouvez cliquer sur une image afin de l'agrandir.</h5>
+            <br>
             <div class="image-container">
                 <img src="images/consulter_entraves.svg" alt="Diagramme de séquence - Consulter les entraves" class="large-image">
                 <br>
@@ -1390,7 +1410,9 @@
                 <div class="step" id="step-1">
                     <h3 class="step-title"><span class="step-number">1.</span> Téléchargement du Prototype</h3>
                     <p class="step-description">
-                        Téléchargez le fichier <code>.jar</code> depuis notre <a href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01/releases" target="_blank" class="inline-link">page des releases GitHub</a>.
+                        Téléchargez le fichier </p> <div class="code-snippet">
+                    <pre>.jar</pre>
+                </div>  <p>depuis notre <a href="https://github.com/SmilingAustrich/UdeM-IFT2255-Groupe01/releases" target="_blank" class="inline-link">page des releases GitHub</a>.
                         Cliquez sur la dernière version stable pour obtenir le fichier JAR.
                     </p>
                 </div>
@@ -1402,7 +1424,7 @@
                         Le prototype nécessite <strong>Java 8 ou plus récent</strong>. Vérifiez si vous avez Java installé en ouvrant votre terminal et en exécutant la commande suivante :
                     </p>
                     <div class="code-snippet">
-                        <pre><code>java -version</code></pre>
+                        <pre>java -version</pre>
                     </div>
                     <p class="step-description">
                         Si Java n'est pas installé ou si la version est obsolète, vous pouvez le télécharger et l'installer depuis le site officiel :
@@ -1414,10 +1436,10 @@
                 <div class="step" id="step-3">
                     <h3 class="step-title"><span class="step-number">3.</span> Lancement du Prototype</h3>
                     <p class="step-description">
-                        Une fois Java installé, exécutez le fichier <code>MaVillePrototypeV0.2.0.jar</code> en utilisant la commande suivante dans le terminal ou via l'explorateur de fichiers :
+                        Une fois Java installé, exécutez le fichier MaVillePrototypeV0.2.0.jar en utilisant la commande suivante dans le terminal ou via l'explorateur de fichiers :
                     </p>
                     <div class="code-snippet">
-                        <pre><code>java -jar MaVillePrototypeV0.2.0.jar</code></pre>
+                        <pre>java -jar MaVillePrototypeV0.2.0.jar</pre>
                     </div>
                 </div>
 
