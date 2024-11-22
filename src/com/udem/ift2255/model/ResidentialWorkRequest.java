@@ -119,5 +119,6 @@ public class ResidentialWorkRequest implements Serializable {
         return candidatures;
     }
 
+public Map<Intervenant, String> getCandidatures(){
+return candidatures;}
 }
-

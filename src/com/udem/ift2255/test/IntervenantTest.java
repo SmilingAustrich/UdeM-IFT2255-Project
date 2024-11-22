@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
+// Codé par Ilyesse
 public class IntervenantTest {
 
     @Test
@@ -27,6 +28,8 @@ public class IntervenantTest {
         assertTrue(request.isWorkAvailable());
         assertEquals(1, request.getCandidaturesMap().size());
         assertTrue(request.getCandidaturesMap().containsKey(intervenant));
+        System.out.println("\nTous les tests pour la méthode SoumettreCandidature ont été réussis.\n");
+
     }
 
     @Test
@@ -47,6 +50,8 @@ public class IntervenantTest {
 
         // Assert
         assertFalse(request.getCandidaturesMap().containsKey(intervenant));
+        System.out.println("\nTous les tests pour la méthode retirerCandidature ont été réussis.\n");
+
     }
 
     @Test
@@ -65,7 +70,9 @@ public class IntervenantTest {
 
         // Assert
         assertTrue(request.isWorkAvailable());
+        System.out.println("\nTous les tests pour la méthode ConfirmerCandidature ont été réussis.\n");
     }
+
 }
 
 
