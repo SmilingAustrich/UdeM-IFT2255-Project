@@ -396,16 +396,25 @@ public class Intervenant implements User, Serializable {
     }
 
     public void retirerCandidature(ResidentialWorkRequest requete) {
-        requete.rendreIndisponible();
-        System.out.println("Candidature confirmée par l'intervenant " + this.firstName);
-
-
+        if (requete.getCandidatures().containsKey(this)) {
+            requete.getCandidatures().remove(this); // Supprime la candidature
+            System.out.println("Candidature retirée par l'intervenant " + this.firstName);
+        } else {
+            System.out.println("Aucune candidature à retirer pour cet intervenant.");
+        }
     }
+
 
     public void confirmerCandidature(ResidentialWorkRequest requete) {
-        requete.rendreDisponible();
-        System.out.println("Candidature confirmée par l'intervenant " + this.firstName);
-
+        if (!requete.isWorkAvailable()) {
+            requete.rendreDisponible();
+            System.out.println("Soumission de la candidature confirmée par l'intervenant " + this.firstName);
+        } else {
+            System.out.println("La requête est déjà disponible.");
+        }
     }
+
+
+
 
 }

@@ -53,11 +53,17 @@ public class ResidentialWorkRequest implements Serializable {
     }
 
     public void ajouterCandidature(Intervenant intervenant, String message) {
-        if (isWorkAvailable){
-            candidatures.put(intervenant,message);
+        if (isWorkAvailable() && !candidatures.containsKey(intervenant)) {
+            candidatures.put(intervenant, message);
             System.out.println("Candidature soumise par " + intervenant.getFirstName());
+        } else if (candidatures.containsKey(intervenant)) {
+            System.out.println("La candidature a déjà été soumise par " + intervenant.getFirstName());
+        } else {
+            System.out.println("Impossible de soumettre la candidature.");
         }
     }
+
+
 
     public void retirerCandidature(Intervenant intervenant){
         candidatures.remove(intervenant);
@@ -108,5 +114,11 @@ public class ResidentialWorkRequest implements Serializable {
     public String getQuartier() {
         return neighbourhood;
     }
-}
 
+    public Map<Intervenant, String> getCandidaturesMap() {
+        return candidatures;
+    }
+
+public Map<Intervenant, String> getCandidatures(){
+return candidatures;}
+}

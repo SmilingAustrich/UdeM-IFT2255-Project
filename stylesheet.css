@@ -1053,3 +1053,7 @@ code {
     overflow-x: auto;
     font-family: 'Courier New', Courier, monospace;
 }
+@media (max-width: 768px) {
+    body {
+        font-size: 0.9rem; /* Smaller screens */
+    }}
