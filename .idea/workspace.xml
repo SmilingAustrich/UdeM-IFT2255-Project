@@ -12,10 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran.">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="stylesheet.css update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +85,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "devoir2",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/tarek/Documents/My stuff/BsC Computer Science /Automne 2024/IFT2255/devoir 2/UdeM-IFT2255-Groupe01/images",
     "node.js.detected.package.eslint": "true",
@@ -424,7 +424,23 @@
       <option name="project" value="LOCAL" />
       <updated>1732232128441</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="stylesheet.css update">
+      <option name="closed" value="true" />
+      <created>1732233708645</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1732233708645</updated>
+    </task>
+    <task id="LOCAL-00030" summary="stylesheet.css update">
+      <option name="closed" value="true" />
+      <created>1732234109452</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1732234109453</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -466,7 +482,8 @@
     <MESSAGE value="changement au rapport.html, disposition des images, ajout du tableau de la repartition des taches." />
     <MESSAGE value="changement au rapport.html, modification de la barre latérale, ajout de ma photo" />
     <MESSAGE value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
+    <MESSAGE value="stylesheet.css update" />
+    <option name="LAST_COMMIT_MESSAGE" value="stylesheet.css update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
