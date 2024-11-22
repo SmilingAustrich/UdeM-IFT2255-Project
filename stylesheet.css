@@ -1041,3 +1041,15 @@ img{
 .lateral-left-bar .nav-item-details .dash:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
+/* Code box styling */
+code {
+    display: block;
+    background-color: #1e1e1e;
+    color: #dcdcdc;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
