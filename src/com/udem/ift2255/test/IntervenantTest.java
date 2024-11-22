@@ -1,69 +1,68 @@
 package com.udem.ift2255.test;
 
-import com.udem.ift2255.auth.AuthenticationService;
-import com.udem.ift2255.database.Database;
 import com.udem.ift2255.model.Intervenant;
+import com.udem.ift2255.model.ResidentialWorkRequest;
 import com.udem.ift2255.model.Resident;
-import com.udem.ift2255.ui.Menu;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
 public class IntervenantTest {
 
-    @Test
-    public void testSignUpIntervenant() {
-        Intervenant testIntervenant = new Intervenant("Ilyesse", "Bouzommita", "Ilyesse.bouzommita@outlook.com", "Ilyesse123", "10982345", 2);
-        AuthenticationService.signUpIntervenant(testIntervenant);
+    private Intervenant intervenant;
+    private ResidentialWorkRequest request;
 
-        Intervenant retrievedIntervenant = Database.getIntervenantMap().get("Ilyesse.bouzommita@outlook.com");
-        assertEquals(testIntervenant, retrievedIntervenant);
+    @Before
+    public void setUp() {
+        Resident resident = new Resident("John", "Doe", "john.doe@example.com", "password123", "1234567890", "123 Main St", 30);
+        request = new ResidentialWorkRequest(resident, "Repair Road", "Fixing potholes", "Road Work", LocalDate.now(), "Plateau");
+        intervenant = new Intervenant("Jane", "Smith", "jane.smith@example.com", "password456", "12345678", 1);
     }
 
     @Test
-    public void testIntervenantLogInMenu() {
-        Intervenant testIntervenant = new Intervenant("Ilyesse", "Bouzommita", "Ilyesse.bouzommita@outlook.com", "Ilyesse123", "10982345", 2);
-        AuthenticationService.signUpIntervenant(testIntervenant);
+    public void testSoumettreCandidature() {
+        // Act
+        intervenant.soumettreCandidature(request, "Interested in this work");
 
-        String simulatedInput = "Ilyesse.bouzommita@outlook.com\nIlyesse123\n\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        Menu menu = new Menu();
-        menu.intervenantLogInMenu();
-
-        String output = outputStream.toString();
-        assertTrue(output.contains("Connexion réussie ! Bienvenue, Ilyesse."));
+        // Assert
+        assertTrue(request.isWorkAvailable());
+        assertEquals(1, request.getCandidatures().size());
+        assertTrue(request.getCandidatures().containsKey(intervenant));
     }
 
     @Test
-    public void testIntervenantInscriptionMenu() {
-        String simulatedInput = "Ilyesse\nBouzommita\nIlyesse.bouzommita@outlook.com\nIlyesse123\n10982345\n2\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+    public void testRetirerCandidature() {
+        // Arrange
+        intervenant.soumettreCandidature(request, "Interested in this work");
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+        // Vérifie que la candidature existe avant suppression
+        assertTrue(request.getCandidatures().containsKey(intervenant));
 
-        Menu menu = new Menu();
-        menu.intervenantInscriptionMenu();
+        // Act
+        intervenant.retirerCandidature(request);
 
-        Intervenant retrievedIntervenant = Database.getIntervenantMap().get("Ilyesse.bouzommita@outlook.com");
-        assertNotNull(retrievedIntervenant);
-        assertEquals("Ilyesse", retrievedIntervenant.getFirstName());
-        assertEquals("Bouzommita", retrievedIntervenant.getLastName());
-
-        String output = outputStream.toString();
-        assertTrue(output.contains("Inscription réussie ! Vous pouvez maintenant vous connecter."));
+        // Assert
+        assertFalse(request.getCandidatures().containsKey(intervenant));
     }
 
 
 
+    @Test
+    public void testConfirmerCandidature() {
+        // Arrange
+        intervenant.soumettreCandidature(request, "Interested in this work");
+        request.rendreIndisponible();
 
+        // Act
+        intervenant.confirmerCandidature(request);
+
+        // Assert
+        assertTrue(request.isWorkAvailable());
+    }
 }
+
+
 
