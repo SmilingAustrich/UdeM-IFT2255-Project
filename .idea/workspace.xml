@@ -12,9 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="changement au rapport.html, modification de la barre latérale, ajout de ma photo">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +98,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "inlay.hints",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -415,7 +416,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732231895477</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran.">
+      <option name="closed" value="true" />
+      <created>1732232128441</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1732232128441</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -456,14 +465,15 @@
     <MESSAGE value="changement au rapport.html, disposition des images." />
     <MESSAGE value="changement au rapport.html, disposition des images, ajout du tableau de la repartition des taches." />
     <MESSAGE value="changement au rapport.html, modification de la barre latérale, ajout de ma photo" />
-    <option name="LAST_COMMIT_MESSAGE" value="changement au rapport.html, modification de la barre latérale, ajout de ma photo" />
+    <MESSAGE value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/udem/ift2255/ui/Menu.java</url>
-          <line>347</line>
+          <line>343</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>

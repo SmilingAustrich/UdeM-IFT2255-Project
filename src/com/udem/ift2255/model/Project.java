@@ -12,11 +12,11 @@ public class Project implements Serializable {
     private final int EndDate;
     private final Intervenant projectOwner;
     private static final long serialVersionUID = 1L;
-    public Project(String projectName, String projectDescription, String projectType, String projectStatus, int startDate, int endDate, Intervenant projectOwner) {
+    public Project(String projectName, String projectDescription, String projectType, int startDate, int endDate, Intervenant projectOwner) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.projectType = projectType;
-        this.projectStatus = projectStatus;
+        this.projectStatus = "prévu";
         this.StartDate = startDate;
         this.EndDate = endDate;
         this.projectOwner = projectOwner;
