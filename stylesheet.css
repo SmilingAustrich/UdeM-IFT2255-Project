@@ -990,7 +990,10 @@ img{
     z-index: -1;
 }
 
-
+.member{
+    padding-left: 50px;
+    padding-right:50px;
+}
 .lateral-left-bar .nav-item-title {
     cursor: pointer;
     padding: 8px 12px;

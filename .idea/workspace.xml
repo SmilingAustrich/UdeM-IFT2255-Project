@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran.">
+    <list default="true" id="1f8e66a6-5a75-4593-a864-44e5f7c8a60f" name="Changes" comment="stylesheet.css update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rapport.html" beforeDir="false" afterPath="$PROJECT_DIR$/rapport.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
@@ -424,7 +424,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732232128441</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="stylesheet.css update">
+      <option name="closed" value="true" />
+      <created>1732233708645</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1732233708645</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -466,7 +474,8 @@
     <MESSAGE value="changement au rapport.html, disposition des images, ajout du tableau de la repartition des taches." />
     <MESSAGE value="changement au rapport.html, modification de la barre latérale, ajout de ma photo" />
     <MESSAGE value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix du bug de la barre latérale qui ne s'affichait pas correctement lorsqu'on est pas en plein écran." />
+    <MESSAGE value="stylesheet.css update" />
+    <option name="LAST_COMMIT_MESSAGE" value="stylesheet.css update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
