@@ -115,7 +115,7 @@ public class ResidentialWorkRequest implements Serializable {
         return neighbourhood;
     }
 
-    public Map<Intervenant, String> getCandidatures() {
+    public Map<Intervenant, String> getCandidaturesMap() {
         return candidatures;
     }
 

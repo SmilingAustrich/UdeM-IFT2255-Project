@@ -408,7 +408,7 @@ public class Intervenant implements User, Serializable {
     public void confirmerCandidature(ResidentialWorkRequest requete) {
         if (!requete.isWorkAvailable()) {
             requete.rendreDisponible();
-            System.out.println("Candidature confirmée par l'intervenant " + this.firstName);
+            System.out.println("Soumission de la candidature confirmée par l'intervenant " + this.firstName);
         } else {
             System.out.println("La requête est déjà disponible.");
         }
