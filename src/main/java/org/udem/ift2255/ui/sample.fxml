@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: 0a0e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="215.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="341.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@ressources/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="216.0" prefHeight="26.0" prefWidth="378.0" text="Je souhaite continuer en tant que" textFill="#fbdc6a">
+               <font>
+                  <Font name="Candara Bold" size="21.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="155.0" layoutY="78.0" prefHeight="35.0" prefWidth="191.0" text="Bienvenue " textFill="#fbdc6a">
+               <font>
+                  <Font name="Candara Bold" size="29.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
+            <Button layoutX="266.0" layoutY="305.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #fbdc6a;" text="Intervenant" textAlignment="CENTER">
+               <effect>
+                  <Glow />
+               </effect>
+               <font>
+                  <Font name="Candara" size="16.0" />
+               </font>
+            </Button>
+            <Button layoutX="120.0" layoutY="305.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="116.0" style="-fx-background-color: #fbdc6a;" text="Résident" textAlignment="CENTER">
+               <effect>
+                  <Glow />
+               </effect>
+               <font>
+                  <Font name="Candara" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

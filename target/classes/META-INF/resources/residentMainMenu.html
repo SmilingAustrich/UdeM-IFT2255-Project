@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resident Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h3>Resident Dashboard</h3>
+    </div>
+    <div class="menu-section">
+        <div class="menu-title">Gestion des Préférences</div>
+        <div class="menu-item"><a href="#">Modifier ses préférences horaires</a></div>
+    </div>
+    <div class="menu-section">
+        <div class="menu-title">Notifications</div>
+        <div class="menu-item">
+            <a href="#">Voir ses notifications</a>
+            <span class="notification-count">5</span> <!-- Example notification count -->
+        </div>
+    </div>
+    <div class="menu-section">
+        <div class="menu-title">Travaux</div>
+        <div class="menu-item"><a href="#">Consulter les travaux en cours</a></div>
+        <div class="menu-item"><a href="#">Consulter les travaux à venir (3 prochains mois)</a></div>
+        <div class="menu-item"><a href="#">Chercher ou filtrer les travaux par quartier</a></div>
+    </div>
+    <div class="menu-section">
+        <div class="menu-title">Entraves</div>
+        <div class="menu-item"><a href="#" id="consulter-entraves">Consulter les entraves engendrées par un travail</a></div>
+        <div class="menu-item"><a href="#">Chercher ou filtrer les entraves par rue</a></div>
+    </div>
+    <div class="menu-section">
+        <div class="menu-title">Requêtes</div>
+        <div class="menu-item"><a href="#">Soumettre une requête de travail</a></div>
+        <div class="menu-item"><a href="#">Faire le suivi d'une requête de travail</a></div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <h2>Bienvenue, Resident!</h2>
+    <!-- Dynamic content for Entraves will be loaded here -->
+    <div id="entraves-content">
+        <!-- Entraves content will be populated here -->
+    </div>
+</div>
+
+<script>
+    // Fetch the entraves data from the backend API
+    function fetchEntraves() {
+        fetch("http://localhost:8080/api/entraves")
+            .then(response => response.json())
+            .then(data => {
+                // Check if we have data
+                if (Array.isArray(data) && data.length > 0) {
+                    let entravesListHtml = '<ul>';
+
+                    // Loop through each entrave and display it
+                    data.forEach(entrave => {
+                        entravesListHtml += `
+                                <li>
+                                    <strong>ID du travail:</strong> ${entrave.id_request} <br>
+                                    <strong>Nom de la rue:</strong> ${entrave.shortname} <br>
+                                    <strong>Impact sur la rue:</strong> ${entrave.streetimpacttype}
+                                </li>
+                            `;
+                    });
+
+                    entravesListHtml += '</ul>';
+                    document.getElementById("entraves-list").innerHTML = entravesListHtml;
+                } else {
+                    document.getElementById("entraves-list").innerHTML = "Aucune entrave trouvée.";
+                }
+            })
+            .catch(error => {
+                console.error("Erreur lors de la récupération des entraves:", error);
+                document.getElementById("entraves-list").innerHTML = "Une erreur est survenue.";
+            });
+    }
+
+    // Call the fetchEntraves function on page load
+    window.onload = fetchEntraves;
+</script>
+
+</body>
+</html>

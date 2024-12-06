@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Intervenant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="content">
+    <div class="paralax">
+        <div class="layer rocks2"></div>
+        <div class="layer rocks1"></div>
+        <div class="layer hills"></div>
+        <div class="layer foreground"></div>
+    </div>
+    <div class="blur-overlay"></div>
+</div>
+
+<div class="container">
+    <form id="loginForm" class="login-form">
+        <h3>Portail de Connexion - Intervenant</h3>
+        <label for="email">Adresse courriel:</label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+
+        <div class="btn" onclick="submitForm(event);">Se connecter</div>
+    </form>
+</div>
+
+<script>
+    // JavaScript function to send the form data as JSON via fetch API
+    function submitForm(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Gather form data
+        const formData = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+// Send the form data as JSON using fetch API
+        fetch('/authenticate/intervenant', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Connexion réussie');
+                    // Redirect or do something after successful login
+                } else {
+                    response.text().then(text => alert(text)); // Show error message from backend
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la connexion');
+            });
+    }
+
+</script>
+
+<script src="scripts.js"></script>
+</body>
+</html>
