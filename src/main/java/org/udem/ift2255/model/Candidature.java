@@ -6,15 +6,16 @@ import jakarta.persistence.*;
 @Entity
 public class Candidature extends PanacheEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)  // You can use LAZY to optimize performance by not loading this relationship immediately
-    @JoinColumn(name = "intervenant_id")  // Optional: specify the column name in the database
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "intervenant_id")
     private Intervenant intervenant;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_request_id")  // Specify the column name for the foreign key
+    @JoinColumn(name = "work_request_id")
     private ResidentialWorkRequest workRequest;
 
-    @Column(length = 500)  // Optional: specify the length of the column for message
+    @Column(length = 500)
     private String message;
 
     // Getters and Setters

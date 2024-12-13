@@ -7,6 +7,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "project")
 public class Project extends PanacheEntity {
+
+
+
     @Column(name = "project_name", nullable = false)
     private String projectName;
 

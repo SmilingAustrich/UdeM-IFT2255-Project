@@ -41,6 +41,7 @@ public class IntervenantResource {
 
     @POST
     @Path("/authenticate")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateIntervenant(@FormParam("email") String email, @FormParam("password") String password) {
         boolean isAuthenticated = intervenantService.authenticate(email, password);

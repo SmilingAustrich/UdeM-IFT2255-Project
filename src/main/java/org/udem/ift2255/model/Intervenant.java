@@ -14,6 +14,8 @@ import java.util.List;
 @Table(name = "intervenant")
 public class Intervenant extends PanacheEntity implements User {
 
+
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -116,13 +118,6 @@ public class Intervenant extends PanacheEntity implements User {
         return cityIdCode;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     // Optional: Add a method to get the work requests associated with the intervenant
     public List<ResidentialWorkRequest> getWorkRequests() {

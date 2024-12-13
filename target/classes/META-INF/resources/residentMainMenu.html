@@ -33,7 +33,7 @@
     <div class="menu-section">
         <div class="menu-title">Entraves</div>
         <div class="menu-item"><a href="#" id="consulter-entraves">Consulter les entraves engendrées par un travail</a></div>
-        <div class="menu-item"><a href="#">Chercher ou filtrer les entraves par rue</a></div>
+        <div class="menu-item"><a href="#" id="filter-entraves-street">Chercher ou filtrer les entraves par rue</a></div>
     </div>
     <div class="menu-section">
         <div class="menu-title">Requêtes</div>
@@ -45,47 +45,86 @@
 <!-- Main Content -->
 <div class="main-content">
     <h2>Bienvenue, Resident!</h2>
-    <!-- Dynamic content for Entraves will be loaded here -->
     <div id="entraves-content">
-        <!-- Entraves content will be populated here -->
+        <!-- Entraves content will be dynamically populated here -->
     </div>
 </div>
 
 <script>
-    // Fetch the entraves data from the backend API
-    function fetchEntraves() {
-        fetch("http://localhost:8080/api/entraves")
-            .then(response => response.json())
+    // Function to fetch and display all entraves
+    function fetchAllEntraves() {
+        fetch('/entraves') // Call the backend REST endpoint
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch entraves");
+                return response.json();
+            })
             .then(data => {
-                // Check if we have data
-                if (Array.isArray(data) && data.length > 0) {
-                    let entravesListHtml = '<ul>';
-
-                    // Loop through each entrave and display it
-                    data.forEach(entrave => {
-                        entravesListHtml += `
-                                <li>
-                                    <strong>ID du travail:</strong> ${entrave.id_request} <br>
-                                    <strong>Nom de la rue:</strong> ${entrave.shortname} <br>
-                                    <strong>Impact sur la rue:</strong> ${entrave.streetimpacttype}
-                                </li>
-                            `;
-                    });
-
-                    entravesListHtml += '</ul>';
-                    document.getElementById("entraves-list").innerHTML = entravesListHtml;
+                const content = document.getElementById('entraves-content');
+                content.innerHTML = '<h3>Liste de Toutes les Entraves</h3>';
+                if (data.length === 0) {
+                    content.innerHTML += '<p>Aucune entrave trouvée.</p>';
                 } else {
-                    document.getElementById("entraves-list").innerHTML = "Aucune entrave trouvée.";
+                    const list = document.createElement('ul');
+                    data.forEach(entrave => {
+                        const item = document.createElement('li');
+                        item.innerHTML = `
+                            <strong>ID du Travail:</strong> ${entrave.id_request} <br>
+                            <strong>Rue:</strong> ${entrave.shortname} <br>
+                            <strong>Impact:</strong> ${entrave.streetimpacttype}
+                        `;
+                        list.appendChild(item);
+                    });
+                    content.appendChild(list);
                 }
             })
             .catch(error => {
-                console.error("Erreur lors de la récupération des entraves:", error);
-                document.getElementById("entraves-list").innerHTML = "Une erreur est survenue.";
+                console.error(error);
+                const content = document.getElementById('entraves-content');
+                content.innerHTML = '<p>Erreur lors du chargement des entraves.</p>';
             });
     }
 
-    // Call the fetchEntraves function on page load
-    window.onload = fetchEntraves;
+    // Function to fetch entraves filtered by street
+    function fetchEntravesByStreet(streetName) {
+        fetch(`/entraves/by-street/${streetName}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch entraves by street");
+                return response.json();
+            })
+            .then(data => {
+                const content = document.getElementById('entraves-content');
+                content.innerHTML = `<h3>Entraves pour la Rue: ${streetName}</h3>`;
+                if (data.length === 0) {
+                    content.innerHTML += '<p>Aucune entrave trouvée pour cette rue.</p>';
+                } else {
+                    const list = document.createElement('ul');
+                    data.forEach(entrave => {
+                        const item = document.createElement('li');
+                        item.innerHTML = `
+                            <strong>ID du Travail:</strong> ${entrave.id_request} <br>
+                            <strong>Rue:</strong> ${entrave.shortname} <br>
+                            <strong>Impact:</strong> ${entrave.streetimpacttype}
+                        `;
+                        list.appendChild(item);
+                    });
+                    content.appendChild(list);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                const content = document.getElementById('entraves-content');
+                content.innerHTML = '<p>Erreur lors du chargement des entraves par rue.</p>';
+            });
+    }
+
+    // Event Listeners
+    document.getElementById('consulter-entraves').addEventListener('click', fetchAllEntraves);
+    document.getElementById('filter-entraves-street').addEventListener('click', () => {
+        const streetName = prompt('Entrez le nom de la rue:');
+        if (streetName) {
+            fetchEntravesByStreet(streetName);
+        }
+    });
 </script>
 
 </body>

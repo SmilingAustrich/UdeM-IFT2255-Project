@@ -20,11 +20,16 @@ public class Main {
     @Inject
     TestDataInitializer testDataInitializer;  // Inject TestDataInitializer
 
-    // This method is called at startup to initialize test data
     public void onStart(@Observes StartupEvent event) {
-        // Initialize test data during app startup
-        testDataInitializer.initializeTestData();  // Use injected TestDataInitializer
+        try {
+            testDataInitializer.initializeTestData();
+            System.out.println("Test data initialized successfully!");
+        } catch (Exception e) {
+            System.err.println("Failed to initialize test data: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
 
     // Redirect to the login page (login.html)
     @GET

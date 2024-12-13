@@ -152,7 +152,7 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("\033[1;36m Recherche de travaux...\033[0m");
-                ResidentService.rechercherTravaux();
+               ;// ResidentService.rechercherTravaux();
                 break;
             case 3:
                 System.out.println("\033[1;36m Configuration des notifications personnalisées...\033[0m");

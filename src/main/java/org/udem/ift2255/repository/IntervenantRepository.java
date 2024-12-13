@@ -8,12 +8,13 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class IntervenantRepository implements PanacheRepository<Intervenant> {
 
+    // Find an Intervenant by Email
     public Intervenant findByEmail(String email) {
         return find("email", email).firstResult();
     }
 
-    // Method to find an Intervenant by ID
+    // Find an Intervenant by ID
     public Intervenant findById(Long id) {
-        // Use Panache's find method with JPQL to find by id
-        return find("id", id).firstResult();  // Returns the first result or null if not found
-    }}
+        return findByIdOptional(id).orElse(null); // Optional handling with null fallback
+    }
+}

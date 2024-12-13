@@ -1,6 +1,6 @@
 package org.udem.ift2255.resource;
 
-import com.google.gson.JsonArray;
+
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -10,6 +10,21 @@ import org.udem.ift2255.model.Resident;
 import org.udem.ift2255.service.AuthenticationService;
 import org.udem.ift2255.service.ResidentService;
 import jakarta.transaction.Transactional;
+
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import org.udem.ift2255.service.ResidentService;
+
+import jakarta.json.JsonArray;
+import jakarta.json.JsonObject;
+
+
+
 
 @Path("/residents")
 @Produces(MediaType.APPLICATION_JSON)
@@ -50,6 +65,7 @@ public class ResidentResource {
 
     @POST
     @Path("/authenticate")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateResident(@FormParam("email") String email, @FormParam("password") String password) {
         // Use AuthenticationService to authenticate with "resident" as userType
@@ -61,6 +77,8 @@ public class ResidentResource {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid credentials").build();
         }
     }
+
+
 
     @POST
     @Path("/register")
@@ -82,6 +100,10 @@ public class ResidentResource {
         }
         return Response.ok("Login successful").build();
     }
+
+
+
+
 
     // New endpoint to fetch all Entraves (no need for residentId)
     @GET
@@ -108,5 +130,7 @@ public class ResidentResource {
                     .build();
         }
     }
+
+
 
 }

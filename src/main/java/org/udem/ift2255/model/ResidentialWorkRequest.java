@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "residential_work_request")
 public class ResidentialWorkRequest extends PanacheEntity {
 
-    private Long id;
+
 
     @Column(name = "work_title", nullable = false)
     private String workTitle;
@@ -26,11 +26,11 @@ public class ResidentialWorkRequest extends PanacheEntity {
     @Column(name = "neighbourhood", nullable = false)
     private String neighbourhood;
 
+
     @Column(name = "work_wished_start_date", nullable = false)
     private LocalDate workWishedStartDate;
 
-    @ManyToOne
-    @JoinColumn(name = "resident_id", nullable = false)
+    @OneToOne(mappedBy = "requete")
     private Resident resident;
 
     @Column(name = "is_work_available", nullable = false)

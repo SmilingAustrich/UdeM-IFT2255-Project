@@ -3,37 +3,33 @@ package org.udem.ift2255.repository;
 import org.udem.ift2255.model.Resident;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-
-import java.util.List;
 
 @ApplicationScoped
 public class ResidentRepository implements PanacheRepository<Resident> {
 
-    @Inject
-    jakarta.persistence.EntityManager entityManager;
-
-    // Example of using Panache methods
+    // Find a Resident by ID (provided by Panache)
     public Resident findById(Long id) {
-        return find("id", id).firstResult();  // Using Panache find()
+        return find("id", id).firstResult();
     }
 
-    // Custom save method using EntityManager
+    // Save a Resident (Panache handles persist and merge automatically)
     @Transactional
     public void save(Resident resident) {
-        if (resident.getId() == null) {
-            entityManager.persist(resident);  // Perform persist if ID is null
+        if (resident.isPersistent()) {
+            resident.persist(); // Panache will handle both persist and merge
         } else {
-            entityManager.merge(resident);  // Perform merge (update) if ID exists
+            persist(resident); // Explicitly persist if it's a new entity
         }
     }
 
+    // Delete a Resident
     @Transactional
     public void delete(Resident resident) {
-        entityManager.remove(entityManager.contains(resident) ? resident : entityManager.merge(resident));
+        resident.delete(); // Panache handles removal
     }
 
+    // Find a Resident by Email
     public Resident findByEmail(String email) {
         return find("email", email).firstResult();
     }

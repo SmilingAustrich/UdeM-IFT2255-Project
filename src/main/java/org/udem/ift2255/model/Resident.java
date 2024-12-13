@@ -10,6 +10,8 @@ import jakarta.persistence.*;
 @Table(name = "resident")
 public class Resident extends PanacheEntity implements User {
 
+
+
     @OneToOne
     @JoinColumn(name = "requete_id")
     private ResidentialWorkRequest requete;
@@ -28,6 +30,7 @@ public class Resident extends PanacheEntity implements User {
 
     @Column(name = "phone", nullable = false)
     private String phone;
+
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -56,9 +59,6 @@ public class Resident extends PanacheEntity implements User {
         this.firstName = firstName;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getLastName() {
         return lastName;
@@ -116,7 +116,5 @@ public class Resident extends PanacheEntity implements User {
         this.requete = requete;
     }
 
-    public void setId(long l) {
-        this.id = l;
-    }
+
 }
