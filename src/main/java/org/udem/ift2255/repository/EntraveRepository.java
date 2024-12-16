@@ -23,6 +23,8 @@ public class EntraveRepository {
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
+            System.out.println("HTTP Response Code: " + responseCode);
+
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                     StringBuilder response = new StringBuilder();
@@ -30,15 +32,20 @@ public class EntraveRepository {
                     while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
+                    System.out.println("Raw API Response: " + response);
+
                     // Use Jakarta JSON to parse the response
                     try (JsonReader jsonReader = Json.createReader(new StringReader(response.toString()))) {
-                        return jsonReader.readObject();
+                        JsonObject jsonResponse = jsonReader.readObject();
+                        System.out.println("Parsed JSON Response: " + jsonResponse);
+                        return jsonResponse;
                     }
                 }
             } else {
                 throw new RuntimeException("Failed to fetch entraves. HTTP Response Code: " + responseCode);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Error fetching entraves from API", e);
         }
     }

@@ -131,4 +131,8 @@ public class Intervenant extends PanacheEntity implements User {
     public void setPassword(String s) {
         this.password = s;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

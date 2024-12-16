@@ -1,13 +1,12 @@
 package org.udem.ift2255.resource;
 
 import jakarta.inject.Inject;
+import jakarta.json.*;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.udem.ift2255.service.EntraveService;
 
-import jakarta.json.JsonArray;
-import jakarta.json.JsonObject;
 import java.util.List;
 
 @Path("/entraves")
@@ -19,10 +18,49 @@ public class EntraveResource {
     EntraveService entraveService;
 
     @GET
-    public Response getAllEntraves() {
-        JsonArray entraves = entraveService.getAllEntraves();
-        return Response.ok(entraves).build();
+    @Path("/getAllEntraves")
+    public Response getAllEntraves(@QueryParam("page") @DefaultValue("1") int page,
+                                   @QueryParam("limit") @DefaultValue("10") int limit) {
+        try {
+            JsonArray entraves = entraveService.getAllEntraves();
+
+            int total = entraves.size();
+            int start = (page - 1) * limit;
+            int end = Math.min(start + limit, total);
+
+            System.out.println("Pagination - Start: " + start + ", End: " + end + ", Total: " + total);
+
+            if (start >= total) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Page number exceeds total available pages.")
+                        .build();
+            }
+
+            List<JsonValue> paginatedEntraves = entraves.subList(start, end);
+
+            JsonArrayBuilder resultsArray = Json.createArrayBuilder();
+            for (JsonValue entrave : paginatedEntraves) {
+                resultsArray.add(entrave);
+            }
+
+            JsonObject response = Json.createObjectBuilder()
+                    .add("results", resultsArray)
+                    .add("total", total)
+                    .add("page", page)
+                    .add("limit", limit)
+                    .build();
+
+            System.out.println("Paginated Response: " + response);
+
+            return Response.ok(response).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("An error occurred while processing the request.")
+                    .build();
+        }
     }
+
 
     @GET
     @Path("/by-work-id/{workId}")

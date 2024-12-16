@@ -4,18 +4,18 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "candidature")
 public class Candidature extends PanacheEntity {
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "intervenant_id")
+    @ManyToOne
+    @JoinColumn(name = "intervenant_id", nullable = false)
     private Intervenant intervenant;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_request_id")
+    @ManyToOne
+    @JoinColumn(name = "work_request_id", nullable = false)
     private ResidentialWorkRequest workRequest;
 
-    @Column(length = 500)
+    @Column(name = "message", nullable = false)
     private String message;
 
     // Getters and Setters

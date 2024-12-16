@@ -3,7 +3,6 @@ package org.udem.ift2255.model;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +25,11 @@ public class ResidentialWorkRequest extends PanacheEntity {
     @Column(name = "neighbourhood", nullable = false)
     private String neighbourhood;
 
-
     @Column(name = "work_wished_start_date", nullable = false)
     private LocalDate workWishedStartDate;
 
-    @OneToOne(mappedBy = "requete")
+    @ManyToOne
+    @JoinColumn(name = "resident_id", nullable = false)
     private Resident resident;
 
     @Column(name = "is_work_available", nullable = false)
@@ -43,9 +42,10 @@ public class ResidentialWorkRequest extends PanacheEntity {
     @JoinColumn(name = "chosen_intervenant_id")
     private Intervenant chosenIntervenant;
 
-    private static final long serialVersionUID = 1L;
+    // Default constructor
+    public ResidentialWorkRequest() {}
 
-    // Constructors
+    // Parameterized constructor
     public ResidentialWorkRequest(Resident resident, String workTitle, String detailedWorkDescription,
                                   String workType, LocalDate workWishedStartDate, String neighbourhood) {
         this.resident = resident;
@@ -55,18 +55,9 @@ public class ResidentialWorkRequest extends PanacheEntity {
         this.workType = workType;
         this.workWishedStartDate = workWishedStartDate;
         this.neighbourhood = neighbourhood;
-        this.candidatures = new ArrayList<>();
-    }
-
-    public ResidentialWorkRequest() {
-        // Default constructor
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
     public String getWorkTitle() {
         return workTitle;
     }
@@ -135,19 +126,17 @@ public class ResidentialWorkRequest extends PanacheEntity {
         this.chosenIntervenant = chosenIntervenant;
     }
 
-    // Method to handle candidatures
+    // Utility Methods
     public void ajouterCandidature(Intervenant intervenant, String message) {
         if (isWorkAvailable() && candidatures.stream().noneMatch(c -> c.getIntervenant().equals(intervenant))) {
             Candidature candidature = new Candidature();
             candidature.setIntervenant(intervenant);
-            candidature.setWorkRequest(this);  // Link the candidature back to this work request
+            candidature.setWorkRequest(this);  // Link candidature to this request
             candidature.setMessage(message);
             candidatures.add(candidature);
             System.out.println("Candidature soumise par " + intervenant.getFirstName());
-        } else if (candidatures.stream().anyMatch(c -> c.getIntervenant().equals(intervenant))) {
-            System.out.println("La candidature a déjà été soumise par " + intervenant.getFirstName());
         } else {
-            System.out.println("Impossible de soumettre la candidature.");
+            System.out.println("Candidature impossible ou déjà soumise par " + intervenant.getFirstName());
         }
     }
 
@@ -156,21 +145,35 @@ public class ResidentialWorkRequest extends PanacheEntity {
         System.out.println("Candidature retirée par " + intervenant.getFirstName());
     }
 
-    public void choisirCandidature(Intervenant intervenantChoisi, String messageResident) {
+    public void choisirCandidature(Intervenant intervenantChoisi) {
         candidatures.stream()
                 .filter(c -> c.getIntervenant().equals(intervenantChoisi))
                 .findFirst()
                 .ifPresent(c -> {
                     this.chosenIntervenant = intervenantChoisi;
+                    this.isWorkAvailable = false;  // Mark the work as unavailable once chosen
                     System.out.println("Candidature choisie : " + intervenantChoisi.getFirstName());
-                    if (messageResident != null) {
-                        System.out.println("Message du résident : " + messageResident);
-                    }
                 });
     }
 
+    @Override
+    public String toString() {
+        return "ResidentialWorkRequest{" +
+                "id=" + id +
+                ", workTitle='" + workTitle + '\'' +
+                ", detailedWorkDescription='" + detailedWorkDescription + '\'' +
+                ", workType='" + workType + '\'' +
+                ", neighbourhood='" + neighbourhood + '\'' +
+                ", workWishedStartDate=" + workWishedStartDate +
+                ", resident=" + (resident != null ? resident.getFirstName() : "N/A") +
+                ", isWorkAvailable=" + isWorkAvailable +
+                ", candidatures=" + candidatures.size() +
+                ", chosenIntervenant=" + (chosenIntervenant != null ? chosenIntervenant.getFirstName() : "N/A") +
+                '}';
+    }
+
     public String getTitle() {
-        return workTitle;
+        return this.workTitle;
     }
 
     public LocalDate getStartDate() {

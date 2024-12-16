@@ -15,16 +15,15 @@ import jakarta.transaction.Transactional;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 
+
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import java.io.BufferedReader;
+
 
 import java.time.LocalDate;
-
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Map;
 
@@ -118,93 +117,70 @@ public class ResidentService {
         );
         workRequestRepository.saveRequest(requete);
     }
+    @Transactional
+    public JsonArray rechercherTravaux(String searchCriteria, String searchValue) throws Exception {
+        // Step 1: Fetch data from the API
+        URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
 
-//    public static List<Map<String, String>> rechercherTravaux() {
-//        List<Map<String, String>> travauxList = new ArrayList<>();
-//
-//        try {
-//            // Step 1: Fetch data from API
-//            URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setRequestMethod("GET");
-//
-//            int responseCode = connection.getResponseCode();
-//            if (responseCode == HttpURLConnection.HTTP_OK) {
-//                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//                String inputLine;
-//                StringBuilder response = new StringBuilder();
-//
-//                while ((inputLine = in.readLine()) != null) {
-//                    response.append(inputLine);
-//                }
-//                in.close();
-//
-//                // Step 2: Parse the JSON response
-//                JsonObject jsonResponse = JsonParser.parseString(response.toString()).getAsJsonObject();
-//                JsonArray travaux = jsonResponse.getAsJsonObject("result").getAsJsonArray("records");
-//
-//                // Step 3: Store the search results in the list (instead of printing them)
-//                boolean continueSearching = true;
-//                while (continueSearching) {
-//                    // This part is for searching criteria (could be handled by a separate method)
-//                    // Here we're just assuming the search criteria are based on title for simplicity
-//
-//                    // Example for searching by title
-//                    String titre = "Example Title"; // This should be dynamically input from the user
-//                    List<Map<String, String>> foundTravaux = searchByTitle(travaux, titre);
-//                    travauxList.addAll(foundTravaux);
-//
-//                    // In a real application, handle other search criteria (type, borough, etc.) here
-//                    continueSearching = false;  // Exit loop after one search for simplicity
-//                }
-//            } else {
-//                // Handle the error (e.g., log it or throw an exception)
-//                throw new Exception("[ERREUR] Impossible de récupérer les données.");
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return travauxList;
-//    }
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            try (JsonReader jsonReader = Json.createReader(new InputStreamReader(connection.getInputStream()))) {
+                JsonObject jsonResponse = jsonReader.readObject();
+                JsonObject result = jsonResponse.getJsonObject("result");
+                JsonArray records = result.getJsonArray("records");
 
-//    private static List<Map<String, String>> searchByTitle(JsonArray travaux, String titre) {
-//        List<Map<String, String>> results = new ArrayList<>();
-//
-//       // for (int i = 0; i < travaux.size(); i++) {
-//            JsonObject travail = travaux.get(i).getAsJsonObject();
-//            if (getAsStringSafe(travail.get("id")).contains(titre)) {
-//                Map<String, String> travailData = Map.of(
-//                        "id", getAsStringSafe(travail.get("id")),
-//                        "quartier", getAsStringSafe(travail.get("boroughid")),
-//                        "typeTravaux", getAsStringSafe(travail.get("reason_category")),
-//                        "intervenant", getAsStringSafe(travail.get("organizationname"))
-//                );
-//                results.add(travailData);
-//            }
-//        }
-//
-//        return results;
-//    }
+                // Step 2: Filter and format records
+                jakarta.json.JsonArrayBuilder filteredRecords = Json.createArrayBuilder();
 
-//    private static String getAsStringSafe(Object obj) {
-//        return (obj == null) ? "" : obj.toString();
-//    }
+                for (JsonObject record : records.getValuesAs(JsonObject.class)) {
+                    String valueToCheck = record.getString(searchCriteria, "").toLowerCase();
+                    if (valueToCheck.contains(searchValue.toLowerCase())) {
+                        JsonObject formattedRecord = Json.createObjectBuilder()
+                                .add("ID du Travail", record.getString("_id", "N/A"))
+                                .add("Quartier", record.getString("boroughid", "N/A"))
+                                .add("Type de Travaux", record.getString("reason_category", "N/A"))
+                                .add("Intervenant", record.getString("organizationname", "N/A"))
+                                .build();
+                        filteredRecords.add(formattedRecord);
+                    }
+                }
 
-//    public JsonArray convertListToJsonArray(List<Map<String, Object>> list) {
-//        Gson gson = new Gson();
-//        JsonArray jsonArray = new JsonArray();
-//
-//        for (Map<String, Object> map : list) {
-//            JsonElement jsonElement = gson.toJsonTree(map);
-//            jsonArray.add(jsonElement);
-//        }
-//
-//        return jsonArray;}
+                return filteredRecords.build();
+            }
+        } else {
+            throw new Exception("Failed to fetch data from API. Response Code: " + responseCode);
+        }
+    }
 
 
-    // Method to fetch the data from external API using Jakarta JSON
+    private List<Map<String, String>> filterTravaux(jakarta.json.JsonArray travaux, String searchCriteria, String searchValue) {
+        List<Map<String, String>> results = new ArrayList<>();
+
+        for (int i = 0; i < travaux.size(); i++) {
+            jakarta.json.JsonObject travail = travaux.getJsonObject(i); // Correct method for Jakarta JSON
+
+            String valueToCheck = getAsStringSafe(travail.get(searchCriteria)); // Safely retrieve value
+            if (valueToCheck != null && valueToCheck.toLowerCase().contains(searchValue.toLowerCase())) {
+                Map<String, String> travailData = Map.of(
+                        "id", getAsStringSafe(travail.get("id")),
+                        "quartier", getAsStringSafe(travail.get("boroughid")),
+                        "typeTravaux", getAsStringSafe(travail.get("reason_category")),
+                        "intervenant", getAsStringSafe(travail.get("organizationname"))
+                );
+                results.add(travailData);
+            }
+        }
+
+        return results;
+    }
+
+    private String getAsStringSafe(jakarta.json.JsonValue value) {
+        return (value == null || value.getValueType() == jakarta.json.JsonValue.ValueType.NULL) ? "" : value.toString();
+    }
+
+
     public JsonArray consulterEntraves() throws Exception {
         URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=a2bc8014-488c-495d-941b-e7ae1999d1bd");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -213,10 +189,24 @@ public class ResidentService {
         int responseCode = connection.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try (JsonReader jsonReader = Json.createReader(new InputStreamReader(connection.getInputStream()))) {
-                // Parse the JSON response using Jakarta JSON
                 JsonObject jsonResponse = jsonReader.readObject();
                 JsonObject result = jsonResponse.getJsonObject("result");
-                return result.getJsonArray("records");
+                JsonArray records = result.getJsonArray("records");
+
+                // Create a new JsonArray builder to hold the formatted records
+                jakarta.json.JsonArrayBuilder formattedRecords = Json.createArrayBuilder();
+
+                // Iterate through the records and extract necessary fields
+                for (JsonObject record : records.getValuesAs(JsonObject.class)) {
+                    JsonObject formattedRecord = Json.createObjectBuilder()
+                            .add("ID du Travail", record.getString("_id", "N/A")) // Replace "_id" with actual field name
+                            .add("Rue", record.getString("Rue", "N/A"))         // Replace "Rue" with actual field name
+                            .add("Impact", record.getString("Impact", "N/A"))   // Replace "Impact" with actual field name
+                            .build();
+                    formattedRecords.add(formattedRecord);
+                }
+
+                return formattedRecords.build();
             }
         } else {
             throw new Exception("Failed to fetch data from API. Response Code: " + responseCode);

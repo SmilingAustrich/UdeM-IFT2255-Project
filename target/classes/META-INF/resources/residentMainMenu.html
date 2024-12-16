@@ -4,128 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resident Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="stylesMainMenu.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons"></script>
 </head>
 <body>
-<!-- Sidebar -->
-<div class="sidebar">
-    <div class="sidebar-header">
-        <h3>Resident Dashboard</h3>
-    </div>
-    <div class="menu-section">
-        <div class="menu-title">Gestion des Préférences</div>
-        <div class="menu-item"><a href="#">Modifier ses préférences horaires</a></div>
-    </div>
-    <div class="menu-section">
-        <div class="menu-title">Notifications</div>
-        <div class="menu-item">
-            <a href="#">Voir ses notifications</a>
-            <span class="notification-count">5</span> <!-- Example notification count -->
-        </div>
-    </div>
-    <div class="menu-section">
-        <div class="menu-title">Travaux</div>
-        <div class="menu-item"><a href="#">Consulter les travaux en cours</a></div>
-        <div class="menu-item"><a href="#">Consulter les travaux à venir (3 prochains mois)</a></div>
-        <div class="menu-item"><a href="#">Chercher ou filtrer les travaux par quartier</a></div>
-    </div>
-    <div class="menu-section">
-        <div class="menu-title">Entraves</div>
-        <div class="menu-item"><a href="#" id="consulter-entraves">Consulter les entraves engendrées par un travail</a></div>
-        <div class="menu-item"><a href="#" id="filter-entraves-street">Chercher ou filtrer les entraves par rue</a></div>
-    </div>
-    <div class="menu-section">
-        <div class="menu-title">Requêtes</div>
-        <div class="menu-item"><a href="#">Soumettre une requête de travail</a></div>
-        <div class="menu-item"><a href="#">Faire le suivi d'une requête de travail</a></div>
-    </div>
-</div>
+<!-- Header Section -->
 
-<!-- Main Content -->
-<div class="main-content">
-    <h2>Bienvenue, Resident!</h2>
-    <div id="entraves-content">
-        <!-- Entraves content will be dynamically populated here -->
+<div class="header">
+    <div class="header__logo">
+        <strong>Ma Ville</strong>
     </div>
+    <nav class="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="index.html" class="navbar__link">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="#" class="navbar__link">
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="consulterTravaux.html" class="navbar__link">
+                    <span>Rechercher Travaux</span>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="consulterEntraves.html" class="navbar__link">
+                    <span>Consulter Entraves</span>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="requeteTravail.html" class="navbar__link">
+                    <span>Soumettre une Requête</span>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="#" class="navbar__link">
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="mesrequetes.html" class="navbar__link">
+                    <span>Mes Requêtes</span>
+                </a>
+            </li>
+        </ul>
+
+
+    </nav>
+
+</div>
+<!-- Content Section -->
+<div id="content" class="content-section">
+    <h1>Welcome to the Resident Dashboard</h1>
+    <p>Use the navigation menu above to access different features.</p>
 </div>
 
 <script>
-    // Function to fetch and display all entraves
-    function fetchAllEntraves() {
-        fetch('/entraves') // Call the backend REST endpoint
-            .then(response => {
-                if (!response.ok) throw new Error("Failed to fetch entraves");
-                return response.json();
-            })
-            .then(data => {
-                const content = document.getElementById('entraves-content');
-                content.innerHTML = '<h3>Liste de Toutes les Entraves</h3>';
-                if (data.length === 0) {
-                    content.innerHTML += '<p>Aucune entrave trouvée.</p>';
-                } else {
-                    const list = document.createElement('ul');
-                    data.forEach(entrave => {
-                        const item = document.createElement('li');
-                        item.innerHTML = `
-                            <strong>ID du Travail:</strong> ${entrave.id_request} <br>
-                            <strong>Rue:</strong> ${entrave.shortname} <br>
-                            <strong>Impact:</strong> ${entrave.streetimpacttype}
-                        `;
-                        list.appendChild(item);
-                    });
-                    content.appendChild(list);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                const content = document.getElementById('entraves-content');
-                content.innerHTML = '<p>Erreur lors du chargement des entraves.</p>';
-            });
-    }
+    // Initialize Feather Icons
 
-    // Function to fetch entraves filtered by street
-    function fetchEntravesByStreet(streetName) {
-        fetch(`/entraves/by-street/${streetName}`)
-            .then(response => {
-                if (!response.ok) throw new Error("Failed to fetch entraves by street");
-                return response.json();
-            })
-            .then(data => {
-                const content = document.getElementById('entraves-content');
-                content.innerHTML = `<h3>Entraves pour la Rue: ${streetName}</h3>`;
-                if (data.length === 0) {
-                    content.innerHTML += '<p>Aucune entrave trouvée pour cette rue.</p>';
-                } else {
-                    const list = document.createElement('ul');
-                    data.forEach(entrave => {
-                        const item = document.createElement('li');
-                        item.innerHTML = `
-                            <strong>ID du Travail:</strong> ${entrave.id_request} <br>
-                            <strong>Rue:</strong> ${entrave.shortname} <br>
-                            <strong>Impact:</strong> ${entrave.streetimpacttype}
-                        `;
-                        list.appendChild(item);
-                    });
-                    content.appendChild(list);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                const content = document.getElementById('entraves-content');
-                content.innerHTML = '<p>Erreur lors du chargement des entraves par rue.</p>';
-            });
-    }
-
-    // Event Listeners
-    document.getElementById('consulter-entraves').addEventListener('click', fetchAllEntraves);
-    document.getElementById('filter-entraves-street').addEventListener('click', () => {
-        const streetName = prompt('Entrez le nom de la rue:');
-        if (streetName) {
-            fetchEntravesByStreet(streetName);
-        }
-    });
 </script>
-
 </body>
 </html>

@@ -122,11 +122,10 @@ public class IntervenantService {
      * Permet de choisir une candidature parmi celles soumises.
      *
      * @param intervenantChoisi L'intervenant choisi pour le projet.
-     * @param messageResident Le message du résident si présent.
      * @param requete La requête de travail à laquelle choisir une candidature.
      */
-    public void choisirCandidature(Intervenant intervenantChoisi, String messageResident, ResidentialWorkRequest requete) {
-        requete.choisirCandidature(intervenantChoisi, messageResident);
+    public void choisirCandidature(Intervenant intervenantChoisi, ResidentialWorkRequest requete) {
+        requete.choisirCandidature(intervenantChoisi);
     }
 
     @Inject

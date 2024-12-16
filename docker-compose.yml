@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   postgres:
     image: postgres:16
@@ -12,6 +11,25 @@ services:
     volumes:
       - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
       - ./src/main/resources/data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U USER -d mavilledb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  app:
+    build: .
+    environment:
+      QUARKUS_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mavilledb
+      QUARKUS_DATASOURCE_USERNAME: USER
+      QUARKUS_DATASOURCE_PASSWORD: user
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
     networks:
       - app-network
 
