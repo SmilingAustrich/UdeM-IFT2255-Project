@@ -9,6 +9,9 @@ import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
+import java.awt.Desktop;
+import java.net.URI;
+
 /**
  * This is a Quarkus JAX-RS resource class that initializes test data on app startup
  * and redirects the user to the login page at the root URL.
@@ -24,17 +27,24 @@ public class Main {
         try {
             testDataInitializer.initializeTestData();
             System.out.println("Test data initialized successfully!");
+
+            // Open the browser to the application's root URL
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().browse(new URI("http://localhost:8080/DefaultPage.html"));
+                System.out.println("Browser opened to http://localhost:8080/");
+            } else {
+                System.err.println("Desktop not supported. Please open the browser manually.");
+            }
         } catch (Exception e) {
-            System.err.println("Failed to initialize test data: " + e.getMessage());
+            System.err.println("Failed to initialize test data or open browser: " + e.getMessage());
             e.printStackTrace();
         }
     }
-
 
     // Redirect to the login page (DefaultPage.html)
     @GET
     public Response redirectToLogin() {
         // Redirect to DefaultPage.html located in src/main/resources/META-INF/resources/
-        return Response.seeOther(java.net.URI.create("/login.html")).build();
+        return Response.seeOther(java.net.URI.create("/DefaultPage.html")).build();
     }
 }
