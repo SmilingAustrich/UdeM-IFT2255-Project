@@ -1,8 +1,13 @@
-// Fetch work requests for the resident with ID 1
 const fetchWorkRequests = async () => {
     try {
-        // Fetch the work requests
-        const response = await fetch('http://localhost:8080/work-requests/resident/1');
+        // Get residentId from localStorage
+        const residentId = localStorage.getItem('residentId');
+        if (!residentId) {
+            throw new Error("Resident ID not found in localStorage");
+        }
+
+        // Fetch the work requests for the logged-in resident
+        const response = await fetch(`http://localhost:8080/work-requests/resident/${residentId}`);
 
         // Check if the response is ok (status 200)
         if (!response.ok) {
@@ -11,49 +16,48 @@ const fetchWorkRequests = async () => {
 
         // Parse the JSON response
         const data = await response.json();
-        console.log("Fetched Work Requests:", data); // Log the fetched data
 
-        // Display the fetched work requests
-        displayWorkRequests(data);
+        // Check if data is valid and not empty
+        if (Array.isArray(data) && data.length > 0) {
+            displayWorkRequests(data); // Display the work requests if found
+        } else {
+            document.getElementById('request-list').innerHTML = '<li>Aucune requête trouvée.</li>';
+        }
     } catch (error) {
         console.error('Error fetching work requests:', error);
+        document.getElementById('request-list').innerHTML = `<li>${error.message}</li>`;
     }
 };
 
 // Function to display work requests on the page
 const displayWorkRequests = (workRequests) => {
-    const requestList = document.getElementById('request-list'); // Get the <ul> element
+    const requestList = document.getElementById('request-list');
+    requestList.innerHTML = ''; // Clear any previous data
 
-    // Clear the list before displaying new data
-    requestList.innerHTML = '';
-
-    // Iterate through each work request and create a list item
+    // Iterate through the work requests and create list items
     workRequests.forEach(request => {
         const listItem = document.createElement('li');
         listItem.classList.add('work-request-item'); // Add a class for styling
 
+        // Ensure that the properties exist before accessing them
+        const workTitle = request.workTitle || 'No Title';
+        const detailedWorkDescription = request.detailedWorkDescription || 'No Description';
+        const neighbourhood = request.neighbourhood || 'No Neighbourhood';
+        const startDate = request.startDate ? new Date(request.startDate).toLocaleDateString() : 'No Start Date';
+        const workType = request.workType || 'No Work Type';
+        const workWishedStartDate = request.workWishedStartDate ? new Date(request.workWishedStartDate).toLocaleDateString() : 'No Wished Start Date';
+        const candidaturesCount = request.candidatures ? request.candidatures.length : 0;
+
         // Add work request details to the list item
         listItem.innerHTML = `
-            <strong>Title:</strong> ${request.title} <br>
-            <strong>Description:</strong> ${request.detailedWorkDescription} <br>
-            <strong>Neighbourhood:</strong> ${request.neighbourhood} <br>
-            <strong>Start Date:</strong> ${request.startDate} <br>
-            <strong>Work Type:</strong> ${request.workType} <br>
-            <strong>Wished Start Date:</strong> ${request.workWishedStartDate} <br>
-            <strong>Candidatures:</strong> ${request.candidatures.length} <br>
+            <strong>Title:</strong> ${workTitle} <br>
+            <strong>Description:</strong> ${detailedWorkDescription} <br>
+            <strong>Neighbourhood:</strong> ${neighbourhood} <br>
+            <strong>Start Date:</strong> ${startDate} <br>
+            <strong>Work Type:</strong> ${workType} <br>
+            <strong>Wished Start Date:</strong> ${workWishedStartDate} <br>
+            <strong>Candidatures:</strong> ${candidaturesCount} <br>
         `;
-
-        // If there are candidatures, display their information
-        if (request.candidatures.length > 0) {
-            const candidaturesList = document.createElement('ul');
-            request.candidatures.forEach(candidature => {
-                const candidatureItem = document.createElement('li');
-                candidatureItem.innerHTML = `<strong>Intervenant:</strong> ${candidature.intervenant.firstName} ${candidature.intervenant.lastName} <br>
-                                             <strong>Status:</strong> ${candidature.status}`;
-                candidaturesList.appendChild(candidatureItem);
-            });
-            listItem.appendChild(candidaturesList);
-        }
 
         // Append the list item to the <ul> element
         requestList.appendChild(listItem);
@@ -62,5 +66,3 @@ const displayWorkRequests = (workRequests) => {
 
 // Call the fetchWorkRequests function when the page loads
 fetchWorkRequests();
-
-

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class ResidentialWorkRequestDTO {
 
+    private Long id;
     private String workTitle;
     private String detailedWorkDescription;
     private String workType;
@@ -49,5 +50,10 @@ public class ResidentialWorkRequestDTO {
 
     public void setWorkWishedStartDate(LocalDate workWishedStartDate) {
         this.workWishedStartDate = workWishedStartDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+
     }
 }

@@ -43,18 +43,38 @@ public class ResidentialWorkRequestResource {
     @Path("/resident/{residentId}")
     public Response getWorkRequestsByResident(@PathParam("residentId") Long residentId) {
         try {
+            // Fetch the work requests using the service
             List<ResidentialWorkRequest> workRequests = workRequestService.getWorkRequestsByResident(residentId);
+
             if (workRequests == null || workRequests.isEmpty()) {
                 return Response.status(Response.Status.NOT_FOUND)
                         .entity("No work requests found for resident ID " + residentId).build();
             }
-            return Response.status(Response.Status.OK).entity(workRequests).build();
+
+            // Map ResidentialWorkRequest to ResidentialWorkRequestDTO using setters
+            List<ResidentialWorkRequestDTO> workRequestDTOs = workRequests.stream()
+                    .map(workRequest -> {
+                        ResidentialWorkRequestDTO dto = new ResidentialWorkRequestDTO();
+                        dto.setId(workRequest.id);
+                        dto.setWorkTitle(workRequest.getWorkTitle());
+                        dto.setDetailedWorkDescription(workRequest.getDetailedWorkDescription());
+                        dto.setNeighbourhood(workRequest.getNeighbourhood());
+                        dto.setWorkType(workRequest.getWorkType());
+                        dto.setWorkWishedStartDate(LocalDate.parse(workRequest.getWorkWishedStartDate().toString()));
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+
+            return Response.status(Response.Status.OK).entity(workRequestDTOs).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Error: " + e.getMessage()).build();
         }
     }
+
+
+
 
     @GET
     @Path("/all")

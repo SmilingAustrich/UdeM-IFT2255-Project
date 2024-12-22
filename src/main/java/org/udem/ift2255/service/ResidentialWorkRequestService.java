@@ -16,6 +16,7 @@ import org.udem.ift2255.repository.ResidentRepository;
 import org.udem.ift2255.repository.ResidentialWorkRequestRepository;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @ApplicationScoped
@@ -91,13 +92,16 @@ public class ResidentialWorkRequestService {
     // Fetch all work requests for a specific resident
     public List<ResidentialWorkRequest> getWorkRequestsByResident(Long residentId) {
         try {
+            // Ensure the correct query to reference the 'assignedResident' relationship
             return em.createQuery("SELECT r FROM ResidentialWorkRequest r WHERE r.assignedResident.id = :residentId", ResidentialWorkRequest.class)
                     .setParameter("residentId", residentId)
                     .getResultList();
         } catch (Exception e) {
+            // Log the error more effectively for debugging
             e.printStackTrace();
-            return null;
+            return Collections.emptyList(); // Return an empty list instead of null
         }
     }
+
 
 }
