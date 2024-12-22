@@ -113,4 +113,10 @@ public class ResidentialWorkRequestResource {
                     .build();
         }
     }
+
+    // In ResidentialWorkRequestResource.java
+    public void setWorkRequestService(ResidentialWorkRequestService service) {
+        this.workRequestService = service;
+    }
+
 }

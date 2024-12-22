@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulter les Requêtes de Travail</title>
+    <!-- Same stylesheet as the resident pages -->
     <link rel="stylesheet" href="../styles/stylesMainMenu.css">
 </head>
 <body>
 
-<!-- Header Section -->
+<!-- Header Section (Injected by headerIntervenant.js) -->
 <div id="header"></div>
 <script src="../javascript/headerIntervenant.js"></script>
 
@@ -17,18 +18,17 @@
     <h1>Consulter les Requêtes de Travail</h1>
     <p>Voici la liste des requêtes de travail soumises par les résidents.</p>
 
-    <div id="work-requests-list">
-        <!-- Work requests will be displayed here -->
-    </div>
+    <!-- Container where the work requests will be displayed -->
+    <div id="work-requests-list"></div>
 </div>
 
 <script>
-    // Fetch all work requests and display them
+    // When the page loads, fetch all work requests and display them
     document.addEventListener('DOMContentLoaded', () => {
         fetch('/work-requests/all')  // Call the backend to get all work requests
             .then(response => response.json())
             .then(workRequests => {
-                if (workRequests && Array.isArray(workRequests)) {
+                if (Array.isArray(workRequests)) {
                     const workRequestsList = document.getElementById('work-requests-list');
                     workRequestsList.innerHTML = '';  // Clear any existing content
 
@@ -36,60 +36,56 @@
                         const workRequestItem = document.createElement('div');
                         workRequestItem.classList.add('work-request-item');
 
-                        console.log('Request ID:', request.id); // This should log a valid number
-
                         workRequestItem.innerHTML = `
-                            <h3>${request.workTitle}</h3>
-                            <p><strong>Description:</strong> ${request.detailedWorkDescription}</p>
-                            <p><strong>Type:</strong> ${request.workType}</p>
-                            <p><strong>Quartier:</strong> ${request.quartier}</p>
-                            <p><strong>Date de début souhaitée:</strong> ${request.workWishedStartDate}</p>
-                            <button class="submit-candidature-btn" data-request-id="${request.id}">Soumettre Candidature</button>
-                        `;
+                <h3>${request.workTitle}</h3>
+                <p><strong>Description:</strong> ${request.detailedWorkDescription}</p>
+                <p><strong>Type:</strong> ${request.workType}</p>
+                <p><strong>Quartier:</strong> ${request.quartier}</p>
+                <p><strong>Date de début souhaitée:</strong> ${request.workWishedStartDate}</p>
+                <button class="submit-candidature-btn" data-request-id="${request.id}">
+                  Soumettre Candidature
+                </button>
+              `;
                         workRequestsList.appendChild(workRequestItem);
                     });
 
-                    // Add event listeners for "Soumettre Candidature" buttons
+                    // Add event listeners to the "Soumettre Candidature" buttons
                     const candidatureButtons = document.querySelectorAll('.submit-candidature-btn');
                     candidatureButtons.forEach(button => {
                         button.addEventListener('click', handleCandidatureSubmission);
                     });
-
                 }
             })
             .catch(error => {
                 console.error('Erreur lors de la récupération des requêtes de travail:', error);
-                document.getElementById('work-requests-list').innerHTML = '<p>Erreur lors du chargement des requêtes.</p>';
+                document.getElementById('work-requests-list').innerHTML =
+                    '<p>Erreur lors du chargement des requêtes.</p>';
             });
     });
 
-    /// Handle the candidature submission
+    // Handle the candidature submission
     function handleCandidatureSubmission(event) {
         const workRequestId = event.target.getAttribute('data-request-id');
-        console.log('workRequestId:', workRequestId); // Log the value of workRequestId
-
-        // Get the intervenantId from localStorage
         const intervenantId = localStorage.getItem('intervenantId');
-        console.log('Intervenant ID:', intervenantId); // Ensure this value is logged correctly
 
         if (!intervenantId || !workRequestId || isNaN(workRequestId)) {
             alert('Le ID de la demande de travail ou de l\'intervenant est invalide.');
-            return; // Exit the function if the IDs are invalid
+            return; // Exit if IDs are invalid
         }
 
         // Prepare data to send in the request
         const data = {
-            workRequestId: parseInt(workRequestId, 10),  // Ensure it's an integer
-            message: 'Your application message'  // You can replace this with actual user input
+            workRequestId: parseInt(workRequestId, 10),
+            message: 'Votre message de candidature'
         };
 
-        // Send the data to the backend
+        // Send the POST request
         fetch(`/candidatures/${intervenantId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data) // Pass the correct object with workRequestId and message
+            body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(responseData => {
@@ -104,7 +100,6 @@
                 alert('Une erreur est survenue.');
             });
     }
-
 </script>
 
 </body>

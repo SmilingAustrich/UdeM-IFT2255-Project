@@ -1,22 +1,39 @@
+/**
+ * Classe EntraveResource
+ *
+ * Cette classe représente une ressource REST pour gérer les entraves.
+ * Elle fournit des points d'entrée pour récupérer toutes les entraves, filtrer par ID de travaux,
+ * ou rechercher par nom de rue. La pagination est également prise en charge.
+ */
 package org.udem.ift2255.resource;
 
-import jakarta.inject.Inject;
-import jakarta.json.*;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import org.udem.ift2255.service.EntraveService;
+import jakarta.inject.Inject;                          // Permet d'injecter des dépendances
+import jakarta.json.*;                                 // Fournit des outils pour créer et manipuler des objets JSON
+import jakarta.ws.rs.*;                                // Fournit les annotations pour les services REST
+import jakarta.ws.rs.core.MediaType;                   // Spécifie les types de contenu pour les requêtes et réponses
+import jakarta.ws.rs.core.Response;                    // Fournit des outils pour construire les réponses HTTP
+import org.udem.ift2255.service.EntraveService;        // Service pour gérer les entraves
 
-import java.util.List;
+import java.util.List;                                 // Permet de manipuler des listes
 
+/**
+ * Ressource REST pour la gestion des entraves
+ */
 @Path("/entraves")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EntraveResource {
 
     @Inject
-    EntraveService entraveService;
+    EntraveService entraveService; // Service pour récupérer les données d'entraves
 
+    /**
+     * Récupère toutes les entraves avec pagination.
+     *
+     * @param page  Le numéro de la page à récupérer (par défaut : 1).
+     * @param limit Le nombre d'entraves par page (par défaut : 10).
+     * @return Une réponse HTTP contenant les entraves paginées ou un message d'erreur.
+     */
     @GET
     @Path("/getAllEntraves")
     public Response getAllEntraves(@QueryParam("page") @DefaultValue("1") int page,
@@ -61,7 +78,12 @@ public class EntraveResource {
         }
     }
 
-
+    /**
+     * Récupère les entraves associées à un ID de travaux donné.
+     *
+     * @param workId L'ID des travaux.
+     * @return Une réponse contenant les entraves correspondantes ou un message d'erreur.
+     */
     @GET
     @Path("/by-work-id/{workId}")
     public Response getEntravesByWorkId(@PathParam("workId") String workId) {
@@ -70,6 +92,12 @@ public class EntraveResource {
                 : Response.ok(entraves).build();
     }
 
+    /**
+     * Récupère les entraves pour une rue donnée.
+     *
+     * @param streetName Le nom de la rue.
+     * @return Une réponse contenant les entraves correspondantes ou un message d'erreur.
+     */
     @GET
     @Path("/by-street/{streetName}")
     public Response getEntravesByStreet(@PathParam("streetName") String streetName) {

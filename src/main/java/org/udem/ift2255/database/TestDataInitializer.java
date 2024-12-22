@@ -1,28 +1,58 @@
+/**
+ * Classe TestDataInitializer
+ *
+ * Cette classe est responsable de l'initialisation des données de test dans la base de données.
+ * Elle crée et persiste plusieurs entités (Resident, Intervenant, Project, ResidentialWorkRequest, Candidature)
+ * et utilise également un service de notification pour envoyer des notifications aux résidents.
+ */
 package org.udem.ift2255.database;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
-import org.udem.ift2255.model.*;
-import org.udem.ift2255.service.NotificationService;
+import jakarta.enterprise.context.ApplicationScoped; // Annotation indiquant que la classe a un cycle de vie de type ApplicationScoped
+import jakarta.persistence.EntityManager;             // Permet de gérer et manipuler les entités (Entity) en base de données
+import jakarta.transaction.Transactional;            // Annotation permettant de gérer les transactions
+import org.udem.ift2255.model.*;                     // Import des entités du modèle
+import org.udem.ift2255.service.NotificationService; // Import du service de notification
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.function.Supplier;
+import java.time.LocalDate;                          // Permet de manipuler des dates
+import java.util.List;                               // Interface List (structure de données de type liste)
+import java.util.function.Supplier;                  // Interface fonctionnelle Supplier (fournit un objet sur demande)
 
+/**
+ * Classe servant à initialiser les données de test.
+ * Les données créées ici sont utilisées pour alimenter la base de données
+ * afin de simuler un environnement complet.
+ */
 @ApplicationScoped
 public class TestDataInitializer {
 
+    /**
+     * Fournit l'interface permettant de gérer les entités et d'interagir
+     * avec la base de données (persistence context).
+     */
     private final EntityManager entityManager;
 
-    // Inject NotificationService
+    /**
+     * Service de notification permettant d'envoyer des notifications
+     * aux résidents ciblés lors de la création de projets.
+     */
     private final NotificationService notificationService;
 
+    /**
+     * Constructeur TestDataInitializer.
+     *
+     * @param entityManager        Gère les opérations de persistence sur les entités.
+     * @param notificationService  Permet l'envoi de notifications aux résidents.
+     */
     public TestDataInitializer(EntityManager entityManager, NotificationService notificationService) {
         this.entityManager = entityManager;
         this.notificationService = notificationService;
     }
 
+    /**
+     * Méthode principale d'initialisation de données de test.
+     * Elle est transactionnelle, ce qui signifie que toutes les opérations
+     * de persistence effectuées dans cette méthode seront dans une même transaction.
+     */
     @Transactional
     public void initializeTestData() {
         // Supprimer toutes les données existantes
@@ -65,18 +95,29 @@ public class TestDataInitializer {
         notificationService.sendProjectNotification(project2);
     }
 
+    /**
+     * Méthode privée permettant de supprimer toutes les données existantes dans la base de données
+     * afin d'éviter les conflits ou les duplications lors de l'initialisation des données de test.
+     */
     private void clearDatabase() {
-        // Delete from Project first to remove any foreign key constraints
+        // Supprimer d'abord les entités Project pour éviter les contraintes de clés étrangères
         entityManager.createQuery("DELETE FROM Project").executeUpdate();
 
-        // Now delete from other tables
+        // Supprimer les données des autres tables
         List<String> tables = List.of("Candidature", "ResidentialWorkRequest", "Intervenant", "Resident", "Project");
         for (String table : tables) {
             entityManager.createQuery("DELETE FROM " + table).executeUpdate();
         }
     }
 
-
+    /**
+     * Méthode générique permettant de créer et de persister une entité.
+     * Cette méthode utilise un Supplier<T> pour instancier l'entité avant de la persister.
+     *
+     * @param supplier Une lambda ou méthode renvoyant une nouvelle instance de l'entité à persister.
+     * @param <T>      Le type de l'entité à persister.
+     * @return         L'entité nouvellement créée et persistée.
+     */
     private <T> T persistEntity(Supplier<T> supplier) {
         T entity = supplier.get();
         entityManager.persist(entity);

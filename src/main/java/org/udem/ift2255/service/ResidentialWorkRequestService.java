@@ -64,7 +64,8 @@ public class ResidentialWorkRequestService {
 
     // Get all work requests
     public List<ResidentialWorkRequest> getAllRequests() {
-        return workRequestRepository.listAll();  // Fetch all work requests
+        List<ResidentialWorkRequest> requests = workRequestRepository.listAll();
+        return requests != null ? requests : Collections.emptyList(); // Return empty list if repository returns null
     }
 
     // Get a work request by its title
@@ -103,5 +104,9 @@ public class ResidentialWorkRequestService {
         }
     }
 
+    public void setRepositories(ResidentialWorkRequestRepository workRequestRepo, ResidentRepository residentRepo) {
+        this.workRequestRepository = workRequestRepo;
+        this.residentRepository = residentRepo;
+    }
 
 }

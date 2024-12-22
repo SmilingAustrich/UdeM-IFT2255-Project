@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.removeItem('residentId');
                     sessionStorage.removeItem('email');
                     sessionStorage.removeItem('residentId');
-                    window.location.replace('../index.html');
+                    window.location.replace('../DefaultPage.html');
                 });
             }
 

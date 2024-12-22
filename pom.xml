@@ -46,12 +46,31 @@
             <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
         </dependency>
 
-
+        <!-- Jakarta JSON -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.json</artifactId>
             <version>2.0.1</version> <!-- The implementation -->
         </dependency>
+
+        <!-- Additional Jakarta APIs -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+        <!-- Quarkus Features -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-qute</artifactId>
@@ -60,7 +79,6 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-client-reactive</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
@@ -74,6 +92,11 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Testing -->
@@ -99,11 +122,11 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Security -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-jwt</artifactId>
         </dependency>
-
 
         <!-- Password hashing -->
         <dependency>
@@ -112,6 +135,7 @@
             <version>0.4</version>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>
@@ -144,6 +168,41 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <!-- Prepare JaCoCo agent before tests -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- Generate the JaCoCo report after tests -->
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <!-- Generate a coverage report for integration tests -->
+                    <execution>
+                        <id>post-integration-test</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report-integration</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+
+
         </plugins>
     </build>
 </project>

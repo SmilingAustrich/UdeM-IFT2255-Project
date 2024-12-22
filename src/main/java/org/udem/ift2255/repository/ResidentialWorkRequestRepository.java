@@ -1,39 +1,84 @@
+/**
+ * Classe ResidentialWorkRequestRepository
+ *
+ * Cette classe est un dépôt (repository) pour gérer les entités ResidentialWorkRequest.
+ * Elle utilise PanacheRepository pour simplifier les opérations CRUD sur les requêtes
+ * de travaux résidentiels. Cette classe est annotée avec @ApplicationScoped,
+ * ce qui signifie qu'une seule instance est créée et partagée dans tout le cycle
+ * de vie de l'application.
+ */
 package org.udem.ift2255.repository;
 
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
-import org.udem.ift2255.model.ResidentialWorkRequest;
-import jakarta.enterprise.context.ApplicationScoped;
+import io.quarkus.hibernate.orm.panache.PanacheRepository; // Fournit des fonctionnalités simplifiées pour les dépôts Panache
+import org.udem.ift2255.model.ResidentialWorkRequest;      // Import de l'entité ResidentialWorkRequest
+import jakarta.enterprise.context.ApplicationScoped;       // Spécifie le scope de l'application
 
-import java.util.List;
+import java.util.List;                                     // Permet de manipuler des listes d'entités
 
+/**
+ * Dépôt ResidentialWorkRequestRepository
+ *
+ * Ce dépôt permet d'effectuer des opérations spécifiques sur les requêtes de travaux résidentiels,
+ * comme l'enregistrement, la suppression, la recherche par titre ou par filtres.
+ */
 @ApplicationScoped
 public class ResidentialWorkRequestRepository implements PanacheRepository<ResidentialWorkRequest> {
 
-    // Method to save a new request
+    /**
+     * Enregistre une nouvelle requête de travaux résidentiels.
+     *
+     * @param requete La requête de travaux résidentiels à enregistrer.
+     */
     public void saveRequest(ResidentialWorkRequest requete) {
-        persist(requete);  // PanacheRepository provides persist method
+        persist(requete); // Méthode fournie par PanacheRepository
     }
 
-    // Method to delete a request
+    /**
+     * Supprime une requête de travaux résidentiels.
+     *
+     * @param requete La requête de travaux résidentiels à supprimer.
+     */
     public void removeRequest(ResidentialWorkRequest requete) {
-        delete(requete);  // PanacheRepository provides delete method
+        delete(requete); // Méthode fournie par PanacheRepository
     }
 
-    // Find a work request by its title
+    /**
+     * Recherche une requête de travaux résidentiels par son titre.
+     *
+     * @param title Le titre de la requête.
+     * @return La requête correspondante ou {@code null} si elle n'existe pas.
+     */
     public ResidentialWorkRequest findByTitle(String title) {
-        // Use Panache's find method with JPQL to search by title
-        return find("title", title).firstResult();
+        return find("title", title).firstResult(); // Recherche par titre
     }
 
-    // Get a list of filtered requests based on workType and neighbourhood
+    /**
+     * Recherche les requêtes filtrées par type de travaux et quartier.
+     *
+     * @param workType     Le type de travaux.
+     * @param neighbourhood Le quartier.
+     * @return Une liste des requêtes correspondant aux filtres.
+     */
     public List<ResidentialWorkRequest> findFilteredRequests(String workType, String neighbourhood) {
-        // Use Panache's find method with JPQL to filter by workType and neighbourhood
         return find("workType = ?1 and neighbourhood = ?2", workType, neighbourhood).list();
     }
 
-    // Get all work requests
+    /**
+     * Récupère toutes les requêtes de travaux résidentiels.
+     *
+     * @return Une liste contenant toutes les requêtes.
+     */
     public List<ResidentialWorkRequest> getAllRequests() {
-        // Use Panache's list() to get all requests
-        return listAll();
+        return listAll(); // Récupère toutes les entités
+    }
+
+    /**
+     * Recherche les requêtes de travaux associées à un résident spécifique.
+     *
+     * @param residentId L'ID du résident.
+     * @return Une liste de requêtes associées à ce résident.
+     */
+    public List<ResidentialWorkRequest> findByResidentId(Long residentId) {
+        return find("assignedResident.id", residentId).list();
     }
 }

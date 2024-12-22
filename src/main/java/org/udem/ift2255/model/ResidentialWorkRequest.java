@@ -165,4 +165,3 @@ public class ResidentialWorkRequest extends PanacheEntity {
         return this.id;
     }
 }
-

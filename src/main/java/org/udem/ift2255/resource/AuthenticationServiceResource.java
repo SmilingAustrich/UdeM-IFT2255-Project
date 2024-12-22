@@ -1,34 +1,48 @@
+/**
+ * Classe AuthenticationServiceResource
+ *
+ * Cette classe représente une ressource REST pour gérer l'authentification
+ * et l'inscription des utilisateurs (résidents et intervenants) dans l'application Ma Ville.
+ * Elle fournit des points d'entrée pour les opérations d'authentification et de création
+ * de nouveaux comptes.
+ */
 package org.udem.ift2255.resource;
 
-import jakarta.json.Json;
-import org.udem.ift2255.service.AuthenticationService;
-import org.udem.ift2255.dto.LoginRequestDTO;
-import org.udem.ift2255.model.*;
-import org.udem.ift2255.repository.ResidentRepository;
-import org.udem.ift2255.repository.IntervenantRepository;
+import jakarta.json.Json;                              // Fournit des outils pour créer et manipuler des objets JSON
+import org.udem.ift2255.service.AuthenticationService; // Service d'authentification
+import org.udem.ift2255.dto.LoginRequestDTO;           // DTO pour les requêtes de connexion
+import org.udem.ift2255.model.*;                       // Import des entités Resident et Intervenant
+import org.udem.ift2255.repository.ResidentRepository; // Dépôt pour gérer les résidents
+import org.udem.ift2255.repository.IntervenantRepository; // Dépôt pour gérer les intervenants
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import jakarta.enterprise.context.ApplicationScoped;   // Spécifie le scope de l'application
+import jakarta.inject.Inject;                          // Permet d'injecter des dépendances
+import jakarta.transaction.Transactional;              // Gestion des transactions
+import jakarta.ws.rs.*;                                // Fournit les annotations pour les services REST
+import jakarta.ws.rs.core.MediaType;                   // Spécifie les types de contenu pour les requêtes et réponses
+import jakarta.ws.rs.core.Response;                    // Fournit des outils pour construire les réponses HTTP
 
+/**
+ * Ressource REST pour l'authentification et l'inscription
+ */
 @ApplicationScoped
 @Path("/authenticate")
 public class AuthenticationServiceResource {
 
     @Inject
-    ResidentRepository residentRepository;
+    ResidentRepository residentRepository; // Dépôt pour les résidents
 
     @Inject
-    IntervenantRepository intervenantRepository;
+    IntervenantRepository intervenantRepository; // Dépôt pour les intervenants
 
     @Inject
-    AuthenticationService authenticationService;
+    AuthenticationService authenticationService; // Service d'authentification
 
     /**
-     * Authenticate Resident using provided email and password
+     * Authentifie un résident avec l'email et le mot de passe fournis.
+     *
+     * @param loginRequest Les informations de connexion (email et mot de passe).
+     * @return Une réponse contenant les détails du résident ou un message d'erreur.
      */
     @POST
     @Path("/resident")
@@ -37,13 +51,12 @@ public class AuthenticationServiceResource {
     public Response authenticateResident(LoginRequestDTO loginRequest) {
         Resident resident = residentRepository.find("email", loginRequest.getEmail()).firstResult();
 
-        // Verify password without encryption (plain text comparison)
+        // Vérifie le mot de passe en clair (sans chiffrement pour simplifier)
         if (resident != null && loginRequest.getPassword().equals(resident.getPassword())) {
-            // Return resident information including residentId and email
             return Response.ok()
                     .entity(Json.createObjectBuilder()
-                            .add("residentId", resident.id) // Ensure residentId is included
-                            .add("email", resident.getEmail())   // Ensure email is included
+                            .add("residentId", resident.id)
+                            .add("email", resident.getEmail())
                             .build())
                     .build();
         } else {
@@ -53,26 +66,26 @@ public class AuthenticationServiceResource {
         }
     }
 
-
     /**
-     * Authenticate Intervenant using provided email and password
+     * Authentifie un intervenant avec l'email et le mot de passe fournis.
+     *
+     * @param loginRequest Les informations de connexion (email et mot de passe).
+     * @return Une réponse contenant les détails de l'intervenant ou un message d'erreur.
      */
     @POST
     @Path("/intervenant")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateIntervenant(LoginRequestDTO loginRequest) {
-        // Find the intervenant by email
         Intervenant intervenant = intervenantRepository.find("email", loginRequest.getEmail()).firstResult();
 
-        // Check if the intervenant exists and if the password matches
+        // Vérifie le mot de passe en clair (sans chiffrement pour simplifier)
         if (intervenant != null && loginRequest.getPassword().equals(intervenant.getPassword())) {
-            // Return the intervenantId and email in the response
             return Response.ok()
                     .entity(Json.createObjectBuilder()
                             .add("message", "Intervenant authenticated successfully")
-                            .add("intervenantId", intervenant.id)  // Include the intervenantId
-                            .add("email", intervenant.getEmail())  // Include the email
+                            .add("intervenantId", intervenant.id)
+                            .add("email", intervenant.getEmail())
                             .build())
                     .build();
         } else {
@@ -84,23 +97,22 @@ public class AuthenticationServiceResource {
         }
     }
 
-
-
     /**
-     * Sign up a new Resident
+     * Inscrit un nouveau résident.
+     *
+     * @param resident L'objet Resident à enregistrer.
+     * @return Une réponse HTTP indiquant le succès ou un message d'erreur.
      */
     @POST
     @Path("/signup/resident")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response signUpResident(Resident resident) {
-        // Check if the email already exists in the database
         if (residentRepository.find("email", resident.getEmail()).firstResult() != null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("A resident with this email already exists.")
                     .build();
         }
 
-        // Directly save the plain text password (no encryption for simplicity)
         residentRepository.persist(resident);
 
         return Response.status(Response.Status.CREATED)
@@ -109,13 +121,15 @@ public class AuthenticationServiceResource {
     }
 
     /**
-     * Sign up a new Intervenant
+     * Inscrit un nouvel intervenant.
+     *
+     * @param intervenant L'objet Intervenant à enregistrer.
+     * @return Une réponse HTTP indiquant le succès ou un message d'erreur.
      */
     @POST
     @Path("/signup/intervenant")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response signUpIntervenant(Intervenant intervenant) {
-        // Check if the email already exists in the database
         if (intervenantRepository.find("email", intervenant.getEmail()).firstResult() != null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(Json.createObjectBuilder()
@@ -124,7 +138,6 @@ public class AuthenticationServiceResource {
                     .build();
         }
 
-        // Directly save the plain text password (no encryption for simplicity)
         intervenantRepository.persist(intervenant);
 
         return Response.status(Response.Status.CREATED)
@@ -133,6 +146,4 @@ public class AuthenticationServiceResource {
                         .build())
                 .build();
     }
-
-
 }

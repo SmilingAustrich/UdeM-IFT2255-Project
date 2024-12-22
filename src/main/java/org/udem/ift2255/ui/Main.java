@@ -31,10 +31,10 @@ public class Main {
     }
 
 
-    // Redirect to the login page (index.html)
+    // Redirect to the login page (DefaultPage.html)
     @GET
     public Response redirectToLogin() {
-        // Redirect to index.html located in src/main/resources/META-INF/resources/
+        // Redirect to DefaultPage.html located in src/main/resources/META-INF/resources/
         return Response.seeOther(java.net.URI.create("/login.html")).build();
     }
 }
