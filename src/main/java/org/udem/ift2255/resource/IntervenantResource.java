@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.Response;
 import org.udem.ift2255.dto.CandidatureRequestDTO;
 import org.udem.ift2255.model.Intervenant;
 import org.udem.ift2255.model.ResidentialWorkRequest;
+import org.udem.ift2255.model.Resident;
 import org.udem.ift2255.service.IntervenantService;
 import org.udem.ift2255.service.ResidentialWorkRequestService;
 
@@ -24,11 +25,11 @@ public class IntervenantResource {
     @Inject
     ResidentialWorkRequestService workRequestService;
 
+    // Serve the login page for Intervenant
     @GET
     @Path("/login")
     @Produces(MediaType.TEXT_HTML)
     public String getIntervenantLoginPage() {
-        // Serve the Intervenant login page
         return "<html><body>" +
                 "<h2>Intervenant Login</h2>" +
                 "<form action='/intervenant/authenticate' method='post'>" +
@@ -39,6 +40,7 @@ public class IntervenantResource {
                 "</body></html>";
     }
 
+    // Authenticate the Intervenant based on email and password
     @POST
     @Path("/authenticate")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -53,6 +55,7 @@ public class IntervenantResource {
         }
     }
 
+    // Register a new Intervenant
     @POST
     @Path("/register")
     @Transactional
@@ -64,6 +67,7 @@ public class IntervenantResource {
         return Response.status(Response.Status.CREATED).entity("Registration successful").build();
     }
 
+    // Login Intervenant with email and password
     @POST
     @Path("/login")
     public Response loginIntervenant(@QueryParam("email") String email, @QueryParam("password") String password) {
@@ -74,17 +78,18 @@ public class IntervenantResource {
         return Response.ok("Login successful").build();
     }
 
+    // Get all work requests or filter by specific criteria for the intervenant
     @GET
     @Path("/consultRequetes")
     @Produces(MediaType.APPLICATION_JSON)
     public Response consulterRequetes(@QueryParam("filterOption") int filterOption,
                                       @QueryParam("filterValue") String filterValue) {
-        List<ResidentialWorkRequest> allRequests = workRequestService.getAllRequests(); // Get all requests from DB via service
+        List<ResidentialWorkRequest> allRequests = workRequestService.getAllRequests();
         List<ResidentialWorkRequest> filteredRequests = intervenantService.consulterListeRequetesTravaux(filterOption, filterValue, allRequests);
-
         return Response.ok(filteredRequests).build();
     }
 
+    // Submit a candidature for a work request
     @POST
     @Path("/submitCandidature")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -103,19 +108,27 @@ public class IntervenantResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Work request not found").build();
         }
 
-        // Get the workType and neighbourhood from the workRequest object
-        String workType = workRequest.getWorkType(); // Get work type from the request
-        String neighbourhood = workRequest.getNeighbourhood(); // Get neighbourhood from the request
+        // Retrieve filtered requests based on workType and neighbourhood
+        List<ResidentialWorkRequest> filteredRequests = workRequestService.getFilteredRequests(workRequest.getWorkType(), workRequest.getNeighbourhood());
 
-        // Retrieve filtered requests based on these parameters
-        List<ResidentialWorkRequest> filteredRequests = workRequestService.getFilteredRequests(workType, neighbourhood);
-
-        // Pass all necessary parameters to the service method
+        // Submit the candidature via the service layer
         String result = intervenantService.soumettreCandidature(candidatureRequestDTO.getTitreRequete(),
                 candidatureRequestDTO.getMessage(),
                 filteredRequests,
                 intervenant);
 
         return Response.ok(result).build();
+    }
+
+    // Fetch preferences of a resident
+    @GET
+    @Path("/residents/{residentId}/preferences")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPreferences(@PathParam("residentId") Long residentId) {
+        Resident resident = Resident.findById(residentId);
+        if (resident == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Resident not found").build();
+        }
+        return Response.ok(resident.getPreferredHours()).build();
     }
 }

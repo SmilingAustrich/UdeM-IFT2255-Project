@@ -99,6 +99,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-jwt</artifactId>
+        </dependency>
+
+
         <!-- Password hashing -->
         <dependency>
             <groupId>org.mindrot</groupId>

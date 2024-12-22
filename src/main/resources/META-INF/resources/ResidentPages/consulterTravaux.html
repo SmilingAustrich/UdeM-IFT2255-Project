@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulter Travaux</title>
+    <link rel="stylesheet" href="../styles/stylesMainMenu.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons"></script>
+</head>
+<body>
+<!-- Header Section -->
+<div id="header"></div>
+<script src="../javascript/headerResident.js"></script>
+
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Consulter les Travaux</h1>
+    <!-- Button and Search Form Container -->
+    <div class="button-form-container">
+        <button id="view-all-btn" class="view-all-btn">Afficher Tous les Travaux</button>
+        <form id="search-form" class="search-form">
+            <label for="search-criteria">Rechercher par:</label>
+            <select id="search-criteria">
+                <option value="name">Nom</option>
+                <option value="street">Rue</option>
+                <option value="work-id">ID de Travail</option>
+            </select>
+            <input type="text" id="search-input" placeholder="Entrez votre recherche..." />
+            <button type="submit" class="search-btn">Rechercher</button>
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="results">
+        <!-- Dynamic results will be displayed here -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button id="prev-page" disabled>Précédent</button>
+        <span id="page-number">Page: 1</span>
+        <button id="next-page">Suivant</button>
+    </div>
+</div>
+
+<script>
+    // Initialize Feather Icons
+    feather.replace();
+
+
+    let currentPage = 1;
+    const resultsPerPage = 10;
+
+    // Prevent the default behavior of "Suivant" and "Précédent" buttons
+    document.getElementById('prev-page').addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent page reload
+        if (currentPage > 1) {
+            currentPage--;
+            fetchTravaux(document.getElementById('search-criteria').value, document.getElementById('search-input').value.trim(), currentPage);
+        }
+    });
+
+    document.getElementById('next-page').addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent page reload
+        fetchTravaux(document.getElementById('search-criteria').value, document.getElementById('search-input').value.trim(), currentPage + 1);
+    });
+
+    // Handle form submission for search
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent form submission from reloading the page
+        const criteria = document.getElementById('search-criteria').value;
+        const query = document.getElementById('search-input').value.trim();
+
+        if (!query) {
+            alert('Veuillez entrer une valeur de recherche.');
+            return;
+        }
+
+        currentPage = 1; // Reset to the first page on a new search
+        fetchTravaux(criteria, query, currentPage);
+    });
+
+    // Handle "View All" button click
+    document.getElementById('view-all-btn').addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default button behavior
+        currentPage = 1; // Reset to the first page
+        fetchAllTravaux(currentPage); // Call a specific function to fetch all travaux
+    });
+
+    // Fetch All Travaux Data
+    function fetchAllTravaux(page) {
+        const endpoint = `/travaux/all?page=${page}&limit=${resultsPerPage}`;
+
+        fetch(endpoint)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la récupération des données.');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                displayResults(data.results);
+                updatePagination(data.total, page);
+            })
+            .catch((error) => {
+                console.error(error);
+                document.getElementById('results').innerHTML = '<p class="error">Erreur lors du chargement des travaux.</p>';
+            });
+    }
+
+    // Display Results
+    function displayResults(travaux) {
+        const resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = `<h2>Résultats:</h2>`;
+
+        if (travaux.length === 0) {
+            resultsContainer.innerHTML += '<p>Aucun travail trouvé.</p>';
+            return;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'result-list';
+
+        travaux.forEach((travail) => {
+            const item = document.createElement('li');
+            item.innerHTML = `
+            <strong>ID:</strong> ${travail.id}<br>
+            <strong>Arrondissement:</strong> ${travail.boroughid}<br>
+            <strong>Statut:</strong> ${travail.currentstatus}<br>
+            <strong>Motif:</strong> ${travail.reason_category}<br>
+            <strong>Catégorie d'intervenant:</strong> ${travail.submittercategory}<br>
+            <strong>Nom de l'intervenant:</strong> ${travail.organizationname}
+        `;
+            list.appendChild(item);
+        });
+
+        resultsContainer.appendChild(list);
+    }
+
+    // Update Pagination
+    function updatePagination(totalResults, page) {
+        const totalPages = Math.ceil(totalResults / resultsPerPage);
+        document.getElementById('page-number').innerText = `Page: ${page}`;
+        document.getElementById('prev-page').disabled = page === 1;
+        document.getElementById('next-page').disabled = page === totalPages;
+
+        document.getElementById('prev-page').onclick = () => {
+            if (page > 1) {
+                currentPage = page - 1;
+                fetchAllTravaux(currentPage); // Ensure this works for all travaux
+            }
+        };
+
+        document.getElementById('next-page').onclick = () => {
+            if (page < totalPages) {
+                currentPage = page + 1;
+                fetchAllTravaux(currentPage); // Ensure this works for all travaux
+            }
+        };
+    }
+
+</script>
+</body>
+</html>

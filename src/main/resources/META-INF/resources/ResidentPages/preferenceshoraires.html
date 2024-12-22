@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préférences Horaires</title>
+    <link rel="stylesheet" href="../styles/stylesMainMenu.css">
+</head>
+<body>
+<!-- Header Section -->
+<div id="header"></div>
+<script src="../javascript/headerResident.js"></script>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Gérer Vos Préférences</h1>
+
+
+    <!-- Edit Preferences Section -->
+    <div class="tab-content" id="editPreferences">
+        <h2>Modifier vos Préférences Horaires</h2>
+        <form id="preferencesForm" class="form">
+            <div class="form-group">
+                <label for="day">Jour de la semaine:</label>
+                <select id="day" name="day" required>
+                    <option value="Lundi">Lundi</option>
+                    <option value="Mardi">Mardi</option>
+                    <option value="Mercredi">Mercredi</option>
+                    <option value="Jeudi">Jeudi</option>
+                    <option value="Vendredi">Vendredi</option>
+                    <option value="Samedi">Samedi</option>
+                    <option value="Dimanche">Dimanche</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="startTime">Heure de début:</label>
+                    <input type="time" id="startTime" name="startTime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endTime">Heure de fin:</label>
+                    <input type="time" id="endTime" name="endTime" required>
+                </div>
+            </div>
+
+            <button type="button" id="addTimeSlotBtn" class="view-all-btn">Ajouter la plage horaire</button>
+        </form>
+
+        <h2>Plages Horaires Sélectionnées</h2>
+        <ul id="timeSlotsList"></ul>
+
+        <button type="button" id="savePreferencesBtn" class="view-all-btn">Sauvegarder les Préférences</button>
+    </div>
+
+
+
+</div>
+
+<script src="../javascript/preferences.js"></script>
+</body>
+</html>

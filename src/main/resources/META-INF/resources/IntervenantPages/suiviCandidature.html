@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi de mes Candidatures</title>
+    <link rel="stylesheet" href="../styles/stylesMainMenu.css">
+</head>
+<body>
+<!-- Header Section -->
+<div id="header"></div>
+<script src="../javascript/headerIntervenant.js"></script>
+
+<!-- Main Content Section -->
+<div class="content">
+    <h1>Suivi de mes candidatures</h1>
+    <p>Voici la liste de toutes vos candidatures soumises.</p>
+
+    <div id="candidatures-list">
+        <!-- Candidatures will be displayed here -->
+    </div>
+</div>
+
+<script>
+    // Fetch the candidatures for the logged-in intervenant
+    document.addEventListener('DOMContentLoaded', () => {
+        const intervenantId = localStorage.getItem('intervenantId');  // Get the intervenant ID from localStorage
+
+        // Check if intervenantId exists
+        if (!intervenantId) {
+            alert('Intervenant ID is not found.');
+            return;
+        }
+
+        // Fetch candidatures from the backend
+        fetch(`/candidatures/${intervenantId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error fetching candidatures');
+                }
+                return response.json();  // Parse the JSON
+            })
+            .then(candidatures => {
+                console.log('Fetched candidatures:', candidatures); // Log the fetched data
+                const candidatureListElement = document.getElementById('candidatures-list');
+                candidatureListElement.innerHTML = '';  // Clear any existing content
+
+                if (candidatures && candidatures.length > 0) {
+                    candidatures.forEach(candidature => {
+                        const candidatureItem = document.createElement('div');
+                        candidatureItem.classList.add('candidature-item');
+
+                        // Add candidature details
+                        candidatureItem.innerHTML = `
+                    <h3>Travail: ${candidature.titreRequete || 'Non spécifié'}</h3>
+                    <p><strong>ID de la demande de travail:</strong> ${candidature.id || 'Non spécifié'}</p>
+                    <p><strong>Date de soumission:</strong> ${candidature.submissionDate || 'Non spécifié'}</p>
+                    <p><strong>Statut:</strong> ${candidature.status || 'Non spécifié'}</p>
+                    <button class="delete-candidature-btn" data-candidature-id="${candidature.id}">Supprimer Candidature</button>
+                `;
+                        candidatureListElement.appendChild(candidatureItem);
+                    });
+
+                    // Add event listeners for "Supprimer Candidature" buttons
+                    const deleteButtons = document.querySelectorAll('.delete-candidature-btn');
+                    deleteButtons.forEach(button => {
+                        button.addEventListener('click', handleDeleteCandidature);
+                    });
+                } else {
+                    candidatureListElement.innerHTML = '<p>Aucune candidature trouvée.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des candidatures:', error);
+                document.getElementById('candidatures-list').innerHTML = '<p>Aucune candidature.</p>';
+            });
+
+    });
+    // Handle the deletion of a candidature
+    function handleDeleteCandidature(event) {
+        const candidatureId = event.target.getAttribute('data-candidature-id');  // Get the candidature ID from the button
+
+        if (confirm('Êtes-vous sûr de vouloir supprimer cette candidature?')) {
+            // Send a DELETE request to the backend to delete the candidature
+            fetch(`/candidatures/${candidatureId}`, {  // Delete from /candidatures/{candidatureId}
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+                    .then(response => response.json())
+                .then(responseData => {
+                    if (responseData.success) {
+                        alert('Candidature supprimée avec succès!');
+                        location.reload();  // Reload the page to reflect changes
+                    } else {
+                        alert('Erreur lors de la suppression de la candidature.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la suppression de la candidature:', error);
+                    alert('Une erreur est survenue lors de la suppression de la candidature.');
+                });
+        }
+    }
+
+
+
+
+
+</script>
+
+</body>
+</html>

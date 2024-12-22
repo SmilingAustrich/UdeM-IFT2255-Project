@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte Résident - MaVille</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<!-- Background and Form -->
+<div class="content">
+    <div class="paralax">
+        <div class="layer rocks2"></div>
+        <div class="layer rocks1"></div>
+        <div class="layer hills"></div>
+        <div class="layer foreground"></div>
+    </div>
+    <div class="blur-overlay"></div>
+</div>
+
+<div class="container">
+    <div class="login-form">
+        <h3 class="glow">Créer un compte Résident</h3>
+        <form id="signupForm">
+            <!-- Inline Name Fields -->
+            <div class="form-inline-group">
+                <div class="form-inline">
+                    <label for="firstName">Prénom:</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Prénom" required>
+                </div>
+                <div class="form-inline">
+                    <label for="lastName">Nom:</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Nom" required>
+                </div>
+            </div>
+
+            <!-- Email and Password Fields -->
+            <div class="form-group">
+                <label for="email">Adresse courriel:</label>
+                <input type="email" id="email" name="email" placeholder="Adresse courriel" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+
+            <!-- Address Field -->
+            <div class="form-group">
+                <label for="address">Adresse résidentielle:</label>
+                <input type="text" id="address" name="address" placeholder="Adresse résidentielle" required>
+            </div>
+
+            <!-- Inline Phone and Age Fields -->
+            <div class="form-inline-group">
+                <div class="form-inline">
+                    <label for="phone">Téléphone:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Téléphone" pattern="^\+?[0-9]{10,15}$" required>
+                </div>
+                <div class="form-inline">
+                    <label for="age">Âge:</label>
+                    <input type="number" id="age" name="age" placeholder="Âge" min="16" required>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="btn" onclick="submitSignupForm(event);">
+                <i class="fas fa-user-plus"></i> Créer un compte
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function submitSignupForm(event) {
+        event.preventDefault();
+
+        const formData = {
+            userType: "resident", // or "intervenant" based on the form
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            phone: document.getElementById('phone')?.value, // Optional for intervenant
+            address: document.getElementById('address')?.value, // Optional for intervenant
+            age: parseInt(document.getElementById('age')?.value, 10), // Optional for intervenant
+        };
+
+        fetch('/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Compte créé avec succès');
+                    window.location.href = "../LogInPages/residentLogin.html"; // Redirect to login page
+                } else {
+                    response.text().then(text => alert(text));
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la création du compte');
+            });
+    }
+
+</script>
+</body>
+</html>

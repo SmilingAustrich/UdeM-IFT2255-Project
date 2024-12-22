@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumettre un Projet</title>
+    <link rel="stylesheet" href="../styles/stylesMainMenu.css">
+    <style>
+        /* Carousel styles */
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .carousel div {
+            flex: 0 0 auto;
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            cursor: pointer;
+            scroll-snap-align: start;
+            text-align: center;
+            width: 200px;
+        }
+
+        .carousel div.selected {
+            background-color: #5cb85c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div id="header"></div>
+<script src="../javascript/headerIntervenant.js"></script>
+
+<!-- Main Content Section -->
+<div class="content">
+    <h1>Soumettre un Projet</h1>
+    <p>Veuillez remplir les informations concernant le projet à soumettre.</p>
+
+    <form id="submit-project-form">
+        <label for="projectName">Nom du Projet:</label>
+        <input type="text" id="projectName" name="projectName" required><br><br>
+
+        <label for="projectDescription">Description du Projet:</label>
+        <textarea id="projectDescription" name="projectDescription" required></textarea><br><br>
+
+        <label for="neighbourhood">Quartier:</label>
+        <input type="text" id="neighbourhood" name="neighbourhood" required><br><br>
+
+        <label for="projectType">Type de Projet:</label>
+        <div class="carousel" id="projectTypeCarousel">
+            <!-- Carousel items will be inserted here -->
+        </div><br><br>
+
+        <!-- Hidden input to store the selected project type -->
+        <input type="hidden" id="projectType" name="projectType" required><br><br>
+
+        <label for="startDate">Date de Début:</label>
+        <input type="date" id="startDate" name="startDate" required><br><br>
+
+        <label for="endDate">Date de Fin:</label>
+        <input type="date" id="endDate" name="endDate" required><br><br>
+
+        <button type="submit">Soumettre Projet</button>
+    </form>
+</div>
+
+<script>
+    // List of project types
+    const projectTypes = [
+        'Travaux routiers',
+        'Travaux de gaz ou électricité',
+        'Construction ou rénovation',
+        'Entretien paysager',
+        'Travaux liés aux transports en commun',
+        'Travaux de signalisation et éclairage',
+        'Travaux souterrains',
+        'Travaux résidentiel',
+        'Entretien urbain',
+        'Entretien des réseaux de télécommunication'
+    ];
+
+    // Populate the carousel with project types
+    const projectTypeCarousel = document.getElementById('projectTypeCarousel');
+
+    projectTypes.forEach((type, index) => {
+        const div = document.createElement('div');
+        div.textContent = type;
+        div.setAttribute('data-type', type);
+        div.addEventListener('click', () => selectProjectType(type, div));
+        projectTypeCarousel.appendChild(div);
+    });
+
+    // Function to select a project type
+    function selectProjectType(type, element) {
+        // Remove "selected" class from all items
+        const allItems = document.querySelectorAll('.carousel div');
+        allItems.forEach(item => item.classList.remove('selected'));
+
+        // Add "selected" class to the clicked item
+        element.classList.add('selected');
+
+        // Set the selected type in the hidden projectType input field
+        document.getElementById('projectType').value = type;
+    }
+
+    // Handle form submission
+    document.getElementById('submit-project-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Retrieve form values
+        const projectName = document.getElementById('projectName').value;
+        const projectDescription = document.getElementById('projectDescription').value;
+        const projectType = document.getElementById('projectType').value;
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        const neighbourhood = document.getElementById('neighbourhood').value;
+
+
+        // Get the intervenant ID from localStorage
+        const intervenantId = localStorage.getItem('intervenantId');
+
+        // Prepare data to send in the request
+        const projectData = {
+            projectName: projectName,
+            projectDescription: projectDescription,
+            projectType: projectType,
+            neighbourhood: neighbourhood,  // Include neighbourhood here
+            startDate: startDate,
+            endDate: endDate
+        };
+
+        // Submit the project data via a POST request
+        fetch(`/projects/submit/${intervenantId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(projectData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Projet soumis avec succès!');
+                } else {
+                    alert('Erreur lors de la soumission du projet: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la soumission du projet:', error);
+                alert('Une erreur est survenue lors de la soumission du projet.');
+            });
+    });
+</script>
+
+</body>
+</html>

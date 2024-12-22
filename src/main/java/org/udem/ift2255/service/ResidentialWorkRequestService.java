@@ -2,20 +2,21 @@ package org.udem.ift2255.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.udem.ift2255.dto.CandidatureRequestDTO;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
 import org.udem.ift2255.dto.ResidentialWorkRequestDTO;
-import org.udem.ift2255.model.Candidature;
-import org.udem.ift2255.model.Intervenant;
-import org.udem.ift2255.model.Resident;
 import org.udem.ift2255.model.ResidentialWorkRequest;
-import org.udem.ift2255.repository.IntervenantRepository;
+import org.udem.ift2255.model.Resident;
 import org.udem.ift2255.repository.ResidentRepository;
 import org.udem.ift2255.repository.ResidentialWorkRequestRepository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ResidentialWorkRequestService {
@@ -24,18 +25,22 @@ public class ResidentialWorkRequestService {
     ResidentialWorkRequestRepository workRequestRepository;
 
     @Inject
-    IntervenantRepository intervenantRepository;
-
-    @Inject
     ResidentRepository residentRepository;
 
+    @PersistenceContext
+    EntityManager em;
+
     // Save a new work request
+    @Transactional  // Ensure this method runs inside a transaction
     public void saveRequest(ResidentialWorkRequestDTO requestDTO, Long residentId) {
-        ResidentialWorkRequest request = new ResidentialWorkRequest();
-        Resident resident = residentRepository.findById(residentId); // Fetch the Resident entity
+        // Fetch the Resident entity
+        Resident resident = residentRepository.findById(residentId);
         if (resident == null) {
             throw new IllegalArgumentException("Resident not found for the provided ID");
-        }if (requestDTO.getWorkTitle() == null || requestDTO.getWorkTitle().isEmpty()) {
+        }
+
+        // Validate input
+        if (requestDTO.getWorkTitle() == null || requestDTO.getWorkTitle().isEmpty()) {
             throw new IllegalArgumentException("Work title is required");
         }
 
@@ -43,140 +48,56 @@ public class ResidentialWorkRequestService {
             throw new IllegalArgumentException("Start date must be a valid future date");
         }
 
-        request.setResident(resident);
+        // Create the work request and set its properties
+        ResidentialWorkRequest request = new ResidentialWorkRequest();
+        request.setAssignedResident(resident);
         request.setWorkTitle(requestDTO.getWorkTitle());
         request.setDetailedWorkDescription(requestDTO.getDetailedWorkDescription());
         request.setWorkType(requestDTO.getWorkType());
         request.setNeighbourhood(requestDTO.getNeighbourhood());
         request.setWorkWishedStartDate(requestDTO.getWorkWishedStartDate());
-        workRequestRepository.persist(request); // Save the ResidentialWorkRequest
-    }
 
-
-    // Add a candidature to a work request
-    public void addCandidature(Long workRequestId, Long intervenantId, String message) {
-        // Fetch work request and intervenant using Panache
-        ResidentialWorkRequest request = workRequestRepository.findById(workRequestId);
-        Intervenant intervenant = intervenantRepository.findById(intervenantId);
-
-        if (request == null) {
-            throw new IllegalArgumentException("Work request not found.");
-        }
-        if (intervenant == null) {
-            throw new IllegalArgumentException("Intervenant not found.");
-        }
-
-        // Check if the candidature already exists or if the work is available
-        if (request.isWorkAvailable() &&
-                request.getCandidatures().stream().noneMatch(c -> c.getIntervenant().equals(intervenant))) {
-            // Create and add candidature
-            Candidature candidature = new Candidature();
-            candidature.setIntervenant(intervenant);
-            candidature.setWorkRequest(request);
-            candidature.setMessage(message);
-
-            // Add candidature to the work request
-            request.getCandidatures().add(candidature);
-            System.out.println("Candidature soumise par " + intervenant.getFirstName());
-        } else {
-            throw new IllegalStateException("Candidature impossible ou déjà soumise.");
-        }
-    }
-
-    // Remove a candidature from a work request
-    public void removeCandidature(Long workRequestId, Long intervenantId) {
-        ResidentialWorkRequest request = workRequestRepository.findById(workRequestId);
-        Intervenant intervenant = intervenantRepository.findById(intervenantId);
-
-        if (request == null || intervenant == null) {
-            throw new IllegalArgumentException("Work request or intervenant not found.");
-        }
-
-        boolean removed = request.getCandidatures().removeIf(c -> c.getIntervenant().equals(intervenant));
-        if (removed) {
-            System.out.println("Candidature retirée par " + intervenant.getFirstName());
-        } else {
-            throw new IllegalStateException("Candidature introuvable pour cet intervenant.");
-        }
-    }
-
-    // Choose a candidature for a work request
-    public void chooseCandidature(Long workRequestId, Long intervenantId) {
-        ResidentialWorkRequest request = workRequestRepository.findById(workRequestId);
-        Intervenant intervenant = intervenantRepository.findById(intervenantId);
-
-        if (request == null) {
-            throw new IllegalArgumentException("Work request not found.");
-        }
-        if (intervenant == null) {
-            throw new IllegalArgumentException("Intervenant not found.");
-        }
-
-        // Check if the candidature exists
-        if (request.getCandidatures().stream().noneMatch(c -> c.getIntervenant().equals(intervenant))) {
-            throw new IllegalStateException("Candidature not found for the specified intervenant.");
-        }
-
-        // Set the chosen intervenant
-        request.setChosenIntervenant(intervenant);
-        request.setWorkAvailable(false); // Close the work request
-        System.out.println("Candidature choisie : " + intervenant.getFirstName());
-    }
-
-    // Get a work request by its title
-    public ResidentialWorkRequest getRequestByTitle(String title) {
-        return workRequestRepository.findByTitle(title);
+        // Persist the work request
+        workRequestRepository.persist(request);
     }
 
     // Get all work requests
     public List<ResidentialWorkRequest> getAllRequests() {
-        return workRequestRepository.listAll();
+        return workRequestRepository.listAll();  // Fetch all work requests
     }
 
-    // Get filtered work requests
+    // Get a work request by its title
+    public ResidentialWorkRequest getRequestByTitle(String title) {
+        return workRequestRepository.find("workTitle", title).firstResult();  // Fetch by title
+    }
+
+    // Get filtered work requests based on work type and neighbourhood
     public List<ResidentialWorkRequest> getFilteredRequests(String workType, String neighbourhood) {
-        return workRequestRepository.findFilteredRequests(workType, neighbourhood);
+        return workRequestRepository.find("workType = ?1 and neighbourhood = ?2", workType, neighbourhood).list();  // Fetch filtered results
     }
 
-    public List<ResidentialWorkRequestDTO> getResidentWorkRequests(Long residentId) {
-        return workRequestRepository.find("resident.id", residentId).stream()
-                .map(request -> {
-                    ResidentialWorkRequestDTO dto = new ResidentialWorkRequestDTO();
-                    dto.setId(request.id);
-                    dto.setWorkTitle(request.getWorkTitle());
-                    dto.setWorkType(request.getWorkType());
-                    dto.setNeighbourhood(request.getNeighbourhood());
-                    dto.setWorkWishedStartDate(request.getWorkWishedStartDate());
-                    dto.setCandidatures(request.getCandidatures().stream()
-                            .map(c -> {
-                                CandidatureRequestDTO candidatureDTO = new CandidatureRequestDTO();
-                                candidatureDTO.setIntervenantId(c.getIntervenant().id);
-                                candidatureDTO.setTitreRequete(request.getWorkTitle()); // Title of the work request
-                                candidatureDTO.setMessage(c.getMessage());
-                                return candidatureDTO;
-                            })
-                            .collect(Collectors.toList()));
+    // Get a work request by its ID
+    // Method to get a work request by ID
+    public ResidentialWorkRequest getRequestById(Long workRequestId) {
+        try {
+            return em.find(ResidentialWorkRequest.class, workRequestId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
 
-                    return dto;
-                })
-                .collect(Collectors.toList());
     }
 
-
-    public void acceptCandidature(Long requestId, Long intervenantId) {
-        ResidentialWorkRequest request = workRequestRepository.findById(requestId);
-        if (request == null) {
-            throw new IllegalArgumentException("Requête introuvable.");
+    // Fetch all work requests for a specific resident
+    public List<ResidentialWorkRequest> getWorkRequestsByResident(Long residentId) {
+        try {
+            return em.createQuery("SELECT r FROM ResidentialWorkRequest r WHERE r.assignedResident.id = :residentId", ResidentialWorkRequest.class)
+                    .setParameter("residentId", residentId)
+                    .getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-
-        Intervenant intervenant = intervenantRepository.findById(intervenantId);
-        if (intervenant == null) {
-            throw new IllegalArgumentException("Intervenant introuvable.");
-        }
-
-        request.setChosenIntervenant(intervenant);
-        request.setWorkAvailable(false);
-        workRequestRepository.persist(request);
     }
 
 }

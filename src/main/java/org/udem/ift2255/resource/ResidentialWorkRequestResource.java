@@ -6,89 +6,91 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.udem.ift2255.dto.CandidatureRequestDTO;
 import org.udem.ift2255.dto.ResidentialWorkRequestDTO;
+import org.udem.ift2255.dto.WorkRequestDTO;
+import org.udem.ift2255.model.Candidature;
+import org.udem.ift2255.model.Intervenant;
+import org.udem.ift2255.service.CandidatureService;
+import org.udem.ift2255.service.NotificationService;
 import org.udem.ift2255.service.ResidentialWorkRequestService;
+import org.udem.ift2255.model.ResidentialWorkRequest;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/work-requests")
-@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class ResidentialWorkRequestResource {
 
     @Inject
     ResidentialWorkRequestService workRequestService;
-
-    // Add a candidature to a work request
-    @POST
-    @Path("/{id}/add-candidature")
-    public Response addCandidature(@PathParam("id") Long id, CandidatureRequestDTO candidatureDTO) {
-        try {
-            workRequestService.addCandidature(id, candidatureDTO.getIntervenantId(), candidatureDTO.getMessage());
-            return Response.ok("Candidature soumise avec succès.").build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-    }
-
-    // Choose a candidature for a work request
-    @POST
-    @Path("/{id}/choose-candidature/{intervenantId}")
-    public Response chooseCandidature(@PathParam("id") Long id, @PathParam("intervenantId") Long intervenantId) {
-        try {
-            workRequestService.chooseCandidature(id, intervenantId);
-            return Response.ok("Candidature choisie avec succès.").build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-    }
 
     @POST
     @Path("/create/{residentId}")
     public Response createWorkRequest(@PathParam("residentId") Long residentId, ResidentialWorkRequestDTO requestDTO) {
         try {
             workRequestService.saveRequest(requestDTO, residentId);
-            return Response.ok("Work request created successfully").build();
-        } catch (IllegalArgumentException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-    }
-
-
-
-
-    // List all work requests
-    @GET
-    @Path("/list")
-    public Response listAllWorkRequests() {
-        try {
-            return Response.ok(workRequestService.getAllRequests()).build();
+            return Response.status(Response.Status.CREATED).entity("Work request created successfully").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erreur lors du chargement des requêtes.").build();
-        }
-    }
-
-    @GET
-    @Path("/resident/{residentId}/requests")
-    public Response getResidentWorkRequests(@PathParam("residentId") Long residentId) {
-        try {
-            List<ResidentialWorkRequestDTO> requests = workRequestService.getResidentWorkRequests(residentId);
-            return Response.ok(requests).build();
-        } catch (Exception e) {
+            e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Erreur lors du chargement des requêtes.").build();
+                    .entity("Error: " + e.getMessage()).build();
         }
     }
 
-    // Accept a candidature for a work request
-    @POST
-    @Path("/{requestId}/accept-candidature/{intervenantId}")
-    public Response acceptCandidature(@PathParam("requestId") Long requestId,
-                                      @PathParam("intervenantId") Long intervenantId) {
+    @GET
+    @Path("/resident/{residentId}")
+    public Response getWorkRequestsByResident(@PathParam("residentId") Long residentId) {
         try {
-            workRequestService.acceptCandidature(requestId, intervenantId);
-            return Response.ok("Candidature acceptée avec succès.").build();
+            List<ResidentialWorkRequest> workRequests = workRequestService.getWorkRequestsByResident(residentId);
+            if (workRequests == null || workRequests.isEmpty()) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("No work requests found for resident ID " + residentId).build();
+            }
+            return Response.status(Response.Status.OK).entity(workRequests).build();
         } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Erreur: " + e.getMessage()).build();
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error: " + e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/all")
+    public Response getAllWorkRequests() {
+        try {
+            // Get all work requests
+            List<ResidentialWorkRequest> workRequests = workRequestService.getAllRequests();
+
+            // Check if no work requests found
+            if (workRequests == null || workRequests.isEmpty()) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("No work requests found")
+                        .build();
+            }
+
+            // Convert ResidentialWorkRequest objects to WorkRequestDTO objects
+            List<WorkRequestDTO> workRequestDTOs = workRequests.stream()
+                    .map(request -> {
+                        WorkRequestDTO dto = new WorkRequestDTO();
+                        dto.setId(request.id);  // Set the ID field
+                        dto.setWorkTitle(request.getWorkTitle());
+                        dto.setDetailedWorkDescription(request.getDetailedWorkDescription());
+                        dto.setQuartier(request.getNeighbourhood());
+                        dto.setWorkType(request.getWorkType());
+                        dto.setWorkWishedStartDate(request.getWorkWishedStartDate().toString());  // Convert LocalDate to String
+                        return dto;
+                    })
+                    .collect(Collectors.toList());
+
+            // Return the DTOs
+            return Response.status(Response.Status.OK).entity(workRequestDTOs).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error: " + e.getMessage())
+                    .build();
         }
     }
 }

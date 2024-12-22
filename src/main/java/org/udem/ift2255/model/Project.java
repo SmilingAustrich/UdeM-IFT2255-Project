@@ -19,6 +19,10 @@ public class Project extends PanacheEntity {
     @Column(name = "project_type", nullable = false)
     private String projectType;
 
+    @Column(name = "neighbourhood", nullable = false)
+    private String  neighbourhood;
+
+
     @Column(name = "project_status", nullable = false)
     private String projectStatus;
 
@@ -33,15 +37,17 @@ public class Project extends PanacheEntity {
     private Intervenant projectOwner;
 
     // Constructor with parameters
-    public Project(String projectName, String projectDescription, String projectType, LocalDate startDate, LocalDate endDate, Intervenant projectOwner) {
+    public Project(String projectName, String projectDescription, String projectType, String neighbourhood, LocalDate startDate, LocalDate endDate, Intervenant projectOwner) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.projectType = projectType;
+        this.neighbourhood = neighbourhood;  // Ensure this is set correctly
         this.projectStatus = "prévu";
         this.startDate = startDate;
         this.endDate = endDate;
         this.projectOwner = projectOwner;
     }
+
     // Default constructor
     public Project() {
     }
@@ -102,5 +108,14 @@ public class Project extends PanacheEntity {
 
     public void setProjectOwner(Intervenant projectOwner) {
         this.projectOwner = projectOwner;
+    }
+
+    public String getNeighbourhood() {
+        return neighbourhood;
+    }
+
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
+
     }
 }

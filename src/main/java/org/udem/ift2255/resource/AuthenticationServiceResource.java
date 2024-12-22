@@ -1,5 +1,6 @@
 package org.udem.ift2255.resource;
 
+import jakarta.json.Json;
 import org.udem.ift2255.service.AuthenticationService;
 import org.udem.ift2255.dto.LoginRequestDTO;
 import org.udem.ift2255.model.*;
@@ -9,12 +10,9 @@ import org.udem.ift2255.repository.IntervenantRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import org.mindrot.jbcrypt.BCrypt;
-
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.net.URI;
 
 @ApplicationScoped
 @Path("/authenticate")
@@ -30,20 +28,6 @@ public class AuthenticationServiceResource {
     AuthenticationService authenticationService;
 
     /**
-     * Hash password using BCrypt
-     */
-    private String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
-
-    /**
-     * Compare password with the hashed password
-     */
-    private boolean checkPassword(String plainPassword, String hashedPassword) {
-        return BCrypt.checkpw(plainPassword, hashedPassword);
-    }
-
-    /**
      * Authenticate Resident using provided email and password
      */
     @POST
@@ -51,15 +35,24 @@ public class AuthenticationServiceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateResident(LoginRequestDTO loginRequest) {
-        boolean isAuthenticated = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword(), "resident");
+        Resident resident = residentRepository.find("email", loginRequest.getEmail()).firstResult();
 
-        if (isAuthenticated) {
-            return Response.ok().entity("Resident authenticated successfully").build();
+        // Verify password without encryption (plain text comparison)
+        if (resident != null && loginRequest.getPassword().equals(resident.getPassword())) {
+            // Return resident information including residentId and email
+            return Response.ok()
+                    .entity(Json.createObjectBuilder()
+                            .add("residentId", resident.id) // Ensure residentId is included
+                            .add("email", resident.getEmail())   // Ensure email is included
+                            .build())
+                    .build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Invalid credentials").build();
+                    .entity("Invalid credentials")
+                    .build();
         }
     }
+
 
     /**
      * Authenticate Intervenant using provided email and password
@@ -69,15 +62,29 @@ public class AuthenticationServiceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response authenticateIntervenant(LoginRequestDTO loginRequest) {
-        boolean isAuthenticated = authenticationService.authenticate(loginRequest.getEmail(), loginRequest.getPassword(), "intervenant");
+        // Find the intervenant by email
+        Intervenant intervenant = intervenantRepository.find("email", loginRequest.getEmail()).firstResult();
 
-        if (isAuthenticated) {
-            return Response.ok().entity("Intervenant authenticated successfully").build();
+        // Check if the intervenant exists and if the password matches
+        if (intervenant != null && loginRequest.getPassword().equals(intervenant.getPassword())) {
+            // Return the intervenantId and email in the response
+            return Response.ok()
+                    .entity(Json.createObjectBuilder()
+                            .add("message", "Intervenant authenticated successfully")
+                            .add("intervenantId", intervenant.id)  // Include the intervenantId
+                            .add("email", intervenant.getEmail())  // Include the email
+                            .build())
+                    .build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Invalid credentials").build();
+                    .entity(Json.createObjectBuilder()
+                            .add("message", "Invalid credentials")
+                            .build())
+                    .build();
         }
     }
+
+
 
     /**
      * Sign up a new Resident
@@ -86,14 +93,14 @@ public class AuthenticationServiceResource {
     @Path("/signup/resident")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response signUpResident(Resident resident) {
+        // Check if the email already exists in the database
         if (residentRepository.find("email", resident.getEmail()).firstResult() != null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("A resident with this email already exists.")
                     .build();
         }
 
-        // Hash password before saving
-        resident.setPassword(hashPassword(resident.getPassword()));
+        // Directly save the plain text password (no encryption for simplicity)
         residentRepository.persist(resident);
 
         return Response.status(Response.Status.CREATED)
@@ -108,18 +115,24 @@ public class AuthenticationServiceResource {
     @Path("/signup/intervenant")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response signUpIntervenant(Intervenant intervenant) {
+        // Check if the email already exists in the database
         if (intervenantRepository.find("email", intervenant.getEmail()).firstResult() != null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("An intervenant with this email already exists.")
+                    .entity(Json.createObjectBuilder()
+                            .add("message", "An intervenant with this email already exists.")
+                            .build())
                     .build();
         }
 
-        // Hash password before saving
-        intervenant.setPassword(hashPassword(intervenant.getPassword()));
+        // Directly save the plain text password (no encryption for simplicity)
         intervenantRepository.persist(intervenant);
 
         return Response.status(Response.Status.CREATED)
-                .entity("Intervenant registered successfully")
+                .entity(Json.createObjectBuilder()
+                        .add("message", "Intervenant registered successfully")
+                        .build())
                 .build();
     }
+
+
 }

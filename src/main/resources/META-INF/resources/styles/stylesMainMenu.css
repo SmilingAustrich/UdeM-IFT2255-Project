@@ -1,0 +1,606 @@
+/* General styles */
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background-size: cover;
+    background-position: center;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #fff; /* Default text color */
+}
+
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    padding: 0 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar__item {
+    list-style: none;
+}
+
+.navbar__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 3.5rem;
+    width: 9rem;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar__link:hover {
+    color: #2a4fd3;
+    transform: scale(1.1);
+}
+
+.navbar__link svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.5px;
+    transition: stroke 0.3s ease;
+}
+
+.navbar__link:hover svg {
+    stroke: #2a4fd3;
+}
+
+/* Main content styles */
+.content {
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    color: #333;
+}
+
+.content h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+/* Form styles */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.search-form label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+    align-self: center;
+    color: #333;
+}
+
+.search-form select,
+.search-form input,
+.search-form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: 250ms ease all;
+}
+
+.search-form input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-form button {
+    background-color: #000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-form button:hover {
+    background-color: #153ec4;
+}
+
+/* Results section */
+.results h2 {
+    margin-bottom: 1rem;
+    color: #000000;
+    font-size: 1.5rem;
+}
+
+.result-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.result-list li {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.result-list li:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.02);
+    transition: all 0.2s ease;
+}
+
+/* Add this to your stylesMainMenu.css */
+
+.view-all-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    margin: 20px 0;
+    background-color: #000000; /* Green color */
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+
+}
+
+.view-all-btn:hover {
+    background-color: #2a4fd3; /* Darker green on hover */
+}
+
+/* Container for the button and form */
+.button-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Ensures proper layout on smaller screens */
+    gap: 16px; /* Space between the button and the form */
+    margin: 20px 0; /* Adds vertical spacing */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .button-form-container {
+        flex-direction: column; /* Stack the button and form on smaller screens */
+        gap: 12px;
+    }
+
+    .search-form {
+        flex-direction: column; /* Stack the form elements vertically */
+        gap: 8px;
+    }
+
+    .view-all-btn,
+    .search-btn {
+        width: 100%; /* Full-width buttons on smaller screens */
+    }
+}
+
+/* Styling for form inputs and dropdowns */
+.search-form select,
+.search-form input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-form select:focus,
+.search-form input:focus {
+    border-color: #28a745;
+}
+
+/* Styling for the "Rechercher" button */
+.search-btn {
+    padding: 8px 16px;
+    background-color: #000000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* General Styling */
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Add spacing between form elements */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Inline form items for compact layout */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Input fields */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Prevents fields from overflowing */
+    margin-top: 5px;
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #555;
+}
+/* Parallax Background Styles */
+.paralax {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    filter: hue-rotate(240deg) brightness(0.9);
+}
+
+.paralax .layer {
+    position: absolute;
+    width: 400%;
+    animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
+
+.paralax .foreground {
+    height: 50%;
+    bottom: 0;
+    background: url('http://www.testomic.com/public/codepen-assets/img/paralax/foreground.png') repeat-x;
+    background-size: 25% 100%;
+    animation: slideshow 25s linear infinite;
+}
+
+.paralax .hills {
+    height: 40%;
+    bottom: 15%;
+    background: url('http://www.testomic.com/public/codepen-assets/img/paralax/hills.png') repeat-x;
+    background-size: 25% 100%;
+    animation: slideshow 50s linear infinite;
+}
+
+.paralax .rocks1 {
+    height: 35%;
+    bottom: 25%;
+    background: url('http://www.testomic.com/public/codepen-assets/img/paralax/rocks1.png') repeat-x;
+    background-size: 25% 100%;
+    animation: slideshow 100s linear infinite;
+}
+
+.paralax .rocks2 {
+    height: 40%;
+    bottom: 15%;
+    background: url('http://www.testomic.com/public/codepen-assets/img/paralax/rocks2.png') repeat-x;
+    background-size: 25% 100%;
+    animation: slideshow 200s linear infinite;
+}
+
+/* Blur Overlay - Adjusted to Affect Only Parallax Background */
+.blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    z-index: 0; /* Lower than content */
+    pointer-events: none; /* Prevents interaction with the overlay */
+}
+
+/* Ensure Content is Above Parallax Background */
+.content-section,
+.header {
+    position: relative;
+    z-index: 2; /* Higher than blur-overlay and parallax layers */
+}
+
+/* Keyframes for animation */
+@keyframes slideshow {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Style for delete button */
+.delete-btn {
+    margin-left: 50px;
+    background-color: #f44336; /* Red background */
+    color: white;              /* White text */
+    border: none;              /* No border */
+    padding: 8px 16px;         /* Padding around text */
+    font-size: 14px;           /* Adjust font size */
+    cursor: pointer;          /* Pointer cursor on hover */
+    border-radius: 4px;        /* Rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for background and scale */
+}
+
+/* Hover effect */
+.delete-btn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: scale(1.05);     /* Slightly enlarge the button */
+}
+
+/* Active (clicked) state */
+.delete-btn:active {
+    background-color: #b71c1c; /* Even darker red when clicked */
+    transform: scale(1);       /* Reset scale */
+}
+
+/* Optionally, add focus outline for accessibility */
+.delete-btn:focus {
+    outline: 2px solid #ff4081; /* Focus outline (bright pink) */
+    outline-offset: 2px;
+}
+
+/* Notification container */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Styles for individual notifications */
+.notification {
+    background-color: #4CAF50; /* Green for success */
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.notification.error {
+    background-color: #f44336; /* Red for errors */
+}
+
+.notification.info {
+    background-color: #2196F3; /* Blue for information */
+}
+
+.notification-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.notification-item.unread {
+    background-color: #f0f0f0;
+}
+.notification-item.read {
+    background-color: #e0e0e0;
+}
+.timestamp {
+    font-size: 0.8em;
+    color: #777;
+    margin-left: 10px;
+}
+/* Styles for the notification dropdown */
+.notification-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 10;
+}
+
+.notification-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+}
+
+.notification-dropdown ul li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.notification-dropdown ul li:last-child {
+    border-bottom: none;
+}
+
+.notification-dropdown ul li:hover {
+    background-color: #f0f0f0;
+}
+/* Work Requests List */
+#work-requests-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.work-request-item {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.work-request-item:hover {
+    transform: translateY(-5px);
+}
+
+.work-request-item h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.work-request-item p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+button.submit-candidature-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button.submit-candidature-btn:hover {
+    background-color: #218838;
+}
+
+button.submit-candidature-btn:active {
+    transform: scale(0.98);
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    #work-requests-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #work-requests-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.candidature-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.candidature-item h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.candidature-item p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Button Styles */
+.delete-candidature-btn {
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-candidature-btn:hover {
+    background-color: #c9302c;
+}
+
+/* No items message */
+#candidatures-list p {
+    font-size: 18px;
+    color: #888;
+}

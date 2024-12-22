@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Requêtes de Travail</title>
+    <link rel="stylesheet" href="../styles/stylesMainMenu.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons"></script>
+</head>
+<body>
+<!-- Header Section -->
+<div id="header"></div>
+<script src="../javascript/headerResident.js"></script>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Mes Requêtes de Travail</h1>
+
+    <!-- Requests Section -->
+    <div id="work-requests" class="work-requests">
+        <h2>Vos Requêtes</h2>
+        <ul id="request-list" class="request-list">
+            <!-- Dynamic list of requests will be inserted here -->
+        </ul>
+    </div>
+
+    <!-- Candidatures Section -->
+    <div id="candidatures" class="candidatures" style="display: none;">
+        <h2>Candidatures pour la Requête</h2>
+        <ul id="candidature-list" class="candidature-list">
+            <!-- Dynamic list of candidatures will be inserted here -->
+        </ul>
+        <button id="back-to-requests" class="btn">Retour</button>
+    </div>
+</div>
+
+<script src="../javascript/mesrequetes.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Résident</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+<div class="content">
+    <div class="paralax">
+        <div class="layer rocks2"></div>
+        <div class="layer rocks1"></div>
+        <div class="layer hills"></div>
+        <div class="layer foreground"></div>
+    </div>
+    <div class="blur-overlay"></div>
+</div>
+
+<div class="container">
+    <form id="loginForm" class="login-form">
+        <h3>Portail de Connexion - Résident</h3>
+        <label for="email">Adresse courriel:</label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+
+        <div class="btn" onclick="submitForm(event);">Se connecter</div>
+    </form>
+</div>
+
+
+<script>
+    // JavaScript function to handle form submission
+    function submitForm(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Gather form data
+        const formData = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        // Send the form data as JSON using fetch API
+        fetch('/authenticate/resident', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // Parse JSON if response is okay
+                } else {
+                    return response.text().then(text => {
+                        throw new Error(text); // Throw error with backend message
+                    });
+                }
+            })
+            .then(data => {
+                // Check if the response contains the required data
+                if (data.residentId && data.email) {
+                    // Save the email, residentId, and other important info in localStorage
+                    localStorage.setItem('email', data.email); // Save the email
+                    localStorage.setItem('residentId', data.residentId); // Save the residentId
+
+                    alert('Connexion réussie');
+                    // Redirect to the main menu
+                    window.location.href = "../Menus/residentMainMenu.html";
+                } else {
+                    alert('Les informations de l\'utilisateur sont manquantes.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la connexion: ' + error.message);
+            });
+    }
+
+
+
+
+
+</script>
+
+<script src="scripts.js"></script>
+</body>
+</html>

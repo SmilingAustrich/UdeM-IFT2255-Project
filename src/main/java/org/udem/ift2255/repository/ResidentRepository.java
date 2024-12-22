@@ -5,6 +5,8 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
+import java.util.List;
+
 @ApplicationScoped
 public class ResidentRepository implements PanacheRepository<Resident> {
 
@@ -32,5 +34,10 @@ public class ResidentRepository implements PanacheRepository<Resident> {
     // Find a Resident by Email
     public Resident findByEmail(String email) {
         return find("email", email).firstResult();
+    }
+
+    // Find residents by their neighborhood
+    public List<Resident> findByNeighbourhood(String neighbourhood) {
+        return find("neighbourhood", neighbourhood).list();  // This query assumes that the 'neighbourhood' field is correctly mapped in Resident
     }
 }

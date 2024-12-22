@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte Intervenant - MaVille</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<!-- Background and Form -->
+<div class="content">
+    <div class="paralax">
+        <div class="layer rocks2"></div>
+        <div class="layer rocks1"></div>
+        <div class="layer hills"></div>
+        <div class="layer foreground"></div>
+    </div>
+    <div class="blur-overlay"></div>
+</div>
+
+<div class="container">
+    <div class="login-form">
+        <h3 class="glow">Créer un compte Intervenant</h3>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="firstName">Prénom:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Prénom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Nom:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Type d'intervenant:</label>
+                <div class="carousel">
+                    <div class="carousel-container" id="carousel-container">
+                        <div class="carousel-item" data-type="Urban Maintenance">Entretien urbain</div>
+                        <div class="carousel-item" data-type="Construction and Renovation">Construction et rénovation</div>
+                        <div class="carousel-item" data-type="Electrical and Plumbing">Électricité et plomberie</div>
+                        <div class="carousel-item" data-type="Gas and Energy Services">Services de gaz et d'énergie</div>
+                        <div class="carousel-item" data-type="Public Transport Works">Travaux de transport public</div>
+                        <div class="carousel-item" data-type="Landscaping">Paysagisme</div>
+                        <div class="carousel-item" data-type="Telecommunications">Télécommunications</div>
+                    </div>
+                    <button class="carousel-btn prev" onclick="moveCarousel(-1)">←</button>
+                    <button class="carousel-btn next" onclick="moveCarousel(1)">→</button>
+                </div>
+                <input type="hidden" id="type" name="type" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">Adresse courriel:</label>
+                <input type="email" id="email" name="email" placeholder="Adresse courriel" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cityId">Identifiant de la ville (8 chiffres):</label>
+                <input type="text" id="cityId" name="cityId" pattern="\\d{8}" placeholder="Ex: 12345678" required>
+            </div>
+
+            <div class="btn" onclick="submitSignupForm(event);">
+                <i class="fas fa-user-plus"></i> Créer un compte
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function submitSignupForm(event) {
+        event.preventDefault();
+
+        const formData = {
+            userType: "intervenant", // Explicitly set for intervenant
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            type: document.getElementById('type').value, // Retrieved from carousel
+            cityId: document.getElementById('cityId').value // Must be exactly 8 digits
+        };
+
+        fetch('/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Compte créé avec succès');
+                    window.location.href = "intervenantLogin.html"; // Redirect to intervenant login page
+                } else {
+                    response.text().then(text => alert(text));
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la création du compte');
+            });
+    }
+
+    let currentIndex = 0;
+
+    function moveCarousel(direction) {
+        const container = document.getElementById('carousel-container');
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        // Remove active class from current item
+        items[currentIndex].classList.remove('active');
+
+        // Update index
+        currentIndex = (currentIndex + direction + totalItems) % totalItems;
+
+        // Add active class to the new item
+        items[currentIndex].classList.add('active');
+
+        // Move carousel
+        container.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update hidden input value
+        document.getElementById('type').value = items[currentIndex].dataset.type;
+    }
+
+    // Initialize first item as active
+    document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('.carousel-item');
+        items[currentIndex].classList.add('active');
+        document.getElementById('type').value = items[currentIndex].dataset.type;
+    });
+
+
+</script>
+</body>
+</html>

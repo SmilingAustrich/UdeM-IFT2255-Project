@@ -11,6 +11,11 @@ import jakarta.persistence.*;
 public class Resident extends PanacheEntity implements User {
 
 
+    @Column(name = "neighbourhood", nullable = false)
+    private String neighbourhood;
+
+    @Column(name = "preferred_hours")
+    private String preferredHours; // New field for preferred hours
 
     @OneToOne
     @JoinColumn(name = "requete_id")
@@ -38,7 +43,9 @@ public class Resident extends PanacheEntity implements User {
     @Column(name = "age", nullable = false)
     private int age;
 
-    public Resident(String firstName, String lastName, String email, String password, String phone, String address, int age) {
+
+
+    public Resident(String firstName, String lastName, String email, String password, String phone, String address, int age, String neighbourhood) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -46,6 +53,7 @@ public class Resident extends PanacheEntity implements User {
         this.phone = phone;
         this.address = address;
         this.age = age;
+        this.neighbourhood = neighbourhood;
     }
     public Resident() {}
         // No-argument constructor for PanacheEntity
@@ -116,5 +124,21 @@ public class Resident extends PanacheEntity implements User {
         this.requete = requete;
     }
 
+    public String getPreferredHours() {
+        return preferredHours;
+    }
 
+    public void setPreferredHours(String preferredHours) {
+        this.preferredHours = preferredHours;
+    }
+    // Constructors, getters, and setters
+    public String getNeighbourhood() {
+        return neighbourhood;
+    }
+
+    public void setNeighbourhood(String neighbourhood) {
+        this.neighbourhood = neighbourhood;
+
+
+    }
 }

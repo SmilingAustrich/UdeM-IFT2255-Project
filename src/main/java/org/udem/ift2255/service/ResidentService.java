@@ -38,15 +38,12 @@ public class ResidentService {
 
 
     // Authenticate the resident based on email and password
-    public boolean authenticate(String email, String password) {
-        // Here, assume we have a method that fetches the resident by email from a repository or test data
-        Resident resident = residentRepository.findByEmail(email);
-
-        // Check if the resident exists and the password matches
+    public Resident authenticate(String email, String password) {
+        Resident resident = Resident.find("email", email).firstResult();
         if (resident != null && resident.getPassword().equals(password)) {
-            return true; // Authentication successful
+            return resident; // Return the authenticated Resident object
         }
-        return false; // Authentication failed
+        return null; // Authentication failed
     }
 
     /**
@@ -54,105 +51,24 @@ public class ResidentService {
      */
     @Transactional
     public void soumettreRequeteTravail(Resident resident, String workTitle, String detailedWorkDescription,
-                                        String quartier, int workType, LocalDate workWishedStartDate) {
+                                        String quartier, String workType, LocalDate workWishedStartDate) {
         // Ensure that the start date is not in the past
         if (workWishedStartDate.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("La date ne peut pas être dans le passé.");
         }
 
-        // Determine the work type string
-        String workTypeString = getWorkTypeString(workType);
+
 
         // Create a new work request
         ResidentialWorkRequest request = new ResidentialWorkRequest(
-                resident, workTitle, detailedWorkDescription, workTypeString, workWishedStartDate, quartier
+                resident, workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier
         );
         // Save the work request to the repository
         workRequestRepository.saveRequest(request);
     }
 
-    private String getWorkTypeString(int workType) {
-        switch (workType) {
-            case 1:
-                return "Travaux routiers";
-            case 2:
-                return "Travaux de gaz ou électricité";
-            case 3:
-                return "Construction ou rénovation";
-            case 4:
-                return "Entretien paysager";
-            case 5:
-                return "Travaux liés aux transports en commun";
-            case 6:
-                return "Travaux de signalisation et éclairage";
-            case 7:
-                return "Travaux souterrains";
-            case 8:
-                return "Travaux résidentiels";
-            case 9:
-                return "Entretien urbain";
-            case 10:
-                return "Entretien des réseaux de télécommunication";
-            default:
-                return "Inconnu";
-        }
-    }
 
-    @Transactional
-    public void fermerRequete(ResidentialWorkRequest requete) {
-        // Check if the work request is available before closing it
-        if (!requete.isWorkAvailable()) {
-            // Optional: Use logging instead of System.out.println for production code
-            // logger.info("La requête est fermée par " + requete.getResident().getFirstName());
-            workRequestRepository.removeRequest(requete);
-        }
-    }
 
-    // If you still want a 'creerRequete' method, here's how it could be rewritten.
-    @Transactional
-    public void creerRequete(Resident resident, String workTitle, String detailedWorkDescription,
-                             String workType, LocalDate workWishedStartDate, String quartier) {
-        ResidentialWorkRequest requete = new ResidentialWorkRequest(
-                resident, workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier
-        );
-        workRequestRepository.saveRequest(requete);
-    }
-    @Transactional
-    public JsonArray rechercherTravaux(String searchCriteria, String searchValue) throws Exception {
-        // Step 1: Fetch data from the API
-        URL url = new URL("https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=cc41b532-f12d-40fb-9f55-eb58c9a2b12b");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            try (JsonReader jsonReader = Json.createReader(new InputStreamReader(connection.getInputStream()))) {
-                JsonObject jsonResponse = jsonReader.readObject();
-                JsonObject result = jsonResponse.getJsonObject("result");
-                JsonArray records = result.getJsonArray("records");
-
-                // Step 2: Filter and format records
-                jakarta.json.JsonArrayBuilder filteredRecords = Json.createArrayBuilder();
-
-                for (JsonObject record : records.getValuesAs(JsonObject.class)) {
-                    String valueToCheck = record.getString(searchCriteria, "").toLowerCase();
-                    if (valueToCheck.contains(searchValue.toLowerCase())) {
-                        JsonObject formattedRecord = Json.createObjectBuilder()
-                                .add("ID du Travail", record.getString("_id", "N/A"))
-                                .add("Quartier", record.getString("boroughid", "N/A"))
-                                .add("Type de Travaux", record.getString("reason_category", "N/A"))
-                                .add("Intervenant", record.getString("organizationname", "N/A"))
-                                .build();
-                        filteredRecords.add(formattedRecord);
-                    }
-                }
-
-                return filteredRecords.build();
-            }
-        } else {
-            throw new Exception("Failed to fetch data from API. Response Code: " + responseCode);
-        }
-    }
 
 
     private List<Map<String, String>> filterTravaux(jakarta.json.JsonArray travaux, String searchCriteria, String searchValue) {

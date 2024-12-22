@@ -32,7 +32,7 @@ public class Intervenant extends PanacheEntity implements User {
     private String cityIdCode;
 
     @Column(name = "entrepreneurType", nullable = false)
-    private int entrepreneurType;
+    private String entrepreneurType;
 
     // Optional: One-to-many relationship with ResidentialWorkRequest if an intervenant can have many requests
     @OneToMany(mappedBy = "chosenIntervenant")
@@ -48,7 +48,7 @@ public class Intervenant extends PanacheEntity implements User {
      * @param cityIdCode       Le code d'identification de la ville (à 8 chiffres)
      * @param entrepreneurType Le type d'entrepreneur (privé, public, particulier)
      */
-    public Intervenant(String firstName, String lastName, String email, String password, String cityIdCode, int entrepreneurType) {
+    public Intervenant(String firstName, String lastName, String email, String password, String cityIdCode, String entrepreneurType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -105,7 +105,7 @@ public class Intervenant extends PanacheEntity implements User {
      *
      * @return le type d'entrepreneur (numérique)
      */
-    public int getEntrepreneurType() {
+    public String getEntrepreneurType() {
         return entrepreneurType;
     }
 
@@ -134,5 +134,25 @@ public class Intervenant extends PanacheEntity implements User {
 
     public Long getId() {
         return id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setType(String type) {
+        this.entrepreneurType = type;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityIdCode = cityId;
     }
 }
