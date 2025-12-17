@@ -1,115 +1,160 @@
-# 🌆 Projet "Ma Ville" - Application de Gestion des Travaux (Devoir 3)
+# 🌆 Project "My city" - A public and private work manager
 
-## 📄 Brève Description du Projet
+## 🌍 Language / Langue
 
-**Ma Ville** est une application innovante développée en **Java** pour simplifier la gestion des travaux publics et privés à Montréal. Conçue pour répondre aux besoins des **résidents** et des **intervenants**, elle facilite la communication, améliore la planification des travaux, et contribue à minimiser les perturbations causées par les chantiers. Ce projet a été réalisé dans le cadre d'un **devoir universitaire**.
+* [🇬🇧 English Version](#-english-version)
+* [🇫🇷 Version Française](#-version-française)
 
-L'application offre une meilleure coordination entre les divers acteurs, assurant ainsi une plus grande transparence et une expérience utilisateur améliorée grâce à des notifications personnalisées et des fonctionnalités de planification participative.
+![Java](https://img.shields.io/badge/Language-Java-red?style=for-the-badge\&logo=prolog)
+![HTML](https://img.shields.io/badge/Language-HTML-green?style=for-the-badge\&logo=prolog)
+![CSS](https://img.shields.io/badge/Language-CSS-yellow?style=for-the-badge\&logo=prolog)
+![Course](https://img.shields.io/badge/Course-IFT2035-blue?style=for-the-badge)
+![University](https://img.shields.io/badge/University-UdeM-navy?style=for-the-badge)
 
-## ✨ Fonctionnalités Principales
+---
 
-### Résidents 🏡
-Les résidents peuvent :
-- **S'inscrire** et **se connecter** pour accéder aux fonctionnalités personnalisées.
-- **Consulter les travaux en cours ou à venir** dans leur quartier avec des filtres par type de travaux, rue, ou quartier.
-- **Soumettre des requêtes de travaux** pour des projets résidentiels spécifiques.
-- **Suivre l'état de leurs requêtes** et **recevoir des notifications** sur l'avancement.
-- **Donner un avis** sur les travaux une fois terminés pour améliorer la qualité des projets futurs.
-- **Participer à la planification des travaux**, en partageant des plages horaires préférées, favorisant ainsi une planification inclusive et harmonieuse.
-- **Recevoir des notifications personnalisées** pour rester informé des projets dans leur quartier.
+## 🇫🇷 Version Française
 
-### Intervenants 🛠️
-Les intervenants ont la possibilité de :
-- **S'inscrire** et **se connecter** avec un identifiant valide de la ville.
-- **Consulter les requêtes de travaux** soumises par les résidents et **soumettre leur candidature**.
-- **Soumettre un nouveau projet** en précisant les quartiers et rues affectés ainsi que les détails des travaux.
-- **Mettre à jour les informations d'un chantier**, notamment le statut et l'avancement, pour garantir une communication claire avec les résidents.
+### 📄 Brève Description du Projet
 
-## 📂 Organisation du Répertoire
+**Ma Ville** est une application innovante développée en **Java** pour simplifier la gestion des travaux publics et privés à Montréal. Elle facilite la communication, améliore la planification des travaux et contribue à minimiser les perturbations pour les résidents et intervenants.
 
-Le répertoire `src` contient les classes Java principales du projet, organisées comme suit :
+### ✨ Fonctionnalités Principales
+
+#### Résidents 🏡
+
+* Inscription et connexion
+* Consultation des travaux en cours ou à venir avec filtres
+* Soumission et suivi de requêtes de travaux
+* Avis sur travaux terminés
+* Participation à la planification
+* Notifications personnalisées
+
+#### Intervenants 🛠️
+
+* Inscription et connexion avec identifiant valide
+* Consultation des requêtes et soumission de candidature
+* Soumission de nouveaux projets
+* Mise à jour du statut et avancement des chantiers
+
+### 📂 Organisation du Répertoire
 
 ```plaintext
 src
 └── com.udem.ift2255
     ├── model
-    │   ├── User.java                   # Interface commune pour les utilisateurs résidents et intervenants.
-    │   ├── Intervenant.java            # Classe représentant un intervenant (entreprise ou particulier).
-    │   ├── Resident.java               # Classe représentant un résident avec des méthodes pour consulter les entraves et travaux.
-    │   ├── ResidentialWorkRequest.java # Classe représentant une requête de travaux résidentiels.
-    │   ├── Project.java                # Classe représentant un projet de travaux.
-    │
     ├── auth
-    │   ├── AuthenticationService.java  # Service pour gérer l'authentification des résidents et intervenants.
-    │
     ├── ui
-    │   ├── Menu.java                   # Gère l'interface en ligne de commande pour la navigation.
-    │   ├── Main.java                   # Classe principale pour démarrer l'application.
-    │
     ├── database
-    │   ├── Database.java               # Classe contenant toutes les données du système.
     ├── test
-    │   ├── AuthenticationServiceTest.java
-    │   ├── ResidentTest.java
-    │   ├── IntervenantTest.java
-
 ```
 
-## 👥 Auteurs
+### 👥 Auteurs
 
-Ce projet a été réalisé par :
+* **Tarik Hireche**
+* **Karim Ndoye**
+* **Ilyesse Bouzammita**
 
-- **Tarik Hireche**  
-  * _Développement du service d'authentification, de l'interface utilisateur et de ses implémentations_
-  * _Création du diagramme de cas d'utilisation, scénarios et du README_
-  * _Mise à jour des exigences et des risques pour le devoir 2_
+### 📋 Instructions d'Installation et d'Exécution
 
-- **Karim Ndoye**  
-  * _Développement des fonctionnalités résidents et intervenant_
-  * _Création du glossaire, analyse_
-  * _Mise à jour de l'analyse des besoins matériels et solution de stockage pour le devoir 2_
+**Prérequis** : JDK 8+, IDE Java
 
-- **Ilyesse Bouzammita**  
-  * _Développement du menu principal des intervenants et des résidents_
-  * _Création du diagramme d'activités_
-  * _Mise à jour du diagramme d'activités et contribution à l'architecture pour le devoir 2_
+**Installation** :
 
-## 📋 Instructions d'Installation et d'Exécution
+```sh
+git clone <url_du_dépôt>
+```
 
-### Prérequis
-- **Java Development Kit (JDK)** version 8 ou supérieure.
-- **IntelliJ IDEA** ou un autre IDE pour Java.
+Ouvrir dans l'IDE
 
-### Installation
-1. Clonez le dépôt GitHub sur votre machine locale :
-   ```sh
-   git clone <url_du_dépôt>
-   ```
-2. Ouvrez le projet dans votre IDE préféré.
+**Exécution** : Compiler et exécuter `Main.java` et suivre les instructions CLI.
 
-### Exécution
-1. Compilez et exécutez la classe `Main.java`.
-2. Suivez les instructions affichées dans l'interface en ligne de commande pour naviguer dans l'application.
+**Tests** : Disponibles dans `src/test/java` avec **JUnit**
 
-### Tests
-- Les tests unitaires sont disponibles dans le répertoire `src/test/java`.
-- Utilisez **JUnit** pour exécuter les tests.
+### 🎨 Architecture et Design
 
-### Release
-- Une release est disponible pour chaque jalon du projet. Vous pouvez la télécharger depuis l'onglet **Releases** du dépôt GitHub.
+* Modularité et flexibilité
+* Communication fluide entre composants
+* Intégration de services externes
 
-## 🎨 Architecture et Design
+**Diagrammes** : Cas d'utilisation, activités, classes
 
-Le design du projet a été pensé pour favoriser la modularité, la flexibilité et l'évolution de l'application. L'architecture choisie permet une communication fluide entre les différentes composantes, avec un accent particulier sur l'intégration des services externes, tels que les APIs de la Ville de Montréal.
+### 📄 Licence
 
-### Diagrammes
-- **Diagramme de cas d'utilisation** : Illustrant les interactions des résidents et intervenants avec l'application.
-- **Diagramme d'activités** : Détaillant les principaux processus de l'application, mis à jour pour refléter les nouvelles exigences.
-- **Diagramme de classes** : Présentant les différentes classes et leur relation, conçu pour respecter les principes de cohésion et de couplage minimal.
-
-## 📄 Licence
-Ce projet est réalisé dans le cadre d'un devoir universitaire et n'est pas destiné à un usage commercial.
+Projet académique, pas destiné à un usage commercial.
 
 ---
 
-Merci de votre intérêt pour **Ma Ville** ! Nous espérons que cette application contribuera à améliorer la communication et la gestion des travaux dans la ville de Montréal. Pour toute question ou suggestion, n'hésitez pas à nous contacter via le dépôt GitHub. ✨
+## 🇬🇧 English Version
+
+### 📄 Project Brief
+
+**Ma Ville** is an innovative **Java** application designed to simplify the management of public and private works in Montreal. It improves communication, enhances work planning, and minimizes disruptions for residents and stakeholders.
+
+### ✨ Main Features
+
+#### Residents 🏡
+
+* Registration and login
+* View ongoing/upcoming works with filters
+* Submit and track work requests
+* Provide feedback on completed works
+* Participate in planning
+* Receive personalized notifications
+
+#### Stakeholders 🛠️
+
+* Registration and login with valid city ID
+* View requests and submit applications
+* Submit new projects
+* Update project status and progress
+
+### 📂 Directory Structure
+
+```plaintext
+src
+└── com.udem.ift2255
+    ├── model
+    ├── auth
+    ├── ui
+    ├── database
+    ├── test
+```
+
+### 👥 Authors
+
+* **Tarik Hireche**
+* **Karim Ndoye**
+* **Ilyesse Bouzammita**
+
+### 📋 Installation and Execution
+
+**Prerequisites**: JDK 8+, Java IDE
+
+**Installation**:
+
+```sh
+git clone <repository_url>
+```
+
+Open in your IDE
+
+**Execution**: Compile and run `Main.java` and follow the CLI instructions.
+
+**Tests**: Available in `src/test/java` with **JUnit**
+
+### 🎨 Architecture and Design
+
+* Modularity and flexibility
+* Smooth communication between components
+* Integration with external services
+
+**Diagrams**: Use case, activity, class diagrams
+
+### 📄 License
+
+Academic project, not intended for commercial use.
+
+---
+
+Thank you for your interest in **Ma Ville**! This application aims to improve communication and work management in Montreal. For questions or suggestions, please contact us via the GitHub repository.
