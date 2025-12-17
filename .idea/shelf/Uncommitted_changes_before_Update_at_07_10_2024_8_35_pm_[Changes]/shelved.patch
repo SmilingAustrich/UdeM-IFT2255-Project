@@ -1,0 +1,37 @@
+Index: src/Menus.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\r\n\r\npublic class Menus {\r\n    // Méthode pour afficher le menu de connexion/inscription\r\n    public void greet() {\r\n\r\n\r\n        Scanner in = new Scanner(System.in);\r\n        System.out.print(\"Bienvenue sur votre application Ma Ville.\" +\r\n                \"\\n Pour continuer, veuillez choisir une action à l'aide du menu ci-dessous.\" +\r\n                \"\\n I. Se connecter en tant que:\\n\" +\r\n                \"\\t 1. Résident.\\n\"\r\n                + \"\\t 2. Intervenant.\\n\"\r\n                + \"II. S'inscrire en tant que:\\n\" +\r\n                \"\\t 3. Résident.\\n\"\r\n                + \"\\t 4. Intervenant.\\n\"\r\n                + \":> \");\r\n        int choice = in.nextInt();\r\n        in.nextLine();\r\n\r\n        switch (choice) {\r\n            case 1:\r\n                System.out.print(\"--------------------------\\n\" +\r\n                        \"Chargement du portail de connexion \");\r\n                AppSimulation.simulateLoading();\r\n                System.out.println(\"--------------------------\\n\");\r\n                residentLogInMenu();\r\n                break;\r\n\r\n            case 2:\r\n                System.out.print(\"--------------------------\\n\" +\r\n                        \"Chargement du portail de connexion \");\r\n                AppSimulation.simulateLoading();\r\n                System.out.println(\"--------------------------\\n\");\r\n                break;\r\n\r\n            case 3:\r\n                System.out.println(\"Inscription en tant que résident.\");\r\n                System.out.print(\"Veuillez entrer votre nom complet >: \");\r\n                String fullNameResident = in.nextLine();\r\n                System.out.print(\"Adresse courriel >: \");\r\n\r\n                System.out.print(\"Mot de passe >: \");\r\n\r\n\r\n                AppSimulation.simulateLoading();\r\n                System.out.println(\"Inscription réussie. Vous pouvez maintenant vous connecter.\");\r\n                break;\r\n\r\n            case 4:\r\n                System.out.println(\"Inscription en tant qu'intervenant.\");\r\n                System.out.print(\"Veuillez entrer votre nom complet >: \");\r\n                String fullNameIntervenant = in.nextLine();\r\n                System.out.print(\"Adresse courriel >: \");\r\n                String emailIntervenant = in.nextLine();\r\n                System.out.print(\"Mot de passe >: \");\r\n                String passwordIntervenant = in.nextLine();\r\n                System.out.print(\"Identifiant de la ville (code à 8 chiffres) >: \");\r\n                String cityId = in.nextLine();\r\n\r\n                // Appel à un service d'inscription\r\n                System.out.println(\"Inscription réussie. Vous pouvez maintenant vous connecter.\");\r\n                break;\r\n\r\n            default:\r\n                System.out.println(\"Choix invalide. Veuillez réessayer.\");\r\n                break;\r\n        }\r\n    }\r\n\r\n\r\n    public void residentLogInMenu() {\r\n\r\n        Scanner in = new Scanner(System.in);\r\n\r\n        System.out.println(\"Bienvenue sur le portail de connexion des résidents.\\n\" +\r\n                \"Veuillez entrer votre nom d'utilisateur ainsi que votre mot de passe.\\n\");\r\n\r\n        System.out.print(\"Nom d'utilisateur >: \");\r\n        String username = in.nextLine();\r\n        System.out.print(\"Mot de passe >: \");\r\n        String password = in.nextLine();\r\n\r\n        boolean loggedInResident = AuthenticationService.login(username, password);\r\n        while (loggedInResident != true ) {\r\n            System.out.println(\"Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.\");\r\n\r\n            System.out.print(\"Nom d'utilisateur >: \");\r\n            username = in.nextLine();\r\n            System.out.print(\"Mot de passe >: \");\r\n            password = in.nextLine();\r\n            loggedInResident = AuthenticationService.login(username, password);\r\n        }\r\n        if (loggedInResident) {\r\n            System.out.println(\"Connexion réussie ! Bienvenue, \" + username);\r\n            // Redirige vers le menu des résidents\r\n            residentMainMenu();\r\n        }\r\n    }\r\n\r\n    // Menu des intervenants (à personnaliser selon les fonctionnalités)\r\n    public void intervenantMenu() {\r\n\r\n        Scanner in = new Scanner(System.in);\r\n\r\n        System.out.println(\"Bienvenue sur le portail de connexion des intervenants.\\n \" +\r\n                \"Veuillez entrer votre nom d'utilisateur ainsi que votre mot de passe.\\n\");\r\n        System.out.print(\"Nom d'utilisateur >: \");\r\n\r\n        String username = in.nextLine();\r\n        System.out.print(\"Mot de passe >: \");\r\n        String password = in.nextLine();\r\n\r\n        boolean loggedInIntervenant = AuthenticationService.login(username, password);\r\n        while (loggedInIntervenant != true ) {\r\n            System.out.println(\"Nom d'utilisateur ou mot de passe incorrect. Veuillez réessayer.\");\r\n\r\n            System.out.print(\"Nom d'utilisateur >: \");\r\n            username = in.nextLine();\r\n            System.out.print(\"Mot de passe >: \");\r\n            password = in.nextLine();\r\n            loggedInIntervenant = AuthenticationService.login(username, password);\r\n        }if (loggedInIntervenant) {\r\n            System.out.println(\"Connexion réussie ! Bienvenue, \" + username);\r\n            // Redirige vers le menu des intervenants\r\n            intervenantMainMenu();\r\n        }\r\n    }\r\n\r\n    // Méthode pour démarrer l'application\r\n    public void start() {\r\n        greet();\r\n    }\r\n\r\n    // Main pour exécuter l'application\r\n    public static void main(String[] args) {\r\n        Menus app = new Menus();\r\n        app.start();\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/src/Menus.java b/src/Menus.java
+--- a/src/Menus.java	(revision 23f0f2ccaf542b54e94907b47db0c819d050a840)
++++ b/src/Menus.java	(date 1728234010105)
+@@ -94,7 +94,7 @@
+         if (loggedInResident) {
+             System.out.println("Connexion réussie ! Bienvenue, " + username);
+             // Redirige vers le menu des résidents
+-            residentMainMenu();
++//            residentMainMenu();
+         }
+     }
+ 
+@@ -123,7 +123,7 @@
+         }if (loggedInIntervenant) {
+             System.out.println("Connexion réussie ! Bienvenue, " + username);
+             // Redirige vers le menu des intervenants
+-            intervenantMainMenu();
++//            intervenantMainMenu();
+         }
+     }
+ 
+@@ -132,9 +132,5 @@
+         greet();
+     }
+ 
+-    // Main pour exécuter l'application
+-    public static void main(String[] args) {
+-        Menus app = new Menus();
+-        app.start();
+-    }
++
+ }
