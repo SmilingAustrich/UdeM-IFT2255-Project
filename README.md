@@ -8,7 +8,7 @@
 ![Java](https://img.shields.io/badge/Language-Java-red?style=for-the-badge\&logo=prolog)
 ![HTML](https://img.shields.io/badge/Language-HTML-green?style=for-the-badge\&logo=prolog)
 ![CSS](https://img.shields.io/badge/Language-CSS-yellow?style=for-the-badge\&logo=prolog)
-![Course](https://img.shields.io/badge/Course-IFT2035-blue?style=for-the-badge)
+![Course](https://img.shields.io/badge/Course-IFT2255-blue?style=for-the-badge)
 ![University](https://img.shields.io/badge/University-UdeM-navy?style=for-the-badge)
 
 ---
