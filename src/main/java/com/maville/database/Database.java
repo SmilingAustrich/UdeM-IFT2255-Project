@@ -1,6 +1,6 @@
-package com.udem.ift2255.database;
+package com.maville.database;
 
-import com.udem.ift2255.model.*;
+import com.maville.model.*;
 
 import java.nio.file.Paths;
 import java.time.LocalDate;

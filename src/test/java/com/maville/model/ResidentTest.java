@@ -1,12 +1,12 @@
-package com.udem.ift2255.test;
+package com.maville.model;
 
 import static org.junit.Assert.*;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.udem.ift2255.model.Resident;
-import com.udem.ift2255.model.ResidentialWorkRequest;
-import com.udem.ift2255.database.Database;
+import com.maville.model.Resident;
+import com.maville.model.ResidentialWorkRequest;
+import com.maville.database.Database;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,11 +1,11 @@
-package com.udem.ift2255.ui;
+package com.maville.ui;
 
-import com.udem.ift2255.auth.AuthenticationService;
-import com.udem.ift2255.database.Database;
-import com.udem.ift2255.model.Intervenant;
-import com.udem.ift2255.model.Resident;
-import com.udem.ift2255.model.ResidentialWorkRequest;
-import com.udem.ift2255.model.Project;
+import com.maville.auth.AuthenticationService;
+import com.maville.database.Database;
+import com.maville.model.Intervenant;
+import com.maville.model.Resident;
+import com.maville.model.ResidentialWorkRequest;
+import com.maville.model.Project;
 
 
 import java.io.Console;
@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * La classe {@code com.udem.ift2255.ui.Menu} représente le menu principal de l'application Ma Ville.
+ * La classe {@code Menu} représente le menu principal de l'application Ma Ville.
  * Elle permet aux utilisateurs de se connecter, de s'inscrire et d'accéder aux différentes fonctionnalités
  * en fonction de leur statut (résident ou intervenant).
  */

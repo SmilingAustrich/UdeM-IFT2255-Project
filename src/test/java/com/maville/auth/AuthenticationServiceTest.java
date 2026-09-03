@@ -1,13 +1,13 @@
-package com.udem.ift2255.test;
+package com.maville.auth;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.udem.ift2255.auth.AuthenticationService;
-import com.udem.ift2255.database.Database;
-import com.udem.ift2255.model.Intervenant;
-import com.udem.ift2255.model.Resident;
+import com.maville.auth.AuthenticationService;
+import com.maville.database.Database;
+import com.maville.model.Intervenant;
+import com.maville.model.Resident;
 
 /* Classe test codée par Karim*/
 public class AuthenticationServiceTest {

@@ -1,4 +1,4 @@
-package com.udem.ift2255.model;
+package com.maville.model;
 
 import java.io.Serializable;
 import java.util.HashMap;

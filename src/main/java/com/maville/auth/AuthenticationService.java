@@ -1,7 +1,7 @@
-package com.udem.ift2255.auth;
+package com.maville.auth;
 
-import com.udem.ift2255.database.Database;
-import com.udem.ift2255.model.*;
+import com.maville.database.Database;
+import com.maville.model.*;
 
 public class AuthenticationService {
 

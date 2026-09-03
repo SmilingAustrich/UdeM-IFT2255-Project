@@ -1,7 +1,7 @@
-package com.udem.ift2255.model;
+package com.maville.model;
 
-import com.udem.ift2255.database.Database;
-import com.udem.ift2255.ui.*;
+import com.maville.database.Database;
+import com.maville.ui.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * La classe {@code com.udem.ift2255.model.Intervenant} représente un utilisateur de type intervenant dans l'application Ma Ville.
+ * La classe {@code Intervenant} représente un utilisateur de type intervenant dans l'application Ma Ville.
  * Un intervenant est un professionnel qui peut soumettre des projets de travaux et consulter des requêtes.
  */
 public class Intervenant implements User, Serializable {
@@ -27,7 +27,7 @@ public class Intervenant implements User, Serializable {
     private final int entrepreneurType;
     private static final long serialVersionUID = 1L;
     /**
-     * Constructeur de la classe {@code com.udem.ift2255.model.Intervenant}.
+     * Constructeur de la classe {@code Intervenant}.
      *
      * @param firstName        Le prénom de l'intervenant
      * @param lastName         Le nom de famille de l'intervenant
@@ -360,14 +360,14 @@ public class Intervenant implements User, Serializable {
             System.out.println("Conflit potentiel avec les préférences des résidents. Souhaitez-vous continuer malgré tout ? (oui/non)");
             String choix = in.nextLine();
             if (choix.equalsIgnoreCase("non")) {
-                System.out.println("com.udem.ift2255.model.Project annulé. Retour au menu principal.");
+                System.out.println("Projet annulé. Retour au menu principal.");
                 Menu.intervenantMainMenu(this);
                 return;
             }
         }
 
-        // com.udem.ift2255.model.Project soumis avec succès
-        System.out.println("com.udem.ift2255.model.Project soumis avec succès !");
+        // Projet soumis avec succès
+        System.out.println("Projet soumis avec succès !");
         System.out.println("Détails du projet soumis :");
         System.out.println("Titre : " + titre);
         System.out.println("Description : " + description);

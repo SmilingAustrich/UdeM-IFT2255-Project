@@ -1,8 +1,8 @@
-package com.udem.ift2255.test;
+package com.maville.model;
 
-import com.udem.ift2255.model.Intervenant;
-import com.udem.ift2255.model.ResidentialWorkRequest;
-import com.udem.ift2255.model.Resident;
+import com.maville.model.Intervenant;
+import com.maville.model.ResidentialWorkRequest;
+import com.maville.model.Resident;
 import org.junit.Test;
 
 import java.time.LocalDate;

@@ -1,6 +1,6 @@
-package com.udem.ift2255.model;
+package com.maville.model;
 
-import com.udem.ift2255.ui.*;
+import com.maville.ui.*;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -14,7 +14,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
-import com.udem.ift2255.database.Database;
+import com.maville.database.Database;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +22,7 @@ import java.time.format.DateTimeParseException;
 
 
 /**
- * La classe {@code com.udem.ift2255.model.Resident} représente un utilisateur résident dans l'application Ma Ville.
+ * La classe {@code Resident} représente un utilisateur résident dans l'application Ma Ville.
  * Un résident peut consulter les travaux, signaler des problèmes, et recevoir des notifications personnalisées.
  */
 public class Resident implements User, Serializable {
@@ -37,7 +37,7 @@ public class Resident implements User, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructeur de la classe {@code com.udem.ift2255.model.Resident}.
+     * Constructeur de la classe {@code Resident}.
      *
      * @param firstName Le prénom du résident
      * @param lastName  Le nom de famille du résident
@@ -727,7 +727,6 @@ public class Resident implements User, Serializable {
         ResidentialWorkRequest requete = new ResidentialWorkRequest(this, workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier);
         Database.getResidentialWorkMap().put(this,requete);
 
-//        Map<com.udem.ift2255.model.Resident, com.udem.ift2255.model.ResidentialWorkRequest > lol = com.udem.ift2255.database.Database.getRequeteTravailMap();
     }
 
     public void fermerRequete(ResidentialWorkRequest requete){
