@@ -1,25 +1,24 @@
 package com.maville.ui;
 
-import com.maville.database.Database;
+import com.maville.ui.console.ConsolePrompt;
+
+import java.util.Scanner;
 
 /**
- * Classe principale {@code Main} pour démarrer l'application Ma Ville.
- * Ce programme a été réalisé dans le cadre d'un devoir universitaire.
+ * Starts Ma Ville.
  *
- * Auteurs :
- * - Tarik Hireche
- * - Ilyesse Bouzammita
- * - Karim Ndoye
+ * <p>The single {@link Scanner} is opened here and passed down. Every screen
+ * used to open its own, which meant one screen's read-ahead could consume a
+ * line the next screen was waiting for.
  */
-public class Main {
+public final class Main {
 
-    /**
-     * Méthode principale {@code main} qui démarre l'application en créant un objet {@code Menu}.
-     *
-     * @param args Arguments de la ligne de commande (non utilisés)
-     */
+    private Main() {
+    }
+
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.start();  // Lance l'application Ma Ville
+        try (Scanner in = new Scanner(System.in)) {
+            new Menu(new ConsolePrompt(in)).start();
+        }
     }
 }

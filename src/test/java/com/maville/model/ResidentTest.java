@@ -1,134 +1,103 @@
 package com.maville.model;
 
-import static org.junit.Assert.*;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.maville.model.Resident;
-import com.maville.model.ResidentialWorkRequest;
 import com.maville.database.Database;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-/* Classe test codée par Tarek */
 public class ResidentTest {
 
     private Resident resident;
 
     @Before
     public void setUp() {
-        // Nettoyer la base de données des requêtes avant chaque test pour assurer un état propre
         Database.getResidentialWorkMap().clear();
-
-        // Initialisation une instance de Resident pour les test
-        resident = new Resident(
-                "John",         // Prénom
-                "Doe",          // Nom de famille
-                "john.doe@example.com", // Adresse e-mail
-                "securePassword123",    // Mot de passe
-                "1234567890",   // Téléphone
-                "1234 Street",  // Adresse
-                30              // Âge
-        );
+        resident = new Resident("John", "Doe", "john.doe@example.com",
+                "securePassword123", "1234567890", "1234 Street", 30);
     }
 
     @Test
-    public void testCreerRequete() {
-        // Étape 1 : Préparer les données d'entrée pour la requête de travaux
-        String workTitle = "New Fence Installation";
-        String detailedWorkDescription = "Install a wooden fence around the backyard.";
-        String workType = "Construction";
-        LocalDate workWishedStartDate = LocalDate.of(2024, 12, 1);
-        String quartier = "Plateau-Mont-Royal";
+    public void creerRequeteStoresTheRequestAgainstTheResident() {
+        LocalDate startDate = LocalDate.of(2024, 12, 1);
+        resident.creerRequete("New Fence Installation",
+                "Install a wooden fence around the backyard.",
+                WorkType.CONSTRUCTION.label(), startDate, "Plateau-Mont-Royal");
 
-        // Étape 2 : Appeler la méthode pour créer une requête
-        resident.creerRequete(workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier);
+        Map<Resident, ResidentialWorkRequest> requests = Database.getResidentialWorkMap();
+        assertTrue(requests.containsKey(resident));
 
-        // Étape 3 : Vérifier que la requête a été ajoutée à la base de données
-        Map<Resident, ResidentialWorkRequest> workRequests = Database.getResidentialWorkMap();
-
-        // Assertions pour vérifier que le résident a une requête de travaux
-        assertTrue(workRequests.containsKey(resident));
-
-        ResidentialWorkRequest request = workRequests.get(resident);
+        ResidentialWorkRequest request = requests.get(resident);
         assertNotNull(request);
-        assertEquals(workTitle, request.getWorkTitle());
-        assertEquals(detailedWorkDescription, request.getDetailedWorkDescription());
-        assertEquals(workType, request.getWorkType());
-        assertEquals(workWishedStartDate, request.getWorkWishedStartDate());
-        assertEquals(quartier, request.getQuartier());
-
-        System.out.println("Tous les tests pour la méthode creerRequete ont été réussis.");
-
+        assertEquals("New Fence Installation", request.getWorkTitle());
+        assertEquals("Install a wooden fence around the backyard.", request.getDetailedWorkDescription());
+        assertEquals(WorkType.CONSTRUCTION.label(), request.getWorkType());
+        assertEquals(startDate, request.getWorkWishedStartDate());
+        assertEquals("Plateau-Mont-Royal", request.getQuartier());
+        assertEquals(resident, request.getResident());
     }
 
     @Test
-    public void testFetchTravauxData() {
-        // Étape 1 : Créer une instance de Resident
-        Resident resident = new Resident(
-                "John",
-                "Doe",
-                "john.doe@example.com",
-                "securePassword123",
-                "1234567890",
-                "1234 Street",
-                30
-        );
+    public void aNewRequestIsOpenForApplications() {
+        resident.creerRequete("Clôture", "Installation d'une clôture.",
+                WorkType.CONSTRUCTION.label(), LocalDate.of(2024, 12, 1), "Plateau-Mont-Royal");
 
-        try {
-            // Étape 2 : Récupérer les données des travaux depuis l'API
-            JsonArray travaux = resident.fetchTravauxData();
+        assertTrue(Database.getResidentialWorkMap().get(resident).isWorkAvailable());
+    }
 
-            // Étape 3 : Vérifier que les données récupérées ne sont pas nulles et contiennent des éléments
-            assertNotNull("Le JSON array ne devrait pas être 'null' ", travaux);
-            assertTrue("Le JSON array devrait contenir des données", travaux.size() > 0);
+    /**
+     * The removal used to be keyed by email against a map keyed by Resident, so
+     * it removed nothing and the request stayed open forever.
+     */
+    @Test
+    public void fermerRequeteRemovesAClosedRequest() {
+        resident.creerRequete("Clôture", "Installation d'une clôture.",
+                WorkType.CONSTRUCTION.label(), LocalDate.of(2024, 12, 1), "Plateau-Mont-Royal");
+        ResidentialWorkRequest request = Database.getResidentialWorkMap().get(resident);
 
-            // Optionnel : Vérifier la structure du premier enregistrement
-            JsonElement firstRecord = travaux.get(0);
-            assertTrue("Le premier élément doit être un JsonObject", firstRecord.isJsonObject());
-            assertTrue("Le premier élément doit avoir une section 'id'", firstRecord.getAsJsonObject().has("id"));
-            assertTrue("Le premier élément doit avoir une section 'boroughid'", firstRecord.getAsJsonObject().has("boroughid"));
-            assertTrue("Le premier élément doit avoir une section 'reason_category'", firstRecord.getAsJsonObject().has("reason_category"));
-            assertTrue("Le premier élément doit avoir une section 'organizationname'", firstRecord.getAsJsonObject().has("organizationname"));
+        request.rendreIndisponible();
+        resident.fermerRequete(request);
 
-            // Affichage pour confirmer que les tests sont passés
-            System.out.println("Tous les tests pour la méthode fetchTravauxData ont été réussis.");
-
-        } catch (IOException e) {
-            fail("Une erreur IOException a eu lieu: " + e.getMessage());
-        }
+        assertFalse(Database.getResidentialWorkMap().containsKey(resident));
     }
 
     @Test
-    public void testSuivreRequetesResidentielles() {
+    public void fermerRequeteKeepsARequestThatIsStillOpen() {
+        resident.creerRequete("Clôture", "Installation d'une clôture.",
+                WorkType.CONSTRUCTION.label(), LocalDate.of(2024, 12, 1), "Plateau-Mont-Royal");
+        ResidentialWorkRequest request = Database.getResidentialWorkMap().get(resident);
 
-        // Étape 1 : Préparer une requête de travaux pour le résident
-        String workTitle = "Installation de Clôture";
-        String detailedWorkDescription = "Installation d'une clôture en bois autour du jardin.";
-        String workType = "Construction";
-        LocalDate workWishedStartDate = LocalDate.of(2024, 12, 1);
-        String quartier = "Plateau-Mont-Royal";
-        resident.creerRequete(workTitle, detailedWorkDescription, workType, workWishedStartDate, quartier);
+        resident.fermerRequete(request);
 
-        // Étape 2 : Vérifier que la requête existe dans la base de données
-        Map<Resident, ResidentialWorkRequest> requetes = Database.getResidentialWorkMap();
-        assertTrue("Le résident devrait avoir une requête active", requetes.containsKey(resident));
+        assertTrue(Database.getResidentialWorkMap().containsKey(resident));
+    }
 
-        ResidentialWorkRequest requete = requetes.get(resident);
-        assertNotNull("La requête ne devrait pas être nulle", requete);
-        assertEquals(workTitle, requete.getTitle());
-        assertEquals(detailedWorkDescription, requete.getDescription());
-        assertEquals(workType, requete.getWorkType());
-        assertEquals(quartier, requete.getNeighbourhood());
-        assertEquals(workWishedStartDate, requete.getStartDate());
+    @Test
+    public void creerRequeteTwiceKeepsOnlyTheLatest() {
+        resident.creerRequete("Première", "d1", WorkType.CONSTRUCTION.label(),
+                LocalDate.of(2024, 12, 1), "Plateau");
+        resident.creerRequete("Deuxième", "d2", WorkType.PAYSAGER.label(),
+                LocalDate.of(2025, 1, 15), "Rosemont");
 
-        // Affichage pour confirmer que les tests sont passés
-        System.out.println("Tous les tests pour la méthode suivreRequetesResidentielles ont été réussis.");
+        assertEquals(1, Database.getResidentialWorkMap().size());
+        assertEquals("Deuxième", Database.getResidentialWorkMap().get(resident).getTitle());
+    }
+
+    @Test
+    public void exposesTheDetailsItWasBuiltWith() {
+        assertEquals("John", resident.getFirstName());
+        assertEquals("Doe", resident.getLastName());
+        assertEquals("john.doe@example.com", resident.getEmail());
+        assertEquals("securePassword123", resident.getPassword());
+        assertEquals("1234567890", resident.getPhone());
+        assertEquals("1234 Street", resident.getAddress());
+        assertEquals(30, resident.getAge());
     }
 }
