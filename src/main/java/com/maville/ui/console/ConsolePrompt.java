@@ -47,10 +47,6 @@ public final class ConsolePrompt {
         this.in = in;
     }
 
-    public Scanner scanner() {
-        return in;
-    }
-
     /** Reads a line as-is, with no validation. */
     public String line(String prompt) {
         System.out.print(prompt);
@@ -79,16 +75,6 @@ public final class ConsolePrompt {
             } catch (NumberFormatException e) {
                 System.out.println(Ansi.error("Veuillez entrer un nombre."));
             }
-        }
-    }
-
-    /** Reads an integer once, or empty when the answer is not one. */
-    public Optional<Integer> optionalNumber(String prompt) {
-        System.out.print(prompt);
-        try {
-            return Optional.of(Integer.parseInt(in.nextLine().trim()));
-        } catch (NumberFormatException e) {
-            return Optional.empty();
         }
     }
 
