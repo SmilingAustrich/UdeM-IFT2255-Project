@@ -1,4 +1,6 @@
-# Ma Ville
+# My City
+
+*Ma Ville* in French, which is what the application calls itself when it runs.
 
 A console application for tracking public road work and street obstructions in
 Montreal. Residents look up what is being dug up near them and open requests for
